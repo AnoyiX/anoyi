@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>登录-沧海云视频</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/signin.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div id="wrapper" class="login-page" >
+        <div id="login_form" class="form">
+            <form class="register-form" id="signUp">
+                <input type="text" placeholder="电子邮件" id="u_email" />
+                <input type="password" placeholder="密码,8-16位,字母+数字" id="u_password" />
+                <input type="text" placeholder="昵称" id="u_nickname" />
+                <button id="create">创建账户</button>
+                <p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
+            </form>
+            <form class="login-form" th:action="@{/login}" method="post" id="signIn">
+                <input type="text" placeholder="邮箱" id="username" name="username" th:value="${email} ? ${email} : ''"/>
+                <input type="password" placeholder="密码" id="password" name="password"/>
+                <button id="login" type="submit">登　录</button>
+                <p class="message">还没有账户? <a href="#">立刻创建</a></p>
+                <p th:if="${result}" style="color:red;margin-top: 10px;">[[${result}]]</p>
+                <p th:if="${param.error}" style="color:red;margin-top: 10px;">
+                    邮箱或密码有误，请检查后重新输入！
+                </p>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<script type="text/javascript">
+
+    var token = $("meta[name='_csrf']").attr("content");
+
+    /* 注册 */
+    function check_register(){
+        $("#info").remove();
+        var email = $("#u_email").val();
+        var password = $("#u_password").val();
+        var nickname = $("#u_nickname").val();
+        if(nickname != "" && password != "" && email != "")
+        {
+            $.post("/sign-up",{
+                "email": email,
+                "password": password,
+                "nickname": nickname,
+                "_csrf": token
+            }, function (data)
+            {
+                var info = $("<p id=\"info\" style=\"color:red;margin-top: 10px;\"></p>");
+                info.text(data.message);
+                $("#signUp").append(info);
+            });
+        }
+        else
+        {
+            $("#login_form").removeClass('shake_effect');
+            setTimeout(function()
+                       {
+                           $("#login_form").addClass('shake_effect')
+                       },1);
+        }
+    }
+
+    $("#create").click(function(){
+        check_register();
+        return false;
+    });
+
+    $('.message a').click(function () {
+        $('form').animate({
+                              height: 'toggle',
+                              opacity: 'toggle'
+                          }, 'slow');
+    });
+</script>
+</body>
+</html>

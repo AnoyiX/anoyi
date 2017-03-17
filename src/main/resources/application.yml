@@ -1,0 +1,41 @@
+# Tomcat 配置
+server:
+  port: 80
+
+# 数据库 及 Redis 配置
+spring:
+  redis:
+    host: [Redis服务器地址]
+    port: [Redis端口号]
+    password: [Redis客户端密码]
+  datasource:
+    url: [数据库连接地址]
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: [数据库账号]
+    password: [数据库密码]
+    sql-script-encoding: utf-8
+  mail:
+    host: [邮件提供方地址]
+    username: [邮箱账号]
+    password: [邮箱密码]
+    properties:
+      mail:
+        smtp:
+          auth: false
+        starttls:
+          enable: false
+          required: false
+
+# Mybatis 配置
+mybatis:
+  config-location: classpath:/mybatis.xml
+
+# Redis Key 前缀
+redis:
+  prefix:
+    signUp: SIGN
+
+# 本站信息
+app:
+  name: [网站名称]
+  domain: [网站域名]

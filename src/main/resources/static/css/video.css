@@ -1,0 +1,38 @@
+body {
+    background-color: #f5f5f5;
+}
+.video {
+    height: 300px;
+    width: 200px;
+    background-color: salmon;
+}
+.video img {
+    height: 250px;
+    width: 190px;
+}
+.video-info {
+    width: 150px;
+    display: inline-block;
+    float: left;
+}
+.video-desc {
+    font-size: 8px;
+    color: #F2F2F2;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.video-title {
+    color: white;
+    font-size: 12px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.video-tag {
+    color: white;
+    width: 40px;
+    display: inline-block;
+    height: 40px;
+    padding: 4px;
+}

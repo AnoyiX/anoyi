@@ -1,0 +1,95 @@
+/* Start Feature CSS */
+.green-text { color: #178A27; }
+.blue-text { color: #1686C1; }
+.gray-text { color: #1686C1; }
+.green-btn { background: #178A27; }
+.green-btn:hover { background: #449D44; }
+.blue-btn { background: #1686C1; }
+.blue-btn:hover { background: #31B0D5; }
+.red-btn { background: #852406; }
+.red-btn:hover { background: #C9302C; }
+.feature-content {
+    background: #FFFFFF;
+    padding-bottom: 20px;
+}
+
+.feature-content-title {
+    padding: 0 20px;
+    text-align: center;
+}
+.feature-content-description {
+    padding: 0 20px 35px;
+    text-align: left;
+    color: #333333;
+    margin-top: 15px;
+}
+.feature-content-link {
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 30px;
+    text-decoration: none;
+    text-transform: capitalize;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.feature-content-link:hover, .feature-content-link:link, .feature-content-link:visited  {
+    color: white;
+    text-decoration: none;
+}
+
+.infoContent{
+    background-color: #FFFFFF;
+}
+
+.infoTitle{
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.infoTitle:hover{
+    color: red;
+    text-decoration: none;
+}
+
+.infoBtn{
+    margin: 0;
+    height: 40px;
+    width: 100%;
+    color: #FFFFFF;
+    background-color: #D9534f;
+    border: 0;
+}
+
+.infoBtn:hover{
+    background-color: #C9302C;
+}
+
+.infoTag{
+    position: absolute;
+    top: 0;
+    left: 21px;
+    margin: 10px;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.infoImage{
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+
+/* End Feature CSS */

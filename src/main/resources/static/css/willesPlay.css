@@ -1,0 +1,199 @@
+@charset "utf-8";
+a:hover{
+	text-decoration: none;
+}
+#willesPlay{
+	/*width: 1000px;
+	height: 660px;*/
+	/*width: 1024px;
+	height: auto;*/
+	margin: 15px auto;
+	box-shadow: 0px 0px 15px #333333;
+	position: relative;
+}
+/*播放器头部*/
+#willesPlay .playHeader{
+	width: 100%;
+	height: 48px;
+	border-radius: 3px 3px 0px 0px;
+}
+#willesPlay .playHeader .videoName{
+	font-size: 16px;
+	width: 400px;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	margin: 0 auto;
+	color: #7a7f82;
+
+}
+#willesPlay .playContent{
+	position: relative;
+	height: auto;
+	overflow: hidden;
+	background:#000;
+	cursor: pointer;
+}
+#willesPlay .playContent .turnoff{
+	position: absolute;
+	z-index: 10;
+	right: -40px;
+	top: 50%;
+	margin-top: -90px;
+}
+#willesPlay .playContent .turnoff li a{
+	display: block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 20px;
+	color: #fff;
+	background: rgba(0,0,0,.5);
+}
+#willesPlay .playContent .turnoff li a:hover{
+	color: #666;
+}
+#willesPlay .playContent .playTip{
+	position: absolute;
+	width: 110px;
+	height: 110px;
+	text-align: center;
+	line-height: 110px;
+	top: 50%;
+	left: 50%;
+	margin-left: -55px;
+	margin-top: -55px;
+	background: #ef6a6c;
+	font-size: 60px;
+	border: 3px solid #FFFFFF;
+	border-radius: 50%;
+	color: #fff;
+	cursor: pointer;
+}
+#willesPlay .playControll{
+	position: absolute;
+	z-index: 2147483650;
+	width: 100%;
+	height: 48px;
+	bottom: -48px;
+	background: url(/image/playheader.jpg) repeat-x;
+	border-radius: 0px 0px 3px 3px;
+	-moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;   
+}
+#willesPlay .fullControll{
+	background:rgba(0,0,0,.5);
+}
+#willesPlay .fullControll .timebar span{
+	color: #FFFFFF;
+}
+#willesPlay .playControll .playPause{
+	float: left;
+	width: 20px;
+	height: 25px;
+	background: url(/image/control_01.png) 0px 0px no-repeat;
+	margin: 11px 0px 0px 12px;
+	cursor: pointer;
+}
+#willesPlay .playControll .playIcon{
+	background-position: 0px -32px;
+}
+/*进度条*/
+#willesPlay .playControll .timebar{
+float: left;
+width: calc(100% - 145px);
+line-height: 48px;
+overflow: hidden;
+margin: 0 auto;
+margin: 0px 0px 0px 20px;
+}
+#willesPlay .playControll .timebar .progress{
+	float: left;
+	width: 80%;
+	margin: 19px 5px;
+	height: 10px;
+	cursor: pointer;
+}
+#willesPlay .playControll .timebar span{
+	float: left;
+	width: 8%;
+	text-align: center;
+}
+#willesPlay .otherControl{
+	float: right;
+	position: relative;
+}
+
+#willesPlay .otherControl span{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 20px;
+	margin: 9px  7px;
+	/*background: url(../images/control_01.png) no-repeat;*/
+	cursor: pointer;
+}
+#willesPlay .otherControl span:nth-child(1){
+	font-size: 28px;
+	color: #ef6a6c;
+}
+/*#willesPlay .otherControl span:nth-child(2){
+	background-position: -171px 0px;
+}*/
+#willesPlay .otherControl span:nth-child(2){
+	color: #919597;
+}
+/*音量*/
+#willesPlay .otherControl .volumeBar{
+	display: none;
+	position: absolute;
+	top: -110px;
+	left:4px;
+	width: 26px;
+	height: 100px;
+	background:#f1f2f2;
+	border-radius: 4px;
+	cursor: pointer;
+}
+#willesPlay .otherControl .volumeBar:after{
+	content:"";
+	display: block;
+	position:absolute;
+	bottom: -7px;
+	left: 5px;
+	width: 0;
+    height: 0;
+    border-left:8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #f1f2f2;
+}
+#willesPlay .otherControl .volumeBar .volumewrap{
+	background: #a2a7aa;
+	width: 8px;
+	height: 80px;
+	position: absolute;
+	bottom: 10px;
+	left: 9px;
+	border-radius: 4px;
+}
+
+#willesPlay .otherControl .volumeBar .progress{
+	background: none;
+}
+#willesPlay .otherControl .volumeBar .progress-bar{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	border-radius: 4px;
+}
+video::-webkit-media-controls-enclosure {
+    /*禁用播放器控制栏的样式*/
+    display: none !important;
+}
+:-webkit-full-screen{}

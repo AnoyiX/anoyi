@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${category.name}"></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/user.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #f1f1f1">
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 50px">
+
+    <!-- 个人信息 -->
+    <div class="row" >
+        <ol class="breadcrumb" style="margin: 20px 0; background-color: #FFFFFF">
+            <li><a th:href="@{/}">首页</a></li>
+            <li class="active" th:text="${category.name}"></li>
+        </ol>
+    </div>
+    <!-- End 个人信息 -->
+
+    <!-- 分享 -->
+    <div class="row" style="margin-top: 1px;">
+        <div class="form-group raw col-md-8 col-md-offset-2">
+            <div class="col-md-12 col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon">分享地址</span>
+                    <input id="shareInput" type="text" style="color: #0f0f0f" class="form-control" th:value="'http://www.ictgu.cn/share/'+${category.md5}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End 分享 -->
+
+    <!-- 内容列表 -->
+    <div class="row" style="padding: 20px;">
+        <div class="row text-center inner">
+            <div class="col-md-3 col-xs-6" th:each="item : ${items}" style="margin-bottom: 20px">
+                <div class="infoContent">
+                    <a th:href="@{/play(v=${item.url})}">
+                        <img th:src="${item.image}" alt="Image" class="infoImage"/>
+                        <span class="infoTag" th:text="${item.type}"></span>
+                    </a>
+                    <a th:href="@{/play(v=${item.url})}" class="infoTitle" th:text="${item.name}" style="padding-bottom: 10px"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End 内容列表 -->
+
+</div>
+</body>
+</html>

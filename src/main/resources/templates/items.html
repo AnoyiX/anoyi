@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${category.name}"></title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/user.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #f1f1f1">
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 50px">
+
+    <!-- 个人信息 -->
+    <div class="row" >
+        <ol class="breadcrumb" style="margin: 20px 0; background-color: #FFFFFF">
+            <li><a th:href="@{/}">首页</a></li>
+            <li th:if="${#httpServletRequest.remoteUser}"><a th:href="@{/user}" th:text="${user.nickname}"></a></li>
+            <li class="active" th:text="${category.name}"></li>
+        </ol>
+    </div>
+    <!-- End 个人信息 -->
+
+    <!-- 分享 -->
+    <div class="row" style="margin-top: 1px;">
+        <div class="form-group raw col-md-8 col-md-offset-2">
+            <div class="col-md-12 col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon">分享地址</span>
+                    <input id="shareInput" type="text" style="color: #0f0f0f" class="form-control" th:value="'http://www.ictgu.cn/share/'+${category.md5}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End 分享 -->
+
+    <!-- 内容列表 -->
+    <div class="row" style="padding: 20px;">
+        <div class="row text-center inner">
+            <div class="col-md-3 col-xs-6" th:each="item : ${items}" style="margin-bottom: 20px">
+                <div class="infoContent">
+                    <a th:href="@{/play(v=${item.url})}">
+                        <img th:src="${item.image}" alt="Image" class="infoImage"/>
+                        <span class="infoTag" th:text="${item.type}"></span>
+                    </a>
+                    <a th:href="@{/play(v=${item.url})}" class="infoTitle" th:text="${item.name}"></a>
+                    <button class="infoBtn deleteBtn" data-toggle="modal" data-target="#deleteModal" th:value="${item.id}"> 删除 </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End 内容列表 -->
+
+    <!-- 删除 模态框 -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        删除内容
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-align: center" id="deleteBody">
+                    <p>
+                        确定删除 ?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-danger" id="deleteItem">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End 删除 模态框 -->
+
+</div>
+
+<script style="text/javascript">
+
+    var api;
+    
+    function deleteApi(id){
+        return "/user/category/item/delete/" + id;
+    }
+
+
+
+    $("document").ready(function () {
+        
+        $(".deleteBtn").click(function (){
+            api = deleteApi($(this).val());
+        });
+
+        /* 删除内容 */
+        $("#deleteItem").click(function (){
+            $.get(api,function (data) {
+                if (data.code == 100){
+                    window.location.reload();
+                }else {
+                    var info = $("<p id=\"info\" style=\"color:red;margin-top: 10px;\"></p>");
+                    info.text("删除失败，请刷新页面后重试！");
+                    $("#deleteBody").append(info);
+                }
+            })
+        });
+    });
+</script>
+</body>
+</html>

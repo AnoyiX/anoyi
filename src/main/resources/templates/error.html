@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>出错啦！</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #f1f1f1">
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 100px">
+    <div style="text-align: center">
+        <p style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; font-size: 250px; color: #CF4646">ERROR</p>
+        <a th:href="@{/us}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-send"></span> 联系我们</a>
+        <a th:href="@{/}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-home"></span> 返回首页</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>视频解析-沧海云</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #f1f1f1">
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 100px">
+    <div class="row" style="padding: 20px">
+        <div class="row" style="margin-top: 1px;">
+            <div class="form-group raw col-md-8 col-md-offset-2">
+                <div class="col-md-10 col-xs-9">
+                    <input type="text" placeholder="视频播放地址" id="videoUrl" style="color: #0f0f0f" class="form-control">
+                </div>
+                <button class="btn btn-danger col-md-2 col-xs-3" id="parse">解析一下</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script style="text/javascript">
+
+    /* 页面跳转 */
+    $(document).ready(function (){
+        $("#parse").click(function (){
+            var videoUrl = $("#videoUrl").val();
+            var regx = /[a-zA-z]+:\/\/[^\s]*/;
+            if (regx.exec(videoUrl)==null){
+                alert("请输入正确的视频播放地址");
+            }else {
+                location.href = "/play?v=" + videoUrl;
+            }
+        });
+    });
+</script>
+</body>
+</html>

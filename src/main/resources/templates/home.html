@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>沧海云视频-个人定制视频库</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/carousel.css">
+  <link rel="stylesheet" href="css/docs.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #f1f1f1; padding-bottom: 0">
+
+<div th:insert="~{header :: nav}"></div>
+
+
+<!-- Start Carousel -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li th:each="carouselPic,iterStat:${carouselPics}" data-target="#myCarousel" th:data-slide-to="${iterStat.index}" th:class="(${iterStat.index}==0)?'active':''"></li>
+  </ol>
+  <div class="carousel-inner text-center" role="listbox">
+    <div th:each="carouselPic,iterStat:${carouselPics}" th:class="(${iterStat.index}==0)?'item active':'item'">
+      <a th:href="@{/play(v=${carouselPic.value})}">
+        <img th:src="${carouselPic.image}" alt="">
+      </a>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<!-- End carousel -->
+
+<!-- Start Content -->
+<div class="container" style="padding-top: 0">
+
+  <!-- 精选推荐 -->
+  <div class="row">
+    <div class="bs-callout bs-callout-danger">
+      <h4 style="display: inline-block">精选推荐</h4>
+      <button type="button" class="btn btn-danger pull-right refresh" value="6">
+        <span class="glyphicon glyphicon-refresh"></span> 换一批
+      </button>
+    </div>
+  </div>
+  <div class="row videoBox">
+    <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="recommend, iterStat:${recommends}">
+      <a th:href="@{/play(v=${recommend.value})}" th:if="${iterStat.index} < 6" class="videoUrl">
+        <img th:src="${recommend.image}" alt="" class="img-responsive img-thumbnail videoImage" >
+        <div class="caption">
+          <p class="text-left videoTitle" th:text="${recommend.title}"></p>
+        </div>
+      </a>
+      <div th:if="${iterStat.index} >= 6" hidden>
+        <ul class="videoImage">[[${recommend.image}]]</ul>
+        <ul class="videoTitle">[[${recommend.title}]]</ul>
+        <a th:href="@{/play(v=${recommend.value})}" class="videoUrl"></a>
+      </div>
+    </div>
+  </div>
+  <!-- END 精选推荐 -->
+
+  <!-- 电视剧 -->
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="bs-callout bs-callout-danger">
+          <h4 style="display: inline-block">电视剧</h4>
+          <button type="button" class="btn btn-danger pull-right refresh" value="8">
+            <span class="glyphicon glyphicon-refresh"></span> 换一批
+          </button>
+        </div>
+      </div>
+      <div class="row videoBox">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-6 videoItem" th:each="tvHot, iterStat:${tvHots}">
+              <a th:href="@{/play(v=${tvHot.value})}" th:if="${iterStat.index} < 8" class="videoUrl">
+                <img th:src="${tvHot.image}" class="img-responsive img-thumbnail videoImage">
+                <div class="caption">
+                  <p class="text-left videoTitle" th:text="${tvHot.title}"></p>
+                </div>
+              </a>
+              <div th:if="${iterStat.index} >= 8" hidden>
+                <ul class="videoImage">[[${tvHot.image}]]</ul>
+                <ul class="videoTitle">[[${tvHot.title}]]</ul>
+                <a th:href="@{/play(v=${tvHot.value})}" class="videoUrl"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 hidden-sm hidden-xs">
+      <div class="top">
+        <h3><span class="glyphicon glyphicon-play-circle"></span>  排行榜</h3>
+      </div>
+      <div class="list-group" style="padding-top: 5px;">
+        <a th:each="tvTop:${tvTops}" th:href="@{/play(v=${tvTop.value})}" class="list-group-item" th:text="${tvTop.title}"></a>
+      </div>
+    </div>
+  </div>
+  <!-- END 电视剧 -->
+
+  <!-- 电影 -->
+  <div class="row">
+    <div class="bs-callout bs-callout-danger">
+      <h4 style="display: inline-block">电影</h4>
+      <button type="button" class="btn btn-danger pull-right refresh" value="12">
+        <span class="glyphicon glyphicon-refresh"></span> 换一批
+      </button>
+    </div>
+  </div>
+  <div class="row videoBox">
+    <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="movie, iterStat:${movies}">
+      <a th:href="@{/play(v=${movie.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
+        <img th:src="${movie.image}" class="img-responsive img-thumbnail videoImage">
+        <div class="caption">
+          <p class="text-left videoTitle" th:text="${movie.title}"></p>
+        </div>
+      </a>
+      <div th:if="${iterStat.index} >= 12" hidden>
+        <ul class="videoImage">[[${movie.image}]]</ul>
+        <ul class="videoTitle">[[${movie.title}]]</ul>
+        <a th:href="@{/play(v=${movie.value})}" class="videoUrl"></a>
+      </div>
+    </div>
+  </div>
+  <!-- END 电影 -->
+
+  <!-- 动漫 -->
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="bs-callout bs-callout-danger">
+          <h4 style="display: inline-block">动漫</h4>
+          <button type="button" class="btn btn-danger pull-right refresh" value="8">
+            <span class="glyphicon glyphicon-refresh"></span> 换一批
+          </button>
+        </div>
+      </div>
+      <div class="row videoBox">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-6 videoItem" th:each="animeHot, iterStat:${animeHots}">
+              <a th:href="@{/play(v=${animeHot.value})}" th:if="${iterStat.index} < 8" class="videoUrl">
+                <img th:src="${animeHot.image}" class="img-responsive img-thumbnail videoImage">
+                <div class="caption">
+                  <p class="text-left videoTitle" th:text="${animeHot.title}"></p>
+                </div>
+              </a>
+              <div th:if="${iterStat.index} >= 8" hidden>
+                <ul class="videoImage">[[${animeHot.image}]]</ul>
+                <ul class="videoTitle">[[${animeHot.title}]]</ul>
+                <a th:href="@{/play(v=${animeHot.value})}" class="videoUrl"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 hidden-sm hidden-xs">
+      <div class="top">
+        <h3><span class="glyphicon glyphicon-play-circle"></span>  腾讯动漫</h3>
+      </div>
+      <div class="list-group" style="padding-top: 5px;">
+        <a th:each="animeNew:${animeNews}" th:href="@{/play(v=${animeNew.value})}" class="list-group-item" th:text="${animeNew.title}"></a>
+      </div>
+    </div>
+  </div>
+  <!-- END 动漫 -->
+
+  <!-- 友情链接 -->
+  <div class="row">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title"> <span class="glyphicon glyphicon-globe"></span> 友情链接</h3>
+        <a th:href="@{/friend}" type="button" class="btn btn-sm btn-info pull-right" style="margin-top: -23px">
+          <span class="glyphicon glyphicon-link"></span> 申请加入
+        </a>
+      </div>
+      <div class="panel-body" id="linkList">
+      </div>
+    </div>
+  </div>
+  <!-- END 友情链接 -->
+
+</div>
+<!-- End Content -->
+
+<!-- Start Footer -->
+<div class="footer">
+  <div class="container">
+    <p class="text-muted col-md-10">免责声明：所有资源均来自互联网解析，本站仅提供展示。</p>
+    <p class="text-muted col-md-2 pull-right">
+      <a href="http://www.miitbeian.gov.cn" target="_blank">鄂ICP备16007917号</a>
+    </p>
+  </div>
+</div>
+<!-- End Footer -->
+
+<script type="text/javascript">
+
+  /* "换一批" 功能 */
+  $(".refresh").click(function () {
+    var size = $(this).val();
+    for (var i = 0; i < size; i++){
+      var videoBox = $(this).parent().parent().next().find(".videoItem");
+      var imageValue = videoBox.eq(i).find(".videoImage").eq(0).attr("src");
+      var titleValue = videoBox.eq(i).find(".videoTitle").eq(0).text();
+      var urlValue = videoBox.eq(i).find(".videoUrl").eq(0).attr("href");
+      var node = videoBox.eq(size);
+      var image = node.find(".videoImage").eq(0).text();
+      var title = node.find(".videoTitle").eq(0).text();
+      var url = node.find(".videoUrl").eq(0).attr("href");
+      videoBox.eq(i).find(".videoImage").eq(0).attr("src", image);
+      videoBox.eq(i).find(".videoTitle").eq(0).text(title);
+      videoBox.eq(i).find(".videoUrl").eq(0).attr("href", url);
+      node.remove();
+      var divBox = $("<div class=\"videoItem\"></div>");
+      var hiddenNode = $("<div hidden></div>");
+      var imageNode = $("<ul class=\"videoImage\"></ul>");
+      var titleNode = $("<ul class=\"videoTitle\"></ul>");
+      var urlNode = $("<a href='' class=\"videoUrl\"></a>");
+      imageNode.text(imageValue);
+      titleNode.text(titleValue);
+      urlNode.attr("href", urlValue);
+      hiddenNode.append(imageNode);
+      hiddenNode.append(titleNode);
+      hiddenNode.append(urlNode);
+      divBox.append(hiddenNode);
+      $(this).parent().parent().next().append(divBox);
+    }
+  });
+
+  /* 获取友情链接信息 */
+  $(document).ready(function(){
+    $.get("/friend/list-home", function (data)
+    {
+      for (var i = 0; i<data.length; i++){
+        var box = $("<div class='col-md-2 col-xs-3'></div>");
+        var item = $("<a href='' target='_blank'></a>");
+        item.text(data[i].name);
+        item.attr("href", data[i].domain);
+        box.append(item);
+        $("#linkList").append(box);
+      }
+    });
+  });
+</script>
+
+</body>
+
+</html>

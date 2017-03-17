@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>友情链接-沧海云</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 70px">
+    <!-- 申请加入 -->
+    <div class="jumbotron">
+        <p style="color: red;"><span class="glyphicon glyphicon-plus"></span> <b>申请流程</b></p>
+        <p>1.在您网站首页添加本站友情链接（名称：[[${appName}]]，地址：http://[[${appDomain}]]）；</p>
+        <p>2.在下面填写贵站名称和首页地址，提交即可自动审核；</p>
+        <p>3.若需本站首页展示贵站，请联系我们。</p>
+        <form class="form-inline" onsubmit="">
+            <div class="form-group">
+                <label for="name">网站名称</label>
+                <input type="text" class="form-control" id="name" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="domain">首页地址</label>
+                <input type="text" class="form-control" id="domain" value="http://">
+            </div>
+            <button class="btn btn-primary" id="applyJoin">申请加入</button>
+        </form>
+    </div>
+    <!-- End 申请加入 -->
+
+    <!-- 最新友链 -->
+    <div class="row">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title"> <span class="glyphicon glyphicon-globe"></span>  最新加入（排名不分先后）</h3>
+            </div>
+            <div class="panel-body" id="linkList">
+            </div>
+        </div>
+    </div>
+    <!-- END 最新友链 -->
+
+</div>
+
+<script style="text/javascript">
+
+    var index = 0;
+    var size = 50;
+
+    $(document).ready(function (){
+
+        /* 获取友情链接信息 */
+        $.get("/friend/list",{
+            "index": index,
+            "size": size
+        }, function (data)
+        {
+            for (var i = 0; i<data.length; i++){
+                var box = $("<div class='col-md-2 col-xs-3'></div>");
+                var item = $("<a href='' target='_blank'></a>");
+                item.text(data[i].name);
+                item.attr("href", data[i].domain);
+                box.append(item);
+                $("#linkList").append(box);
+            }
+        });
+
+        $("form").submit(function() {return false;});
+
+        /* 申请加入本站友联 */
+        $("#applyJoin").click(function (){
+            $("#info").remove();
+            var name = $("#name").val();
+            var domain = $("#domain").val();
+            $.get("/friend/join",
+                   {
+                       "name": name,
+                       "domain": domain
+                   }, function (data)
+                   {
+                      if(data.code == 100){
+                          location.href = "/friend";
+                      }else {
+                          var info = $("<p id=\"info\" style=\"color:red;margin-top: 10px;\"></p>");
+                          info.text(data.message);
+                          $(".jumbotron").append(info);
+                      }
+                   });
+        });
+    });
+</script>
+</body>
+</html>
