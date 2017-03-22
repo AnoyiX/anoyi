@@ -32,4 +32,5 @@ Spring Boot 结合网络爬虫开发的完整视频网站，演示地址：http:
 - [Spring Boot 全栈开发：解析器实现](http://www.jianshu.com/p/ab4f7415491b)
 - [Spring Boot 全栈开发：视频解析之优酷](http://www.jianshu.com/p/23292186e972)
 - [Spring Boot 全栈开发：漂亮的邮件注册](http://www.jianshu.com/p/927e179a747a)
+- [Spring Boot 全栈开发：用户安全](http://www.jianshu.com/p/c883b86c34fa)
 - 未完待续
