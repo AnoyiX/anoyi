@@ -29,7 +29,7 @@ public class JsoupUtils {
   public static Document getDocWithPhone(String url){
     Document document = new Document("http://ictgu.cn");
     try {
-      document = Jsoup.connect(url).userAgent(UA_PHONE).timeout(TIME_OUT).ignoreContentType(true).get();
+      document = Jsoup.connect(url).userAgent(UA_PHONE).timeout(TIME_OUT).ignoreContentType(true).validateTLSCertificates(false).get();
     } catch (IOException e) {
       log.info("网址请求失败：" + url);
     }

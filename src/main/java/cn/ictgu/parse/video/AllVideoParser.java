@@ -4,12 +4,19 @@ import cn.ictgu.config.OtherParseConfig;
 import cn.ictgu.dao.model.Episode;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.Parser;
+import cn.ictgu.tools.AesUtils;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +27,9 @@ import java.util.regex.Pattern;
 @Log4j
 abstract class AllVideoParser implements Parser<Video>{
 
-  private static final String REAL_API_REGEX = "get\\(\"(.*?)\"";
+  private static final String REAL_API_REGEX = "post\\(\"(.*?)\"";
+  private static final String ID_REGEX = "sign\\(\"(.*?)\"";
+  private static final String UA_PHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
 
   /**
    * 1.创建一个带有版权信息的Video
@@ -32,14 +41,13 @@ abstract class AllVideoParser implements Parser<Video>{
    * @return 完整的视频信息
    */
   @Override
-  public Video parse(String url) {
+  public final Video parse(String url) {
     Video video = initVideo();
     video.setValue(url);
     video.setParser(OtherParseConfig.OFFICIAL_WEBSITE);
     video.setParserName(OtherParseConfig.OFFICIAL_NAME);
     crawlerTitleAndImage(url, video);
-    String realApi = getRealApi(url);
-    String playUrl = getPlayUrl(realApi);
+    String playUrl = getPlayUrl(url);
     video.setPlayUrl(playUrl);
     return video;
   }
@@ -50,21 +58,41 @@ abstract class AllVideoParser implements Parser<Video>{
 
   abstract void crawlerTitleAndImage(String url, Video video);
 
-  private String getRealApi(String url){
+  private String getPlayUrl(String url){
     String api = OtherParseConfig.REQUEST + url;
-    Document document = JsoupUtils.getDocWithPhone(api);
-    Matcher matcher = Pattern.compile(REAL_API_REGEX).matcher(document.html());
-    if (matcher.find()){
-      return OtherParseConfig.OFFICIAL_WEBSITE + matcher.group(1);
+    Map<String, String> cookies;
+    Document document;
+    try {
+      Connection.Response response = Jsoup.connect(api).userAgent(UA_PHONE).header("Upgrade-Insecure-Requests","1").header("Host","aikan-tv.com").ignoreContentType(true).execute();
+      cookies = response.cookies();
+      document = response.parse();
+      Matcher matcher = Pattern.compile(REAL_API_REGEX).matcher(document.html());
+      if (matcher.find()){
+        String realApi =  OtherParseConfig.OFFICIAL_WEBSITE + matcher.group(1);
+        matcher = Pattern.compile(ID_REGEX).matcher(document.html());
+        if (matcher.find()){
+          String id = matcher.group(1);
+          id = AesUtils.encrypt(id, OtherParseConfig.IV, OtherParseConfig.KEY);
+          try {
+            id = URLEncoder.encode(id, "UTF-8");
+            id = id.replaceAll("\n\r", "");
+          } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+          }
+          try {
+            Document result = Jsoup.connect(realApi).header("X-Requested-With","XMLHttpRequest").header("Content-Type","application/x-www-form-urlencoded").cookies(cookies).userAgent(UA_PHONE).ignoreContentType(true).validateTLSCertificates(false).data("url", url).data("id", id).data("type","auto").data("siteuser", "").post();
+            log.info("Parser result : " + result.text());
+            JSONObject json = JSONObject.parseObject(result.text());
+            return json.getString("url");
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
     }
     return null;
   }
 
-
-  private String getPlayUrl(String realApi) {
-    log.debug("realApi:" + realApi);
-    Document document = JsoupUtils.getDocWithPhone(realApi);
-    JSONObject json = JSONObject.parseObject(document.body().text());
-    return json.getString("ck_f");
-  }
 }

@@ -1,6 +1,7 @@
 package cn.ictgu.parse;
 
 import cn.ictgu.dto.Video;
+import cn.ictgu.parse.search.VideoSearch;
 import cn.ictgu.parse.video.Imooc;
 import cn.ictgu.parse.video.Iqiyi;
 import cn.ictgu.parse.video.Letv;
@@ -13,11 +14,14 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 

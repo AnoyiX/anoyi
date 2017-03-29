@@ -1,8 +1,12 @@
 package cn.ictgu.controller;
 
 import cn.ictgu.dao.service.FriendLinkService;
+import cn.ictgu.dto.Video;
 import cn.ictgu.dto.VideoDTO;
+import cn.ictgu.parse.search.VideoSearch;
 import cn.ictgu.redis.RedisSourceManager;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,16 +30,33 @@ public class IndexController {
   @Autowired
   private FriendLinkService friendLinkService;
 
+  @Autowired
+  private VideoSearch videoSearch;
+
   /* 登录页 */
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public String login(){
     return "login";
   }
 
+  /* 搜索页 */
+  @RequestMapping(value = "/s")
+  public String search(HttpServletRequest request, Model model){
+    model.addAttribute("navIndex", 1);
+    String keyword = request.getParameter("wd");
+    if (StringUtils.isNotEmpty(keyword)){
+      List<Video> videos = videoSearch.searchVideos(keyword);
+      model.addAttribute("videos", videos);
+      model.addAttribute("hasResult", true);
+      model.addAttribute("size", videos.size());
+    }
+    return "search";
+  }
+
   /* 解析页 */
   @RequestMapping(value = "/video", method = RequestMethod.GET)
   public String video(Model model){
-    model.addAttribute("navIndex", 1);
+    model.addAttribute("navIndex", 2);
     return "video";
   }
 

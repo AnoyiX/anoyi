@@ -20,7 +20,16 @@
                         <a href="/" >首页</a>
                     </li>
                     <li th:class="${navIndex} == 1 ? 'active' : ''">
-                        <a href="/video">解析</a>
+                        <a href="/s">搜索</a>
+                    </li>
+                    <li th:class="${navIndex} == 2 ? 'active' : ''">
+                        <a href="/video">高级</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ChinaSilence/any-video" target="_blank">Github</a>
+                    </li>
+                    <li>
+                        <a href="http://vpn.ictgu.cn/" target="_blank">校园VPN</a>
                     </li>
                 </ul>
                 <div class="navbar-form navbar-right">
