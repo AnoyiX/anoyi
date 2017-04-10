@@ -12,8 +12,4 @@ public class OtherParseConfig {
 
   public static final String REQUEST = "https://aikan-tv.com/tong.php?url=";
 
-  public static final String KEY = "61520f8d6c4415bb4e8936ee0f987939";
-
-  public static final String IV = "4052807019444978";
-
 }
