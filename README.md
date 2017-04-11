@@ -3,6 +3,10 @@ Spring Boot 结合网络爬虫开发的完整视频网站，演示地址：http:
 
 ![首页展示.png](http://upload-images.jianshu.io/upload_images/3424642-b67307b7700bd532.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+更新记录
+-------
+完美解决乐视视频VIP视频解析，自动选择最高清视频（4月11日）
+
 开发环境
 -------
 - JDK 1.8
