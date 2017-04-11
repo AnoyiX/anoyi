@@ -1,6 +1,6 @@
 package cn.ictgu.API;
 
-import cn.ictgu.dao.model.Episode;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.ParseManager;
 import cn.ictgu.parse.Parser;

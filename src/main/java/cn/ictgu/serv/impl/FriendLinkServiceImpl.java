@@ -1,8 +1,9 @@
-package cn.ictgu.dao.service;
+package cn.ictgu.serv.impl;
 
-import cn.ictgu.dao.mapper.FriendLinkMapper;
-import cn.ictgu.dao.model.FriendLink;
-import cn.ictgu.dao.model.enumclass.YesNoEnum;
+import cn.ictgu.serv.mapper.FriendLinkMapper;
+import cn.ictgu.serv.model.FriendLink;
+import cn.ictgu.serv.model.enumclass.YesNoEnum;
+import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.tools.UrlUtils;
 import lombok.extern.log4j.Log4j;
 import org.jsoup.Jsoup;
@@ -17,12 +18,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 友情链接 Service
- * Created by Silence on 2017/3/9.
+ * 友情链接
+ * Created by Silence on 2017/4/11.
  */
 @Service
 @Log4j
-public class FriendLinkService {
+public class FriendLinkServiceImpl implements FriendLinkService{
 
   @Value("${app.name}")
   private String appName;
@@ -81,5 +82,4 @@ public class FriendLinkService {
   public String getAppDomain() {
     return appDomain;
   }
-
 }

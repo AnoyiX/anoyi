@@ -1,4 +1,4 @@
-package cn.ictgu.dao.model.enumclass;
+package cn.ictgu.serv.model.enumclass;
 
 /**
  * 资源类型枚举

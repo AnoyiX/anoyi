@@ -1,9 +1,9 @@
 package cn.ictgu.API;
 
-import cn.ictgu.dao.model.CategoryItem;
-import cn.ictgu.dao.model.User;
-import cn.ictgu.dao.service.CategoryItemService;
-import cn.ictgu.dao.service.UserService;
+import cn.ictgu.serv.model.CategoryItem;
+import cn.ictgu.serv.model.User;
+import cn.ictgu.serv.service.CategoryItemService;
+import cn.ictgu.serv.service.UserService;
 import cn.ictgu.dto.SimpleResponse;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;

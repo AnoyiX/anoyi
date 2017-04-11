@@ -1,4 +1,4 @@
-package cn.ictgu.dao.model;
+package cn.ictgu.serv.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

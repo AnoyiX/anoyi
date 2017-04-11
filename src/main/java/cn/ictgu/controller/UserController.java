@@ -1,9 +1,9 @@
 package cn.ictgu.controller;
 
-import cn.ictgu.dao.model.Category;
-import cn.ictgu.dao.model.User;
-import cn.ictgu.dao.service.CategoryService;
-import cn.ictgu.dao.service.UserService;
+import cn.ictgu.serv.model.Category;
+import cn.ictgu.serv.model.User;
+import cn.ictgu.serv.service.CategoryService;
+import cn.ictgu.serv.service.UserService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

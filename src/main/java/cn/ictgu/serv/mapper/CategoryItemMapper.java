@@ -1,6 +1,6 @@
-package cn.ictgu.dao.mapper;
+package cn.ictgu.serv.mapper;
 
-import cn.ictgu.dao.model.CategoryItem;
+import cn.ictgu.serv.model.CategoryItem;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

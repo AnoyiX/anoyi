@@ -1,7 +1,7 @@
 package cn.ictgu.API;
 
-import cn.ictgu.dao.model.FriendLink;
-import cn.ictgu.dao.service.FriendLinkService;
+import cn.ictgu.serv.model.FriendLink;
+import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.dto.SimpleResponse;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

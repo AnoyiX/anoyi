@@ -1,9 +1,11 @@
-package cn.ictgu.dao.service;
+package cn.ictgu.serv.impl;
 
-import cn.ictgu.dao.mapper.CategoryItemMapper;
-import cn.ictgu.dao.mapper.CategoryMapper;
-import cn.ictgu.dao.model.CategoryItem;
-import cn.ictgu.dao.model.enumclass.CategoryItemType;
+import cn.ictgu.serv.mapper.CategoryItemMapper;
+import cn.ictgu.serv.mapper.CategoryMapper;
+import cn.ictgu.serv.model.CategoryItem;
+import cn.ictgu.serv.model.enumclass.CategoryItemType;
+import cn.ictgu.serv.service.CategoryItemService;
+import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * CategoryItem Service
- * Created by Silence on 2017/3/14.
+ * CategoryItem
+ * Created by Silence on 2017/4/11.
  */
 @Service
-public class CategoryItemService {
+@Log4j
+public class CategoryItemServiceImpl implements CategoryItemService{
 
   @Autowired
   private CategoryItemMapper mapper;
@@ -29,7 +32,7 @@ public class CategoryItemService {
 
   private Map<String, String> defaultImages;
 
-  public CategoryItemService(){
+  public CategoryItemServiceImpl(){
     defaultImages = new HashMap<>();
     defaultImages.put(CategoryItemType.VIDEO.name(), "item-video.jpg");
     defaultImages.put(CategoryItemType.ARTICLE.name(), "item-article.jpg");
@@ -71,5 +74,4 @@ public class CategoryItemService {
     }
     return false;
   }
-
 }

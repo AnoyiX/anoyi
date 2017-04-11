@@ -1,13 +1,12 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.dao.model.Episode;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;

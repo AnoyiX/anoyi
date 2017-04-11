@@ -1,7 +1,7 @@
 package cn.ictgu.parse.video;
 
 import cn.ictgu.dto.Video;
-import cn.ictgu.dao.model.Episode;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

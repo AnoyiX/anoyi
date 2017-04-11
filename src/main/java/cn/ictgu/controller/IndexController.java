@@ -1,6 +1,6 @@
 package cn.ictgu.controller;
 
-import cn.ictgu.dao.service.FriendLinkService;
+import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.dto.Video;
 import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.parse.search.VideoSearch;

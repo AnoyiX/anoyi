@@ -1,6 +1,6 @@
 package cn.ictgu.tools.mail;
 
-import cn.ictgu.dao.model.User;
+import cn.ictgu.serv.model.User;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

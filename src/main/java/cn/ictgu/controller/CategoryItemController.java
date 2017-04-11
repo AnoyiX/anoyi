@@ -1,11 +1,11 @@
 package cn.ictgu.controller;
 
-import cn.ictgu.dao.model.Category;
-import cn.ictgu.dao.model.CategoryItem;
-import cn.ictgu.dao.model.User;
-import cn.ictgu.dao.service.CategoryItemService;
-import cn.ictgu.dao.service.CategoryService;
-import cn.ictgu.dao.service.UserService;
+import cn.ictgu.serv.model.Category;
+import cn.ictgu.serv.model.CategoryItem;
+import cn.ictgu.serv.model.User;
+import cn.ictgu.serv.service.CategoryItemService;
+import cn.ictgu.serv.service.CategoryService;
+import cn.ictgu.serv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,11 +1,9 @@
 package cn.ictgu.parse.video;
 
 import cn.ictgu.config.OtherParseConfig;
-import cn.ictgu.dao.model.Episode;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.Parser;
-import cn.ictgu.tools.AesUtils;
-import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
 import org.jsoup.Connection;
@@ -15,6 +13,7 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -27,9 +26,11 @@ import java.util.regex.Pattern;
 @Log4j
 abstract class AllVideoParser implements Parser<Video>{
 
-  private static final String REAL_API_REGEX = "post\\(\"(.*?)\"";
-  private static final String ID_REGEX = "sign\\(\"(.*?)\"";
+  private static final String REAL_API_REGEX = "url:'\\./(.*?)'";
+  private static final String ID_REGEX = "encodeURIComponent\\(\"(.*?)\"";
   private static final String UA_PHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
+
+  private static final int timeout = 600000;
 
   /**
    * 1.创建一个带有版权信息的Video
@@ -63,7 +64,7 @@ abstract class AllVideoParser implements Parser<Video>{
     Map<String, String> cookies;
     Document document;
     try {
-      Connection.Response response = Jsoup.connect(api).userAgent(UA_PHONE).header("Upgrade-Insecure-Requests","1").header("Host","aikan-tv.com").ignoreContentType(true).execute();
+      Connection.Response response = Jsoup.connect(api).userAgent(UA_PHONE).timeout(timeout).header("Upgrade-Insecure-Requests","1").header("Host","aikan-tv.com").ignoreContentType(true).execute();
       cookies = response.cookies();
       document = response.parse();
       Matcher matcher = Pattern.compile(REAL_API_REGEX).matcher(document.html());
@@ -72,18 +73,16 @@ abstract class AllVideoParser implements Parser<Video>{
         matcher = Pattern.compile(ID_REGEX).matcher(document.html());
         if (matcher.find()){
           String id = matcher.group(1);
-          id = AesUtils.encrypt(id, OtherParseConfig.IV, OtherParseConfig.KEY);
           try {
             id = URLEncoder.encode(id, "UTF-8");
-            id = id.replaceAll("\n\r", "");
           } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
           }
           try {
-            Document result = Jsoup.connect(realApi).header("X-Requested-With","XMLHttpRequest").header("Content-Type","application/x-www-form-urlencoded").cookies(cookies).userAgent(UA_PHONE).ignoreContentType(true).validateTLSCertificates(false).data("url", url).data("id", id).data("type","auto").data("siteuser", "").post();
+            Document result = Jsoup.connect(realApi).timeout(timeout).header("X-Requested-With","XMLHttpRequest").header("Content-Type","application/x-www-form-urlencoded").cookies(cookies).userAgent(UA_PHONE).ignoreContentType(true).validateTLSCertificates(false).data("id", id).data("type","auto").data("time", String.valueOf(new Date().getTime())).data("hd", "cq").post();
             log.info("Parser result : " + result.text());
             JSONObject json = JSONObject.parseObject(result.text());
-            return json.getString("url");
+            return json.getString("video");
           } catch (IOException e) {
             e.printStackTrace();
           }

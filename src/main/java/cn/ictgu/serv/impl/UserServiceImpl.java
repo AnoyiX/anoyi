@@ -1,9 +1,9 @@
-package cn.ictgu.dao.service;
+package cn.ictgu.serv.impl;
 
-import cn.ictgu.dao.mapper.UserMapper;
-import cn.ictgu.dao.model.User;
-import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.redis.RedisTokenManager;
+import cn.ictgu.serv.mapper.UserMapper;
+import cn.ictgu.serv.model.User;
+import cn.ictgu.serv.service.UserService;
 import cn.ictgu.tools.mail.MailService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
@@ -12,12 +12,12 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
- * User Service
- * Created by Silence on 2017/3/11.
+ * 用户管理
+ * Created by Silence on 2017/4/11.
  */
 @Service
 @Log4j
-public class UserService {
+public class UserServiceImpl implements UserService{
 
   @Autowired
   private UserMapper mapper;

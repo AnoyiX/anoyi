@@ -1,6 +1,6 @@
 package cn.ictgu.config.security;
 
-import cn.ictgu.dao.service.UserService;
+import cn.ictgu.serv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -24,7 +24,7 @@ class AnyUserDetailsService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-    cn.ictgu.dao.model.User user = userService.getByEmail(s);
+    cn.ictgu.serv.model.User user = userService.getByEmail(s);
     if (user == null){
       throw new UsernameNotFoundException("用户不存在");
     }

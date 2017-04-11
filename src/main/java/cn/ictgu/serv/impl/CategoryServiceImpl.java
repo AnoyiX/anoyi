@@ -1,13 +1,12 @@
-package cn.ictgu.dao.service;
+package cn.ictgu.serv.impl;
 
-import cn.ictgu.dao.mapper.CategoryItemMapper;
-import cn.ictgu.dao.mapper.CategoryMapper;
-import cn.ictgu.dao.model.Category;
+import cn.ictgu.serv.mapper.CategoryItemMapper;
+import cn.ictgu.serv.mapper.CategoryMapper;
+import cn.ictgu.serv.model.Category;
+import cn.ictgu.serv.service.CategoryService;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang.math.RandomUtils;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -17,12 +16,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Category Service
- * Created by Silence on 2017/3/13.
+ * 分类管理
+ * Created by Silence on 2017/4/11.
  */
 @Service
 @Log4j
-public class CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
   private static final String LOGO = "/image/category/%s.jpg";
 
@@ -68,7 +67,7 @@ public class CategoryService {
       return true;
     }
     return false;
-}
+  }
 
   public boolean insert(Long userId, String name){
     Category category = new Category();

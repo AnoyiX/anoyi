@@ -26,11 +26,13 @@ public class RedisSourceManager {
   @Autowired
   private StringRedisTemplate stringRedisTemplate;
 
+  /* 保存视频信息 */
   public void saveVideos(String key, List<VideoDTO> videos){
     String value = JSONObject.toJSONString(videos);
     stringRedisTemplate.opsForValue().set(key, value);
   }
 
+  /* 得到视频信息 */
   public List<VideoDTO> getVideosByKeyAndTag(String key, String tag){
     key = key + "_" + tag;
     String cacheValue = stringRedisTemplate.opsForValue().get(key);

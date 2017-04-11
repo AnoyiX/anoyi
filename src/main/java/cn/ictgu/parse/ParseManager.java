@@ -13,6 +13,7 @@ import cn.ictgu.tools.UrlUtils;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @Log4j
-public class ParseManager {
+public class ParseManager{
 
   @Autowired
   private StringRedisTemplate redisTemplate;

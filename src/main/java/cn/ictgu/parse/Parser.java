@@ -1,6 +1,6 @@
 package cn.ictgu.parse;
 
-import cn.ictgu.dao.model.Episode;
+import cn.ictgu.serv.model.Episode;
 
 import java.util.List;
 

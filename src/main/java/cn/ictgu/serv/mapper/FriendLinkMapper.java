@@ -1,6 +1,6 @@
-package cn.ictgu.dao.mapper;
+package cn.ictgu.serv.mapper;
 
-import cn.ictgu.dao.model.FriendLink;
+import cn.ictgu.serv.model.FriendLink;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -1,6 +1,6 @@
-package cn.ictgu.dao.mapper;
+package cn.ictgu.serv.mapper;
 
-import cn.ictgu.dao.model.Episode;
+import cn.ictgu.serv.model.Episode;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

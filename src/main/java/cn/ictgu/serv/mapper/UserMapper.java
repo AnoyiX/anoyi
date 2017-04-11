@@ -1,6 +1,6 @@
-package cn.ictgu.dao.mapper;
+package cn.ictgu.serv.mapper;
 
-import cn.ictgu.dao.model.User;
+import cn.ictgu.serv.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -1,7 +1,7 @@
 package cn.ictgu.API;
 
-import cn.ictgu.dao.model.User;
-import cn.ictgu.dao.service.UserService;
+import cn.ictgu.serv.model.User;
+import cn.ictgu.serv.service.UserService;
 import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.tools.CheckUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
