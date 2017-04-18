@@ -1,13 +1,14 @@
 package cn.ictgu.controller;
 
 import cn.ictgu.dto.Video;
-import cn.ictgu.parse.ParseManager;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import cn.ictgu.parse.ParserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 视频播放
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class VideoController {
 
   @Autowired
-  private ParseManager parseManager;
+  private ParserManager parseManager;
 
   /* 视频播放页 */
   @RequestMapping(value = "/play", method = RequestMethod.GET)

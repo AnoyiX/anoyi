@@ -1,16 +1,18 @@
 package cn.ictgu.API;
 
+import cn.ictgu.config.security.AnyUser;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.UserService;
 import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.tools.CheckUtils;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * User API
@@ -32,9 +34,8 @@ public class UserApi {
       return response;
     }
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails) {
-      String email = ((UserDetails)principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       if(userService.updateNickname(user.getId(), nickname)){
         response.setCode(100);
         return response;

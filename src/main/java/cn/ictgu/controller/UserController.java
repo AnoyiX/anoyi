@@ -1,10 +1,10 @@
 package cn.ictgu.controller;
 
+import cn.ictgu.config.security.AnyUser;
 import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.CategoryService;
 import cn.ictgu.serv.service.UserService;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,6 @@ import java.util.List;
  * Created by Silence on 2017/3/10.
  */
 @Controller
-@Log4j
 public class UserController {
 
   @Autowired
@@ -45,9 +44,8 @@ public class UserController {
   @RequestMapping(value = "/user", method = RequestMethod.GET)
   public String user(Model model){
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails) {
-      String email = ((UserDetails)principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       model.addAttribute("user", user);
       List<Category> categories = categoryService.getByUserId(user.getId());
       model.addAttribute("categories", categories);

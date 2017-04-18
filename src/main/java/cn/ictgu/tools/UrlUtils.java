@@ -1,17 +1,15 @@
 package cn.ictgu.tools;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 /**
  * Url 工具类
  * Created by Silence on 2016/11/24.
  */
-@Log4j
+@Log4j2
 public class UrlUtils {
 
   public static String getDomain(String url){

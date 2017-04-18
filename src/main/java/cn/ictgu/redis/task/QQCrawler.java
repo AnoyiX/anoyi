@@ -4,6 +4,7 @@ import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.redis.RedisSourceManager;
 import cn.ictgu.tools.JsoupUtils;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by Silence on 2017/2/15.
  */
 @Component
-@Log4j
+@Log4j2
 public class QQCrawler {
 
   private static final String HOME_PAGE_PC_CARTOON_HOT = "http://v.qq.com/cartoon/";

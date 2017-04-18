@@ -3,12 +3,12 @@ package cn.ictgu.API;
 import cn.ictgu.serv.model.FriendLink;
 import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.dto.SimpleResponse;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

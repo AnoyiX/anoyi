@@ -2,7 +2,7 @@ package cn.ictgu.tools.mail;
 
 import cn.ictgu.serv.model.User;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
  * Created by Silence on 2017/3/11.
  */
 @Service
-@Log4j
+@Log4j2
 public class MailService {
 
   @Autowired

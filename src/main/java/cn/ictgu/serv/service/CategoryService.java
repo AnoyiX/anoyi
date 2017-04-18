@@ -9,7 +9,6 @@ import java.util.List;
  * Category Service
  * Created by Silence on 2017/3/13.
  */
-@Service
 public interface CategoryService {
 
   /* 查询用户所有的分类信息 */

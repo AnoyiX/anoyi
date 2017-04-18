@@ -4,6 +4,7 @@ import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.redis.RedisSourceManager;
 import cn.ictgu.tools.JsoupUtils;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
  * Created by Silence on 2017/2/12.
  */
 @Component
-@Log4j
+@Log4j2
 public class LetvCrawler {
 
   private static final String HOME_PAGE_PC = "http://www.le.com/";

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
  * User Service
  * Created by Silence on 2017/3/11.
  */
-@Service
 public interface UserService {
 
   /* 用户注册 */

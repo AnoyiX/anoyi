@@ -5,7 +5,6 @@ import cn.ictgu.dto.Video;
 import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.parse.search.VideoSearch;
 import cn.ictgu.redis.RedisSourceManager;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

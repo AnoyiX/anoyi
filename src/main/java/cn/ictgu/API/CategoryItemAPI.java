@@ -1,13 +1,13 @@
 package cn.ictgu.API;
 
+import cn.ictgu.config.security.AnyUser;
+import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.serv.model.CategoryItem;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.CategoryItemService;
 import cn.ictgu.serv.service.UserService;
-import cn.ictgu.dto.SimpleResponse;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.log4j.Log4j;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * CategoryItem API
  * Created by Silence on 2017/3/14.
  */
 @RestController
-@Log4j
+@Log4j2
 public class CategoryItemAPI {
-
-  @Autowired
-  private UserService userService;
 
   @Autowired
   private CategoryItemService itemService;
@@ -34,9 +33,8 @@ public class CategoryItemAPI {
   public SimpleResponse add(HttpServletRequest request){
     SimpleResponse simpleResponse = new SimpleResponse();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails){
-      String email = ((UserDetails) principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       CategoryItem item = createItem(user.getId(), request);
       if (itemService.insert(item)){
         simpleResponse.setCode(100);
@@ -54,9 +52,8 @@ public class CategoryItemAPI {
   public SimpleResponse delete(@PathVariable("id") Long id){
     SimpleResponse simpleResponse = new SimpleResponse();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails){
-      String email = ((UserDetails) principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       if (itemService.delete(id, user.getId())){
         simpleResponse.setCode(100);
         return simpleResponse;

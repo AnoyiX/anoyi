@@ -1,11 +1,11 @@
 package cn.ictgu.API;
 
+import cn.ictgu.config.security.AnyUser;
 import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.CategoryService;
 import cn.ictgu.serv.service.UserService;
 import cn.ictgu.dto.SimpleResponse;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,16 +28,12 @@ public class CategoryAPI {
   @Autowired
   private CategoryService categoryService;
 
-  @Autowired
-  private UserService userService;
-
   @RequestMapping(value = "/user/category/delete/{categoryId}", method = RequestMethod.GET)
   public SimpleResponse deleteCategory(@PathVariable("categoryId") Long categoryId){
     SimpleResponse simpleResponse = new SimpleResponse();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails) {
-      String email = ((UserDetails)principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       if(categoryService.deleteByUserIdAndId(user.getId(), categoryId)){
         simpleResponse.setCode(100);
         return simpleResponse;
@@ -50,9 +47,8 @@ public class CategoryAPI {
   public SimpleResponse addCategory(HttpServletRequest request){
     SimpleResponse simpleResponse = new SimpleResponse();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails) {
-      String email = ((UserDetails)principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       String name = request.getParameter("name");
       if (name == null){
         simpleResponse.setCode(200);
@@ -71,9 +67,8 @@ public class CategoryAPI {
   public List<Category> list(){
     List<Category> categories = new ArrayList<>();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails) {
-      String email = ((UserDetails)principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser) {
+      AnyUser user = (AnyUser)principal;
       categories = categoryService.getByUserId(user.getId());
     }
     return categories;

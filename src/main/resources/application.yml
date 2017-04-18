@@ -1,23 +1,30 @@
-# Tomcat 配置
+# 容器 配置
 server:
   port: 80
+  undertow:
+    worker-threads: 20
+    buffer-size: 512
+    io-threads: 2
 
-# 数据库 及 Redis 配置
+# 数据库 及 Redis 配置   
 spring:
   redis:
-    host: [Redis服务器地址]
-    port: [Redis端口号]
-    password: [Redis客户端密码]
+    host: [Redis地址]
+    port: [Reids端口号]
+    password: [Redis密码，没有则去掉此行]
   datasource:
     url: [数据库连接地址]
     driver-class-name: org.mariadb.jdbc.Driver
     username: [数据库账号]
     password: [数据库密码]
     sql-script-encoding: utf-8
+    hikari:
+      max-lifetime: 1765000
+      maximum-pool-size: 10
   mail:
-    host: [邮件提供方地址]
-    username: [邮箱账号]
-    password: [邮箱密码]
+    host: [服务邮箱地址]
+    username: [用户名]
+    password: [密码]
     properties:
       mail:
         smtp:

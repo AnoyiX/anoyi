@@ -6,6 +6,7 @@ import cn.ictgu.serv.model.enumclass.YesNoEnum;
 import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.tools.UrlUtils;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
  * Created by Silence on 2017/4/11.
  */
 @Service
-@Log4j
+@Log4j2
 public class FriendLinkServiceImpl implements FriendLinkService{
 
   @Value("${app.name}")

@@ -1,7 +1,6 @@
 package cn.ictgu.parse.search;
 
 import cn.ictgu.dto.Video;
-import lombok.extern.log4j.Log4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,7 +16,6 @@ import java.util.List;
  * Created by Silence on 2017/3/27.
  */
 @Component
-@Log4j
 public class VideoSearch {
 
   private static final String le = "http://m.le.com";

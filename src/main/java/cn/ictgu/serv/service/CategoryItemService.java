@@ -9,7 +9,6 @@ import java.util.List;
  * CategoryItem Service
  * Created by Silence on 2017/3/14.
  */
-@Service
 public interface CategoryItemService {
 
   /* 查询某个用户某个分类的所有子项 */

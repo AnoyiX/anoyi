@@ -5,7 +5,7 @@ import cn.ictgu.serv.mapper.CategoryMapper;
 import cn.ictgu.serv.model.CategoryItem;
 import cn.ictgu.serv.model.enumclass.CategoryItemType;
 import cn.ictgu.serv.service.CategoryItemService;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by Silence on 2017/4/11.
  */
 @Service
-@Log4j
+@Log4j2
 public class CategoryItemServiceImpl implements CategoryItemService{
 
   @Autowired

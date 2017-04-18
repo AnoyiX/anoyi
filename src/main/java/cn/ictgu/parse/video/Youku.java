@@ -1,10 +1,10 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * 优酷视频
  * Created by Silence on 2017/1/7.
  */
-@Log4j
+@Log4j2
 public class Youku extends AllVideoParser {
   private final static String PROVIDER = "优酷视频";
   private final static String VIDEO_INFO_API = "http://play-ali.youku.com/play/get.json?vid=%s&ct=12";

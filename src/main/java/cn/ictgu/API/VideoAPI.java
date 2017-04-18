@@ -2,15 +2,15 @@ package cn.ictgu.API;
 
 import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
-import cn.ictgu.parse.ParseManager;
+import cn.ictgu.parse.ParserManager;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.UrlUtils;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ import java.util.List;
 public class VideoAPI {
 
   @Autowired
-  private ParseManager parseManager;
+  private ParserManager parseManager;
 
   @RequestMapping(value = "/api/video", method = RequestMethod.GET)
   public Video play(HttpServletRequest request){

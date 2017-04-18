@@ -30,7 +30,10 @@ class AnyUserDetailsService implements UserDetailsService {
     }
     List<SimpleGrantedAuthority> authorities = new ArrayList<>();
     authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-    return new User(s, user.getPassword(), authorities);
+    AnyUser anyUser = new AnyUser(s, user.getPassword(), authorities);
+    anyUser.setId(user.getId());
+    anyUser.setNickname(user.getNickname());
+    return anyUser;
   }
 
 }

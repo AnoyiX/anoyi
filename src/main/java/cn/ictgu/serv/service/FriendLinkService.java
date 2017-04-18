@@ -9,7 +9,6 @@ import java.util.List;
  * 友情链接 Service
  * Created by Silence on 2017/3/9.
  */
-@Service
 public interface FriendLinkService {
 
   /* 得到首页友情链接 */

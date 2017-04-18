@@ -1,11 +1,11 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * 芒果视频
  * Created by Silence on 2017/1/7.
  */
-@Log4j
+@Log4j2
 public class Mgtv extends AllVideoParser{
   private static final String PROVIDER = "芒果视频";
   private static final String VIDEOS = "http://pcweb.api.mgtv.com/episode/list?video_id=%s&page=0&size=50";

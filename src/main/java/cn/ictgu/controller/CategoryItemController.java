@@ -1,5 +1,6 @@
 package cn.ictgu.controller;
 
+import cn.ictgu.config.security.AnyUser;
 import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.model.CategoryItem;
 import cn.ictgu.serv.model.User;
@@ -36,9 +37,8 @@ public class CategoryItemController {
   @RequestMapping(value = "/user/item/{id}", method = RequestMethod.GET)
   public String list(@PathVariable("id") Long id, Model model){
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails){
-      String email = ((UserDetails) principal).getUsername();
-      User user = userService.getByEmail(email);
+    if (principal instanceof AnyUser){
+      AnyUser user = (AnyUser)principal;
       List<CategoryItem> items = categoryItemService.list(id, user.getId());
       Category category = categoryService.getById(id, user.getId());
       model.addAttribute("user", user);

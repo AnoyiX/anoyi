@@ -6,7 +6,7 @@ import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.UserService;
 import cn.ictgu.tools.mail.MailService;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * Created by Silence on 2017/4/11.
  */
 @Service
-@Log4j
+@Log4j2
 public class UserServiceImpl implements UserService{
 
   @Autowired

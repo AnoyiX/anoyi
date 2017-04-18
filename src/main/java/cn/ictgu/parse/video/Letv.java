@@ -1,12 +1,12 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.Parser;
+import cn.ictgu.serv.model.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.jsoup.nodes.Document;
 
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * 乐视视频解析
  * Created by Silence on 2017/1/7.
  */
-@Log4j
+@Log4j2
 public class Letv implements Parser<Video>{
 
   private final static String PROVIDER = "乐视视频";

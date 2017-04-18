@@ -4,7 +4,7 @@ import cn.ictgu.serv.mapper.CategoryItemMapper;
 import cn.ictgu.serv.mapper.CategoryMapper;
 import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.service.CategoryService;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Silence on 2017/4/11.
  */
 @Service
-@Log4j
+@Log4j2
 public class CategoryServiceImpl implements CategoryService {
 
   private static final String LOGO = "/image/category/%s.jpg";
