@@ -8,8 +8,7 @@ import cn.ictgu.serv.service.CategoryItemService;
 import cn.ictgu.serv.service.CategoryService;
 import cn.ictgu.serv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,16 +34,12 @@ public class CategoryItemController {
   private CategoryService categoryService;
 
   @RequestMapping(value = "/user/item/{id}", method = RequestMethod.GET)
-  public String list(@PathVariable("id") Long id, Model model){
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof AnyUser){
-      AnyUser user = (AnyUser)principal;
-      List<CategoryItem> items = categoryItemService.list(id, user.getId());
-      Category category = categoryService.getById(id, user.getId());
-      model.addAttribute("user", user);
-      model.addAttribute("category", category);
-      model.addAttribute("items", items);
-    }
+  public String list(@AuthenticationPrincipal AnyUser user, @PathVariable("id") Long id, Model model){
+    List<CategoryItem> items = categoryItemService.list(id, user.getId());
+    Category category = categoryService.getById(id, user.getId());
+    model.addAttribute("user", user);
+    model.addAttribute("category", category);
+    model.addAttribute("items", items);
     return "items";
   }
 

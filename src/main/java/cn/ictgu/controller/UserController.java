@@ -6,8 +6,7 @@ import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.CategoryService;
 import cn.ictgu.serv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,28 +29,23 @@ public class UserController {
   private CategoryService categoryService;
 
   @RequestMapping(value = "/validate/{token}", method = RequestMethod.GET)
-  public String emailConfirm(@PathVariable("token") String token, Model model){
+  public String emailConfirm(@PathVariable("token") String token, Model model) {
     User user = userService.completeSignUp(token);
-    if (user != null){
+    if (user != null) {
       model.addAttribute("email", user.getEmail());
       model.addAttribute("result", "注册成功，赶紧登陆体验吧！");
-    }else {
+    } else {
       model.addAttribute("result", "链接已失效，请重新注册！");
     }
     return "login";
   }
 
   @RequestMapping(value = "/user", method = RequestMethod.GET)
-  public String user(Model model){
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof AnyUser) {
-      AnyUser user = (AnyUser)principal;
-      model.addAttribute("user", user);
-      List<Category> categories = categoryService.getByUserId(user.getId());
-      model.addAttribute("categories", categories);
-    }
+  public String user(@AuthenticationPrincipal AnyUser user, Model model) {
+    model.addAttribute("user", user);
+    List<Category> categories = categoryService.getByUserId(user.getId());
+    model.addAttribute("categories", categories);
     return "user";
   }
-
 
 }

@@ -1,13 +1,12 @@
 package cn.ictgu.API;
 
 import cn.ictgu.config.security.AnyUser;
+import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.UserService;
-import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.tools.CheckUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +24,7 @@ public class UserApi {
   private UserService userService;
 
   @RequestMapping(value = "/user/name", method = RequestMethod.POST)
-  public SimpleResponse updateUserInfo(HttpServletRequest request){
+  public SimpleResponse updateUserInfo(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
     SimpleResponse response = new SimpleResponse();
     String nickname = request.getParameter("nickname");
     if (!CheckUtils.checkNickname(nickname)){
@@ -33,19 +32,12 @@ public class UserApi {
       response.setMessage("修改失败，参数不正确！");
       return response;
     }
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof AnyUser) {
-      AnyUser user = (AnyUser)principal;
-      if(userService.updateNickname(user.getId(), nickname)){
-        response.setCode(100);
-        return response;
-      }
-      response.setCode(200);
-      response.setMessage("修改失败，参数不正确！");
+    if(userService.updateNickname(user.getId(), nickname)){
+      response.setCode(100);
       return response;
     }
     response.setCode(200);
-    response.setMessage("修改失败，请重新登录！");
+    response.setMessage("修改失败，参数不正确！");
     return response;
   }
 
