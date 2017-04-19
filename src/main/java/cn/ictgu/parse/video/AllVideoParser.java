@@ -4,6 +4,7 @@ import cn.ictgu.config.OtherParseConfig;
 import cn.ictgu.serv.model.Episode;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.Parser;
+import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
@@ -28,11 +29,6 @@ import java.util.regex.Pattern;
 @Log4j2
 abstract class AllVideoParser implements Parser<Video>{
 
-  private static final String REAL_API_REGEX = "url: \"(.*?)\"";
-  private static final String DATA_REGEX = "data: (\\{.*?\\})";
-  private static final String PLAY_URL_REGEX = "u = \"(.*?)\"";
-  private static final String UA_PHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
-
   private static final int timeout = 600000;
 
   /**
@@ -52,6 +48,7 @@ abstract class AllVideoParser implements Parser<Video>{
     video.setParserName(OtherParseConfig.OFFICIAL_NAME);
     crawlerTitleAndImage(url, video);
     String playUrl = getPlayUrl(url);
+    log.info(playUrl);
     video.setPlayUrl(playUrl);
     return video;
   }
@@ -63,30 +60,13 @@ abstract class AllVideoParser implements Parser<Video>{
   abstract void crawlerTitleAndImage(String url, Video video);
 
   private String getPlayUrl(String url){
-    String api = OtherParseConfig.REQUEST + url;
-    Map<String, String> cookies;
-    Document document;
     try {
-      Connection.Response response = Jsoup.connect(api).userAgent(UA_PHONE).timeout(timeout).header("Upgrade-Insecure-Requests","1").header("Host","aikan-tv.com").ignoreContentType(true).execute();
-      cookies = response.cookies();
-      document = response.parse();
-      Matcher matcher = Pattern.compile(REAL_API_REGEX).matcher(document.html());
-      if (matcher.find()){
-        String realApi =  OtherParseConfig.OFFICIAL_WEBSITE + matcher.group(1);
-        matcher = Pattern.compile(DATA_REGEX).matcher(document.html());
-        if (matcher.find()){
-          String data = matcher.group(1);
-          JSONObject object = JSON.parseObject(data);
-          try {
-            Document result = Jsoup.connect(realApi).timeout(timeout).header("X-Requested-With","XMLHttpRequest").header("Content-Type","application/x-www-form-urlencoded").cookies(cookies).userAgent(UA_PHONE).ignoreContentType(true).validateTLSCertificates(false).data("key", object.getString("key")).data("url",object.getString("url")).data("type",object.getString("type")).post();
-            matcher = Pattern.compile(PLAY_URL_REGEX).matcher(result.html());
-            if (matcher.find())
-              return matcher.group(1);
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        }
-      }
+      url = URLEncoder.encode(url, "UTF-8");
+      String api = String.format(OtherParseConfig.REQUEST, url);
+      Connection.Response response = Jsoup.connect(api).userAgent(JsoupUtils.UA_PHONE).timeout(timeout).followRedirects(false).method(Connection.Method.GET).execute();
+      return response.header("Location");
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }

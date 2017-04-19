@@ -1,21 +1,14 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.config.OtherParseConfig;
 import cn.ictgu.dto.Video;
-import cn.ictgu.parse.Parser;
 import cn.ictgu.serv.model.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,32 +20,10 @@ import java.util.regex.Pattern;
  * Created by Silence on 2017/1/7.
  */
 @Log4j2
-public class Youku implements Parser<Video> {
+public class Youku extends AllVideoParser {
   private static final String PROVIDER = "优酷视频";
   private static final String VIDEO_INFO_API = "http://play-ali.youku.com/play/get.json?vid=%s&ct=12";
   private static final String VIDEOS = "http://v.youku.com/v_show/id_%s.html";
-  private static final String PARSER_API = "https://aikan-tv.com/tudouxml.php?url=%s&h5=1";
-
-  @Override
-  public Video parse(String url) {
-    Video video = initVideo();
-    video.setValue(url);
-    video.setParser(OtherParseConfig.OFFICIAL_WEBSITE);
-    video.setParserName(OtherParseConfig.OFFICIAL_NAME);
-    crawlerTitleAndImage(url, video);
-    try {
-      url = URLEncoder.encode(url, "UTF-8");
-      String api = String.format(PARSER_API, url);
-      Connection.Response response = Jsoup.connect(api).userAgent(JsoupUtils.UA_PHONE).followRedirects(false).method(Connection.Method.GET).execute();
-      String location = response.header("Location");
-      video.setPlayUrl(location);
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return video;
-  }
 
   @Override
   public List<Episode> parseEpisodes(String url) {

@@ -1,10 +1,12 @@
-package cn.ictgu.controller;
+﻿package cn.ictgu.controller;
 
+import cn.ictgu.serv.model.Sponsor;
 import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.dto.Video;
 import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.parse.search.VideoSearch;
 import cn.ictgu.redis.RedisSourceManager;
+import cn.ictgu.serv.service.SponsorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,9 @@ public class IndexController {
 
   @Autowired
   private FriendLinkService friendLinkService;
+
+  @Autowired
+  private SponsorService sponsorService;
 
   @Autowired
   private VideoSearch videoSearch;

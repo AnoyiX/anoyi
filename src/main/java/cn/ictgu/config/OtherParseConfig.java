@@ -10,6 +10,6 @@ public class OtherParseConfig {
 
   public static final String OFFICIAL_WEBSITE = "https://aikan-tv.com/";
 
-  public static final String REQUEST = "https://aikan-tv.com/tong.php?url=";
+  public static final String REQUEST = "https://aikan-tv.com/tudouxml.php?url=%s&h5=1";
 
 }

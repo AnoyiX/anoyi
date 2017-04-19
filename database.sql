@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100119
 File Encoding         : 65001
 
-Date: 2017-03-17 20:23:13
+Date: 2017-04-19 21:55:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`),
   KEY `user_id_index` (`user_id`) USING BTREE,
   KEY `md5_index` (`md5`) USING HASH
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for category_item
@@ -47,7 +47,7 @@ CREATE TABLE `category_item` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_id` (`id`) USING BTREE,
   KEY `index_category_id` (`category_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for friend_link
@@ -60,7 +60,20 @@ CREATE TABLE `friend_link` (
   `show` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `domain_index` (`domain`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for sponsor
+-- ----------------------------
+DROP TABLE IF EXISTS `sponsor`;
+CREATE TABLE `sponsor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(32) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `from` varchar(16) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `money` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for user
@@ -74,4 +87,4 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id_index` (`id`) USING BTREE,
   KEY `user_email_index` (`email`) USING HASH
-) ENGINE=InnoDB AUTO_INCREMENT=1007 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1023 DEFAULT CHARSET=utf8mb4;

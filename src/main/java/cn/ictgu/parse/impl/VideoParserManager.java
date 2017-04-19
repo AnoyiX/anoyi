@@ -55,13 +55,13 @@ public class VideoParserManager implements ParserManager{
     String cacheValue = redisTemplate.opsForValue().get(url);
     Video video;
     if (StringUtils.isEmpty(cacheValue)){
-      log.info("开始解析：" + url);
+      log.info("Parse：" + url);
       String key = UrlUtils.getTopDomain(url);
       Parser videoParse = this.getVideoParse(key);
       video = (Video) videoParse.parse(url);
       this.cacheVideoInfo(url, video);
     }else {
-      log.info("开始获取缓存信息：" + url);
+      log.info("Get cache info：" + url);
       video = JSONObject.parseObject(cacheValue, Video.class);
     }
     log.debug("VIDEO: "+ JSONObject.toJSONString(video));
@@ -70,10 +70,12 @@ public class VideoParserManager implements ParserManager{
 
   @Async
   private void cacheVideoInfo(String url, Video video){
-    log.info("缓存视频：" + url);
-    String value = JSONObject.toJSONString(video);
-    redisTemplate.opsForValue().set(url, value);
-    redisTemplate.expire(url, 3, TimeUnit.HOURS);
+    if (StringUtils.isNotEmpty(video.getPlayUrl())){
+      log.info("Cache video：" + url);
+      String value = JSONObject.toJSONString(video);
+      redisTemplate.opsForValue().set(url, value);
+      redisTemplate.expire(url, 3, TimeUnit.HOURS);
+    }
   }
 
 
