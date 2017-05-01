@@ -1,13 +1,24 @@
 # any-video
 Spring Boot 结合网络爬虫开发的完整视频网站，演示地址：http://www.ictgu.cn
 
-![首页展示.png](http://upload-images.jianshu.io/upload_images/3424642-b67307b7700bd532.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![首页](http://upload-images.jianshu.io/upload_images/3424642-3cf38e6ebcdc6e70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![视频解析](http://upload-images.jianshu.io/upload_images/3424642-2cf178c872da300e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![文章解析](http://upload-images.jianshu.io/upload_images/3424642-570107d139619963.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![自定义分类](http://upload-images.jianshu.io/upload_images/3424642-3dd5ad72e1c9d352.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 更新记录
 -------
 - （4月11日）完美解决乐视视频VIP视频解析，自动选择最高清视频
 - （4月18日）选用性能更好的Undertow替代Tomcat，更新部分视频解析的代码
 - （4月18日）更新优酷解析，由于Chrome内核的浏览器不支持优酷的播放格式，所以优酷的视频只能用Windows自带的Edge浏览器或者手机浏览器观看。
+- （5月01日）添加文章解析功能（目前支持微信文章），添加熊猫TV支持
 
 开发环境
 -------
