@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="nav">
@@ -25,6 +24,15 @@
                     <li th:class="${navIndex} == 2 ? 'active' : ''">
                         <a href="/video">高级</a>
                     </li>
+                    <li th:class="${navIndex} == 3 ? 'active' : ''">
+                        <a href="/sponsor">捐助</a>
+                    </li>
+                    <li th:class="${navIndex} == 4 ? 'active' : ''">
+                        <a href="/author">联系作者</a>
+                    </li>
+                    <li>
+                        <a href="http://www.jianshu.com/nb/7549029" target="_blank">文档</a>
+                    </li>
                     <li>
                         <a href="https://github.com/ChinaSilence/any-video" target="_blank">Github</a>
                     </li>
@@ -33,7 +41,7 @@
                     <a class="btn btn-danger" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
                     <a class="btn btn-success" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
                 </div>
-            </div><!--/.navbar-collapse -->
+            </div>
         </div>
     </nav>
 </div>

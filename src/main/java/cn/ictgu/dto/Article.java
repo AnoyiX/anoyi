@@ -2,26 +2,27 @@ package cn.ictgu.dto;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * 视频
- * Created by Silence on 2016/12/2.
+ * 文章
+ * Created by Silence on 2017/5/1.
  */
 @Data
-public class Video {
+public class Article {
 
-  /* 视频名称 */
+  /* 标题 */
   private String title;
 
-  /* 视频图片 */
+  /* 图片 */
   private String image;
 
-  /* 视频播放地址 */
-  private String playUrl;
+  /* 内容 */
+  private String content;
 
-  /* 播放类型 */
-  private String type;
+  /* 作者 */
+  private String author;
+
+  /* 发布时间 */
+  private String time;
 
   /* [版权] 视频源地址 */
   private String value;

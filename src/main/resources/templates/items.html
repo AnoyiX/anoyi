@@ -1,15 +1,58 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${category.name}"></title>
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/user.css">
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .itemIcon{
+            position: relative;
+            float: left;
+            display: inline-block;
+            height: 70px;
+            padding: 5px 0;
+        }
+
+        .itemIcon img{
+            height: 59px;
+            width: 50px;
+        }
+
+        .itemBox{
+            border-radius: 2px;
+            border: 3px solid #F1F1F1;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+        }
+
+        .itemContent{
+            position: relative;
+            display: inline-block;
+            float: left;
+            margin-left: 20px;
+            line-height: 70px;
+            font-size: 16px;
+        }
+
+        .itemContent a:hover{
+            color: #D9534f;
+            text-decoration: none;
+        }
+
+        .itemOpt{
+            position: relative;
+            display: inline-block;
+            float: right;
+            margin-right: 10px;
+        }
+
+        .itemOpt button{
+            margin-top: 20px;
+        }
+
+    </style>
 </head>
 
 <body style="background-color: #f1f1f1">
@@ -44,14 +87,17 @@
     <!-- 内容列表 -->
     <div class="row" style="padding: 20px;">
         <div class="row text-center inner">
-            <div class="col-md-3 col-xs-6" th:each="item : ${items}" style="margin-bottom: 20px">
-                <div class="infoContent">
-                    <a th:href="@{/play(v=${item.url})}">
+            <div class="col-md-6 col-xs-12 itemBox" th:each="item : ${items}">
+                <div class="itemIcon">
+                    <a th:href="${item.url}">
                         <img th:src="${item.image}" alt="Image" class="infoImage"/>
-                        <span class="infoTag" th:text="${item.type}"></span>
                     </a>
-                    <a th:href="@{/play(v=${item.url})}" class="infoTitle" th:text="${item.name}"></a>
-                    <button class="infoBtn deleteBtn" data-toggle="modal" data-target="#deleteModal" th:value="${item.id}"> 删除 </button>
+                </div>
+                <div class="itemContent">
+                    <a th:href="${item.url}" class="infoTitle" th:text="${item.name}"></a>
+                </div>
+                <div class="itemOpt">
+                    <button class="btn btn-danger btn-sm deleteBtn" data-toggle="modal" data-target="#deleteModal" th:value="${item.id}"> 删除 </button>
                 </div>
             </div>
         </div>

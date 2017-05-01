@@ -37,12 +37,9 @@ public class Letv implements Parser<Video>{
 
   @Override
   public Video parse(String url) {
-    Video video = new Video();
-    video.setProvider(PROVIDER);
+    final Video video = new Video();
     video.setValue(url);
-    video.setParserName("Github");
-    video.setParser("http://github.com");
-    video.setType("H5");
+    this.initVideo(video);
     String vid = this.matchVid(url);
     String routeUrl = String.format(ROUTE, vid, getTkey());
     Document document = JsoupUtils.getDocWithPhone(routeUrl, cookie);
@@ -71,6 +68,13 @@ public class Letv implements Parser<Video>{
     JSONObject videoJson = JSONObject.parseObject(text);
     video.setPlayUrl(videoJson.getJSONArray("nodelist").getJSONObject(0).getString("location"));
     return video;
+  }
+
+  private void initVideo(Video video){
+    video.setProvider(PROVIDER);
+    video.setParserName("Github");
+    video.setParser("http://github.com");
+    video.setType("H5");
   }
 
   @Override
@@ -125,7 +129,7 @@ public class Letv implements Parser<Video>{
     return null;
   }
 
-  //乐视tkey算法
+  /* 乐视tkey算法 */
   private static String getTkey() {
     int a = (int) (new Date().getTime() / 1000);
     for (int i = 0; i < 8; i++) {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +34,7 @@ public class CategoryItemController {
   @Autowired
   private CategoryService categoryService;
 
-  @RequestMapping(value = "/user/item/{id}", method = RequestMethod.GET)
+  @GetMapping("/user/item/{id}")
   public String list(@AuthenticationPrincipal AnyUser user, @PathVariable("id") Long id, Model model){
     List<CategoryItem> items = categoryItemService.list(id, user.getId());
     Category category = categoryService.getById(id, user.getId());
@@ -43,7 +44,7 @@ public class CategoryItemController {
     return "items";
   }
 
-  @RequestMapping(value = "/share/{md5}", method = RequestMethod.GET)
+  @GetMapping("/share/{md5}")
   public String share(@PathVariable("md5") String md5, Model model){
     Category category = categoryService.getByMd5(md5);
     if (category == null){

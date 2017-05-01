@@ -6,7 +6,9 @@ import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +26,7 @@ public class CategoryAPI {
   @Autowired
   private CategoryService categoryService;
 
-  @RequestMapping(value = "/user/category/delete/{categoryId}", method = RequestMethod.GET)
+  @GetMapping("/user/category/delete/{categoryId}")
   public SimpleResponse deleteCategory(@AuthenticationPrincipal AnyUser user, @PathVariable("categoryId") Long categoryId){
     SimpleResponse simpleResponse = new SimpleResponse();
     if(categoryService.deleteByUserIdAndId(user.getId(), categoryId)){
@@ -35,7 +37,7 @@ public class CategoryAPI {
     return simpleResponse;
   }
 
-  @RequestMapping(value = "/user/category/add", method = RequestMethod.POST)
+  @PostMapping("/user/category/add")
   public SimpleResponse addCategory(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
     SimpleResponse simpleResponse = new SimpleResponse();
     String name = request.getParameter("name");
@@ -51,7 +53,7 @@ public class CategoryAPI {
     return simpleResponse;
   }
 
-  @RequestMapping(value = "/user/categories", method = RequestMethod.GET)
+  @GetMapping("/user/categories")
   public List<Category> list(@AuthenticationPrincipal AnyUser user){
     return categoryService.getByUserId(user.getId());
   }

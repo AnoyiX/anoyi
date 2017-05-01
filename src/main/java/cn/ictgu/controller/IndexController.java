@@ -1,4 +1,4 @@
-﻿package cn.ictgu.controller;
+package cn.ictgu.controller;
 
 import cn.ictgu.serv.model.Sponsor;
 import cn.ictgu.serv.service.FriendLinkService;
@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,7 +25,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-  private final static String[] TAGS = {"LETV","QQ"};
+  private final static String[] TAGS = {"LETV","PANDA"};
 
   @Autowired
   private RedisSourceManager redisSourceManager;
@@ -38,14 +39,29 @@ public class IndexController {
   @Autowired
   private VideoSearch videoSearch;
 
-  /* 登录页 */
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public String login(){
-    return "login";
+  /* 首页 */
+  @GetMapping("/")
+  public String home(Model model){
+    List<VideoDTO> carouselPics = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CAROUSEL_KEY, TAGS[0]);
+    List<VideoDTO> recommends = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_RECOMMEND_KEY, TAGS[0]);
+    List<VideoDTO> tvHots = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_TV_KEY, TAGS[0]);
+    List<VideoDTO> animeHots = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CARTOON_KEY, TAGS[0]);
+    List<VideoDTO> movies = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_MOVIE_KEY, TAGS[0]);
+    List<VideoDTO> tvTops = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_TV_HOT_KEY, TAGS[0]);
+    List<VideoDTO> lives = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIx_HOME_LIVE_KEY, TAGS[1]);
+    model.addAttribute("carouselPics", carouselPics);
+    model.addAttribute("recommends", recommends);
+    model.addAttribute("tvHots", tvHots);
+    model.addAttribute("animeHots", animeHots);
+    model.addAttribute("tvTops", tvTops);
+    model.addAttribute("lives", lives);
+    model.addAttribute("movies", movies);
+    model.addAttribute("navIndex", 0);
+    return "home";
   }
 
-  /* 搜索页 */
-  @RequestMapping(value = "/s")
+  /* 搜索 */
+  @GetMapping(value = "/s")
   public String search(HttpServletRequest request, Model model){
     model.addAttribute("navIndex", 1);
     String keyword = request.getParameter("wd");
@@ -58,40 +74,47 @@ public class IndexController {
     return "search";
   }
 
-  /* 解析页 */
-  @RequestMapping(value = "/video", method = RequestMethod.GET)
+  /* 解析 */
+  @GetMapping("/video")
   public String video(Model model){
     model.addAttribute("navIndex", 2);
     return "video";
   }
 
-  /* 友情链接页 */
-  @RequestMapping(value = "/friend", method = RequestMethod.GET)
+  /* 捐助 */
+  @GetMapping("/sponsor")
+  public String sponsor(Model model){
+    List<Sponsor> sponsors = sponsorService.list();
+    model.addAttribute("navIndex", 3);
+    model.addAttribute("sponsors", sponsors);
+    return "sponsor";
+  }
+
+  /* 解析 */
+  @GetMapping("/author")
+  public String author(Model model){
+    model.addAttribute("navIndex", 4);
+    return "author";
+  }
+
+  /* 友情链接 */
+  @GetMapping("/friend")
   public String friend(Model model){
     model.addAttribute("appName", friendLinkService.getAppName());
     model.addAttribute("appDomain", friendLinkService.getAppDomain());
     return "friend-link";
   }
 
-  /* 首页 */
-  @RequestMapping(value = "/", method = RequestMethod.GET)
-  public String redis(Model model){
-    List<VideoDTO> carouselPics = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CAROUSEL_KEY, TAGS[0]);
-    List<VideoDTO> recommends = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_RECOMMEND_KEY, TAGS[0]);
-    List<VideoDTO> tvHots = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_TV_KEY, TAGS[0]);
-    List<VideoDTO> animeHots = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CARTOON_KEY, TAGS[0]);
-    List<VideoDTO> movies = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_MOVIE_KEY, TAGS[0]);
-    List<VideoDTO> tvTops = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_TV_HOT_KEY, TAGS[0]);
-    List<VideoDTO> animeNews = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CARTOON_HOT_KEY, TAGS[1]);
-    model.addAttribute("carouselPics", carouselPics);
-    model.addAttribute("recommends", recommends);
-    model.addAttribute("tvHots", tvHots);
-    model.addAttribute("animeHots", animeHots);
-    model.addAttribute("tvTops", tvTops);
-    model.addAttribute("animeNews", animeNews);
-    model.addAttribute("movies", movies);
-    model.addAttribute("navIndex", 0);
-    return "home";
+  /* 登录 */
+  @GetMapping("/login")
+  public String login(){
+    return "login";
+  }
+
+  /* 注册 */
+  @GetMapping("/register")
+  public String register(){
+    return "register";
   }
 
 }

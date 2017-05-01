@@ -8,7 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ public class CategoryItemAPI {
   @Autowired
   private CategoryItemService itemService;
 
-  @RequestMapping(value = "/user/category/item/add", method = RequestMethod.POST)
+  @PostMapping("/user/category/item/add")
   public SimpleResponse add(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
     SimpleResponse simpleResponse = new SimpleResponse();
     CategoryItem item = createItem(user.getId(), request);
@@ -41,7 +43,7 @@ public class CategoryItemAPI {
     return simpleResponse;
   }
 
-  @RequestMapping(value = "/user/category/item/delete/{id}", method = RequestMethod.GET)
+  @GetMapping("/user/category/item/delete/{id}")
   public SimpleResponse delete(@AuthenticationPrincipal AnyUser user, @PathVariable("id") Long id){
     SimpleResponse simpleResponse = new SimpleResponse();
     if (itemService.delete(id, user.getId())){

@@ -1,15 +1,11 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>个人中心</title>
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/user.css">
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <title>个人中心 | Any-Video</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body style="background-color: #f1f1f1">
@@ -158,8 +154,6 @@
 
 <script style="text/javascript">
 
-    var token = $("meta[name='_csrf']").attr("content");
-
     var api;
     
     function deleteApi(id){
@@ -173,8 +167,7 @@
         $("#createCategory").click(function (){
             $("#info").remove();
             $.post("/user/category/add",{
-                "name": $("#nameInput").val(),
-                "_csrf": token
+                "name": $("#nameInput").val()
             }, function (data) {
                 if (data.code == 100){
                     window.location.reload();
@@ -209,8 +202,7 @@
         $("#updateUserInfo").click(function (){
             var nickname = $("#nicknameInput").val();
             $.post("/user/name",{
-                "nickname": nickname,
-                "_csrf": token
+                "nickname": nickname
             },function (data) {
                 if (data.code == 100){
                     window.location.reload();

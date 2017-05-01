@@ -6,6 +6,7 @@ import cn.ictgu.parse.ParserManager;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,19 +24,19 @@ public class VideoAPI {
   @Autowired
   private ParserManager parseManager;
 
-  @RequestMapping(value = "/api/video", method = RequestMethod.GET)
+  @GetMapping("/api/video")
   public Video play(HttpServletRequest request){
     String url = request.getParameter("v");
     url = url.replaceAll("\\?(spm|from).*" , "");
     return parseManager.parseVideo(url);
   }
 
-  @RequestMapping("/api/episode")
+  @GetMapping("/api/episode")
   public List<Episode> episodes(HttpServletRequest request){
     String url = request.getParameter("v");
     url = url.replaceAll("\\?(spm|from).*" , "");
     String key = UrlUtils.getTopDomain(url);
-    Parser videoParse = parseManager.getVideoParse(key);
+    Parser videoParse = parseManager.getParser(key);
     return videoParse.parseEpisodes(url);
   }
 

@@ -7,6 +7,7 @@ import cn.ictgu.serv.service.UserService;
 import cn.ictgu.tools.CheckUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class UserApi {
   @Autowired
   private UserService userService;
 
-  @RequestMapping(value = "/user/name", method = RequestMethod.POST)
+  @PostMapping("/user/name")
   public SimpleResponse updateUserInfo(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
     SimpleResponse response = new SimpleResponse();
     String nickname = request.getParameter("nickname");
@@ -41,7 +42,7 @@ public class UserApi {
     return response;
   }
 
-  @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+  @PostMapping(value = "/register")
   public SimpleResponse signUp(HttpServletRequest request){
     User user = createUser(request);
     SimpleResponse response = checkSignUpRequest(user);
@@ -84,7 +85,7 @@ public class UserApi {
 
   private User createUser(HttpServletRequest request){
     User user = new User();
-    user.setEmail(request.getParameter("email"));
+    user.setEmail(request.getParameter("username"));
     user.setPassword(request.getParameter("password"));
     user.setNickname(request.getParameter("nickname"));
     return user;

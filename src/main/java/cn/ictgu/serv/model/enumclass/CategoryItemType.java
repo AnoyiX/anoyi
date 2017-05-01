@@ -6,7 +6,7 @@ package cn.ictgu.serv.model.enumclass;
  */
 public enum CategoryItemType {
 
-  /* 视频， 文章*/
-  VIDEO, ARTICLE
+  /* 视频， 文章,  文件， 代码， 音乐*/
+  VIDEO, ARTICLE, FILE, CODE, MUSIC
 
 }

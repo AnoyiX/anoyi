@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class VideoDTO {
+
   // 视频是否有效
   private Boolean available;
   // 视频标题
@@ -16,4 +17,5 @@ public class VideoDTO {
   private String image;
   // 视频地址
   private String value;
+
 }

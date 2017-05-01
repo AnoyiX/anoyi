@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>作者信息</title>
+    <link rel="stylesheet" href="/css/me.css">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container">
+    <div class="col-lg-6 col-lg-offset-3">
+
+        <!-- ===== vCard Navigation ===== -->
+        <div class="row w">
+            <div class="col-md-4">
+                <img class="img-responsive" src="/image/avatar.jpg" alt="">
+                <ul class="nav nav-tabs nav-stacked" id="myTab">
+                    <li class="active"><a href="#about">个人简介</a></li>
+                    <li><a href="#profile">个人经历</a></li>
+                    <li><a href="#portfolio">开源项目</a></li>
+                    <li><a href="#contact">联系方式</a></li>
+                </ul>
+            </div><!-- col-md-4 -->
+
+            <!-- ===== vCard Content ===== -->
+            <div class="col-md-8">
+                <div class="tab-content">
+                    <!-- ===== First Tab ===== -->
+                    <div class="tab-pane active" id="about">
+                        <h3>杨远东</h3>
+                        <h5>全栈工程师</h5>
+                        <hr>
+                        <p>生于1995年，湖北人，即将毕业于三峡大学。</p>
+                        <p>热衷于用新技术完成自己的小兴趣。</p>
+                    </div><!-- tab about -->
+
+                    <!-- ===== Second Tab ===== -->
+                    <div class="tab-pane" id="profile">
+                        <h4><i class="icon-file-text-alt"></i> 教育经历</h4>
+                        <p class="sm">
+                            <grey>计算机科学与技术（本科）</grey> | 三峡大学<br/>
+                        </p>
+
+                        <h4><i class="icon-briefcase"></i> 工作经历</h4>
+                        <p class="sm">
+                            <grey>上海哇嗨网络科技有限公司</grey> | 2016.8 - 2017.3<br/>
+                        </p>
+                    </div><!-- Tab Profile -->
+
+                    <!-- ===== Third Tab ===== -->
+                    <div class="tab-pane" id="portfolio">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img class="img-responsive center-block" src="/image/video.svg" alt="">
+                                <a href="https://github.com/ChinaSilence/any-video" style="text-align: center"><h4>Any Video</h4></a>
+                            </div><!-- col-xs-6 -->
+                            <div class="col-xs-6">
+                                <img class="img-responsive center-block" src="/image/Chat.svg" alt="">
+                                <a href="#" style="text-align: center"><h4>Any Chat(开发中)</h4></a>
+                            </div><!-- col-xs-6 -->
+                        </div><!-- row -->
+
+                    </div><!-- /Tab Portfolio -->
+
+                    <!-- ===== Fourth Tab ===== -->
+                    <div class="tab-pane" id="contact">
+                        <h4>联系方式</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p style="margin-bottom: 0px;font-size: 14px">
+                                    邮箱 - 545544032@qq.com<br>
+                                    简书 - <a href="http://www.jianshu.com/u/7b7ec6f2db21">http://www.jianshu.com/u/7b7ec6f2db21</a>
+                                </p>
+                            </div><!-- col-xs-12 -->
+                        </div><!-- row -->
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="/image/qq.JPG" alt="" class="img-responsive center-block">
+                            </div><!-- col-xs-6 -->
+                            <div class="col-xs-6">
+                                <img src="/image/wexin.JPG" alt="" class="img-responsive center-block">
+                            </div><!-- col-xs-6 -->
+                        </div><!-- row -->
+                    </div><!-- Tab Contact -->
+
+                </div><!-- Tab Content -->
+            </div><!-- col-md-8 -->
+        </div><!-- row w -->
+    </div><!-- col-lg-6 -->
+</div>
+<script>
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
+</body>
+</html>
