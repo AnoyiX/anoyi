@@ -6,25 +6,25 @@ server:
     buffer-size: 512
     io-threads: 2
 
-# 数据库 及 Redis 配置    182.254.218.174
+# 数据库 及 Redis 配置    
 spring:
   redis:
-    host: localhost
-    port: 6389
-    password: cloudadmin
+    host: [host]
+    port: [端口号]
+    password: [密码]
   datasource:
-    url: jdbc:mysql://localhost:3306/ictgu?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://[host]:3306/ictgu?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: 54shaohan.
+    username: [账号]
+    password: [密码]
     sql-script-encoding: utf-8
     hikari:
       max-lifetime: 1765000
       maximum-pool-size: 10
   mail:
-    host: smtp.ym.163.com
-    username: admin@ictgu.cn
-    password: 54shaohan
+    host: smtp.ym.163.com[此处填你的邮箱服务地址]
+    username: [账号]
+    password: [密码]
     properties:
       mail:
         smtp:
