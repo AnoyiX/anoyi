@@ -6,25 +6,25 @@ server:
     buffer-size: 512
     io-threads: 2
 
-# 数据库 及 Redis 配置   
+# 数据库 及 Redis 配置    182.254.218.174
 spring:
   redis:
-    host: [Redis地址]
-    port: [Reids端口号]
-    password: [Redis密码，没有则去掉此行]
+    host: localhost
+    port: 6389
+    password: cloudadmin
   datasource:
-    url: [数据库连接地址]
+    url: jdbc:mysql://localhost:3306/ictgu?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: org.mariadb.jdbc.Driver
-    username: [数据库账号]
-    password: [数据库密码]
+    username: root
+    password: 54shaohan.
     sql-script-encoding: utf-8
     hikari:
       max-lifetime: 1765000
       maximum-pool-size: 10
   mail:
-    host: [服务邮箱地址]
-    username: [用户名]
-    password: [密码]
+    host: smtp.ym.163.com
+    username: admin@ictgu.cn
+    password: 54shaohan
     properties:
       mail:
         smtp:
@@ -44,5 +44,5 @@ redis:
 
 # 本站信息
 app:
-  name: [网站名称]
-  domain: [网站域名]
+  name: 沧海云
+  domain: ictgu.cn
