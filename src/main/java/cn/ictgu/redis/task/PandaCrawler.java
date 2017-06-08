@@ -3,6 +3,7 @@ package cn.ictgu.redis.task;
 import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.redis.RedisSourceManager;
 import cn.ictgu.tools.JsoupUtils;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,14 +21,17 @@ import java.util.List;
  */
 @Component
 @Log4j2
+@AllArgsConstructor
 public class PandaCrawler {
   private static final String PANDA = "http://www.panda.tv/";
   private static final String PANDA_ALL = "http://www.panda.tv/all";
   private static final String TAG = "PANDA";
 
-  @Autowired
-  private RedisSourceManager redisSourceManager;
+  private final RedisSourceManager redisSourceManager;
 
+    /**
+     * 每隔20分钟，爬一次熊猫TV
+     */
   @Scheduled(fixedRate = 20 * 60 * 1000)
   public void start(){
     Document document = JsoupUtils.getDocWithPC(PANDA_ALL);

@@ -29,7 +29,7 @@ public class Imooc implements Parser<Video>{
     video.setProvider(PROVIDER);
     video.setValue(url);
     video.setParserName("沧海云");
-    video.setParser("http://ictgu.cn");
+    video.setParser("http://www.ictgu.cn");
     video.setType("H5");
     url = url.replace("www","m");
     Document document = JsoupUtils.getDocWithPhone(url, COOKIES);

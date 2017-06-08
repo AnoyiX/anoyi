@@ -40,6 +40,9 @@ public class Panda implements Parser<Video>{
     return null;
   }
 
+    /**
+     * 初始哈视频信息
+     */
   private void initVideo(Video video){
     video.setProvider(PROVIDER);
     video.setParserName("Github");
@@ -47,6 +50,9 @@ public class Panda implements Parser<Video>{
     video.setType("H5");
   }
 
+    /**
+     * 从 URL 中获取房间号
+     */
   private String getRoomId(String videoUrl){
     String roomId = "";
     Matcher matcher = Pattern.compile("([0-9]{3,})").matcher(videoUrl);

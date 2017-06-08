@@ -5,25 +5,25 @@ import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.UserService;
 import cn.ictgu.tools.CheckUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * User API
  * Created by Silence on 2017/3/11.
  */
 @RestController
+@AllArgsConstructor
 public class UserApi {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
+    /**
+     * 修改用户昵称
+     */
   @PostMapping("/user/name")
   public SimpleResponse updateUserInfo(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
     SimpleResponse response = new SimpleResponse();
@@ -42,6 +42,9 @@ public class UserApi {
     return response;
   }
 
+    /**
+     * 用户注册
+     */
   @PostMapping(value = "/register")
   public SimpleResponse signUp(HttpServletRequest request){
     User user = createUser(request);
@@ -59,6 +62,9 @@ public class UserApi {
     return response;
   }
 
+    /**
+     * 检验用户注册输入的参数
+     */
   private SimpleResponse checkSignUpRequest(User user){
     SimpleResponse response = new SimpleResponse();
     String email = user.getEmail();

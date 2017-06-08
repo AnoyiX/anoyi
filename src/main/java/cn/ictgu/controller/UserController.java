@@ -5,7 +5,7 @@ import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.CategoryService;
 import cn.ictgu.serv.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 /**
- * Controller about user
  * Created by Silence on 2017/3/10.
  */
 @Controller
+@AllArgsConstructor
 public class UserController {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
-  @Autowired
-  private CategoryService categoryService;
+  private final CategoryService categoryService;
 
+  /**
+   * 校验邮箱验证
+   */
   @RequestMapping(value = "/validate/{token}", method = RequestMethod.GET)
   public String emailConfirm(@PathVariable("token") String token, Model model) {
     User user = userService.completeSignUp(token);
@@ -40,6 +41,9 @@ public class UserController {
     return "login";
   }
 
+  /**
+   * 用户页
+   */
   @GetMapping("/user")
   public String user(@AuthenticationPrincipal AnyUser user, Model model) {
     model.addAttribute("user", user);

@@ -3,11 +3,10 @@ package cn.ictgu.serv.service;
 import cn.ictgu.redis.RedisTokenManager;
 import cn.ictgu.serv.mapper.UserMapper;
 import cn.ictgu.serv.model.User;
-import cn.ictgu.serv.service.UserService;
 import cn.ictgu.tools.mail.MailService;
 import com.alibaba.fastjson.JSONObject;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -17,61 +16,59 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Log4j2
-public class UserServiceImpl implements UserService{
+@AllArgsConstructor
+public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private UserMapper mapper;
+    private final UserMapper userMapper;
 
-  @Autowired
-  private RedisTokenManager tokenManager;
+    private final RedisTokenManager tokenManager;
 
-  @Autowired
-  private MailService mailService;
+    private final MailService mailService;
 
-  public boolean updateNickname(Long id, String nickname){
-    return mapper.updateNicknameById(id, nickname) > 0;
-  }
-
-  public User getById(Long id){
-    return mapper.selectById(id);
-  }
-
-  public User getByEmail(String email){
-    return mapper.selectByEmail(email);
-  }
-
-  public boolean signUp(User user){
-    String email = user.getEmail();
-    if (existEmail(email)){
-      log.error("用户注册，邮箱已注册:" + email);
-      return false;
+    public boolean updateNickname(Long id, String nickname) {
+        return userMapper.updateNicknameById(id, nickname) > 0;
     }
-    sendValidateEmail(user);
-    return true;
-  }
 
-  public User completeSignUp(String token){
-    User user = tokenManager.getUserOfSignUp(token);
-    if (user != null){
-      if (existEmail(user.getEmail())){
-        user = mapper.selectByEmail(user.getEmail());
-      }else {
-        mapper.insert(user);
-      }
-      return user;
+    public User getById(Long id) {
+        return userMapper.selectById(id);
     }
-    return null;
-  }
 
-  @Async
-  private void sendValidateEmail(User user){
-    String token = tokenManager.getTokenOfSignUp(user);
-    log.error("用户注册，准备发送邮件：User:" + JSONObject.toJSONString(user) + ", Token: " + token);
-    mailService.userValidate(user, token);
-  }
+    public User getByEmail(String email) {
+        return userMapper.selectByEmail(email);
+    }
 
-  private boolean existEmail(String email){
-    return mapper.selectByEmail(email) != null;
-  }
+    public boolean signUp(User user) {
+        String email = user.getEmail();
+        if (existEmail(email)) {
+            log.error("用户注册，邮箱已注册:" + email);
+            return false;
+        }
+        sendValidateEmail(user);
+        return true;
+    }
+
+    public User completeSignUp(String token) {
+        User user = tokenManager.getUserOfSignUp(token);
+        if (user != null) {
+            if (existEmail(user.getEmail())) {
+                user = userMapper.selectByEmail(user.getEmail());
+            } else {
+                userMapper.insert(user);
+            }
+            return user;
+        }
+        return null;
+    }
+
+    @Async
+    public void sendValidateEmail(User user) {
+        String token = tokenManager.getTokenOfSignUp(user);
+        log.error("用户注册，准备发送邮件：User:" + JSONObject.toJSONString(user) + ", Token: " + token);
+        mailService.userValidate(user, token);
+    }
+
+    private boolean existEmail(String email) {
+        return userMapper.selectByEmail(email) != null;
+    }
 
 }

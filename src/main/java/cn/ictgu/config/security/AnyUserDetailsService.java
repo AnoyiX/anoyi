@@ -1,9 +1,7 @@
 package cn.ictgu.config.security;
 
 import cn.ictgu.serv.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,8 +17,11 @@ import java.util.List;
 @Service
 class AnyUserDetailsService implements UserDetailsService {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
+
+  public AnyUserDetailsService(UserService userService){
+    this.userService = userService;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

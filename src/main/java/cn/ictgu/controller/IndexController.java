@@ -1,45 +1,41 @@
 package cn.ictgu.controller;
 
-import cn.ictgu.serv.model.Sponsor;
-import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.dto.Video;
 import cn.ictgu.dto.VideoDTO;
 import cn.ictgu.parse.search.VideoSearch;
 import cn.ictgu.redis.RedisSourceManager;
+import cn.ictgu.serv.model.Sponsor;
+import cn.ictgu.serv.service.FriendLinkService;
 import cn.ictgu.serv.service.SponsorService;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * Controller
  * Created by Silence on 2016/11/11.
  */
 @Controller
+@AllArgsConstructor
 public class IndexController {
 
   private final static String[] TAGS = {"LETV","PANDA"};
 
-  @Autowired
-  private RedisSourceManager redisSourceManager;
+  private final RedisSourceManager redisSourceManager;
 
-  @Autowired
-  private FriendLinkService friendLinkService;
+  private final FriendLinkService friendLinkService;
 
-  @Autowired
-  private SponsorService sponsorService;
+  private final SponsorService sponsorService;
 
-  @Autowired
-  private VideoSearch videoSearch;
+  private final VideoSearch videoSearch;
 
-  /* 首页 */
+  /**
+   * 首页
+   */
   @GetMapping("/")
   public String home(Model model){
     List<VideoDTO> carouselPics = redisSourceManager.getVideosByKeyAndTag(redisSourceManager.VIDEO_PREFIX_HOME_CAROUSEL_KEY, TAGS[0]);
@@ -60,7 +56,9 @@ public class IndexController {
     return "home";
   }
 
-  /* 搜索 */
+  /**
+   * 搜索
+   */
   @GetMapping(value = "/s")
   public String search(HttpServletRequest request, Model model){
     model.addAttribute("navIndex", 1);
@@ -74,14 +72,18 @@ public class IndexController {
     return "search";
   }
 
-  /* 解析 */
+  /**
+   * 高级
+   */
   @GetMapping("/video")
   public String video(Model model){
     model.addAttribute("navIndex", 2);
     return "video";
   }
 
-  /* 捐助 */
+  /**
+   * 捐助
+   */
   @GetMapping("/sponsor")
   public String sponsor(Model model){
     List<Sponsor> sponsors = sponsorService.list();
@@ -90,14 +92,18 @@ public class IndexController {
     return "sponsor";
   }
 
-  /* 解析 */
+  /**
+   *  解析
+   */
   @GetMapping("/author")
   public String author(Model model){
     model.addAttribute("navIndex", 4);
     return "author";
   }
 
-  /* 友情链接 */
+  /**
+   *  友情链接
+   */
   @GetMapping("/friend")
   public String friend(Model model){
     model.addAttribute("appName", friendLinkService.getAppName());
@@ -105,13 +111,17 @@ public class IndexController {
     return "friend-link";
   }
 
-  /* 登录 */
+  /**
+   *  登录
+   */
   @GetMapping("/login")
   public String login(){
     return "login";
   }
 
-  /* 注册 */
+  /**
+   *  注册
+   */
   @GetMapping("/register")
   public String register(){
     return "register";

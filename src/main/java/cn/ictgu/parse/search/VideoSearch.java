@@ -22,6 +22,11 @@ public class VideoSearch {
   private static final String api = "http://m.le.com/search";
   private static final String ua = "Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Safari/537.36";
 
+    /**
+     * 搜索视频
+     * @param keyword
+     * @return
+     */
   public List<Video> searchVideos(String keyword){
     List<Video> videos = new ArrayList<>();
     Document document = requestAPI(keyword);

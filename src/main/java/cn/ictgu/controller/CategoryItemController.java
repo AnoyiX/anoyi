@@ -7,33 +7,31 @@ import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.CategoryItemService;
 import cn.ictgu.serv.service.CategoryService;
 import cn.ictgu.serv.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
 /**
- * CategoryItem Controller
  * Created by Silence on 2017/3/14.
  */
 @Controller
+@AllArgsConstructor
 public class CategoryItemController {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
-  @Autowired
-  private CategoryItemService categoryItemService;
+  private final CategoryItemService categoryItemService;
 
-  @Autowired
-  private CategoryService categoryService;
+  private final CategoryService categoryService;
 
+  /**
+   * 查看分类的所有子项，仅作者本人可查看
+   */
   @GetMapping("/user/item/{id}")
   public String list(@AuthenticationPrincipal AnyUser user, @PathVariable("id") Long id, Model model){
     List<CategoryItem> items = categoryItemService.list(id, user.getId());
@@ -44,6 +42,9 @@ public class CategoryItemController {
     return "items";
   }
 
+  /**
+   * 分类分享，用于暴露给所有用户
+   */
   @GetMapping("/share/{md5}")
   public String share(@PathVariable("md5") String md5, Model model){
     Category category = categoryService.getByMd5(md5);

@@ -5,29 +5,29 @@ import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.serv.model.CategoryItem;
 import cn.ictgu.serv.service.CategoryItemService;
 import com.alibaba.fastjson.JSONObject;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * CategoryItem API
  * Created by Silence on 2017/3/14.
  */
 @RestController
 @Log4j2
+@AllArgsConstructor
 public class CategoryItemAPI {
 
-  @Autowired
-  private CategoryItemService itemService;
+  private final CategoryItemService itemService;
 
+    /**
+     * 私藏资源到指定分类
+     */
   @PostMapping("/user/category/item/add")
   public SimpleResponse add(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
     SimpleResponse simpleResponse = new SimpleResponse();
@@ -43,6 +43,9 @@ public class CategoryItemAPI {
     return simpleResponse;
   }
 
+    /**
+     * 删除分类下的指定资源
+     */
   @GetMapping("/user/category/item/delete/{id}")
   public SimpleResponse delete(@AuthenticationPrincipal AnyUser user, @PathVariable("id") Long id){
     SimpleResponse simpleResponse = new SimpleResponse();

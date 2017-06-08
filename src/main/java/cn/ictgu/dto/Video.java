@@ -2,8 +2,6 @@ package cn.ictgu.dto;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * 视频
  * Created by Silence on 2016/12/2.
