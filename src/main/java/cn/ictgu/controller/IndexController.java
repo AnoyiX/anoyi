@@ -52,7 +52,7 @@ public class IndexController {
     model.addAttribute("tvTops", tvTops);
     model.addAttribute("lives", lives);
     model.addAttribute("movies", movies);
-    model.addAttribute("navIndex", 0);
+    model.addAttribute("navIndex", -1);
     return "home";
   }
 

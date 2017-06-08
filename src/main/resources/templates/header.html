@@ -15,8 +15,11 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li th:class="${navIndex} == 0 ? 'active' : ''">
+                    <li th:class="${navIndex} == -1 ? 'active' : ''">
                         <a href="/" >首页</a>
+                    </li>
+                    <li th:class="${navIndex} == 0 ? 'active' : ''">
+                        <a href="/news" >动态</a>
                     </li>
                     <li th:class="${navIndex} == 1 ? 'active' : ''">
                         <a href="/s">搜索</a>

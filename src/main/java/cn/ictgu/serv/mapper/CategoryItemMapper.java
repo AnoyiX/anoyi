@@ -31,4 +31,6 @@ public interface CategoryItemMapper {
   @Select("SELECT * FROM category_item WHERE `category_id` = #{categoryId} and `user_id` = #{userId}")
   List<CategoryItem> selectByCategoryIdAndUserId(@Param("categoryId") Long categoryId, @Param("userId") Long userId);
 
+  @Select("SELECT ci.id,ci.user_id,category_id,type,ci.name,image,url from category_item ci left join category c on ci.category_id = c.id where ci.user_id = #{userId} order by ci.id desc limit 20")
+  List<CategoryItem> selectNews(@Param("userId") Long userId);
 }

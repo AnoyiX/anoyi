@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人中心 | Any-Video</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .news-item-block{
+            position: relative;
+        }
+
+        .news-item-block:hover{
+            position: relative;
+            text-decoration: none;
+        }
+
+        .news-item-image{
+            position: relative;
+            width: 100%;
+        }
+
+        .news-item-title{
+            position: relative;
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            bottom: 100px;
+        }
+
+        .news-item-title:hover{
+            color: red;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f1f1f1">
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 50px">
+
+    <div class="row" style="margin-top: 20px">
+        <!-- 文章列表 -->
+        <div class="col-md-9 col-xs-12">
+            <ul class="list-group">
+                <li class="list-group-item" th:each="item : ${items}">
+                    <a th:href="${item.url}" th:text="${item.name}"></a>
+                </li>
+            </ul>
+        </div>
+        <!-- End 文章列表 -->
+
+        <!-- 分类列表 -->
+        <div class="col-md-3 col-xs-6">
+            <div class="row" th:each="category : ${categories}">
+                <div class="col-md-12 col-xs-12" style="height: 180px">
+                    <a th:href="@{/share/{md5}(md5=${category.md5})}" class="news-item-block">
+                        <img th:src=" @{{url}(url=${category.logo})}" alt="Image" class="news-item-image thumbnail"/>
+                        <h4 class="feature-content-title news-item-title" th:text="${category.name}"></h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+</body>
+</html>
