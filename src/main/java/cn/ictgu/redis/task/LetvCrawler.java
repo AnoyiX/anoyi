@@ -1,16 +1,14 @@
 package cn.ictgu.redis.task;
 
-import cn.ictgu.dto.VideoDTO;
+import cn.ictgu.dto.Video;
 import cn.ictgu.redis.RedisSourceManager;
 import cn.ictgu.tools.JsoupUtils;
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -61,15 +59,14 @@ public class LetvCrawler {
      * 爬乐视PC官网-首页轮播信息
      */
     private void saveCarouselsToRedis(Document document) {
-        List<VideoDTO> carouselVideos = new ArrayList<>();
+        List<Video> carouselVideos = new ArrayList<>();
         Elements carousels = document.select("div.chart-info ul.slides li");
         for (Element carousel : carousels) {
-            VideoDTO videoDTO = new VideoDTO();
+            Video videoDTO = new Video();
             String title = carousel.select("a").attr("title");
             String image = carousel.select("img").attr("data-src");
             String url = carousel.select("a").attr("href");
             if (url.contains("le.com")) {
-                videoDTO.setAvailable(true);
                 videoDTO.setTitle(title);
                 if (StringUtils.isEmpty(image)) {
                     image = carousel.select("img").attr("img-src");
@@ -130,18 +127,17 @@ public class LetvCrawler {
         redisSourceManager.saveVideos(key, getVideosFromPhoneDocument(document));
     }
 
-    private List<VideoDTO> getVideosFromPhoneDocument(Document document) {
-        List<VideoDTO> videos = new ArrayList<>();
+    private List<Video> getVideosFromPhoneDocument(Document document) {
+        List<Video> videos = new ArrayList<>();
         Elements videoElements = document.select("div.column_body div a");
         for (Element element : videoElements) {
-            VideoDTO videoDTO = new VideoDTO();
+            Video videoDTO = new Video();
             String title = element.attr("title");
             String image = element.select("span.a_img i").attr("style").replace("background-image:url('", "").replace("')", "");
             if (StringUtils.isEmpty(image)) {
                 image = element.select("span.a_img i").attr("data-src");
             }
             String url = String.format("http://www.le.com/ptv/vplay/%s.html", element.attr("data-vid"));
-            videoDTO.setAvailable(true);
             videoDTO.setTitle(title);
             videoDTO.setImage(image);
             videoDTO.setValue(url);
@@ -151,16 +147,15 @@ public class LetvCrawler {
         return videos;
     }
 
-    private List<VideoDTO> getHostsFromPhoneDocument(Document document, int size) {
-        List<VideoDTO> videos = new ArrayList<>();
+    private List<Video> getHostsFromPhoneDocument(Document document, int size) {
+        List<Video> videos = new ArrayList<>();
         Elements videoElements = document.select("div.column.tab_cnt a");
         for (int i = 0; i < size; i++) {
             Element element = videoElements.get(i);
-            VideoDTO videoDTO = new VideoDTO();
+            Video videoDTO = new Video();
             String title = element.select("i.i1").text();
             String image = element.select("span.a_img i").attr("data-src");
             String url = String.format("http://www.le.com/ptv/vplay/%s.html", element.attr("href").replace("/vplay_", ""));
-            videoDTO.setAvailable(true);
             videoDTO.setTitle(title);
             videoDTO.setImage(image);
             videoDTO.setValue(url);

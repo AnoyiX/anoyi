@@ -2,10 +2,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>视频解析 | Any-Video</title>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <title>资源解析 | Any-Video</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body style="background-color: #f1f1f1">
@@ -17,9 +17,48 @@
         <div class="row" style="margin-top: 1px;">
             <div class="form-group raw col-md-8 col-md-offset-2">
                 <div class="col-md-10 col-xs-9">
-                    <input type="text" placeholder="视频播放地址" id="videoUrl" style="color: #0f0f0f" class="form-control">
+                    <input type="text" placeholder="资源地址" id="videoUrl" style="color: #0f0f0f" class="form-control">
                 </div>
                 <button class="btn btn-danger col-md-2 col-xs-3" id="parse">解析一下</button>
+            </div>
+
+            <div class="form-group raw col-md-8 col-md-offset-2" style="margin-top: 20px">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>网站</th>
+                        <th>Url示例</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">视频</th>
+                        <td>乐视网</td>
+                        <td>http://www.le.com/ptv/vplay/30044120.html</td>
+                        <td>ok</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">视频</th>
+                        <td>熊猫TV</td>
+                        <td>http://www.panda.tv/843951</td>
+                        <td>ok</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">视频</th>
+                        <td>慕课网</td>
+                        <td>http://www.imooc.com/video/13589</td>
+                        <td>error</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">文章</th>
+                        <td>微信</td>
+                        <td>http://mp.weixin.qq.com/s/3yZEp06PNm16-vyfcK4jxw</td>
+                        <td>ok</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -35,7 +74,7 @@
             if (regx.exec(videoUrl)==null){
                 alert("请输入正确的视频播放地址");
             }else {
-                location.href = "/play?v=" + videoUrl;
+                location.href = "/view?u=" + videoUrl;
             }
         });
     });

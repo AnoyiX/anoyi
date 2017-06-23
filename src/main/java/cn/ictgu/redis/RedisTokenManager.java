@@ -2,7 +2,6 @@ package cn.ictgu.redis;
 
 import cn.ictgu.serv.model.User;
 import com.alibaba.fastjson.JSONObject;
-import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;

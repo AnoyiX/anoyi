@@ -3,9 +3,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>视频搜索 | Any-Video</title>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body style="background-color: #f1f1f1">
@@ -34,7 +34,7 @@
 
     <div class="row videoBox">
         <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="video:${videos}">
-            <a th:href="@{/play(v=${video.value})}" class="videoUrl">
+            <a th:href="@{/view(u=${video.value})}" class="videoUrl">
                 <img th:src="${video.image}" class="img-responsive img-thumbnail videoImage">
                 <div style="height: 20px; overflow: hidden">
                     <p class="text-left videoTitle" th:text="${video.title}"></p>

@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="never">
-    <title th:text="${video.title}"></title>
+    <title th:text="${source.title}"></title>
     <link rel="stylesheet" href="/css/willesPlay.css">
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/willesPlay.js"></script>
 </head>
 <body style="background-color: #F1F1F1">
@@ -23,7 +23,7 @@
             <div id="willesPlay">
                 <div class="playHeader">
                     <div class="videoName" >
-                        <p style="display: inline-block" id="videoName" th:text="${video.title}"></p>
+                        <p style="display: inline-block" id="videoName" th:text="${source.title}"></p>
                         <button id="collectBtn" class="btn btn-danger" style="margin-left: 20px" data-toggle="modal" data-target="#collectModal" th:if="${#httpServletRequest.remoteUser}"><span class="glyphicon glyphicon-heart"></span> 收藏</button>
                     </div>
                 </div>
@@ -63,8 +63,8 @@
                     <h3 class="panel-title">来源 / 解析</h3>
                 </div>
                 <div class="panel-body">
-                    <a class="btn btn-danger" th:href="${video.value}" target="_blank"><span class="glyphicon glyphicon-film"></span> [[${video.provider}]]</a>
-                    <a class="btn btn-success" th:href="${video.parser}" target="_blank"><span class="glyphicon glyphicon-fire"></span> [[${video.parserName}]]</a>
+                    <a class="btn btn-danger" th:href="${source.value}" target="_blank"><span class="glyphicon glyphicon-film"></span> [[${source.provider}]]</a>
+                    <a class="btn btn-success" th:href="${source.parser}" target="_blank"><span class="glyphicon glyphicon-fire"></span> [[${source.parserName}]]</a>
                     <p style="margin: 10px">无法播放请使用Edge或Safari或手机浏览器</p>
                 </div>
             </div>
@@ -145,12 +145,8 @@
 <!-- End 提示 模态框 -->
 
 <script th:inline="javascript">
-    var videoTitle = [[${video.title}]];
-    var videoValue = [[${video.value}]];
-    var videoImage = [[${video.image}]];
-    var videoPlayUrl = [[${video.playUrl}]];
-    document.referrer = videoValue;
-    $("#playVideo").attr("src", videoPlayUrl);
+    var playUrl = [[${source.playUrl}]];
+    $("#playVideo").attr("src", playUrl);
 </script>
 
 <script style="text/javascript">
@@ -180,7 +176,7 @@
         $.post("/user/category/item/add",{
             "type": "VIDEO",
             "name": videoTitle,
-            "value": "/play?v="+videoValue,
+            "value": "/view?u="+videoValue,
             "id": $("#categorySelect").val()
         },function(data){
             $('#collectModal').modal('hide');
@@ -191,7 +187,7 @@
 
     /* 获取当前电视剧的分集信息 */
     $(document).ready(function (){
-        var regx = /v=(.*)/;
+        var regx = /u=(.*)/;
         var src = regx.exec(window.location.href)[1];
         var api = "/api/episode";
         $.get(api, {"v":src}, function (data) {
@@ -219,6 +215,7 @@
             }
         });
     });
+
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package cn.ictgu.API;
+package cn.ictgu.api;
 
 import cn.ictgu.config.security.AnyUser;
 import cn.ictgu.dto.SimpleResponse;

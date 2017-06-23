@@ -24,8 +24,6 @@ public class VideoSearch {
 
     /**
      * 搜索视频
-     * @param keyword
-     * @return
      */
   public List<Video> searchVideos(String keyword){
     List<Video> videos = new ArrayList<>();

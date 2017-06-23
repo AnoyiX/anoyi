@@ -1,17 +1,14 @@
-package cn.ictgu.API;
+package cn.ictgu.api;
 
 import cn.ictgu.config.security.AnyUser;
 import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.serv.model.Category;
 import cn.ictgu.serv.service.CategoryService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;

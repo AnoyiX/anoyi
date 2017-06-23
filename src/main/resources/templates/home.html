@@ -5,9 +5,9 @@
     <title>沧海云视频-个人定制视频库</title>
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="css/docs.min.css">
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body style="background-color: #f1f1f1; padding-bottom: 0">
@@ -24,7 +24,7 @@
     </ol>
     <div class="carousel-inner text-center" role="listbox">
         <div th:each="carouselPic,iterStat:${carouselPics}" th:class="(${iterStat.index}==0)?'item active':'item'">
-            <a th:href="@{/play(v=${carouselPic.value})}">
+            <a th:href="@{/view(u=${carouselPic.value})}">
                 <img th:src="${carouselPic.image}" alt="">
             </a>
         </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="row videoBox">
         <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="recommend, iterStat:${recommends}">
-            <a th:href="@{/play(v=${recommend.value})}" th:if="${iterStat.index} < 6" class="videoUrl">
+            <a th:href="@{/view(u=${recommend.value})}" th:if="${iterStat.index} < 6" class="videoUrl">
                 <img th:src="${recommend.image}" alt="" class="img-responsive img-thumbnail videoImage">
                 <div class="caption">
                     <p class="text-left videoTitle" th:text="${recommend.title}"></p>
@@ -63,7 +63,7 @@
             <div th:if="${iterStat.index} >= 6" hidden>
                 <ul class="videoImage">[[${recommend.image}]]</ul>
                 <ul class="videoTitle">[[${recommend.title}]]</ul>
-                <a th:href="@{/play(v=${recommend.value})}" class="videoUrl"></a>
+                <a th:href="@{/view(u=${recommend.value})}" class="videoUrl"></a>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
     </div>
     <div class="row videoBox">
         <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="live, iterStat:${lives}">
-            <a th:href="@{/play(v=${live.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
+            <a th:href="@{/view(u=${live.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
                 <img th:src="${live.image}" class="img-responsive img-thumbnail videoImage">
                 <div class="caption">
                     <p class="text-left videoTitle" th:text="${live.title}"></p>
@@ -89,7 +89,7 @@
             <div th:if="${iterStat.index} >= 12" hidden>
                 <ul class="videoImage">[[${live.image}]]</ul>
                 <ul class="videoTitle">[[${live.title}]]</ul>
-                <a th:href="@{/play(v=${live.value})}" class="videoUrl"></a>
+                <a th:href="@{/view(u=${live.value})}" class="videoUrl"></a>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-6 videoItem" th:each="tvHot, iterStat:${tvHots}">
-                            <a th:href="@{/play(v=${tvHot.value})}" th:if="${iterStat.index} < 8" class="videoUrl">
+                            <a th:href="@{/view(u=${tvHot.value})}" th:if="${iterStat.index} < 8" class="videoUrl">
                                 <img th:src="${tvHot.image}" class="img-responsive img-thumbnail videoImage">
                                 <div class="caption">
                                     <p class="text-left videoTitle" th:text="${tvHot.title}"></p>
@@ -119,7 +119,7 @@
                             <div th:if="${iterStat.index} >= 8" hidden>
                                 <ul class="videoImage">[[${tvHot.image}]]</ul>
                                 <ul class="videoTitle">[[${tvHot.title}]]</ul>
-                                <a th:href="@{/play(v=${tvHot.value})}" class="videoUrl"></a>
+                                <a th:href="@{/view(u=${tvHot.value})}" class="videoUrl"></a>
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                 <h3><span class="glyphicon glyphicon-play-circle"></span> 排行榜</h3>
             </div>
             <div class="list-group" style="padding-top: 5px;">
-                <a th:each="tvTop:${tvTops}" th:href="@{/play(v=${tvTop.value})}" class="list-group-item"
+                <a th:each="tvTop:${tvTops}" th:href="@{/view(u=${tvTop.value})}" class="list-group-item"
                    th:text="${tvTop.title}"></a>
             </div>
         </div>
@@ -149,7 +149,7 @@
     </div>
     <div class="row videoBox">
         <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="movie, iterStat:${movies}">
-            <a th:href="@{/play(v=${movie.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
+            <a th:href="@{/view(u=${movie.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
                 <img th:src="${movie.image}" class="img-responsive img-thumbnail videoImage">
                 <div class="caption">
                     <p class="text-left videoTitle" th:text="${movie.title}"></p>
@@ -158,7 +158,7 @@
             <div th:if="${iterStat.index} >= 12" hidden>
                 <ul class="videoImage">[[${movie.image}]]</ul>
                 <ul class="videoTitle">[[${movie.title}]]</ul>
-                <a th:href="@{/play(v=${movie.value})}" class="videoUrl"></a>
+                <a th:href="@{/view(u=${movie.value})}" class="videoUrl"></a>
             </div>
         </div>
     </div>
@@ -175,7 +175,7 @@
     </div>
     <div class="row videoBox">
         <div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="animeHot, iterStat:${animeHots}">
-            <a th:href="@{/play(v=${animeHot.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
+            <a th:href="@{/view(u=${animeHot.value})}" th:if="${iterStat.index} < 12" class="videoUrl">
                 <img th:src="${animeHot.image}" class="img-responsive img-thumbnail videoImage">
                 <div class="caption">
                     <p class="text-left videoTitle" th:text="${animeHot.title}"></p>
@@ -184,7 +184,7 @@
             <div th:if="${iterStat.index} >= 12" hidden>
                 <ul class="videoImage">[[${animeHot.image}]]</ul>
                 <ul class="videoTitle">[[${animeHot.title}]]</ul>
-                <a th:href="@{/play(v=${animeHot.value})}" class="videoUrl"></a>
+                <a th:href="@{/view(u=${animeHot.value})}" class="videoUrl"></a>
             </div>
         </div>
     </div>

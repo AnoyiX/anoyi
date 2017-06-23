@@ -1,6 +1,6 @@
 package cn.ictgu.redis;
 
-import cn.ictgu.dto.VideoDTO;
+import cn.ictgu.dto.Video;
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,7 +29,7 @@ public class RedisSourceManager {
   /**
    *  保存视频信息到 Redis
    */
-  public void saveVideos(String key, List<VideoDTO> videos){
+  public void saveVideos(String key, List<Video> videos){
     String value = JSONObject.toJSONString(videos);
     stringRedisTemplate.opsForValue().set(key, value);
   }
@@ -37,10 +37,10 @@ public class RedisSourceManager {
   /**
    *  得到视频信息
    */
-  public List<VideoDTO> getVideosByKeyAndTag(String key, String tag){
+  public List<Video> getVideosByKeyAndTag(String key, String tag){
     key = key + "_" + tag;
     String cacheValue = stringRedisTemplate.opsForValue().get(key);
-    return JSONObject.parseArray(cacheValue, VideoDTO.class);
+    return JSONObject.parseArray(cacheValue, Video.class);
   }
 
 }

@@ -1,6 +1,5 @@
 package cn.ictgu.controller;
 
-import cn.ictgu.dto.Article;
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.ParserManager;
 import lombok.AllArgsConstructor;
@@ -22,23 +21,15 @@ public class SourceController {
   /**
    * 视频播放页
    */
-  @GetMapping("/play")
+  @GetMapping("/view")
   public String play(HttpServletRequest request, Model model){
-    String url = request.getParameter("v");
-    url = url.replaceAll("\\?(spm|from).*" , "");
-    Video video = parseManager.parseVideo(url);
-    model.addAttribute("video", video);
-    return "h5-video";
-  }
-
-  /**
-   * 文章展示页
-   */
-  @GetMapping("/article")
-  public String source(HttpServletRequest request, Model model){
     String url = request.getParameter("u");
-    Article article = parseManager.parseArticle(url);
-    model.addAttribute("article", article);
+    url = url.replaceAll("\\?(spm|from).*" , "");
+    Object source = parseManager.parse(url);
+    model.addAttribute("source", source);
+    if (source instanceof Video){
+        return "h5-video";
+    }
     return "h5-article";
   }
 

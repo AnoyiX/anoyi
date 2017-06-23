@@ -1,4 +1,4 @@
-package cn.ictgu.API;
+package cn.ictgu.api;
 
 import cn.ictgu.dto.Video;
 import cn.ictgu.parse.Parser;
@@ -27,7 +27,7 @@ public class VideoAPI {
   public Video play(HttpServletRequest request){
     String url = request.getParameter("v");
     url = url.replaceAll("\\?(spm|from).*" , "");
-    return parseManager.parseVideo(url);
+    return (Video) parseManager.parse(url);
   }
 
     /**

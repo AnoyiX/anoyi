@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="never">
-    <title th:text="${article.title}"></title>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <title th:text="${source.title}"></title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #F1F1F1">
 
@@ -18,7 +18,7 @@
 <div class="container" style="margin-top: 50px;" id="content">
     <div class="row">
         <div class="col-md-8" id="articleContent" style="border: 2px solid #5CB85C; margin-top: 20px; border-radius: 3px">
-            <h2 th:text="${article.title}" class="text-success"></h2>
+            <h2 th:text="${source.title}" class="text-success"></h2>
             <div style="border: 3px solid #5CB85C"></div>
         </div>
         <div class="col-md-4">
@@ -27,8 +27,8 @@
                     <h3 class="panel-title">来源 / 解析</h3>
                 </div>
                 <div class="panel-body">
-                    <a class="btn btn-danger" th:href="${article.value}" target="_blank"><span class="glyphicon glyphicon-film"></span> [[${article.provider}]]</a>
-                    <a class="btn btn-success" th:href="${article.parser}" target="_blank"><span class="glyphicon glyphicon-fire"></span> [[${article.parserName}]]</a>
+                    <a class="btn btn-danger" th:href="${source.value}" target="_blank"><span class="glyphicon glyphicon-film"></span> [[${source.provider}]]</a>
+                    <a class="btn btn-success" th:href="${source.parser}" target="_blank"><span class="glyphicon glyphicon-fire"></span> [[${source.parserName}]]</a>
                 </div>
             </div>
             <div class="panel panel-danger videoList" style="margin-top: 20px">
@@ -36,8 +36,8 @@
                     <h3 class="panel-title">相关信息</h3>
                 </div>
                 <div class="panel-body">
-                    <h4><span class="label label-default">作者</span> <span class="label label-success" th:text="${article.author}"></span></h4>
-                    <h4><span class="label label-default">时间</span> <span class="label label-success" th:text="${article.time}"></span></h4>
+                    <h4><span class="label label-default">作者</span> <span class="label label-success" th:text="${source.author}"></span></h4>
+                    <h4><span class="label label-default">时间</span> <span class="label label-success" th:text="${source.time}"></span></h4>
                     <button id="collectBtn" class="btn btn-danger btn-block" data-toggle="modal" data-target="#collectModal" th:if="${#httpServletRequest.remoteUser}"><span class="glyphicon glyphicon-heart" ></span> 收藏</button>
                 </div>
             </div>
@@ -113,9 +113,7 @@
 <!-- End 提示 模态框 -->
 
 <script th:inline="javascript">
-    var articleContent = [[${article.Content}]];
-    var articleTitle = [[${article.title}]];
-    var articleValue = [[${article.value}]];
+    var articleContent = [[${source.Content}]];
     $("#articleContent").append(articleContent);
 </script>
 
@@ -146,7 +144,7 @@
         $.post("/user/category/item/add",{
             "type": "ARTICLE",
             "name": articleTitle,
-            "value": "/article?u="+articleValue,
+            "value": "/view?u="+articleValue,
             "id": $("#categorySelect").val()
         },function(data){
             $('#collectModal').modal('hide');

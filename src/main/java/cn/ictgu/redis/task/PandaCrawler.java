@@ -1,6 +1,6 @@
 package cn.ictgu.redis.task;
 
-import cn.ictgu.dto.VideoDTO;
+import cn.ictgu.dto.Video;
 import cn.ictgu.redis.RedisSourceManager;
 import cn.ictgu.tools.JsoupUtils;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -39,14 +38,13 @@ public class PandaCrawler {
   }
 
   private void savePandaLivesToRedis(Document document){
-    List<VideoDTO> lives = new ArrayList<>();
+    List<Video> lives = new ArrayList<>();
     Elements elements = document.select("li.video-list-item.video-no-tag");
     for (Element element : elements){
-      VideoDTO videoDTO = new VideoDTO();
+        Video videoDTO = new Video();
       String title = "["+element.select("div.video-info span.video-cate").text()+"] "+element.select("div.video-info span.video-nickname").text();
       String image = element.select("img.video-img").attr("data-original");
       String url = PANDA + element.attr("data-id");
-      videoDTO.setAvailable(true);
       videoDTO.setTitle(title);
       videoDTO.setImage(image);
       videoDTO.setValue(url);
