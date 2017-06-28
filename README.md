@@ -1,6 +1,8 @@
 # any-video
 Spring Boot 结合网络爬虫开发的完整视频网站，演示地址：http://www.ictgu.cn
 
+2.0 版正在开发中，QQ群：481678152，欢迎讨论。
+
 ![首页](http://upload-images.jianshu.io/upload_images/3424642-a987228814be7597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
