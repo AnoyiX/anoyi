@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class UserAPI {
+public class UserApi {
 
     private final static int DEFAULT_SIZE = 10;
 
