@@ -1,8 +1,8 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.dto.Video;
+import cn.ictgu.bean.response.Video;
 import cn.ictgu.parse.Parser;
-import cn.ictgu.serv.model.Episode;
+import cn.ictgu.bean.response.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -42,6 +42,7 @@ public class Letv implements Parser<Video> {
         String title = playurl.getString("title");
         video.setTitle(title);
         String image = playurl.getString("pic").replace("120_90", "360_180");
+        image = image.replace("http:", "");
         video.setImage(image);
         String domain = playurl.getJSONArray("domain").getString(0);
         String dispatch = getDispatch(playurl.getJSONObject("dispatch"));

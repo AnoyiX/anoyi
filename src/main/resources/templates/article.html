@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" th:href="${source.css}">
+
+    <!-- Site Properties -->
+    <title>文章 | Any Video</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{header :: fmenu}"></div>
+
+<div th:replace="~{header :: smenu}"></div>
+
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <div class="nav-divider"></div>
+
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="twelve wide column">
+
+                <div class="row relative">
+                    <h2 class="ui dividing header red" id="articleTitle">
+                        <i class="book icon"></i>
+                        [[${source.title}]]
+                    </h2>
+                    <button class="ui red button right-absolute" id="collectBtn"><i class="heart icon"></i>收藏</button>
+                </div>
+
+                <div class="hidden" id="articleImage" th:data-value="${source.image}"></div>
+
+                <div class="hidden" id="articleUrl" th:data-value="${source.value}"></div>
+
+                <div class="ui container small-container" id="content">
+
+                </div>
+
+            </div>
+
+            <div class="four wide column">
+                <h2 class="ui dividing header Grey">
+                    <i class="spy icon"></i>
+                    相关信息
+                </h2>
+
+                <table class="ui definition table">
+                    <tbody>
+                    <tr>
+                        <td class="five wide column">来源</td>
+                        <td>[[${source.provider}]]</td>
+                    </tr>
+                    <tr>
+                        <td>源地址</td>
+                        <td>
+                            <a th:href="${source.value}">查看原文</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>作者</td>
+                        <td th:text="${source.author}">Anoy</td>
+                    </tr>
+                    <tr>
+                        <td>发布时间</td>
+                        <td th:text="${source.time}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h2 class="ui dividing header Grey">
+                    <i class="bookmark icon"></i>
+                    相关推荐
+                </h2>
+
+                <div class="ui segment">
+                    <a class="ui blue right ribbon label">敬请期待</a>
+                    <p>待数据有一定规模的情况下，将尝试引入推荐算法，提供大家喜爱的优质文章。</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="nav-divider"></div>
+
+    </div>
+
+    <!-- 收藏 -->
+    <div class="ui first coupled modal">
+        <div class="header">
+            选择仓库
+        </div>
+        <div class="image content">
+            <div class="ui fluid selection dropdown">
+                <i class="dropdown icon"></i>
+                <span class="default text" id="defaultItem">选择仓库</span>
+                <div class="menu" id="itemMenu">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <a class="ui button red" href="/user" id="createHubBtn">新建仓库</a>
+            <div class="ui green button" id="collectOkBtn">确定</div>
+        </div>
+    </div>
+
+    <div class="ui small second coupled modal">
+        <div class="header">
+            Notice
+        </div>
+        <div class="content">
+            <div class="description">
+                <p id="description">收藏成功!</p>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve button">
+                <i class="checkmark icon"></i> 关闭
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    /** 初始化组件 */
+    $('.coupled.modal').modal({
+        allowMultiple: false
+    });
+
+    // attach events to buttons
+    $('.second.modal').modal('attach events', '.first.modal .button');
+
+    $('.ui.dropdown').dropdown();
+</script>
+
+<script th:inline="javascript">
+    var content = [[${source.Content}]];
+    $("#content").append(content);
+</script>
+
+<script>
+
+    /** 收藏按钮事件 **/
+    $("#collectBtn").click(function () {
+        var api = "/user/hub/list";
+        var itemMenu = $("#itemMenu");
+        itemMenu.html("");
+        $('.first.modal').modal('show');
+        $.get(api, function (data) {
+            var defaultItem = $("#defaultItem");
+            if (data.length < 1) {
+                defaultItem.text("请先创建仓库！");
+                $("#collectOkBtn").attr("class", "ui disabled primary button");
+            }
+            for (var i = 0; i < data.length; i++) {
+                var item = $("<div class='item' data-value='ad'></div>");
+                var itemAvatar = $("<img class='ui image' />");
+                itemAvatar.attr("data-value", data[i].id);
+                itemAvatar.attr("src", data[i].avatar);
+                item.append(itemAvatar);
+                item.append(data[i].name);
+                itemMenu.append(item);
+            }
+        })
+    });
+
+    /** 收藏确认按钮事件 **/
+    $("#collectOkBtn").click(function () {
+        var api = "/user/hub/item/insert";
+        var defaultItem = $("#defaultItem");
+        var hubId = defaultItem.find("img").eq(0).attr("data-value");
+        var name = $("#articleTitle").text().trim();
+        var image = $("#articleImage").attr("data-value");
+        var value = $("#articleUrl").attr("data-value");
+        $.post(api,
+            {
+                "hubId": hubId,
+                "name": name,
+                "image": image,
+                "value": value,
+                "type": "ARTICLE"
+            },
+            function (data) {
+                if (data.code === 200) {
+                    $("#description").text("收藏成功！");
+                } else {
+                    $("#description").text("收藏失败！");
+                }
+            }
+        );
+    });
+
+</script>
+
+</body>
+
+</html>

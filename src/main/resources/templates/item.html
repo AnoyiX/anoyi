@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>Spring Cloud | Anoy 的仓库</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{header :: fmenu}"></div>
+
+<div th:replace="~{header :: smenu}"></div>
+
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <div class="nav-divider"></div>
+
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="twelve wide column">
+
+                <div class="ui secondary pointing menu red relative">
+                    <a class="item active"> 全部内容
+                        <div class="floating ui red label" th:text="${hub.amount}"></div>
+                    </a>
+                </div>
+
+                <div class="ui divided items " id="itemsDiv">
+                    <div class="item" th:each="item : ${items}">
+                        <div class="image tiny-fixed-height">
+                            <a class="ui left corner label red" th:if="${item.recommend} == 1">
+                                <i class="thumbs outline up icon"></i>
+                            </a>
+                            <img th:src="${item.image}">
+
+                        </div>
+
+                        <div class="middle aligned content">
+                            <a class="header" th:text="${item.name}" th:href="@{/view(u=${item.url})}"></a>
+                            <div class="extra">
+                                <div class="ui horizontal label"
+                                     th:text="${#dates.format(item.createTime, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                                <button class="ui right floated button red deleteBtn" th:value="${item.id}"> 删除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="four wide column">
+
+                <h2 class="ui dividing header red">
+                    <i class="leaf icon red"></i>
+                    仓库信息
+                </h2>
+
+                <div class="ui cards">
+                    <div class="card red">
+                        <div class="content">
+                            <img class="right floated mini ui image" th:src="${hub.avatar}">
+                            <div class="header" th:text="${hub.name}"></div>
+                            <div class="meta" th:text="${#dates.format(hub.createTime, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                            <div class="description" th:text="${hub.description}"></div>
+                        </div>
+                        <div class="extra content">
+                            <a class="ui red fluid basic button" th:href="@{/info/{id}(id=${hub.userId})}"><i
+                                    class="home icon"></i>作者首页</a>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="ui dividing header red">
+                    <i class="send icon red"></i>
+                    分享地址
+                </h2>
+
+                <div class="ui fluid input">
+                    <input type="text" th:value="'http://www.ictgu.cn/share/' + ${hub.md5}" id="shareInput"/>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="ui hidden divider"></div>
+
+    </div>
+</div>
+
+<script>
+    var api = "/user/hub/item/delete/";
+    $('.deleteBtn').click(function () {
+        var currentBtn = $(this);
+        var itemId = currentBtn.val();
+        var requestApi = api + itemId;
+        $.get(requestApi, function (data) {
+            if (data.code === 200) {
+                currentBtn.parent().parent().parent().remove();
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

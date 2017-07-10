@@ -1,84 +1,231 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>资源解析 | Any-Video</title>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>Any Video | Github | 个人定制资源库</title>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="https://cdn.bootcss.com/mediaelement/4.1.3/mediaelementplayer.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/mediaelement/4.1.3/mediaelementplayer.js"></script>
+    <script src="https://cdn.bootcss.com/mediaelement/4.1.2/renderers/twitch.js"></script>
+    <script src="https://cdn.bootcss.com/mediaelement/4.1.2/renderers/vimeo.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
 </head>
 
-<body style="background-color: #f1f1f1">
+<body>
+<div th:replace="~{header :: fmenu}"></div>
 
-<div th:insert="~{header :: nav}"></div>
+<div th:replace="~{header :: smenu}"></div>
 
-<div class="container" style="margin-top: 100px">
-    <div class="row" style="padding: 20px">
-        <div class="row" style="margin-top: 1px;">
-            <div class="form-group raw col-md-8 col-md-offset-2">
-                <div class="col-md-10 col-xs-9">
-                    <input type="text" placeholder="资源地址" id="videoUrl" style="color: #0f0f0f" class="form-control">
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <div class="nav-divider"></div>
+
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="twelve wide column">
+
+                <div class="row relative">
+                    <h2 class="ui dividing header red" id="videoTitle">
+                        <i class="video play outline icon"></i>
+                        [[${source.title}]]
+                    </h2>
+                    <button th:class="${#httpServletRequest.remoteUser} ? 'negative ui button right-absolute' : 'negative ui disabled button right-absolute'"
+                            id="collectBtn"><i class="heart icon"></i>收藏
+                    </button>
                 </div>
-                <button class="btn btn-danger col-md-2 col-xs-3" id="parse">解析一下</button>
+
+                <div class="hidden" id="videoImage" th:data-value="${source.image}"></div>
+
+                <div class="hidden" id="videoUrl" th:data-value="${source.value}"></div>
+
+                <div class="player">
+                    <video id="mediaplayer" width="100%" height="100%" preload="none" style="max-width: 100%" controls
+                           autoplay>
+                        <source th:src="${source.playUrl}"/>
+                    </video>
+                </div>
+
             </div>
 
-            <div class="form-group raw col-md-8 col-md-offset-2" style="margin-top: 20px">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>类型</th>
-                        <th>网站</th>
-                        <th>Url示例</th>
-                        <th>状态</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">视频</th>
-                        <td>乐视网</td>
-                        <td>http://www.le.com/ptv/vplay/30044120.html</td>
-                        <td>ok</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">视频</th>
-                        <td>熊猫TV</td>
-                        <td>http://www.panda.tv/843951</td>
-                        <td>ok</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">视频</th>
-                        <td>慕课网</td>
-                        <td>http://www.imooc.com/video/13589</td>
-                        <td>error</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">文章</th>
-                        <td>微信</td>
-                        <td>http://mp.weixin.qq.com/s/3yZEp06PNm16-vyfcK4jxw</td>
-                        <td>ok</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="four wide column">
+
+                <h2 class="ui dividing header red">
+                    <i class="asterisk icon"></i>
+                    特别提醒
+                </h2>
+
+                <div class="ui segment">
+                    <a class="ui red right ribbon label">仅支持HTML5</a>
+                    <p>无法播放请使用：</p>
+                    <p>Edge(Win) | Safari(Mac) | 手机浏览器</p>
+                </div>
+
+                <h2 class="ui dividing header red">
+                    <i class="cube icon"></i>
+                    选集播放
+                </h2>
+
+                <div class="ui active centered inline loader" id="listLoader"></div>
+
+                <div class="spaced" id="playList">
+
+                </div>
+
             </div>
         </div>
+
+        <div class="ui hidden divider"></div>
+
+        <!-- 收藏 -->
+        <div class="ui first coupled modal">
+            <div class="header">
+                选择仓库
+            </div>
+            <div class="image content">
+                <div class="ui fluid selection dropdown">
+                    <i class="dropdown icon"></i>
+                    <span class="default text" id="defaultItem">选择仓库</span>
+                    <div class="menu" id="itemMenu">
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <a class="ui button red" href="/user" id="createHubBtn">新建仓库</a>
+                <div class="ui green button" id="collectOkBtn">确定</div>
+            </div>
+        </div>
+
+        <div class="ui small second coupled modal">
+            <div class="header">
+                Notice
+            </div>
+            <div class="content">
+                <div class="description">
+                    <p id="description">收藏成功!</p>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui approve button">
+                    <i class="checkmark icon"></i> 关闭
+                </div>
+            </div>
+        </div>
+
     </div>
+    <script>
+        /** 初始化组件 */
+        $('.coupled.modal').modal({
+            allowMultiple: false
+        });
+
+        // attach events to buttons
+        $('.second.modal').modal('attach events', '.first.modal .button');
+
+        $('.ui.dropdown').dropdown();
+    </script>
+
+
 </div>
 
-<script style="text/javascript">
+<script>
 
-    /* 页面跳转 */
-    $(document).ready(function (){
-        $("#parse").click(function (){
-            var videoUrl = $("#videoUrl").val();
-            var regx = /[a-zA-z]+:\/\/[^\s]*/;
-            if (regx.exec(videoUrl)==null){
-                alert("请输入正确的视频播放地址");
-            }else {
-                location.href = "/view?u=" + videoUrl;
+    /** 获取当前电视剧的分集信息 **/
+    $(document).ready(function () {
+        var regx = /u=(.*)/;
+        var src = regx.exec(window.location.href)[1];
+        var api = "/api/episode";
+        $.get(api, {
+            "v": src
+        }, function (data) {
+            $("#listLoader").attr("class", "");
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    var episode = $("<button class='ui basic red button bottom-space play-episode'></button>")
+                    episode.text(data[i].index);
+                    episode.attr("value", data[i].value);
+                    $("#playList").append(episode);
+                }
+                $(".play-episode").click(function () {
+                    var self = $(this);
+                    self.attr("class", "bottom-space ui basic red loading button");
+                    var playUrl = $(this).val();
+                    playUrl = "/api/video?v=" + playUrl;
+                    $.get(playUrl, function (data) {
+                        $("#videoTitle").html("<i class='video play outline icon'></i>" + data.title);
+                        $("#mediaplayer").attr("src", data.playUrl);
+                        $("#videoUrl").attr("data-value", data.value);
+                        $("#videoImage").attr("src", data.image);
+                        self.attr("class", "bottom-space ui basic red button");
+                    })
+                });
             }
         });
     });
 
+    /** 收藏按钮事件 **/
+    $("#collectBtn").click(function () {
+        var api = "/user/hub/list";
+        var itemMenu = $("#itemMenu");
+        itemMenu.html("");
+        $('.first.modal').modal('show');
+        $.get(api, function (data) {
+            var defaultItem = $("#defaultItem");
+            if (data.length < 1) {
+                defaultItem.text("请先创建仓库！");
+                $("#collectOkBtn").attr("class", "ui disabled primary button");
+            }
+            for (var i = 0; i < data.length; i++) {
+                var item = $("<div class='item' data-value='ad'></div>");
+                var itemAvatar = $("<img class='ui image' />");
+                itemAvatar.attr("data-value", data[i].id);
+                itemAvatar.attr("src", data[i].avatar);
+                item.append(itemAvatar);
+                item.append(data[i].name);
+                itemMenu.append(item);
+            }
+        })
+    });
+
+    /** 收藏确认按钮事件 **/
+    $("#collectOkBtn").click(function () {
+        var api = "/user/hub/item/insert";
+        var defaultItem = $("#defaultItem");
+        var hubId = defaultItem.find("img").eq(0).attr("data-value");
+        var name = $("#videoTitle").text().trim();
+        var image = $("#videoImage").attr("data-value");
+        var value = $("#videoUrl").attr("data-value");
+        $.post(api,
+            {
+                "hubId": hubId,
+                "name": name,
+                "image": image,
+                "value": value,
+                "type": "VIDEO"
+            },
+            function (data) {
+                if (data.code === 200) {
+                    $("#description").text("收藏成功！");
+                } else {
+                    $("#description").text("收藏失败！");
+                }
+            }
+        );
+    });
+
 </script>
+
 </body>
+
 </html>

@@ -1,9 +1,9 @@
 package cn.ictgu.parse;
 
-import cn.ictgu.dto.Video;
+import cn.ictgu.bean.response.Video;
 import cn.ictgu.exception.ParserNotFoundException;
+import cn.ictgu.parse.article.Jianshu;
 import cn.ictgu.parse.article.Weixin;
-import cn.ictgu.parse.video.Imooc;
 import cn.ictgu.parse.video.Letv;
 import cn.ictgu.parse.video.Panda;
 import cn.ictgu.tools.UrlUtils;
@@ -17,9 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Silence on 2017/4/14.
- */
 @Service
 @Log4j2
 public class VideoParserManager implements ParserManager {
@@ -35,9 +32,9 @@ public class VideoParserManager implements ParserManager {
         this.redisTemplate = redisTemplate;
         parserMap = new HashMap<>();
         parserMap.put("le.com", new Letv());
-        parserMap.put("imooc.com", new Imooc());
         parserMap.put("panda.tv", new Panda());
         parserMap.put("qq.com", new Weixin());
+        parserMap.put("jianshu.com", new Jianshu());
     }
 
     /**

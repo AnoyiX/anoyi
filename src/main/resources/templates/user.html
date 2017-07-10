@@ -1,219 +1,373 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>个人中心 | Any-Video</title>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>个人中心 | Any Video</title>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
 </head>
 
-<body style="background-color: #f1f1f1">
+<body>
 
-<div th:insert="~{header :: nav}"></div>
+<div th:replace="~{header :: fmenu}"></div>
 
-<div class="container" style="margin-top: 50px">
+<div th:replace="~{header :: smenu}"></div>
 
-    <!-- 个人信息 -->
-    <div class="row" style="padding: 20px; border-bottom: solid;">
-        <div class="col-md-1 col-xs-4">
-            <img src="/image/avatar.png" class="img-circle" style="padding: 0 10px 0 10px">
-        </div>
-        <div class="col-md-4 col-xs-8" style="margin-top: 12px">
-            <p><span class="glyphicon glyphicon-credit-card"></span> 昵称：[[${user.nickname}]]</p>
-            <p><span class="glyphicon glyphicon-envelope"></span> 邮箱：[[${user.username}]]</p>
-        </div>
-        <div class="pull-right" style="line-height: 72px;">
-            <button class="btn btn-danger" data-toggle="modal" data-target="#updateModal">修改资料</button>
-            <form th:action="@{/logout}" method="post" style="display: inline-block">
-                <input type="submit" value="退出登录" class="btn btn-danger"/>
-            </form>
-        </div>
-    </div>
-    <!-- End 个人信息 -->
+<div class="pusher">
 
-    <!-- 分类列表 -->
-    <div class="row" style="padding: 20px;">
-        <div class="row text-center inner">
-            <div class="col-md-3 col-xs-6" th:each="category : ${categories}" style="margin-bottom: 20px">
-                <div class="feature-content">
-                    <img th:src="@{{url}(url=${category.logo})}" alt="Image" class="img-responsive" />
-                    <h4 class="feature-content-title blue-text" th:text="${category.name}"></h4>
-                    <p style="color: #d9534f; padding-bottom: 5pzx">
-                        <span class="glyphicon glyphicon-facetime-video"></span> [[${category.amount}]]
-                        <span class="glyphicon glyphicon-fire" style="margin-left: 20px"></span> [[${category.popularity}]]
-                    </p>
-                    <a th:href="@{/user/item/{id}(id=${category.id})}" class="btn btn-info"> 浏览 </a>
-                    <button class="btn btn-danger deleteBtn" style="margin-left: 10px" data-toggle="modal" data-target="#deleteModal" th:value="${category.id}"> 删除 </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End 分类列表 -->
+    <div th:replace="~{header :: pmenu}"></div>
 
-    <!-- 创建新的分类 -->
-    <div class="row" style="padding: 20px;text-align: center">
-        <button class="btn btn-success" data-toggle="modal" data-target="#createModal"><span class="glyphicon glyphicon-plus"></span> 新建分类</button>
-    </div>
-    <!-- End 创建新的分类 -->
+    <div class="nav-divider"></div>
 
-    <!-- 删除 模态框 -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title">
-                        删除分类
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: center" id="deleteBody">
-                    <p>
-                        确定删除 <b style="color: red" id="name"></b> ?
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-danger" id="deleteCategory">
-                        确定
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End 删除 模态框 -->
-
-    <!-- 新建 模态框 -->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title">
-                        新建分类
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: center" id="createBody">
-                    <form>
-                        <div class="form-group">
-                            <label for="nameInput">分类名称</label>
-                            <input type="text" class="form-control" id="nameInput" />
+    <div class="ui container">
+        <div class="row">
+            <div class="ui raised segment">
+                <a class="ui red ribbon label">个人信息</a>
+                <div class="ui items">
+                    <div class="item">
+                        <div class="ui tiny image">
+                            <img class="ui image" th:src="${user.avatar}">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-info" id="createCategory">
-                        确定
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End 新建 模态框 -->
-
-    <!-- 修改个人资料 模态框 -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title">
-                        修改资料
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: center" id="updateBody">
-                    <form>
-                        <div class="form-group">
-                            <label for="nicknameInput">昵称</label>
-                            <input type="text" class="form-control" id="nicknameInput" />
+                        <div class="content">
+                            <a class="header">[[${user.nickname}]] <i class="man icon"></i></a>
+                            <div class="description">
+                                [[${user.meta}]]
+                            </div>
+                            <div class="extra">
+                                <a class="ui right floated button red" th:href="@{/logout}">退出登录 <i
+                                        class="right chevron icon"></i> </a>
+                                <div class="ui label teal" th:if="${user.loginType} == 'QQ'">QQ 用户</div>
+                                <div class="ui label teal" th:if="${user.loginType} == 'GITHUB'">Github 用户</div>
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-info" id="updateUserInfo">
-                        确定
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End 修改个人资料 模态框 -->
 
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container">
+
+        <div class="row relative">
+            <h2 class="ui dividing header red">
+                <i class="cube icon item"></i>
+                我的仓库
+            </h2>
+            <button class="ui red basic button right-absolute" id="newHub"><i class="add icon"></i>新建仓库</button>
+        </div>
+
+        <div class="ui very padded center aligned segment" th:if="${#lists.isEmpty(hubs)}">
+            <p>暂时没有仓库哦！立即新建一个吧！</p>
+        </div>
+
+        <div class="ui four doubling cards">
+            <div class="card" th:each="hub : ${hubs}">
+                <div class="content">
+                    <img class="right floated mini ui image" th:src="${hub.avatar}">
+                    <div class="header">[[${hub.name}]]</div>
+                    <div class="meta">[[${#dates.format(hub.createTime, 'yyyy-MM-dd HH:mm')}]]</div>
+                    <div class="description">[[${hub.description}]]</div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <a class="ui basic green button" th:href="@{/user/hub/{id}(id=${hub.id})}">浏览</a>
+                        <div class="ui basic red button deleteBtn" th:value="${hub.id}">删除</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container">
+
+        <div class="row relative">
+            <h2 class="ui dividing header red">
+                <i class="cube icon item"></i>
+                我的关注
+            </h2>
+
+            <div class="ui icon buttons right-absolute">
+                <div class="ui basic red button idolsPreBtn" data-tooltip="上一页" data-position="top left" data-inverted="">
+                    <i class="chevron left icon"></i></div>
+                <div class="ui basic red button idolsNextBtn" data-tooltip="下一页" data-position="top left" data-inverted="">
+                    <i class="chevron right icon"></i></div>
+            </div>
+        </div>
+
+        <div class="ui very padded center aligned segment" th:if="${#lists.isEmpty(idols)}">
+            <p>暂时没有关注任何人哦！前往
+                <a href="" class="ui basic button red">瞄一瞄</a>
+            </p>
+        </div>
+
+        <div class="ui ten doubling cards">
+            <div class="card" th:each="idol : ${idols}">
+                <a class="image" data-inverted="" th:data-tooltip="${idol.nickname}" data-position="top center"
+                   th:href="@{/info/{id}(id=${idol.id})}">
+                    <img th:src="${idol.avatar}">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container">
+
+        <div class="row relative">
+            <h2 class="ui dividing header red">
+                <i class="cube icon item"></i>
+                我的粉丝
+            </h2>
+
+            <div class="ui icon buttons right-absolute">
+                <div class="ui basic red button fansPreBtn" data-tooltip="上一页" data-position="top left" data-inverted="">
+                    <i class="chevron left icon"></i></div>
+                <div class="ui basic red button fansNextBtn" data-tooltip="下一页" data-position="top left" data-inverted="">
+                    <i class="chevron right icon"></i></div>
+            </div>
+        </div>
+
+        <div class="ui very padded center aligned segment" th:if="${#lists.isEmpty(fans)}">
+            <p>暂时没有粉丝哦！分享有价值的东西会获得关注哦！</p>
+        </div>
+
+        <div class="ui ten doubling cards">
+            <div class="card" th:each="fan : ${fans}">
+                <a class="image" data-inverted="" th:data-tooltip="${fan.nickname}" data-position="top center"
+                   th:href="@{/info/{id}(id=${fan.id})}">
+                    <img th:src="${fan.avatar}">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <!-- 新建仓库 -->
+    <div class="ui modal" id="newHubModal">
+        <i class="close icon"></i>
+        <div class="header">
+            新建仓库
+        </div>
+        <div class="ui content">
+            <div class="ui form">
+                <div class="field">
+                    <label>仓库名称</label>
+                    <input placeholder="仓库名称" type="text" id="hubNameInput">
+                </div>
+                <div class="field">
+                    <label>仓库描述</label>
+                    <textarea name="" rows="2" cols="" placeholder="一段话描述该仓库的内容，64字以内" id="hubDescInput"></textarea>
+                </div>
+                <div class="ui submit button positive" id="submitBtn">确定</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除仓库 -->
+    <div class="ui small basic test modal" id="deleteHubModal">
+        <div class="ui icon header">
+            <i class="archive icon"></i>
+            删除仓库
+        </div>
+        <div class="content">
+            <p id="tips"></p>
+        </div>
+        <div class="actions">
+            <div class="ui red basic cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </div>
+            <div class="ui green ok inverted button" id="deleteHubBtn">
+                <i class="checkmark icon"></i>
+                Yes
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    var hubId;
 
-<script style="text/javascript">
+    /** 创建仓库 */
+    $("#newHub").click(function () {
+        $('#newHubModal').modal('show');
+    });
 
-    var api;
-    
-    function deleteApi(id){
-        return "/user/category/delete/" + id;
-    }
+    /** 创建仓库-确认 */
+    $("#submitBtn").click(function () {
+        var hubNameInput = $("#hubNameInput");
+        var hubDescInput = $("#hubDescInput");
+        hubNameInput.parent().attr("class", "field");
+        hubDescInput.parent().attr("class", "field");
+        var api = "/user/hub/create";
+        var hubName = hubNameInput.val();
+        var hubDescription = hubDescInput.val();
+        if (hubName.length < 1) {
+            hubNameInput.parent().attr("class", "field error");
+            return;
+        }
+        if (hubDescription.length < 2) {
+            hubDescInput.parent().attr("class", "field error");
+            return;
+        }
 
-
-    $("document").ready(function () {
-
-        /* 新建分类 */
-        $("#createCategory").click(function (){
-            $("#info").remove();
-            $.post("/user/category/add",{
-                "name": $("#nameInput").val()
-            }, function (data) {
-                if (data.code == 100){
+        $.post(api,
+            {
+                'name': hubName,
+                'description': hubDescription
+            },
+            function (data) {
+                if (data.code === 200) {
                     window.location.reload();
-                }else {
-                    var info = $("<p id=\"info\" style=\"color:red;margin-top: 10px;\"></p>");
-                    info.text("新建失败，请重新登录！");
-                    $("#createBody").append(info);
                 }
             });
-        });
 
+    });
 
-        $(".deleteBtn").click(function (){
-            var name = $(this).parent().find("h4").eq(0).text();
-            $("#name").text(name);
-            api = deleteApi($(this).val());
-        });
+    /** 删除仓库-提示 */
+    $(".deleteBtn").click(function () {
+        hubId = $(this).attr("value");
+        var hubName = $(this).parent().parent().parent().find("div[class='header']").eq(0).text();
+        var tips = '删除仓库会删除仓库下所有内容，且无法恢复，你确定删除 "' + hubName + '" 吗？';
+        $("#tips").text(tips);
+        $('#deleteHubModal').modal('setting', 'closable', false).modal('show');
+    });
 
-        /* 删除分类 */
-        $("#deleteCategory").click(function (){
-            $.get(api,function (data) {
-                if (data.code == 100){
-                    window.location.reload();
-                }else {
-                    var info = $("<p id=\"info\" style=\"color:red;margin-top: 10px;\"></p>");
-                    info.text("删除失败，请刷新页面后重试！");
-                    $("#deleteBody").append(info);
-                }
-            })
-        });
-
-        $("#updateUserInfo").click(function (){
-            var nickname = $("#nicknameInput").val();
-            $.post("/user/name",{
-                "nickname": nickname
-            },function (data) {
-                if (data.code == 100){
-                    window.location.reload();
-                }else {
-                    var info = $("<p id=\"info\" style=\"color:red;margin-top: 10px;\"></p>");
-                    info.text(data.message);
-                    $("#updateBody").append(info);
-                }
-            })
-        });
+    /** 删除仓库-确认 */
+    $("#deleteHubBtn").click(function () {
+        var api = "/user/hub/delete/" + hubId;
+        $.get(api, function (data) {
+            if (data.code === 200) {
+                window.location.reload();
+            }
+        })
     });
 </script>
+
+<script th:inline="javascript">
+
+    var userId = [[${user.id}]];
+    var fansPage = 1;
+    var idolsPage = 1;
+
+    /** 我的关注 上一页 */
+    $(".idolsPreBtn").click(function(){
+        idolsPage = idolsPage - 1;
+        var api = "/user/" + userId + "/idols/" + idolsPage;
+        var current = $(this);
+        $.get(api,function(data){
+            current.next().attr('class', 'ui basic red button fansPreBtn');
+            if (data.length < 20){
+                current.attr('class', 'ui disabled basic red button fansPreBtn');
+                if (data.length < 1){
+                    return ;
+                }
+            }
+            var cards = current.parent().parent().next().next();
+            cards.html("");
+            for (var i = 0; i < data.length; i++){
+                var card = createItem(data[i]);
+                cards.append(card);
+            }
+        });
+    });
+
+    /** 我的关注 上一页 */
+    $(".idolsNextBtn").click(function(){
+        idolsPage = idolsPage + 1;
+        var api = "/user/" + userId + "/idols/" + idolsPage;
+        var current = $(this);
+        $.get(api,function(data){
+            current.prev().attr('class', 'ui basic red button fansPreBtn');
+            if (data.length < 20){
+                current.attr('class', 'ui disabled basic red button fansPreBtn');
+                if (data.length < 1){
+                    return ;
+                }
+            }
+            var cards = current.parent().parent().next().next();
+            cards.html("");
+            for (var i = 0; i < data.length; i++){
+                var card = createItem(data[i]);
+                cards.append(card);
+            }
+        });
+    });
+
+    /** 我的粉丝 上一页 */
+    $(".fansPreBtn").click(function(){
+        fansPage = fansPage - 1;
+        var api = "/user/" + userId + "/fans/" + fansPage;
+        var current = $(this);
+        $.get(api,function(data){
+            current.next().attr('class', 'ui basic red button fansPreBtn');
+            if (data.length < 20){
+                current.attr('class', 'ui disabled basic red button fansPreBtn');
+                if (data.length < 1){
+                    return ;
+                }
+            }
+            var cards = current.parent().parent().next().next();
+            cards.html("");
+            for (var i = 0; i < data.length; i++){
+                var card = createItem(data[i]);
+                cards.append(card);
+            }
+        });
+    });
+
+    /** 我的粉丝 上一页 */
+    $(".fansNextBtn").click(function(){
+        fansPage = fansPage + 1;
+        var api = "/user/" + userId + "/fans/" + fansPage;
+        var current = $(this);
+        $.get(api,function(data){
+            current.prev().attr('class', 'ui basic red button fansPreBtn');
+            if (data.length < 20){
+                current.attr('class', 'ui disabled basic red button fansPreBtn');
+                if (data.length < 1){
+                    return ;
+                }
+            }
+            var cards = current.parent().parent().next().next();
+            cards.html("");
+            for (var i = 0; i < data.length; i++){
+                var card = createItem(data[i]);
+                cards.append(card);
+            }
+        });
+    });
+
+
+    /** 渲染用户信息 */
+    function createItem(data){
+        var cardDiv = $('<div class="card"></div>');
+        var cardA = $("<a class='image' data-inverted='' data-position='top center'></a>");
+        cardA.attr('data-tooltip', data.nickname);
+        cardA.attr('href', '/info/'+data.id);
+        var cardImg = $('<img />');
+        cardImg.attr('src', data.avatar);
+        cardA.append(cardA);
+        cardDiv.append(cardA);
+        return cardDiv;
+    }
+
+</script>
+
 </body>
+
 </html>

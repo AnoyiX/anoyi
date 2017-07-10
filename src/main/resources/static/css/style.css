@@ -1,0 +1,146 @@
+body {
+	background-color: #FFFFFF;
+}
+
+.ui.menu .item img.logo {
+	margin-right: 1.5em;
+}
+
+.main.container {
+	margin-top: 7em;
+}
+
+.wireframe {
+	margin-top: 2em;
+}
+
+.ui.footer.segment {
+	margin: 5em 0 0;
+	padding: 5em 0;
+}
+
+.swiper-container {
+	width: 100%;
+}
+
+.swiper-container img {
+	width: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.right-absolute{
+	position: absolute; 
+	right: 0; 
+	top: 0;
+}
+
+.right-absolute-left{
+	position: absolute; 
+	right: 80px;
+	top: 0;
+}
+
+.relative{
+	position: relative;
+}
+
+.nav-divider{
+	display: block;
+	height: 30px;
+}
+
+.spaced .bottom-space{
+    margin-bottom: 5px;
+}
+
+.ui.card .small-image{
+    padding: 20%;
+}
+
+.ui.container.small-container{
+    padding: 0 8%;
+}
+
+.image.tiny-fixed-height{
+    height: 90px;
+    overflow: hidden;
+}
+
+.hidden.menu {
+    display: none;
+}
+
+.masthead.segment {
+    min-height: 700px;
+    padding: 1em 0em;
+}
+
+.masthead .logo.item img {
+    margin-right: 1em;
+}
+
+.masthead .ui.menu .ui.button {
+    margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+    margin-top: 3em;
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+}
+
+.masthead h2 {
+    font-size: 1.7em;
+    font-weight: normal;
+}
+
+.secondary.pointing.menu .toc.item {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .ui.fixed.menu {
+        display: none !important;
+    }
+    .secondary.pointing.menu .item,
+    .secondary.pointing.menu .menu {
+        display: none;
+    }
+    .secondary.pointing.menu .toc.item {
+        display: block;
+    }
+    .masthead.segment {
+        min-height: 350px;
+    }
+    .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+    }
+    .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+    }
+}
+
+.ui.menu{
+    margin-bottom: 0em;
+}

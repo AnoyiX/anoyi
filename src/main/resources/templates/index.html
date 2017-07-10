@@ -1,0 +1,406 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>Any Video | Github | 个人定制资源库</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
+
+</head>
+
+<body>
+
+<div th:replace="~{header :: fmenu}"></div>
+
+<div th:replace="~{header :: smenu}"></div>
+
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <!-- Swiper -->
+    <div class="swiper-container gallery-top">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" th:each="carouselPic : ${carouselPics}">
+                <a th:href="@{/view(u=${carouselPic.value})}">
+                    <img th:src="${carouselPic.image}"/>
+                </a>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container">
+
+        <div class="row relative">
+            <h2 class="ui dividing header green">
+                <i class="green yelp icon item"></i>
+                综艺节目
+            </h2>
+            <button class="ui green button right-absolute refresh" value="5"><i class="refresh icon"></i>换一批</button>
+        </div>
+
+        <div class="ui five column doubling grid">
+
+            <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+                 th:each="recommend, iterStat:${recommends}">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 5">
+                    <a class="image videoUrl" th:href="@{/view(u=${recommend.value})}">
+                        <img th:src="${recommend.image}" alt="" class="videoImage"/>
+                    </a>
+                    <div class="content">
+                        <a class="videoTitle" th:text="${recommend.title}">综艺节目</a>
+                    </div>
+                </div>
+
+                <div th:if="${iterStat.index} >= 5" hidden>
+                    <ul class="videoImage">[[${recommend.image}]]</ul>
+                    <ul class="videoTitle">[[${recommend.title}]]</ul>
+                    <a class="videoUrl" th:href="@{/view(u=${recommend.value})}"></a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container">
+
+        <div class="row relative">
+            <h2 class="ui dividing header green">
+                <i class="reddit yelp icon item"></i>
+                最新电影
+            </h2>
+            <button class="ui green button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批</button>
+        </div>
+
+        <div class="ui five column doubling grid">
+
+            <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+                 th:each="movie, iterStat:${movies}">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 10">
+                    <a class="image videoUrl" th:href="@{/view(u=${movie.value})}">
+                        <img class="videoImage" th:src="${movie.image}" alt=""/>
+                    </a>
+                    <div class="content">
+                        <a class="videoTitle" th:text="${movie.title}">电影</a>
+                    </div>
+                </div>
+
+                <div th:if="${iterStat.index} >= 10" hidden>
+                    <ul class="videoImage">[[${movie.image}]]</ul>
+                    <ul class="videoTitle">[[${movie.title}]]</ul>
+                    <a class="videoUrl" th:href="@{/view(u=${movie.value})}"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="twelve wide column">
+
+                <div class="row relative">
+                    <h2 class="ui dividing header green">
+                        <i class="yelp icon"></i>
+                        电视剧
+                    </h2>
+                    <button class="ui green button right-absolute refresh" value="8"><i class="refresh icon"></i>换一批
+                    </button>
+                </div>
+
+                <div class="ui four column doubling grid">
+
+                    <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+                         th:each="tvHot, iterStat:${tvHots}">
+                        <div class="ui fluid link card" th:if="${iterStat.index} < 8">
+                            <a class="image videoUrl" th:href="@{/view(u=${tvHot.value})}">
+                                <img class="videoImage" th:src="${tvHot.image}" alt=""/>
+                            </a>
+                            <div class="content">
+                                <a class="videoTitle" th:text="${tvHot.title}">电视剧</a>
+                            </div>
+                        </div>
+
+                        <div th:if="${iterStat.index} >= 8" hidden>
+                            <ul class="videoImage">[[${tvHot.image}]]</ul>
+                            <ul class="videoTitle">[[${tvHot.title}]]</ul>
+                            <a class="videoUrl" th:href="@{/view(u=${tvHot.value})}"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="four wide computer only column">
+
+                <h2 class="ui dividing header olive">
+                    <i class="modx icon"></i>
+                    排行榜
+                </h2>
+
+                <div class="ui segments">
+                    <div class="ui red segment" th:each="tvTop : ${tvTops}">
+                        <a th:href="@{/view(u=${tvTop.value})}" th:text="${tvTop.title}">Top</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="ui hidden divider"></div>
+
+        <div class="ui container">
+
+            <div class="row relative">
+                <h2 class="ui dividing header green">
+                    <i class="reddit yelp icon item"></i>
+                    熊猫TV
+                </h2>
+                <button class="ui green button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
+                </button>
+            </div>
+
+            <div class="ui five column doubling grid">
+
+                <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+                     th:each="live, iterStat:${lives}">
+                    <div class="ui fluid link card" th:if="${iterStat.index} < 10">
+                        <a class="image videoUrl" th:href="@{/view(u=${live.value})}">
+                            <img class="videoImage" th:src="${live.image}" alt=""/>
+                        </a>
+                        <div class="content">
+                            <a class="videoTitle" th:text="${live.title}">直播</a>
+                        </div>
+                    </div>
+
+                    <div th:if="${iterStat.index} >= 10" hidden>
+                        <ul class="videoImage">[[${live.image}]]</ul>
+                        <ul class="videoTitle">[[${live.title}]]</ul>
+                        <a class="videoUrl" th:href="@{/view(u=${live.value})}"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ui hidden divider"></div>
+
+        <div class="ui container">
+
+            <div class="row relative">
+                <h2 class="ui dividing header green">
+                    <i class="reddit yelp icon item"></i>
+                    热血动漫
+                </h2>
+                <button class="ui green button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
+                </button>
+            </div>
+
+            <div class="ui five column doubling grid">
+
+                <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+                     th:each="animeHot, iterStat:${animeHots}">
+                    <div class="ui fluid link card" th:if="${iterStat.index} < 10">
+                        <a class="image videoUrl" th:href="@{/view(u=${animeHot.value})}">
+                            <img class="videoImage" th:src="${animeHot.image}" alt=""/>
+                        </a>
+                        <div class="content">
+                            <a class="videoTitle" th:text="${animeHot.title}">动漫</a>
+                        </div>
+                    </div>
+
+                    <div th:if="${iterStat.index} >= 10" hidden>
+                        <ul class="videoImage">[[${animeHot.image}]]</ul>
+                        <ul class="videoTitle">[[${animeHot.title}]]</ul>
+                        <a class="videoUrl" th:href="@{/view(u=${animeHot.value})}"></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="ui hidden divider"></div>
+
+        <div class="ui container" id="friendLinks">
+            <div class="row relative">
+                <h2 class="ui dividing header teal">
+                    <i class="plus icon"></i>
+                    友情链接
+                </h2>
+                <button class="ui teal button right-absolute" id="applyJoin"><i class="plus icon"></i>申请加入</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="ui stackable inverted divided grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">源码下载</h4>
+                    <div class="ui inverted link list">
+                        <a href="https://github.com/ChinaSilence/any-video" class="item" target="_blank">Github</a>
+                        <a href="#" class="item" target="_blank">码云</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">相关文档</h4>
+                    <div class="ui inverted link list">
+                        <a href="http://projects.spring.io/spring-boot/" class="item" target="_blank">Spring Boot</a>
+                        <a href="http://projects.spring.io/spring-security/" class="item" target="_blank">Spring
+                            Security</a>
+                        <a href="https://jsoup.org/" class="item" target="_blank">Jsoup</a>
+                        <a href="http://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html" class="item"
+                           target="_blank">Thymeleaf 3.0</a>
+                        <a href="http://www.jianshu.com/u/7b7ec6f2db21" class="item" target="_blank">简书</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">其他项目</h4>
+                    <div class="ui inverted link list">
+                        <a href="https://github.com/ChinaSilence/any-chat" class="item" target="_blank">Any Security</a>
+                        <a href="https://github.com/ChinaSilence/any-spring-security" class="item" target="_blank">Any
+                            Chat</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">开源声明</h4>
+                    <p>本站资源来源于互联网解析，仅供学习参考，请勿用于商业用途，违者必究！</p>
+                    <div class="ui labeled button" tabindex="0">
+                        <div class="ui red button"><i class="heart icon"></i> Like</div>
+                        <a class="ui basic red left pointing label" href="https://github.com/ChinaSilence/any-video"
+                           target="_blank">
+                            1,024
+                        </a>
+                    </div>
+                    <div class="ui labeled button" tabindex="0">
+                        <div class="ui basic blue button"><i class="fork icon"></i> Forks</div>
+                        <a class="ui basic left pointing blue label" href="https://github.com/ChinaSilence/any-video"
+                           target="_blank">
+                            1,024
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <img src="https://upload-images.jianshu.io/upload_images/3424642-e507ac74fe4079e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+                 class="ui centered mini image">
+            <div class="ui horizontal inverted small divided link list">
+                <a class="item disabled" href="#">Copyright © 2016 - 2017. All Rights Reserved</a>
+                <a class="item disabled" href="#">鄂ICP备16007917号</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 申请友情链接遮罩层 -->
+<div class="ui page dimmer">
+    <div class="content">
+        <div class="center">
+            <h2 class="ui inverted icon header">
+                <i class="mail icon"></i>
+                申请友情链接，请将贵站网址发到以下邮箱
+                <div class="sub header">anoy@ictgu.cn</div>
+            </h2>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    /** 初始化遮罩层 */
+    $("#applyJoin").click(function () {
+        $(".ui.page.dimmer").dimmer('show');
+    });
+
+    <!-- 首页轮播设置 -->
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+</script>
+
+<script>
+    <!-- 加载友情链接 -->
+    var friendLinkAPI = "/link/list";
+    $.get(friendLinkAPI, function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var link = $("<a class='ui red tag label' target='_blank'></a>");
+            link.attr("href", data[i].domain);
+            link.text(data[i].name);
+            $("#friendLinks").append(link);
+        }
+    });
+
+    /** "换一批" 功能 */
+    $(".refresh").click(
+        function () {
+            var size = $(this).val();
+            for (var i = 0; i < size; i++) {
+                var videoBox = $(this).parent().next().find(".videoItem");
+                var imageValue = videoBox.eq(i).find(".videoImage").eq(0).attr("src");
+                var titleValue = videoBox.eq(i).find(".videoTitle").eq(0).text();
+                var urlValue = videoBox.eq(i).find(".videoUrl").eq(0).attr("href");
+                var node = videoBox.eq(size);
+                var image = node.find(".videoImage").eq(0).text();
+                var title = node.find(".videoTitle").eq(0).text();
+                var url = node.find(".videoUrl").eq(0).attr("href");
+                videoBox.eq(i).find(".videoImage").eq(0).attr("src", image);
+                videoBox.eq(i).find(".videoTitle").eq(0).text(title);
+                videoBox.eq(i).find(".videoUrl").eq(0).attr("href", url);
+                node.remove();
+                var divBox = $("<div class=\"videoItem\"></div>");
+                var hiddenNode = $("<div hidden></div>");
+                var imageNode = $("<ul class=\"videoImage\"></ul>");
+                var titleNode = $("<ul class=\"videoTitle\"></ul>");
+                var urlNode = $("<a class=\"videoUrl\"></a>");
+                imageNode.text(imageValue);
+                titleNode.text(titleValue);
+                urlNode.attr("href", urlValue);
+                hiddenNode.append(imageNode);
+                hiddenNode.append(titleNode);
+                hiddenNode.append(urlNode);
+                divBox.append(hiddenNode);
+                $(this).parent().next().append(divBox);
+            }
+        }
+    );
+</script>
+
+</body>
+
+</html>

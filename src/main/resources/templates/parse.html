@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>解析 | Any Video</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{header :: fmenu}"></div>
+
+<div th:replace="~{header :: smenu}"></div>
+
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <div class="nav-divider"></div>
+
+    <div class="ui center aligned text  container">
+        <div class="ui action left icon fluid input">
+            <i class="world icon"></i>
+            <input type="text" placeholder="网址" id="urlInput">
+            <div class="ui teal button" id="parseBtn">解析</div>
+        </div>
+
+        <table class="ui teal table computer only">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>网址示例</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><i class="video play outline icon"></i>乐视</td>
+                <td>http://www.le.com/ptv/vplay/30202613.html</td>
+                <td>ok</td>
+            </tr>
+            <tr>
+                <td><i class="book icon"></i>微信</td>
+                <td>http://mp.weixin.qq.com/s/5za2p6PucOFEMo7zjzQM5A</td>
+                <td>ok</td>
+            </tr>
+            <tr>
+                <td><i class="video play outline icon"></i>熊猫</td>
+                <td>http://www.panda.tv/403249</td>
+                <td>ok</td>
+            </tr>
+            <tr>
+                <td><i class="book icon"></i>简书</td>
+                <td>http://www.jianshu.com/p/f18a9cff351d</td>
+                <td>ok</td>
+            </tr>
+            <tr>
+                <td><i class="laptop icon"></i>其他</td>
+                <td></td>
+                <td>Coding</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 解析器遮罩层 -->
+        <div class="ui page dimmer">
+            <div class="content">
+                <div class="center">
+                    <h2 class="ui inverted icon header">
+                        <i class="notice icon"></i>
+                        暂时无法解析
+                        <div class="sub header" id="urlText"></div>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/, /jianshu.com\/p\//];
+    $('#parseBtn').click(function () {
+        var webUrl = $('#urlInput').val();
+        for (var i = 0; i < regxList.length; i++) {
+            if (webUrl.match(regxList[i])) {
+                window.location.href = '/view?u=' + webUrl;
+                return -1;
+            }
+        }
+        $('#urlText').text(webUrl);
+        $(".ui.page.dimmer").dimmer('show');
+    });
+</script>
+
+</body>
+
+</html>

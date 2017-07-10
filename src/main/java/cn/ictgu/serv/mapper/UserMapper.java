@@ -1,31 +1,47 @@
 package cn.ictgu.serv.mapper;
 
 import cn.ictgu.serv.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
-/**
- * User Mapper
- * Created by Silence on 2017/3/11.
- */
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
-  @Insert("INSERT INTO user(`email`, `password`, `nickname`) VALUES(#{email}, #{password}, #{nickname})")
-  @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = long.class)
-  int insert(User user);
+    @Insert("insert into any_user(open_id, password, login_type, nickname, avatar, gender, meta, md5) values (#{openId}, #{password}, #{loginType}, #{nickname}, #{avatar}, #{gender}, #{meta}, #{md5})")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = long.class)
+    int insert(User user);
 
-  @Select("SELECT * FROM user WHERE `id` = #{id}")
-  User selectById(@Param("id") Long id);
 
-  @Select("SELECT * FROM user WHERE `email` = #{email}")
-  User selectByEmail(@Param("email") String email);
+    @Update("update any_user" +
+            "  set login_type=#{loginType}," +
+            "  nickname=#{nickname}," +
+            "  avatar=#{avatar}," +
+            "  gender=#{gender}," +
+            "  meta=#{meta}," +
+            "  md5=#{md5}" +
+            "  where open_id = #{openId}")
+    void update(User user);
 
-  @Update("UPDATE user SET `nickname` = #{nickname} WHERE `id` = #{id}")
-  int updateNicknameById(@Param("id") Long id, @Param("nickname") String nickname);
+    @Select("select * from any_user where open_id = #{openId}")
+    User selectByOpenId(@Param("openId") String openId);
+
+    @Select("select * from any_user where id = #{userId}")
+    User selectById(@Param("userId") Long userId);
+
+    @Select("select * from any_user order by id desc limit #{size}")
+    List<User> selectNew(@Param("size") int size);
+
+    @Select("select * from any_user u left join any_hub_item hi on u.id = hi.user_id and hi.create_time between date_sub(now(), interval 7 day) and now() group by u.id order by count(u.id) desc limit #{size}")
+    List<User> selectActive(@Param("size") int size);
+
+    @Select("select * from any_user u left join any_attention a on u.id = a.other_id group by u.id order by count(u.id) desc limit #{size}")
+    List<User> selectPopular(@Param("size") int size);
+
+    @Select("select * from any_user where id in(select other_id from any_attention where user_id = #{userId}) order by id desc limit #{begin}, #{end}")
+    List<User> selectIdols(@Param("userId") Long userId, @Param("begin") int begin, @Param("end") int end);
+
+    @Select("select * from any_user where id in(select user_id from any_attention where other_id = #{userId}) order by id desc limit #{begin}, #{end}")
+    List<User> selectFans(@Param("userId") Long userId, @Param("begin") int begin, @Param("end") int end);
 
 }
