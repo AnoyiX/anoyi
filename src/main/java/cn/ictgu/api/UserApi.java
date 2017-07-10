@@ -1,100 +1,45 @@
 package cn.ictgu.api;
 
-import cn.ictgu.config.security.AnyUser;
-import cn.ictgu.dto.SimpleResponse;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.UserService;
-import cn.ictgu.tools.CheckUtils;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-/**
- * Created by Silence on 2017/3/11.
- */
 @RestController
 @AllArgsConstructor
-public class UserApi {
+public class UserAPI {
 
-  private final UserService userService;
+    private final static int DEFAULT_SIZE = 10;
 
-    /**
-     * 修改用户昵称
-     */
-  @PostMapping("/user/name")
-  public SimpleResponse updateUserInfo(@AuthenticationPrincipal AnyUser user, HttpServletRequest request){
-    SimpleResponse response = new SimpleResponse();
-    String nickname = request.getParameter("nickname");
-    if (!CheckUtils.checkNickname(nickname)){
-      response.setCode(200);
-      response.setMessage("修改失败，参数不正确！");
-      return response;
-    }
-    if(userService.updateNickname(user.getId(), nickname)){
-      response.setCode(100);
-      return response;
-    }
-    response.setCode(200);
-    response.setMessage("修改失败，参数不正确！");
-    return response;
-  }
+    private final UserService userService;
 
-    /**
-     * 用户注册
-     */
-  @PostMapping(value = "/register")
-  public SimpleResponse signUp(HttpServletRequest request){
-    User user = createUser(request);
-    SimpleResponse response = checkSignUpRequest(user);
-    if (response.getCode() == 100){
-      if (!userService.signUp(user)){
-        response.setCode(200);
-        response.setMessage("此邮箱已注册，请勿重复注册！");
-        return response;
-      }else {
-        response.setMessage("注册激活邮件已发送至您邮箱，请在12小时内激活完成注册！");
-        return response;
-      }
+    @GetMapping("/api/user/new")
+    public List<User> newUsers(){
+        return userService.getNewUsers(DEFAULT_SIZE);
     }
-    return response;
-  }
 
-    /**
-     * 检验用户注册输入的参数
-     */
-  private SimpleResponse checkSignUpRequest(User user){
-    SimpleResponse response = new SimpleResponse();
-    String email = user.getEmail();
-    if (!CheckUtils.checkEmail(email)){
-      response.setCode(200);
-      response.setMessage("邮箱格式不合法");
-      return response;
+    @GetMapping("/api/user/active")
+    public List<User> activeUsers(){
+        return userService.getActiveUsers(DEFAULT_SIZE);
     }
-    String password = user.getPassword();
-    if (!CheckUtils.checkPassword(password)){
-      response.setCode(200);
-      response.setMessage("密码长度必须为8-16位，且必须包含数字和字母");
-      return response;
-    }
-    String nickname = user.getNickname();
-    if (!CheckUtils.checkNickname(nickname)){
-      response.setCode(200);
-      response.setMessage("昵称长度不合法");
-      return response;
-    }
-    response.setCode(100);
-    return response;
-  }
 
-  private User createUser(HttpServletRequest request){
-    User user = new User();
-    user.setEmail(request.getParameter("username"));
-    user.setPassword(request.getParameter("password"));
-    user.setNickname(request.getParameter("nickname"));
-    return user;
-  }
+    @GetMapping("/api/user/popular")
+    public List<User> popularUsers(){
+        return userService.getPopularUsers(DEFAULT_SIZE);
+    }
+
+    @GetMapping("/user/{userId}/fans/{page}")
+    public List<User> fans(@PathVariable("userId") Long userId, @PathVariable("page") Integer page){
+        return (page < 1) ? null : userService.getFans(userId, page);
+    }
+
+    @GetMapping("/user/{userId}/idols/{page}")
+    public List<User> idols(@PathVariable("userId") Long userId, @PathVariable("page") Integer page){
+        return (page < 1) ? null : userService.getIdols(userId, page);
+    }
 
 }

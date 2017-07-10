@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>赞赏 | Any Video</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{header :: fmenu}"></div>
+
+<div th:replace="~{header :: smenu}"></div>
+
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <div class="nav-divider"></div>
+
+    <div class="ui center aligned container">
+        <h2 class="ui horizontal divider header red"><i class="diamond icon"></i> 感谢您的支持，希望此开源项目能给您带来帮助，谢谢！ </h2>
+        <table class="ui red table">
+            <thead>
+            <tr>
+                <th>昵称</th>
+                <th>方式</th>
+                <th>金额(元)</th>
+                <th class="right aligned">时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tip:${tips}">
+                <td th:text="${tip.nickname}"></td>
+                <td th:text="${tip.from}"></td>
+                <td th:text="${#numbers.formatDecimal(tip.money,0,2)}"></td>
+                <td th:text="${#dates.format(tip.date, 'yyyy-MM-dd HH:mm')}" class="right aligned"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button class="ui basic red button" id="tip">赞赏支持</button>
+
+        <div class="ui page dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui text container">
+
+                        <div class="ui centered equal width grid">
+                            <div class="column">
+                                <div class="ui fluid link card">
+                                    <div class="image">
+                                        <img src="https://upload-images.jianshu.io/upload_images/3424642-5716064f4e2e545f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">支付宝</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="ui fluid link card">
+                                    <div class="image">
+                                        <img src="https://upload-images.jianshu.io/upload_images/3424642-dd10d4fb15d9556f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">微信</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="ui tall stacked segment inverted grey">
+                                    作者寄语
+                                    <div class="ui divider"></div>
+                                    祝帅哥们升职加薪不加班，<br/> 早日迎娶白富美，
+                                    <br/> 走向人生巅峰！
+                                    <div class="ui divider"></div>
+                                    请在备注里标明您的称呼，<br/>再次感谢您的支持！
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#tip").click(function () {
+        $(".ui.page.dimmer").dimmer('show');
+    });
+</script>
+</body>
+
+</html>

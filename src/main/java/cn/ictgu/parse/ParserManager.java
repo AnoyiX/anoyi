@@ -2,7 +2,6 @@ package cn.ictgu.parse;
 
 /**
  * 解析器管理器
- * Created by Silence on 2017/1/5.
  */
 public interface ParserManager {
 

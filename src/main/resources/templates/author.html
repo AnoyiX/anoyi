@@ -1,111 +1,196 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>作者信息</title>
-    <link rel="stylesheet" href="/css/me.css">
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>作者信息 | Any Video</title>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
 </head>
 
 <body>
 
-<div th:insert="~{header :: nav}"></div>
+<div th:replace="~{header :: fmenu}"></div>
 
-<div class="container">
-    <div class="col-lg-6 col-lg-offset-3">
+<div th:replace="~{header :: smenu}"></div>
 
-        <!-- ===== vCard Navigation ===== -->
-        <div class="row w">
-            <div class="col-md-4" style="padding-left: 0">
-                <img class="img-responsive" src="/image/avatar.jpg" alt="">
-                <ul class="nav nav-tabs nav-stacked" id="myTab">
-                    <li class="active"><a href="#about">个人简介</a></li>
-                    <li><a href="#profile">个人经历</a></li>
-                    <li><a href="#portfolio">开源项目</a></li>
-                    <li><a href="#contact">联系方式</a></li>
-                </ul>
-            </div><!-- col-md-4 -->
+<div class="pusher">
 
-            <!-- ===== vCard Content ===== -->
-            <div class="col-md-8">
-                <div class="tab-content">
-                    <!-- ===== First Tab ===== -->
-                    <div class="tab-pane active" id="about">
-                        <h3>杨远东</h3>
-                        <h5>全栈工程师</h5>
-                        <hr>
-                        <p>生于1995年，湖北人，毕业于三峡大学。</p>
-                        <p>热衷于用新技术完成自己的小兴趣。</p>
-                    </div><!-- tab about -->
+    <div th:replace="~{header :: pmenu}"></div>
 
-                    <!-- ===== Second Tab ===== -->
-                    <div class="tab-pane" id="profile">
-                        <h4><i class="icon-file-text-alt"></i> 教育经历</h4>
-                        <p class="sm">
-                            <grey>计算机科学与技术（本科）</grey> | 三峡大学<br/>
-                        </p>
+    <div class="nav-divider"></div>
 
-                        <h4><i class="icon-briefcase"></i> 工作经历</h4>
-                        <p class="sm">
-                            <grey>上海哇嗨网络科技有限公司</grey> | 2016.8 - 2017.3<br/>
-                            <grey>上海特赞信息科技有限公司</grey> | 2017.5 - 至今<br/>
-                        </p>
-                    </div><!-- Tab Profile -->
+    <div class="ui center aligned container">
 
-                    <!-- ===== Third Tab ===== -->
-                    <div class="tab-pane" id="portfolio">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <img class="img-responsive center-block" src="/image/video.svg" alt="">
-                                <a href="https://github.com/ChinaSilence/any-video" style="text-align: center"><h4>Any Video</h4></a>
-                            </div><!-- col-xs-6 -->
-                            <div class="col-xs-6">
-                                <img class="img-responsive center-block" src="/image/chat.svg" alt="">
-                                <a href="https://github.com/ChinaSilence/any-chat" style="text-align: center"><h4>Any Chat</h4></a>
-                            </div><!-- col-xs-6 -->
-                            <div class="col-xs-6">
-                                <img class="img-responsive center-block" src="/image/security.svg" alt="">
-                                <a href="https://github.com/ChinaSilence/any-spring-security" style="text-align: center"><h4>Any Spring Security</h4></a>
-                            </div><!-- col-xs-6 -->
-                        </div><!-- row -->
+        <img class="ui centered small circular image"
+             src="https://upload.jianshu.io/users/upload_avatars/3424642/fb55f16faaf6.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
 
-                    </div><!-- /Tab Portfolio -->
+        <h4 class="ui horizontal divider header red"><i class="student icon"></i> 个人信息 </h4>
+        <div class="ui tall stacked segment red">
+            杨远东，英文名 Anoy，1996年，出生于诗仙李白的第二故乡 -> 安陆。<br/> 2013 ~ 2017 就读于三峡大学（湖北宜昌），本科，计算机科学与技术专业。<br/>
+            热爱编程，追求极客之道，喜欢用技术丰富生活！目前在学习微服务、容器化技术，欢迎前来交流讨论。
+            <div class="ui horizontal divider"> Chinese Poem</div>
+            <div class="ui raised segment">
+                惘然有义 未见东风残百花<br/> 自恃无情 单凭浊酒解千愁
+            </div>
+        </div>
 
-                    <!-- ===== Fourth Tab ===== -->
-                    <div class="tab-pane" id="contact">
-                        <h4>联系方式</h4>
-                        <hr>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p style="margin-bottom: 0px;font-size: 14px">
-                                    邮箱 - 545544032@qq.com<br>
-                                    简书 - <a href="http://www.jianshu.com/u/7b7ec6f2db21">http://www.jianshu.com/u/7b7ec6f2db21</a>
-                                </p>
-                            </div><!-- col-xs-12 -->
-                        </div><!-- row -->
-                        <hr>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <img src="/image/qq.JPG" alt="" class="img-responsive center-block">
-                            </div><!-- col-xs-6 -->
-                            <div class="col-xs-6">
-                                <img src="/image/wexin.JPG" alt="" class="img-responsive center-block">
-                            </div><!-- col-xs-6 -->
-                        </div><!-- row -->
-                    </div><!-- Tab Contact -->
+        <h4 class="ui horizontal divider header red"><i class="cubes icon"></i> 工作经历 </h4>
 
-                </div><!-- Tab Content -->
-            </div><!-- col-md-8 -->
-        </div><!-- row w -->
-    </div><!-- col-lg-6 -->
+        <div class="ui left aligned fluid container">
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui tiny image">
+                        <img src="http://is2.mzstatic.com/image/thumb/Purple127/v4/a3/0a/cd/a30acd16-3e98-d5aa-d116-4b4ec5652e1b/source/175x175bb.jpg">
+                    </div>
+                    <div class="middle aligned content">
+                        <div class="header">上海哇嗨网络科技有限公司</div>
+                        <div class="description">
+                            后端研发实习生，负责网络爬虫系统开发 | 2016.07 ~ 2017.04
+                        </div>
+                        <div class="extra">
+                            <a class="ui right floated basic button red" href="http://www.w2here.com/"
+                               target="_blank"><i class="home icon"></i>Hoho官网 </a>
+                            <a class="ui right floated basic button red"
+                               href="https://www.lagou.com/gongsi/j169653.html" target="_blank"><i
+                                    class="map signs icon"></i>公司招聘 </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ui tiny image">
+                        <img src="http://is4.mzstatic.com/image/thumb/Purple122/v4/27/8f/28/278f28c0-c5c7-3a4a-09fb-f918829ea5e3/source/175x175bb.jpg">
+                    </div>
+                    <div class="middle aligned content">
+                        <div class="header">上海特赞信息科技有限公司</div>
+                        <div class="description">
+                            后端研发工程师，工作内容保密 | 2017.05 ~ 至今
+                        </div>
+                        <div class="extra">
+                            <a class="ui right floated basic button red" href="https://www.tezign.com"
+                               target="_blank"><i class="home icon"></i>Tezign官网 </a>
+                            <a class="ui right floated basic button red" href="https://www.lagou.com/gongsi/j75977.html"
+                               target="_blank"><i class="map signs icon"></i>公司招聘 </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="ui horizontal divider header red"><i class="github icon"></i> 开源项目 </h4>
+
+        <div class="ui centered equal width doubling grid">
+            <div class="column"></div>
+            <div class="column">
+                <div class="ui fluid link card">
+                    <a class="image small-image" href="https://github.com/ChinaSilence/any-video" target="_blank">
+                        <img src="images/video.svg">
+                    </a>
+                    <div class="content">
+                        <a class="header" href="https://github.com/ChinaSilence/any-video" target="_blank">Any-Video</a>
+                        <div class="meta">
+                            <a>Spring Boot 最佳实战</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid link card">
+                    <a class="image small-image" href="https://github.com/ChinaSilence/any-chat" target="_blank">
+                        <img src="images/chat.svg">
+                    </a>
+                    <div class="content">
+                        <a class="header" href="https://github.com/ChinaSilence/any-chat" target="_blank">Any-Chat</a>
+                        <div class="meta">
+                            <a>Web 即时通信</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid link card">
+                    <a class="image small-image" href="https://github.com/ChinaSilence/any-spring-security"
+                       target="_blank">
+                        <img src="images/security.svg">
+                    </a>
+                    <div class="content">
+                        <a class="header" href="https://github.com/ChinaSilence/any-spring-security" target="_blank">Any-Spring-Security</a>
+                        <div class="meta">
+                            <a>轻松学会 Spring Security</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="middle aligned content">
+                    <a class="ui right floated basic button red" href="https://github.com/ChinaSilence" target="_blank"><i
+                            class="add icon"></i>查看更多 </a>
+                </div>
+            </div>
+
+        </div>
+
+        <h4 class="ui horizontal divider header red"><i class="wechat icon"></i> 联系方式 </h4>
+
+        <div class="ui centered equal width doubling grid">
+            <div class="column">
+                <div class="ui fluid link card">
+                    <div class="image">
+                        <img src="https://upload-images.jianshu.io/upload_images/3424642-39acd6f01274f7d2.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+                    </div>
+                    <div class="content">
+                        <a class="header">QQ：545544032</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid link card">
+                    <div class="image">
+                        <img src="https://upload-images.jianshu.io/upload_images/3424642-f3d0f86778919f43.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+                    </div>
+                    <div class="content">
+                        <a class="header">QQ群: 481678152</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid link card">
+                    <div class="image">
+                        <img src="https://upload-images.jianshu.io/upload_images/3424642-a07ccff32e71a950.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+                    </div>
+                    <div class="content">
+                        <a class="header">WX: VIPshaohan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui raised segment red">
+                    <i class="mail icon"></i> 545544032@qq.com
+                </div>
+                <div class="ui raised segment red">
+                    <i class="mail icon"></i> anoy@ictgu.cn
+                </div>
+                <div class="middle aligned content">
+                    <a class="ui right floated basic button red" href="http://www.jianshu.com/u/7b7ec6f2db21"
+                       target="_blank"><i class="heartbeat icon"></i>关注作者简书 </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-divider"></div>
+
+    </div>
+
 </div>
-<script>
-    $('#myTab a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
-</script>
 </body>
+
 </html>

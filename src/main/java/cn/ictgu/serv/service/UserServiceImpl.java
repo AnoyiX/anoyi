@@ -1,74 +1,77 @@
 package cn.ictgu.serv.service;
 
-import cn.ictgu.redis.RedisTokenManager;
 import cn.ictgu.serv.mapper.UserMapper;
 import cn.ictgu.serv.model.User;
-import cn.ictgu.tools.mail.MailService;
-import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-/**
- * 用户管理
- * Created by Silence on 2017/4/11.
- */
+import java.util.List;
+
 @Service
-@Log4j2
 @AllArgsConstructor
+@Log4j2
 public class UserServiceImpl implements UserService {
+
+    private final static int USER_SIZE = 20;
 
     private final UserMapper userMapper;
 
-    private final RedisTokenManager tokenManager;
+    @Override
+    public User updateUserInfo(User user) {
+        String openId = user.getOpenId();
+        String avatar = user.getAvatar();
+        avatar = avatar.replace("http:","");
+        user.setAvatar(avatar);
+        User origin = userMapper.selectByOpenId(openId);
+        if (origin == null){
+            // 首次登陆
+            log.info("INSERT : " + user.toString());
+            userMapper.insert(user);
 
-    private final MailService mailService;
-
-    public boolean updateNickname(Long id, String nickname) {
-        return userMapper.updateNicknameById(id, nickname) > 0;
-    }
-
-    public User getById(Long id) {
-        return userMapper.selectById(id);
-    }
-
-    public User getByEmail(String email) {
-        return userMapper.selectByEmail(email);
-    }
-
-    public boolean signUp(User user) {
-        String email = user.getEmail();
-        if (existEmail(email)) {
-            log.error("用户注册，邮箱已注册:" + email);
-            return false;
-        }
-        sendValidateEmail(user);
-        return true;
-    }
-
-    public User completeSignUp(String token) {
-        User user = tokenManager.getUserOfSignUp(token);
-        if (user != null) {
-            if (existEmail(user.getEmail())) {
-                user = userMapper.selectByEmail(user.getEmail());
-            } else {
-                userMapper.insert(user);
+        }else {
+            // 再次登陆，信息与之前不一致，则更新
+            String md5 = user.getMd5();
+            String originMd5 = origin.getMd5();
+            if (originMd5 != null && !md5.equals(originMd5)){
+                userMapper.update(user);
             }
-            return user;
+            user.setId(origin.getId());
         }
-        return null;
+        return user;
     }
 
-    @Async
-    public void sendValidateEmail(User user) {
-        String token = tokenManager.getTokenOfSignUp(user);
-        log.error("用户注册，准备发送邮件：User:" + JSONObject.toJSONString(user) + ", Token: " + token);
-        mailService.userValidate(user, token);
+    @Override
+    public User getUserInfo(Long userId) {
+        return userMapper.selectById(userId);
     }
 
-    private boolean existEmail(String email) {
-        return userMapper.selectByEmail(email) != null;
+    @Override
+    public List<User> getNewUsers(int size) {
+        return userMapper.selectNew(size);
     }
 
+    @Override
+    public List<User> getActiveUsers(int size) {
+        return userMapper.selectActive(size);
+    }
+
+    @Override
+    public List<User> getPopularUsers(int size) {
+        return userMapper.selectPopular(size);
+    }
+
+    @Override
+    public List<User> getFans(Long userId, int page) {
+        int begin = (page - 1) * USER_SIZE;
+        int end = begin + USER_SIZE;
+        return userMapper.selectFans(userId, begin, end);
+    }
+
+    @Override
+    public List<User> getIdols(Long userId, int page) {
+        int begin = (page - 1) * USER_SIZE;
+        int end = begin + USER_SIZE;
+        return userMapper.selectIdols(userId, begin, end);
+    }
 }
