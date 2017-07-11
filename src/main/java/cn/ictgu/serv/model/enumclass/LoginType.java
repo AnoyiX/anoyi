@@ -5,6 +5,6 @@ package cn.ictgu.serv.model.enumclass;
  */
 public enum LoginType {
 
-    QQ, GIT;
+    QQ, GIT
 
 }
