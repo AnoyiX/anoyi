@@ -65,6 +65,16 @@
                 <td>ok</td>
             </tr>
             <tr>
+                <td><i class="video play outline icon"></i>优酷</td>
+                <td>http://m.youku.com/video/id_XMjg4MjIzMDA0OA==.html</td>
+                <td>ok</td>
+            </tr>
+            <tr>
+                <td><i class="video play outline icon"></i>优酷</td>
+                <td>http://v.youku.com/v_show/id_XMjg4MjIzMDA0OA==.html</td>
+                <td>ok</td>
+            </tr>
+            <tr>
                 <td><i class="laptop icon"></i>其他</td>
                 <td></td>
                 <td>Coding</td>
@@ -87,7 +97,7 @@
     </div>
 </div>
 <script>
-    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/, /jianshu.com\/p\//];
+    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/, /jianshu.com\/p\//, /youku.com/];
     $('#parseBtn').click(function () {
         var webUrl = $('#urlInput').val();
         for (var i = 0; i < regxList.length; i++) {

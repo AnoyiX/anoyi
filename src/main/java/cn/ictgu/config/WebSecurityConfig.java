@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @EnableWebSecurity
 @ConditionalOnClass({
-        cn.ictgu.serv.service.UserService.class
+        UserService.class
 })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
