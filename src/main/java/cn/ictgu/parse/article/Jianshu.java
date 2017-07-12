@@ -20,7 +20,7 @@ public class Jianshu implements Parser<Article> {
     private Pattern pattern;
 
     public Jianshu(){
-        pattern = Pattern.compile("data-original-src=\"(.*?)\"");
+        pattern = Pattern.compile("img.*?src=\"(.*?)\"");
     }
 
     @Override
