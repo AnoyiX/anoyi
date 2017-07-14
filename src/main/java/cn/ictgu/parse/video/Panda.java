@@ -1,8 +1,8 @@
 package cn.ictgu.parse.video;
 
-import cn.ictgu.dto.Video;
+import cn.ictgu.bean.response.Video;
 import cn.ictgu.parse.Parser;
-import cn.ictgu.serv.model.Episode;
+import cn.ictgu.bean.response.Episode;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -30,7 +30,7 @@ public class Panda implements Parser<Video>{
     JSONObject json = JSON.parseObject(document.body().text());
     JSONObject data = json.getJSONObject("data");
     video.setTitle(data.getJSONObject("roominfo").getString("name"));
-    video.setImage(data.getJSONObject("roominfo").getJSONObject("pictures").getString("img"));
+    video.setImage(data.getJSONObject("roominfo").getJSONObject("pictures").getString("img").replace("http:",""));
     video.setPlayUrl(data.getJSONObject("videoinfo").getString("address"));
     return video;
   }

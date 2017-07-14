@@ -1,27 +1,46 @@
 package cn.ictgu.serv.service;
 
 import cn.ictgu.serv.model.User;
-import org.springframework.stereotype.Service;
 
-/**
- * User Service
- * Created by Silence on 2017/3/11.
- */
+import java.util.List;
+
 public interface UserService {
 
-  /* 用户注册 */
-  boolean signUp(User user);
+    /**
+     * 登录时，更新用户信息
+     */
+    User updateUserInfo(User user);
 
-  /* 更新用户昵称 */
-  boolean updateNickname(Long id, String nickname);
+    /**
+     * 获取用户信息
+     * @param userId 用户Id
+     * @return 用户信息
+     */
+    User getUserInfo(Long userId);
 
-  /* 根据ID查询用户信息 */
-  User getById(Long id);
+    /**
+     * 新用户
+     */
+    List<User> getNewUsers(int size);
 
-  /* 根据邮箱查询用户信息 */
-  User getByEmail(String email);
+    /**
+     * 活跃用户，一周内，收藏内容越多，排名越高
+     */
+    List<User> getActiveUsers(int size);
 
-  /* 用户注册之token校验 */
-  User completeSignUp(String token);
+    /**
+     * 人气用户, 粉丝越多，排名越高
+     */
+    List<User> getPopularUsers(int size);
+
+    /**
+     * 获取用户粉丝
+     */
+    List<User> getFans(Long userId, int page);
+
+    /**
+     * 获取用户偶像
+     */
+    List<User> getIdols(Long userId, int page);
 
 }

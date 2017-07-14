@@ -8,7 +8,6 @@ import java.util.concurrent.Executor;
 
 /**
  * 自定义异步配置
- * Created by Silence on 2017/4/30.
  */
 @Configuration
 public class AsyncConfigurer extends AsyncConfigurerSupport {

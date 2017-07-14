@@ -1,13 +1,11 @@
 package cn.ictgu.parse;
 
-import cn.ictgu.serv.model.Episode;
+import cn.ictgu.bean.response.Episode;
 
 import java.util.List;
 
 /**
  * 解析器
- *
- * Created by Silence on 2017/3/15.
  */
 public interface Parser<T> {
 

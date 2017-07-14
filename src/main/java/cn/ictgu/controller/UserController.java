@@ -1,55 +1,67 @@
 package cn.ictgu.controller;
 
-import cn.ictgu.config.security.AnyUser;
-import cn.ictgu.serv.model.Category;
+import cn.ictgu.serv.model.Hub;
 import cn.ictgu.serv.model.User;
-import cn.ictgu.serv.service.CategoryService;
+import cn.ictgu.serv.service.AttentionService;
+import cn.ictgu.serv.service.HubService;
 import cn.ictgu.serv.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-/**
- * Created by Silence on 2017/3/10.
- */
 @Controller
 @AllArgsConstructor
 public class UserController {
 
-  private final UserService userService;
+    private final HubService hubService;
 
-  private final CategoryService categoryService;
+    private final UserService userService;
 
-  /**
-   * 校验邮箱验证
-   */
-  @RequestMapping(value = "/validate/{token}", method = RequestMethod.GET)
-  public String emailConfirm(@PathVariable("token") String token, Model model) {
-    User user = userService.completeSignUp(token);
-    if (user != null) {
-      model.addAttribute("result", "注册成功，赶紧登陆体验吧！");
-    } else {
-      model.addAttribute("result", "链接已失效，请重新注册！");
+    private final AttentionService attentionService;
+
+    /**
+     * 个人中心
+     */
+    @GetMapping("/user")
+    public String user(@AuthenticationPrincipal UsernamePasswordAuthenticationToken authenticationToken, Model model) {
+        User user = (User) authenticationToken.getPrincipal();
+        model.addAttribute("user", user);
+        List<Hub> hubs = hubService.getByUserId(user.getId());
+        if (hubs == null){
+            System.out.println( " hubs is nill ");
+        }
+        model.addAttribute("hubs", hubs);
+        List<User> idols = userService.getIdols(user.getId(), 1);
+        model.addAttribute("idols", idols);
+        List<User> fans = userService.getFans(user.getId(), 1);
+        model.addAttribute("fans", fans);
+        return "user";
     }
-    return "login";
-  }
 
-  /**
-   * 用户页
-   */
-  @GetMapping("/user")
-  public String user(@AuthenticationPrincipal AnyUser user, Model model) {
-    model.addAttribute("user", user);
-    List<Category> categories = categoryService.getByUserId(user.getId());
-    model.addAttribute("categories", categories);
-    return "user";
-  }
+    /**
+     * 查看他人资料
+     */
+    @GetMapping("/info/{id}")
+    public String user(@AuthenticationPrincipal UsernamePasswordAuthenticationToken authenticationToken, @PathVariable("id") Long userId, Model model) {
+        if (authenticationToken != null){
+            User user = (User) authenticationToken.getPrincipal();
+            if (userId.equals(user.getId())){
+                return "redirect:/user";
+            }
+            boolean isAttention = attentionService.isAttention(user.getId(), userId);
+            model.addAttribute("isAttention", isAttention);
+        }
+        User other = userService.getUserInfo(userId);
+        model.addAttribute("user", other);
+        List<Hub> hubs = hubService.getByUserId(userId);
+        model.addAttribute("hubs", hubs);
+        return "info";
+    }
 
 }

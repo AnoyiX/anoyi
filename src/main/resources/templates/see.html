@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>瞄一瞄 | Any Video</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/siderbar.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{header :: fmenu}"></div>
+
+<div th:replace="~{header :: smenu}"></div>
+
+<div class="pusher">
+
+    <div th:replace="~{header :: pmenu}"></div>
+
+    <div class="nav-divider"></div>
+
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="twelve wide column">
+
+                <div class="ui secondary pointing menu red">
+                    <a class="item active item-type" data-value="0">最新 </a>
+                    <a class="item item-type" data-value="1">热门 </a>
+                    <a class="item item-type" data-value="2">推荐 </a>
+                </div>
+
+                <div class="ui divided items" id="itemsDiv">
+                    <div class="ui active centered inline loader" id="itemLoader"></div>
+                </div>
+
+                <button class="fluid ui button" id="loadMore">加载更多</button>
+
+            </div>
+
+            <div class="four wide column">
+
+                <div class="row relative">
+                    <h2 class="ui dividing header green">
+                        <i class="leaf loading icon green"></i>
+                        推荐
+                    </h2>
+                    <button class="ui small basic green button right-absolute" id="exchangeHubBtn"><i
+                            class="refresh icon"></i>换一个
+                    </button>
+                </div>
+
+                <div class="ui cards" id="cards">
+                    <div th:class="${iterStat.index} < 1 ? 'card green' : '' " th:each="hub, iterStat:${hubs}"
+                         th:hidden="${iterStat.index} > 0">
+                        <div class="content">
+                            <img class="right floated mini ui image"
+                                 th:src="${hub.avatar}">
+                            <div class="header" th:text="${hub.name}">Spring Boot</div>
+                            <div class="meta" th:text="${#dates.format(hub.createTime, 'yyyy-MM-dd HH:mm')}"></div>
+                            <div class="description" th:text="${hub.description}"></div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two buttons">
+                                <a class="ui basic green button" th:href="@{/share/{md5}(md5=${hub.md5})}">浏览</a>
+                                <div class="ui basic red button">克隆</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="ui dividing header green">
+                    <i class="viadeo loading icon green"></i>
+                    活跃会员
+                </h2>
+
+                <div class="ui four doubling cards">
+                    <div class="card" th:each="user : ${users}">
+                        <a class="image" data-inverted="" th:data-tooltip="${user.nickname}" data-position="top center"
+                           th:href="@{/info/{id}(id=${user.id})}">
+                            <img th:src="${user.avatar}">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="ui hidden divider"></div>
+    </div>
+</div>
+
+<script>
+
+    var itemsDiv = $('#itemsDiv');
+    var loadMore = $('#loadMore');
+
+    /** 创建列表内容 */
+    function createItem(data) {
+        var item = $("<div class='item'></div>");
+        var imageDiv = $("<div class='image tiny-fixed-height'></div>");
+        var imageNode = $("<img />");
+        imageNode.attr("src", data.image);
+        if (data.recommend === 1) {
+            var recommendDiv = $("<a class='ui left corner label red'></a>");
+            var recommendIcon = $("<i class='thumbs outline up icon'></i>");
+            recommendDiv.append(recommendIcon);
+            imageDiv.append(recommendDiv);
+        }
+        imageDiv.append(imageNode);
+        var contentDiv = $('<div class="content"></div>');
+        var titleA = $('<a class="header"></a>');
+        titleA.attr('href', "/view?u=" + data.url);
+        titleA.text(data.name);
+        var metaDiv = $('<div class="meta"></div>');
+        var descriptionSpan = $('<span class="cinema"></span>');
+        descriptionSpan.html(data.description);
+        metaDiv.append(descriptionSpan);
+        var tagDiv = $('<div class="extra"></div>');
+        var tags = data.tags;
+        for (var i = 0; i < tags.length; i++) {
+            var tag = $('<a class="ui label basic red"></a>');
+            var tagIcon = $('<i></i>');
+            tagIcon.attr('class', tags[i].icon);
+            tag.append(tagIcon);
+            tag.append(tags[i].content);
+            if (i === 1) {
+                tag.attr("href", "/share/" + data.md5);
+            }
+            tagDiv.append(tag);
+        }
+        contentDiv.append(titleA);
+        contentDiv.append(metaDiv);
+        contentDiv.append(tagDiv);
+        item.append(imageDiv);
+        item.append(contentDiv);
+        return item;
+    }
+
+    /** 渲染列表内容 */
+    function renderList(data) {
+        if (data.length < 15) {
+            loadMore.attr('class', 'fluid disabled ui button');
+            loadMore.text('全部加载完毕');
+        } else {
+            loadMore.attr('class', 'fluid ui button');
+            loadMore.text('加载更多');
+        }
+        for (var i = 0; i < data.length; i++) {
+            var item = createItem(data[i]);
+            itemsDiv.append(item);
+        }
+    }
+</script>
+
+<script>
+    var apis = ["/see/new/", "/see/hot/", "/see/recommend/"];
+    var page = 1;
+    var index = 0;
+
+    /** 加载最新的 */
+    $(document).ready(function () {
+        var api = apis[index] + page;
+        $.get(api, function (data) {
+            itemsDiv.html('');
+            renderList(data);
+        });
+    });
+
+    /** 加载更多 */
+    $('#loadMore').click(function () {
+        page = page + 1;
+        var api = apis[index] + page;
+        $.get(api, function (data) {
+            renderList(data);
+        });
+    });
+
+    /** 切换 最新、热门、推荐 **/
+    $('.item-type').click(function () {
+        page = 1;
+        index = $(this).attr('data-value');
+        $(this).parent().find('a').eq(0).attr('class', 'item item-type');
+        $(this).parent().find('a').eq(1).attr('class', 'item item-type');
+        $(this).parent().find('a').eq(2).attr('class', 'item item-type');
+        $(this).attr('class', 'item active item-type');
+        itemsDiv.html('');
+        var api = apis[index] + page;
+        $.get(api, function (data) {
+            renderList(data);
+        });
+    });
+
+    /** 切换推荐的仓库 */
+    $("#exchangeHubBtn").click(function () {
+        var card = $('#cards').find('.card.green').eq(0);
+        var next = card.next();
+        if (next.length === 0) {
+            next = $('#cards').find('div').eq(0);
+        }
+        card.attr("class", "");
+        card.hide();
+        next.attr('class', 'card green');
+        next.show();
+    });
+
+</script>
+</body>
+
+</html>
