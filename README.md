@@ -17,4 +17,4 @@ Spring Boot、Mybatis、HikariCP、Spring Security、OAuth2、Thymeleaf、Semant
 
 How to Run?
 ------
-即将以视频的形式发布！
+[初章](http://www.jianshu.com/p/aff05f5bd8a1) | [部署](http://www.jianshu.com/p/8a9ed762caf7) | Next
