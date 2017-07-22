@@ -76,7 +76,7 @@ body {
 }
 
 .ui.container.small-container{
-    padding: 0 8%;
+    padding: 0 3%;
 }
 
 .image.tiny-fixed-height{
@@ -143,4 +143,11 @@ body {
 
 .ui.menu{
     margin-bottom: 0em;
+}
+
+.image-caption{
+    text-align: center;
+    color: #A6A6A6;
+    margin-bottom: 20px;
+    text-decoration: underline;
 }
