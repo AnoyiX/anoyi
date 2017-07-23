@@ -44,9 +44,7 @@ public class GithubAuthenticationFilter extends AbstractAuthenticationProcessing
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String code = request.getParameter("code");
         String state = request.getParameter("state");
-        System.out.println("Code : " + code + ", state:" + state);
         GithubToken githubToken = this.getToken(code, state);
-        System.out.println(JSON.toJSONString(githubToken));
         if (githubToken != null){
             // 生成验证 authenticationToken
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(githubToken.getAccessToken(), githubToken.getScope());
@@ -64,7 +62,6 @@ public class GithubAuthenticationFilter extends AbstractAuthenticationProcessing
                                 + "&redirect_uri=" + redirectUri
                                 + "&state=" + state);
         String tokenResult = document.text();
-        System.out.println(tokenResult);
         String[] results = tokenResult.split("&");
         if (results.length == 3){
             GithubToken githubToken = new GithubToken();

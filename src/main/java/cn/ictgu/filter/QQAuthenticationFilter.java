@@ -61,13 +61,10 @@ public class QQAuthenticationFilter extends AbstractAuthenticationProcessingFilt
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String code = request.getParameter(CODE);
-        System.out.println("Code : " + code);
         String tokenAccessApi = String.format(TOKEN_ACCESS_API, accessTokenUri, grantType, clientId, clientSecret, code, redirectUri);
         QQToken qqToken = this.getToken(tokenAccessApi);
-        System.out.println(JSON.toJSONString(qqToken));
         if (qqToken != null){
             String openId = getOpenId(qqToken.getAccessToken());
-            System.out.println(openId);
             if (openId != null){
                 // 生成验证 authenticationToken
                 UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(qqToken.getAccessToken(), openId);
