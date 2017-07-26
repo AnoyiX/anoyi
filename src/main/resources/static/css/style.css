@@ -151,3 +151,7 @@ body {
     margin-bottom: 20px;
     text-decoration: underline;
 }
+
+.login-icon{
+    margin: 0 15px;
+}
