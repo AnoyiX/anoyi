@@ -4,6 +4,7 @@ import cn.ictgu.bean.response.Video;
 import cn.ictgu.exception.ParserNotFoundException;
 import cn.ictgu.parse.article.Jianshu;
 import cn.ictgu.parse.article.Weixin;
+import cn.ictgu.parse.video.Iqiyi;
 import cn.ictgu.parse.video.Letv;
 import cn.ictgu.parse.video.Panda;
 import cn.ictgu.parse.video.Youku;
@@ -37,6 +38,7 @@ public class VideoParserManager implements ParserManager {
         parserMap.put("qq.com", new Weixin());
         parserMap.put("jianshu.com", new Jianshu());
         parserMap.put("youku.com", new Youku());
+        parserMap.put("iqiyi.com", new Iqiyi());
     }
 
     /**

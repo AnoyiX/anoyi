@@ -1,11 +1,15 @@
 package cn.ictgu.bean.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 集
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Episode {
 
     // 第几集

@@ -75,6 +75,11 @@
                 <td>ok</td>
             </tr>
             <tr>
+                <td><i class="video play outline icon"></i>爱奇艺</td>
+                <td>http://www.iqiyi.com/v_19rr80qrj0.html</td>
+                <td>ok</td>
+            </tr>
+            <tr>
                 <td><i class="laptop icon"></i>其他</td>
                 <td></td>
                 <td>Coding</td>
@@ -97,7 +102,7 @@
     </div>
 </div>
 <script>
-    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/, /jianshu.com\/p\//, /youku.com/];
+    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/, /jianshu.com\/p\//, /youku.com/, /iqiyi.com/];
     $('#parseBtn').click(function () {
         var webUrl = $('#urlInput').val();
         for (var i = 0; i < regxList.length; i++) {
