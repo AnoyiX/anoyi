@@ -34,8 +34,7 @@ public class SeeServiceImpl implements SeeService {
     @Override
     public List<SimpleSource> getNewItems(int page) {
         int begin = (page - 1) * DEFAULT_ITEM_SIZE;
-        int end = begin + DEFAULT_ITEM_SIZE;
-        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectNewItems(begin, end);
+        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectNewItems(begin, DEFAULT_ITEM_SIZE);
         if (hubItemHubUsers == null) {
             return null;
         }
@@ -45,8 +44,7 @@ public class SeeServiceImpl implements SeeService {
     @Override
     public List<SimpleSource> getHotItems(int page) {
         int begin = (page - 1) * DEFAULT_ITEM_SIZE;
-        int end = begin + DEFAULT_ITEM_SIZE;
-        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectHotItems(begin, end);
+        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectHotItems(begin, DEFAULT_ITEM_SIZE);
         if (hubItemHubUsers == null) {
             return null;
         }
@@ -56,8 +54,7 @@ public class SeeServiceImpl implements SeeService {
     @Override
     public List<SimpleSource> getRecommendItems(int page) {
         int begin = (page - 1) * DEFAULT_ITEM_SIZE;
-        int end = begin + DEFAULT_ITEM_SIZE;
-        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectRecommendItems(begin, end);
+        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectRecommendItems(begin, DEFAULT_ITEM_SIZE);
         if (hubItemHubUsers == null) {
             return null;
         }
