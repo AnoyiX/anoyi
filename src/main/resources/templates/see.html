@@ -47,40 +47,29 @@
 
             </div>
 
-            <div class="four wide column">
+            <div class="four wide column computer only">
 
                 <div class="row relative">
                     <h2 class="ui dividing header blue">
                         <i class="map signs icon blue"></i>
-                        推荐
+                        推荐仓库
                     </h2>
-                    <button class="ui small basic blue button right-absolute" id="exchangeHubBtn"><i
-                            class="refresh icon"></i>换一个
-                    </button>
                 </div>
 
-                <div class="ui cards" id="cards">
-                    <div th:class="${iterStat.index} < 1 ? 'card green' : '' " th:each="hub, iterStat:${hubs}"
-                         th:hidden="${iterStat.index} > 0">
-                        <div class="content">
-                            <img class="right floated mini ui image"
-                                 th:src="${hub.avatar}">
-                            <div class="header" th:text="${hub.name}">Spring Boot</div>
-                            <div class="meta" th:text="${#dates.format(hub.createTime, 'yyyy-MM-dd HH:mm')}"></div>
-                            <div class="description" th:text="${hub.description}"></div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <a class="ui basic green button" th:href="@{/share/{md5}(md5=${hub.md5})}">浏览</a>
-                                <div class="ui basic red button">克隆</div>
-                            </div>
+                <div class="ui items ">
+                    <div class="hub-box item" th:each="hub, iterStat:${hubs}">
+                        <a class="ui mini image circular">
+                            <img th:src="${hub.avatar}" alt="" class="">
+                        </a>
+                        <div class="middle aligned content">
+                            <a class="header" th:text="${hub.name}"></a>
                         </div>
                     </div>
                 </div>
 
                 <h2 class="ui dividing header green">
                     <i class="street view icon green"></i>
-                    新会员
+                    萌新加入
                 </h2>
 
                 <div class="ui four doubling cards">
@@ -106,8 +95,6 @@
                     </div>
                 </div>
 
-
-
             </div>
         </div>
 
@@ -123,7 +110,7 @@
     /** 创建列表内容 */
     function createItem(data) {
         var item = $("<div class='item'></div>");
-        var imageDiv = $("<div class='image tiny-fixed-height'></div>");
+        var imageDiv = $("<div class='image tiny-fixed-height computer only'></div>");
         var imageNode = $("<img />");
         imageNode.attr("src", data.image);
         if (data.recommend === 1) {

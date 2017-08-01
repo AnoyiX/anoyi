@@ -20,7 +20,7 @@ import java.util.List;
 public class SeeServiceImpl implements SeeService {
     private final static int DEFAULT_ITEM_SIZE = 15;
     private final static int DEFAULT_USER_SIZE = 20;
-    private final static int DEFAULT_HUB_SIZE = 10;
+    private final static int DEFAULT_HUB_SIZE = 7;
 
     private final static String DESC_FORMAT = "来源于 <a href='/info/%s'>%s</a> 的收藏";
 

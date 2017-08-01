@@ -155,3 +155,14 @@ body {
 .login-icon{
     margin: 0 15px;
 }
+
+.ui.items .item.hub-box{
+    background: 0 0!important;
+    color: rgba(0,0,0,.6)!important;
+    font-weight: 400;
+    border-radius: .28571429rem;
+    text-transform: none;
+    text-shadow: none!important;
+    box-shadow: 0 0 0 1px rgba(34,36,38,.15) inset;
+    padding: 10px;
+}
