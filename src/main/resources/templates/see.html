@@ -62,7 +62,7 @@
                             <img th:src="${hub.avatar}" alt="" class="">
                         </a>
                         <div class="middle aligned content">
-                            <a class="header" th:text="${hub.name}"  th:value="'http://www.ictgu.cn/share/' + ${hub.md5}"></a>
+                            <a class="header" th:text="${hub.name}"  th:href="'http://www.ictgu.cn/share/' + ${hub.md5}"></a>
                         </div>
                     </div>
                 </div>
