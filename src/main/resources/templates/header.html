@@ -26,10 +26,6 @@
     <a href="/videos" class="item">视频</a>
     <a href="/search" class="item">搜索</a>
     <a href="/parse" class="item">解析</a>
-    <div class="right item">
-        <a class="ui inverted olive button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
-        <a class="ui inverted red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
-    </div>
 </div>
 
 <!-- pointing menu -->

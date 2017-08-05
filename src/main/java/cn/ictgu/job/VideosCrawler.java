@@ -93,7 +93,7 @@ public class VideosCrawler {
             Video video = new Video();
             String url = element.select("p.site-piclist_info_title a").attr("href");
             String title = element.select("p.site-piclist_info_title a").text();
-            String image = element.select("div.site-piclist_pic img").attr("src").replace("http:", "");
+            String image = element.select("div.site-piclist_pic img").attr("src");
             video.setTitle(title);
             video.setImage(image);
             video.setValue(url);
