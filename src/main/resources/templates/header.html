@@ -7,12 +7,10 @@
             <img class="logo" src="/images/atm.png">
         </a>
         <a href="/" class="item">首页</a>
-        <a href="/see" class="item">瞄一瞄</a>
+        <a href="/see" class="item">动态</a>
         <a href="/search" class="item">搜索</a>
         <a href="/parse" class="item">解析</a>
         <a href="/tip" class="item">赞赏</a>
-        <a href="/author" class="item">作者</a>
-        <a href="https://github.com/ChinaSilence/any-video" class="item" target="_blank">Github</a>
         <div class="right item">
             <a class="ui inverted olive button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
             <a class="ui inverted red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
@@ -23,12 +21,9 @@
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu" th:fragment="smenu">
     <a href="/" class="item">首页</a>
-    <a href="/see" class="item">瞄一瞄</a>
+    <a href="/see" class="item">动态</a>
     <a href="/search" class="item">搜索</a>
     <a href="/parse" class="item">解析</a>
-    <a href="/tip" class="item">打赏</a>
-    <a href="/author" class="item">作者</a>
-    <a href="https://github.com/ChinaSilence/any-video" class="item" target="_blank">Github</a>
     <div class="right item">
         <a class="ui inverted olive button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
         <a class="ui inverted red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
@@ -38,15 +33,8 @@
 <!-- pointing menu -->
 <div class="ui large secondary pointing menu" th:fragment="pmenu">
     <a class="toc item">
-        <i class="sidebar icon"></i>
+        <i class="large sidebar icon red"></i>
     </a>
-    <a href="/" class="item">首页</a>
-    <a href="/see" class="item">瞄一瞄</a>
-    <a href="/search" class="item">搜索</a>
-    <a href="/parse" class="item">解析</a>
-    <a href="/tip" class="item">打赏</a>
-    <a href="/author" class="item">作者</a>
-    <a href="https://github.com/ChinaSilence/any-video" class="item" target="_blank">Github</a>
     <div class="right item">
         <a class="ui basic red button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
         <a class="ui basic red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>

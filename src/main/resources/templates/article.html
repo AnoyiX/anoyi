@@ -30,34 +30,45 @@
 
     <div class="nav-divider"></div>
 
-    <div class="ui container">
+    <div class="ui">
 
         <div class="ui stackable grid">
             <div class="twelve wide column">
 
-                <div class="row relative">
-                    <h2 class="ui dividing header red" id="articleTitle">
+                <div class="row">
+                    <h3 class="ui dividing header red" id="articleTitle">
                         <i class="book icon"></i>
                         [[${source.title}]]
-                    </h2>
-                    <button class="ui red button right-absolute" id="collectBtn"><i class="heart icon"></i>收藏</button>
+                    </h3>
                 </div>
 
                 <div class="hidden" id="articleImage" th:data-value="${source.image}"></div>
 
                 <div class="hidden" id="articleUrl" th:data-value="${source.value}"></div>
 
-                <div class="ui container small-container" id="content">
+                <div class="ui container margin-top" id="content">
 
                 </div>
 
             </div>
 
             <div class="four wide column">
-                <h2 class="ui dividing header Grey">
+
+                <h3 class="ui dividing header red">
+                    <i class="heart icon"></i>
+                    相关操作
+                </h3>
+
+                <div class="container ui center aligned">
+                    <button th:class="${#httpServletRequest.remoteUser} ? 'negative fluid ui button' : 'negative fluid ui disabled button'"
+                            id="collectBtn">收藏本文
+                    </button>
+                </div>
+
+                <h3 class="ui dividing header red">
                     <i class="spy icon"></i>
                     相关信息
-                </h2>
+                </h3>
 
                 <table class="ui definition table">
                     <tbody>
@@ -82,13 +93,13 @@
                     </tbody>
                 </table>
 
-                <h2 class="ui dividing header Grey">
+                <h3 class="ui dividing header red">
                     <i class="bookmark icon"></i>
                     相关推荐
-                </h2>
+                </h3>
 
                 <div class="ui segment">
-                    <a class="ui blue right ribbon label">敬请期待</a>
+                    <a class="ui red right ribbon label">敬请期待</a>
                     <p>待数据有一定规模的情况下，将尝试引入推荐算法，提供大家喜爱的优质文章。</p>
                 </div>
 

@@ -166,3 +166,7 @@ body {
     box-shadow: 0 0 0 1px rgba(34,36,38,.15) inset;
     padding: 10px;
 }
+
+.margin-top{
+    margin-top: 10px;
+}

@@ -50,11 +50,11 @@
     <div class="ui container">
 
         <div class="row relative">
-            <h2 class="ui dividing header green">
-                <i class="green yelp icon item"></i>
+            <h2 class="ui dividing header red">
+                <i class="red yelp icon item"></i>
                 综艺节目
             </h2>
-            <button class="ui green button right-absolute refresh" value="5"><i class="refresh icon"></i>换一批</button>
+            <button class="ui red button right-absolute refresh" value="5"><i class="refresh icon"></i>换一批</button>
         </div>
 
         <div class="ui five column doubling grid">
@@ -86,11 +86,11 @@
     <div class="ui container">
 
         <div class="row relative">
-            <h2 class="ui dividing header green">
+            <h2 class="ui dividing header red">
                 <i class="reddit yelp icon item"></i>
                 最新电影
             </h2>
-            <button class="ui green button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批</button>
+            <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批</button>
         </div>
 
         <div class="ui five column doubling grid">
@@ -124,11 +124,11 @@
             <div class="twelve wide column">
 
                 <div class="row relative">
-                    <h2 class="ui dividing header green">
+                    <h2 class="ui dividing header red">
                         <i class="yelp icon"></i>
                         电视剧
                     </h2>
-                    <button class="ui green button right-absolute refresh" value="8"><i class="refresh icon"></i>换一批
+                    <button class="ui red button right-absolute refresh" value="8"><i class="refresh icon"></i>换一批
                     </button>
                 </div>
 
@@ -157,7 +157,7 @@
 
             <div class="four wide computer only column">
 
-                <h2 class="ui dividing header olive">
+                <h2 class="ui dividing header red">
                     <i class="modx icon"></i>
                     排行榜
                 </h2>
@@ -177,11 +177,11 @@
         <div class="ui container">
 
             <div class="row relative">
-                <h2 class="ui dividing header green">
+                <h2 class="ui dividing header red">
                     <i class="reddit yelp icon item"></i>
                     熊猫TV
                 </h2>
-                <button class="ui green button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
+                <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
                 </button>
             </div>
 
@@ -213,11 +213,11 @@
         <div class="ui container">
 
             <div class="row relative">
-                <h2 class="ui dividing header green">
+                <h2 class="ui dividing header red">
                     <i class="reddit yelp icon item"></i>
                     热血动漫
                 </h2>
-                <button class="ui green button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
+                <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
                 </button>
             </div>
 
@@ -250,11 +250,11 @@
 
         <div class="ui container" id="friendLinks">
             <div class="row relative">
-                <h2 class="ui dividing header teal">
-                    <i class="plus icon"></i>
+                <h2 class="ui dividing header red">
+                    <i class="theme icon"></i>
                     友情链接
                 </h2>
-                <button class="ui teal button right-absolute" id="applyJoin"><i class="plus icon"></i>申请加入</button>
+                <button class="ui red button right-absolute" id="applyJoin"><i class="add user icon"></i>申请加入</button>
             </div>
 
         </div>
@@ -269,6 +269,9 @@
                     <div class="ui inverted link list">
                         <a href="https://github.com/ChinaSilence/any-video" class="item" target="_blank">Github</a>
                         <a href="http://git.oschina.net/yyd-code/any-video" class="item" target="_blank">码云</a>
+                        <a href="https://github.com/ChinaSilence/any-chat" class="item" target="_blank">Any Security</a>
+                        <a href="https://github.com/ChinaSilence/any-spring-security" class="item" target="_blank">Any
+                            Chat</a>
                     </div>
                 </div>
                 <div class="three wide column">
@@ -284,11 +287,9 @@
                     </div>
                 </div>
                 <div class="three wide column">
-                    <h4 class="ui inverted header">其他项目</h4>
+                    <h4 class="ui inverted header">其他</h4>
                     <div class="ui inverted link list">
-                        <a href="https://github.com/ChinaSilence/any-chat" class="item" target="_blank">Any Security</a>
-                        <a href="https://github.com/ChinaSilence/any-spring-security" class="item" target="_blank">Any
-                            Chat</a>
+                        <a href="/author" class="item" target="_blank">作者信息</a>
                     </div>
                 </div>
                 <div class="seven wide column">
@@ -358,7 +359,7 @@
     var friendLinkAPI = "/link/list";
     $.get(friendLinkAPI, function (data) {
         for (var i = 0; i < data.length; i++) {
-            var link = $("<a class='ui red tag label' target='_blank'></a>");
+            var link = $("<a class='ui blue basic button' target='_blank'></a>");
             link.attr("href", data[i].domain);
             link.text(data[i].name);
             $("#friendLinks").append(link);
