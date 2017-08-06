@@ -112,19 +112,19 @@ public class Youku implements Parser<Video> {
 
 
     /**
-     * 构建视频播放信息的 API
+     * 构建视频集数信息的 API
      */
     private String createEpisodeRequestApi(String vid, String showId, String cateId) {
         return "http://api.m.youku.com/api/showlist/getshowlist?vid=" + vid + "&showid=" + showId + "&cateid=" + cateId + "&pagesize=98&page=0";
     }
 
     /**
-     * 构建视频集数信息的 API
+     * 构建视频播放信息的 API
      */
     private String createPlayRequestApi(String vid) {
         Date now = new Date();
-        String client_ts = String.valueOf(now.getTime() / 100);
-        return "http://ups.youku.com/ups/get.json?vid=" + vid + "&ccode=0405&client_ip=0.0.0.0&client_ts=" + client_ts + "&utid=KXWiEVieAS8CAWUtEplT9%2FtJ";
+        String client_ts = String.valueOf(now.getTime() / 1000);
+        return "http://ups.youku.com/ups/get.json?vid=" + vid + "&ccode=0405&client_ip=192.168.1.1&utid=KXWiEVieAS8CAWUtEplT9%252FtJ&client_ts=" + client_ts;
     }
 
     /**
