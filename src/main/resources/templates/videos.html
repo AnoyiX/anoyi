@@ -35,7 +35,7 @@
             <a class="item source-type" data-value="10">爱奇艺 </a>
         </div>
 
-        <div class="ui pointing menu blue">
+        <div class="ui pointing menu blue" id="videoType">
             <a class="item active video-type" data-value="1">电视剧</a>
             <a class="item video-type" data-value="2">电影</a>
             <a class="item video-type" data-value="3">综艺</a>
@@ -112,6 +112,11 @@
             $(this).parent().find('a').eq(i).attr('class', 'item source-type');
         }
         $(this).attr('class', 'item active source-type');
+        var videoTypeList = $("#videoType");
+        for (var j=0; j<4; j++){
+            videoTypeList.find('a').eq(j).attr('class', 'item video-type');
+        }
+        videoTypeList.find('a').eq(0).attr('class', 'item active item-type');
         var api = baseApi + type;
         itemLoder.attr('class', 'ui active centered inline loader margin-top');
         $.get(api, function (data) {

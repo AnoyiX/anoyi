@@ -6,8 +6,10 @@ import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,16 +33,29 @@ public class Iqiyi implements Parser<Video> {
         video.setValue(url);
         String tvId = null, vId = null;
         Document mainDoc = JsoupUtils.getDocWithPad(url);
-        String title = mainDoc.select("a#widget-videotitle").text();
-        video.setTitle(title);
-        Matcher matcher = Pattern.compile("tvId:(.*?),").matcher(mainDoc.html());
+        Matcher matcher = Pattern.compile("vid:\"(.*?)\"").matcher(mainDoc.html());
+        if (matcher.find()) {
+            vId = matcher.group(1);
+        }else{
+            Elements elements = mainDoc.select("div.coverContainer a");
+            String firstEpisode;
+            if (elements == null || elements.size() == 0){
+                firstEpisode = mainDoc.select("a.site-piclist_pic_link").get(0).attr("href");
+            }else {
+                firstEpisode = mainDoc.select("div.coverContainer a").get(0).attr("href");
+            }
+            mainDoc = JsoupUtils.getDocWithPad(firstEpisode);
+            matcher = Pattern.compile("vid:\"(.*?)\"").matcher(mainDoc.html());
+            if (matcher.find()){
+                vId = matcher.group(1);
+            }
+        }
+        matcher = Pattern.compile("tvId:(.*?),").matcher(mainDoc.html());
         if (matcher.find()) {
             tvId = matcher.group(1);
         }
-        matcher = Pattern.compile("vid:\"(.*?)\"").matcher(mainDoc.html());
-        if (matcher.find()) {
-            vId = matcher.group(1);
-        }
+        String title = mainDoc.select("a#widget-videotitle").text();
+        video.setTitle(title);
         Date now = new Date();
         String param = String.format(PARAM, tvId, vId, tvId + "_21", now.getTime());
         String vf;
@@ -63,6 +78,12 @@ public class Iqiyi implements Parser<Video> {
         List<Episode> episodes = new ArrayList<>();
         Document mainDoc = JsoupUtils.getDocWithPad(url);
         String albumId = mainDoc.select("a#widget-favourite").attr("data-subscribe-subkey");
+        if (StringUtils.isEmpty(albumId)){
+            Matcher matcher = Pattern.compile("albumid=\"(.*?)\"").matcher(mainDoc.html());
+            if (matcher.find()){
+                albumId = matcher.group(1);
+            }
+        }
         String listApi = String.format(LIST_API, albumId);
         String listJson = JsoupUtils.getDocWithPad(listApi).text();
         listJson = listJson.replace("var tvInfoJs=", "");
