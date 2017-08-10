@@ -64,14 +64,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getFans(Long userId, int page) {
         int begin = (page - 1) * USER_SIZE;
-        int end = begin + USER_SIZE;
-        return userMapper.selectFans(userId, begin, end);
+        return userMapper.selectFans(userId, begin, USER_SIZE);
     }
 
     @Override
     public List<User> getIdols(Long userId, int page) {
         int begin = (page - 1) * USER_SIZE;
-        int end = begin + USER_SIZE;
-        return userMapper.selectIdols(userId, begin, end);
+        return userMapper.selectIdols(userId, begin, USER_SIZE);
     }
 }

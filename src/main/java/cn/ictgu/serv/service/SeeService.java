@@ -33,4 +33,9 @@ public interface SeeService {
      */
     List<User> getActiveUsers();
 
+    /**
+     * 获取新用户
+     */
+    List<User> getNewUsers();
+
 }

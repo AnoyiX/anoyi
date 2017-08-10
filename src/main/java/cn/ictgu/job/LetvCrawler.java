@@ -79,7 +79,7 @@ public class LetvCrawler {
                         url = String.format("http://www.le.com/ptv/vplay/%s.html", matcher.group(1));
                 }
                 videoDTO.setValue(url);
-                log.info("title:" + title + ",image:" + image + ",url:" + url);
+                log.info("Letv:" + title);
                 carouselVideos.add(videoDTO);
             }
         }
@@ -142,7 +142,7 @@ public class LetvCrawler {
             videoDTO.setTitle(title);
             videoDTO.setImage(image);
             videoDTO.setValue(url);
-            log.info("title:" + title + ",image:" + image + ",url:" + url);
+            log.info("Letv:" + title);
             videos.add(videoDTO);
         }
         return videos;
@@ -157,11 +157,11 @@ public class LetvCrawler {
             String title = element.select("i.i1").text();
             String image = element.select("span.a_img i").attr("data-src");
             image = image.replace("http:","");
-            String url = String.format("http://www.le.com/ptv/vplay/%s.html", element.attr("href").replace("/vplay_", ""));
+            String url = String.format("http://www.le.com/ptv/vplay/%s", element.attr("href").replace("/vplay_", ""));
             videoDTO.setTitle(title);
             videoDTO.setImage(image);
             videoDTO.setValue(url);
-            log.info("title:" + title + ",image:" + image + ",url:" + url);
+            log.info("Letv:"+title);
             videos.add(videoDTO);
         }
         return videos;

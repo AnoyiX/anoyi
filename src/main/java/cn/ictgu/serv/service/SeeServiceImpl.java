@@ -20,7 +20,7 @@ import java.util.List;
 public class SeeServiceImpl implements SeeService {
     private final static int DEFAULT_ITEM_SIZE = 15;
     private final static int DEFAULT_USER_SIZE = 20;
-    private final static int DEFAULT_HUB_SIZE = 10;
+    private final static int DEFAULT_HUB_SIZE = 4;
 
     private final static String DESC_FORMAT = "来源于 <a href='/info/%s'>%s</a> 的收藏";
 
@@ -34,9 +34,8 @@ public class SeeServiceImpl implements SeeService {
     @Override
     public List<SimpleSource> getNewItems(int page) {
         int begin = (page - 1) * DEFAULT_ITEM_SIZE;
-        int end = begin + DEFAULT_ITEM_SIZE;
-        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectNewItems(begin, end);
-        if (hubItemHubUsers == null){
+        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectNewItems(begin, DEFAULT_ITEM_SIZE);
+        if (hubItemHubUsers == null) {
             return null;
         }
         return itemsToSources(hubItemHubUsers);
@@ -45,9 +44,8 @@ public class SeeServiceImpl implements SeeService {
     @Override
     public List<SimpleSource> getHotItems(int page) {
         int begin = (page - 1) * DEFAULT_ITEM_SIZE;
-        int end = begin + DEFAULT_ITEM_SIZE;
-        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectHotItems(begin, end);
-        if (hubItemHubUsers == null){
+        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectHotItems(begin, DEFAULT_ITEM_SIZE);
+        if (hubItemHubUsers == null) {
             return null;
         }
         return itemsToSources(hubItemHubUsers);
@@ -56,9 +54,8 @@ public class SeeServiceImpl implements SeeService {
     @Override
     public List<SimpleSource> getRecommendItems(int page) {
         int begin = (page - 1) * DEFAULT_ITEM_SIZE;
-        int end = begin + DEFAULT_ITEM_SIZE;
-        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectRecommendItems(begin, end);
-        if (hubItemHubUsers == null){
+        List<HubItemHubUser> hubItemHubUsers = hubItemMapper.selectRecommendItems(begin, DEFAULT_ITEM_SIZE);
+        if (hubItemHubUsers == null) {
             return null;
         }
         return itemsToSources(hubItemHubUsers);
@@ -74,10 +71,15 @@ public class SeeServiceImpl implements SeeService {
         return userMapper.selectActive(DEFAULT_USER_SIZE);
     }
 
-    private List<SimpleSource> itemsToSources(List<HubItemHubUser> items){
+    @Override
+    public List<User> getNewUsers() {
+        return userMapper.selectNew(DEFAULT_USER_SIZE);
+    }
+
+    private List<SimpleSource> itemsToSources(List<HubItemHubUser> items) {
         List<SimpleSource> simpleSources = new ArrayList<>();
 
-        for (HubItemHubUser item : items){
+        for (HubItemHubUser item : items) {
             SimpleSource simpleSource = itemToSource(item);
             simpleSources.add(simpleSource);
         }
@@ -85,7 +87,7 @@ public class SeeServiceImpl implements SeeService {
         return simpleSources;
     }
 
-    private SimpleSource itemToSource(HubItemHubUser item){
+    private SimpleSource itemToSource(HubItemHubUser item) {
         SimpleSource simpleSource = new SimpleSource();
         simpleSource.setName(item.getName());
         simpleSource.setImage(item.getImage());
@@ -102,7 +104,7 @@ public class SeeServiceImpl implements SeeService {
         return simpleSource;
     }
 
-    private String createDescription(HubItemHubUser item){
+    private String createDescription(HubItemHubUser item) {
         // 例如：1小时前，来源于 <a href='/info/1'>Anoy</a> 的收藏
         String time = TimeUtils.natureTime(item.getCreateTime());
         return time + String.format(DESC_FORMAT, item.getUserId(), item.getNickname());

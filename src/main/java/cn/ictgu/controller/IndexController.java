@@ -47,10 +47,15 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/videos")
+    public String videos(){
+        return "videos";
+    }
+
     /**
      * 搜索
      */
-    @GetMapping(value = "/search")
+    @GetMapping("/search")
     public String search(HttpServletRequest request, Model model) {
         String keyword = request.getParameter("wd");
         if (StringUtils.isNotEmpty(keyword)) {

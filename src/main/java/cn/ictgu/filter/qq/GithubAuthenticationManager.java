@@ -24,7 +24,7 @@ public class GithubAuthenticationManager implements AuthenticationManager {
 
     private final UserService userService;
 
-    public GithubAuthenticationManager(UserService userService){
+    public GithubAuthenticationManager(UserService userService) {
         this.userService = userService;
     }
 
@@ -59,7 +59,11 @@ public class GithubAuthenticationManager implements AuthenticationManager {
         user.setGender("男");
         user.setAvatar(json.getString("avatar_url"));
 
-        String meta = json.getString("location") + " " + json.getString("name") + " " + json.getString("company");
+        String location = json.getString("location");
+        String name = json.getString("name");
+        String company = json.getString("company");
+
+        String meta = (location == null ? "" : location) + " " + (name == null ? "" : name) + " " + (company == null ? "" : company);
         user.setMeta(meta);
         user.setLoginType(LoginType.GIT.name());
 

@@ -38,10 +38,10 @@ public interface UserMapper {
     @Select("select * from any_user u left join any_attention a on u.id = a.other_id group by u.id order by count(u.id) desc limit #{size}")
     List<User> selectPopular(@Param("size") int size);
 
-    @Select("select * from any_user where id in(select other_id from any_attention where user_id = #{userId}) order by id desc limit #{begin}, #{end}")
-    List<User> selectIdols(@Param("userId") Long userId, @Param("begin") int begin, @Param("end") int end);
+    @Select("select * from any_user where id in(select other_id from any_attention where user_id = #{userId}) order by id desc limit #{begin}, #{size}")
+    List<User> selectIdols(@Param("userId") Long userId, @Param("begin") int begin, @Param("size") int size);
 
-    @Select("select * from any_user where id in(select user_id from any_attention where other_id = #{userId}) order by id desc limit #{begin}, #{end}")
-    List<User> selectFans(@Param("userId") Long userId, @Param("begin") int begin, @Param("end") int end);
+    @Select("select * from any_user where id in(select user_id from any_attention where other_id = #{userId}) order by id desc limit #{begin}, #{size}")
+    List<User> selectFans(@Param("userId") Long userId, @Param("begin") int begin, @Param("size") int size);
 
 }

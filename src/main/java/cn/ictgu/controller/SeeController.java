@@ -14,8 +14,9 @@ public class SeeController {
 
     @GetMapping("/see")
     public String news(Model model){
-        model.addAttribute("users", seeService.getActiveUsers());
+        model.addAttribute("activeUsers", seeService.getActiveUsers());
         model.addAttribute("hubs", seeService.getRecommendHubs());
+        model.addAttribute("newUsers", seeService.getNewUsers());
         return "see";
     }
 
