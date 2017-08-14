@@ -62,11 +62,7 @@ public class VideoSearch {
         String title = element.select("a.item_r_title").text();
         String provider = element.select("a.a_cnt_icon").text();
         video.setTitle(title);
-        video.setProvider(provider);
         video.setImage(image);
-        if (StringUtils.isEmpty(provider)){
-            video.setParser("乐视");
-        }
         return video;
     }
 

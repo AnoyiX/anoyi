@@ -2,8 +2,6 @@ package cn.ictgu.bean.response;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * 文章
  */
@@ -28,16 +26,13 @@ public class Article {
     // 发布时间
     private String time;
 
-    // [版权] 视频源地址
+    // [版权] 文章源地址
     private String value;
 
-    // [版权] 视频提供方
+    // 其他信息
+    private String other;
+
+    // 提供方
     private String provider;
-
-    // [版权] 视频解析方名称
-    private String parserName;
-
-    // [版权] 视频解析方官网
-    private String parser;
 
 }

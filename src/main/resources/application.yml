@@ -13,12 +13,13 @@ server:
 spring:
   redis:
     host: localhost
+    password: cloudadmin
 #  使用 MySQL 不用做任何修改
   datasource:
     url: jdbc:mysql://localhost:3306/any_db?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: org.mariadb.jdbc.Driver
-    username:
-    password:
+    username: root
+    password: 54shaohan.
     sql-script-encoding: utf-8
     hikari:
       max-lifetime: 1765000

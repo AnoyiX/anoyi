@@ -47,11 +47,21 @@
 
                 <div class="hidden" id="videoUrl" th:data-value="${source.value}"></div>
 
+                <div class="hidden" id="videoType" th:data-value="${source.type}"></div>
+
+                <div class="hidden" id="videoOther" th:data-value="${source.other}"></div>
+
                 <div class="player margin-top">
                     <video id="mediaplayer" width="100%" height="100%" preload="none" style="max-width: 100%" controls
                            autoplay>
                         <source th:src="${source.playUrl}"/>
                     </video>
+                </div>
+
+                <div class="ui teal progress" id="vProgress" th:if="${source.type} == 'qq'">
+                    <div class="bar">
+                        <div class="progress"></div>
+                    </div>
                 </div>
 
                 <div class="container ui center aligned">
@@ -171,6 +181,9 @@
                         $("#videoUrl").attr("data-value", data.value);
                         $("#videoImage").attr("src", data.image);
                         self.attr("class", "bottom-space ui basic red button");
+                        if (videoType === 'qq') {
+                            init(data.playUrl);
+                        }
                     })
                 });
             }
@@ -225,6 +238,69 @@
                 }
             }
         );
+    });
+
+</script>
+
+<!-- 处理腾讯视频  -->
+<script>
+    var partSize = $('#videoOther').attr('data-value');
+    var videoType = $('#videoType').attr('data-value');
+    var video = document.getElementById('mediaplayer');
+    var baseUrl, baseFile, partList, currentPart;
+
+    function init(url) {
+        partList = new Array();
+        partList[0] = url;
+        currentPart = 0;
+        url = url.replace(/\?.*/, '');
+        var index = url.lastIndexOf('/');
+        baseUrl = url.substring(0, index);
+        baseFile = url.substring(index + 1, url.length);
+        var percent = 1 / parseInt(partSize) * 100;
+
+        progress(percent);
+
+        for (var i = 0; i < parseInt(partSize - 1); i++) {
+            var fileIndex = i + 2;
+            var api = '/api/qq/' + baseFile + '/' + fileIndex;
+            console.log("request:" + api);
+            $.get(api, function (data) {
+                var result = baseUrl + data.value;
+                var partIndex = parseInt(data.index);
+                console.log("data.index:", data.index);
+                console.log('response: ' + result);
+                partList[partIndex - 1] = result;
+                console.log("size:" + partList.length);
+            });
+        }
+    }
+
+    function progress(percent) {
+        $('#vProgress').progress({
+            percent: percent
+        });
+    }
+
+    $(document).ready(function () {
+        if (videoType === 'qq') {
+            init(video.currentSrc);
+        }
+
+        /**
+         * 自动播放下一个片段
+         */
+        video.addEventListener('ended', function () {
+            currentPart++;
+            if (currentPart < partList.length) {
+                console.log("currentPart: " + currentPart);
+                video.src = partList[currentPart];
+                video.load();
+                video.play();
+                var percent = (currentPart + 1) / parseInt(partSize) * 100;
+                progress(percent);
+            }
+        });
     });
 
 </script>

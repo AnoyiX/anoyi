@@ -5,10 +5,7 @@ import cn.ictgu.bean.response.Episode;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +23,7 @@ public class Jianshu implements Parser<Article> {
     @Override
     public Article parse(String url) {
         final Article article = new Article();
-        this.initArticle(article);
+        article.setProvider(PROVIDER);
         article.setValue(url);
         Document document = JsoupUtils.getDocWithPC(url);
         String title = document.select("meta[property=og:title]").attr("content");
@@ -52,9 +49,4 @@ public class Jianshu implements Parser<Article> {
         return null;
     }
 
-    private void initArticle(Article article) {
-        article.setProvider(PROVIDER);
-        article.setParserName("Github");
-        article.setParser("http://github.com");
-    }
 }
