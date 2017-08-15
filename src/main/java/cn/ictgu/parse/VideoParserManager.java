@@ -29,6 +29,7 @@ public class VideoParserManager implements ParserManager {
         parserMap.put("youku.com", new Youku());
         parserMap.put("iqiyi.com", new Iqiyi());
         parserMap.put("v.qq.com", new Tencent());
+        parserMap.put("v.youku.com", new Youku());
     }
 
     /**
