@@ -9,7 +9,6 @@ import cn.ictgu.tools.UrlUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +46,8 @@ public class VideoAPI {
      * 解析腾讯视频片段
      */
     @GetMapping("/api/qq/{file}/{index}")
-    public Episode qqVideo(@PathVariable("file") String fileName, @PathVariable("index") Integer index){
-        return ((Tencent)parseManager.getParser("qq.com")).parsePart(fileName, index);
+    public Episode qqVideo(@PathVariable("file") String fileName, @PathVariable("index") Integer index) {
+        return ((Tencent) parseManager.getParser("v.qq.com")).parsePart(fileName, index);
     }
 
 }
