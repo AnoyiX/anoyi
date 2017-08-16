@@ -124,7 +124,7 @@ public class Youku implements Parser<Video> {
     private String createPlayRequestApi(String vid) {
         Date now = new Date();
         String client_ts = String.valueOf(now.getTime() / 1000);
-        return "http://ups.youku.com/ups/get.json?vid=" + vid + "&ccode=0405&client_ip=192.168.1.1&utid=KXWiEVieAS8CAWUtEplT9%252FtJ&client_ts=" + client_ts;
+        return "http://ups.youku.com/ups/get.json?vid=" + vid + "&ccode=0590&client_ip=192.168.1.1&utid=KXWiEVieAS8CAWUtEplT9%252FtJ&client_ts=" + client_ts;
     }
 
     /**
@@ -134,7 +134,7 @@ public class Youku implements Parser<Video> {
         URL url = new URL(api);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        connection.addRequestProperty("user-agent", JsoupUtils.getUaPhone());
+        connection.addRequestProperty("user-agent", JsoupUtils.getUaPad());
         connection.connect();
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
             // 得到响应信息
