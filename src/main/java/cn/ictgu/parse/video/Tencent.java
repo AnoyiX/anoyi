@@ -6,6 +6,7 @@ import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang.math.RandomUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -112,7 +113,8 @@ public class Tencent implements Parser<Video> {
      */
     private void initVideo(Video video, JSONObject json){
         JSONObject videoJson = json.getJSONObject("vl").getJSONArray("vi").getJSONObject(0);
-        String url = videoJson.getJSONObject("ul").getJSONArray("ui").getJSONObject(0).getString("url");
+        int random = RandomUtils.nextInt(3);
+        String url = videoJson.getJSONObject("ul").getJSONArray("ui").getJSONObject(random).getString("url");
         String vkey = videoJson.getString("fvkey");
         String fn = videoJson.getString("fn");
         String file = fn.replace("mp4", "1.mp4");
