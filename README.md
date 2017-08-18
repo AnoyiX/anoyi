@@ -5,7 +5,9 @@ Any Video 是基于 Spring Boot 开发的应用，利用网络爬虫技术，实
 
 演示地址： https://www.ictgu.cn
 
-![首页](http://upload-images.jianshu.io/upload_images/3424642-1fd0a2f4e0d4645c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![首页](http://upload-images.jianshu.io/upload_images/3424642-c2983ce316b60629.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![动态](http://upload-images.jianshu.io/upload_images/3424642-5179e72a5ca0bc35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![视频解析](http://upload-images.jianshu.io/upload_images/3424642-194f3d331bc1d7d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
