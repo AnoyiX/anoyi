@@ -76,4 +76,8 @@ public class JsoupUtils {
     public static String getUaPad(){
         return UA_PAD;
     }
+
+    public static String getUaPc(){
+        return UA_PC;
+    }
 }
