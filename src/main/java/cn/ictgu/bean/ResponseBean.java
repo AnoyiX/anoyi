@@ -40,7 +40,7 @@ public class ResponseBean {
      * 成功
      */
     public static ResponseBean ok(Object object){
-        return new ResponseBean(0, "success", object);
+        return new ResponseBean(200, "success", object);
     }
 
 }
