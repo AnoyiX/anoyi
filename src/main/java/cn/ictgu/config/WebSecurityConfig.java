@@ -6,6 +6,7 @@ import cn.ictgu.filter.qq.GithubAuthenticationManager;
 import cn.ictgu.filter.qq.QQAuthenticationManager;
 import cn.ictgu.serv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,6 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         UserService.class
 })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${server.port}")
+    private int port;
+
+    @Value("${server.sslPort}")
+    private int sslPort;
 
     private UserService userService;
 
@@ -43,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll()
-                .and().portMapper().http(80).mapsTo(443)
+                .and().portMapper().http(port).mapsTo(sslPort)
                 .and().csrf().disable();
 
         http.rememberMe().alwaysRemember(true);

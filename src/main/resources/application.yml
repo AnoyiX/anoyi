@@ -1,6 +1,7 @@
 # 容器 配置
 server:
-  port: 443
+  port: 8443        # https 端口号，正式 443；测试 8443
+  sslPort: 8080     # http 端口号，正式 80；测试 8080
   ssl:
     key-store: classpath:any.jks
     key-password: 214174460510953
