@@ -33,31 +33,32 @@ public interface HubItemMapper {
     List<HubItem> selectByHubIdAndUserId(@Param("hubId") Long hubId, @Param("userId") Long userId);
 
     @Select("select hi.id, hi.user_id, hi.hub_id, hi.type, hi.name, hi.image, hi.url, hi.recommend, hi.create_time, h.name as hubName, h.md5 as hubMd5, u.nickname" +
-            " from any_hub_item hi"+
-            " left join any_hub h on hi.hub_id = h.id"+
-            " left join any_user u on hi.user_id = u.id"+
-            " group by hi.url"+
-            " order by hi.id desc"+
+            " from any_hub_item hi" +
+            " left join any_hub h on hi.hub_id = h.id" +
+            " left join any_user u on hi.user_id = u.id" +
+            " group by hi.url" +
+            " order by hi.id desc" +
             " limit #{page}, ${size}")
     List<HubItemHubUser> selectNewItems(@Param("page") int page, @Param("size") int size);
 
 
     @Select("select hi.id, hi.user_id, hi.hub_id, hi.type, hi.name, hi.image, hi.url, hi.recommend, hi.create_time, h.name as hubName, h.md5 as hubMd5, u.nickname" +
-            " from any_hub_item hi"+
-            " left join any_hub h on hi.hub_id = h.id"+
-            " left join any_user u on hi.user_id = u.id"+
-            " group by hi.url"+
-            " order by count(url) desc"+
+            " from any_hub_item hi" +
+            " left join any_hub h on hi.hub_id = h.id" +
+            " left join any_user u on hi.user_id = u.id" +
+            " where hi.create_time > DATE_SUB(CURDATE(), INTERVAL 1 WEEK)" +
+            " group by hi.url" +
+            " order by count(url) desc" +
             " limit #{page}, ${size}")
     List<HubItemHubUser> selectHotItems(@Param("page") int page, @Param("size") int size);
 
     @Select("select hi.id, hi.user_id, hi.hub_id, hi.type, hi.name, hi.image, hi.url, hi.recommend, hi.create_time, h.name as hubName, h.md5 as hubMd5, u.nickname" +
-            " from any_hub_item hi"+
-            " left join any_hub h on hi.hub_id = h.id"+
-            " left join any_user u on hi.user_id = u.id"+
-            " where hi.recommend = 1"+
-            " group by hi.url"+
-            " order by hi.id desc"+
+            " from any_hub_item hi" +
+            " left join any_hub h on hi.hub_id = h.id" +
+            " left join any_user u on hi.user_id = u.id" +
+            " where hi.recommend = 1" +
+            " group by hi.url" +
+            " order by hi.id desc" +
             " limit #{page}, ${size}")
     List<HubItemHubUser> selectRecommendItems(@Param("page") int page, @Param("size") int size);
 

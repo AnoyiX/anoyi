@@ -19,7 +19,7 @@ public class Tip {
     private String from;
 
     // 金额
-    private int money;
+    private Double money;
 
     // 时间
     private Date date;

@@ -50,6 +50,11 @@
                 <td>ok</td>
             </tr>
             <tr>
+                <td><i class="video play outline icon"></i>腾讯</td>
+                <td>https://v.qq.com/x/cover/47xswolfi4iamlx/m0024g5c5az.html</td>
+                <td>ok</td>
+            </tr>
+            <tr>
                 <td><i class="book icon"></i>微信</td>
                 <td>http://mp.weixin.qq.com/s/5za2p6PucOFEMo7zjzQM5A</td>
                 <td>ok</td>
@@ -102,7 +107,8 @@
     </div>
 </div>
 <script>
-    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/, /jianshu.com\/p\//, /youku.com/, /iqiyi.com/];
+    var regxList = [/www.le.com\/ptv\/vplay.*/, /mp.weixin.qq.com\/s.*/, /www.panda.tv/,
+        /jianshu.com\/p\//, /youku.com/, /iqiyi.com/, /v.qq.com/];
     $('#parseBtn').click(function () {
         var webUrl = $('#urlInput').val();
         for (var i = 0; i < regxList.length; i++) {

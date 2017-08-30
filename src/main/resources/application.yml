@@ -1,6 +1,7 @@
 # 容器 配置
 server:
-  port: 443
+  port: 8443        # https 端口号，正式 443；测试 8443
+  sslPort: 8080     # http 端口号，正式 80；测试 8080
   ssl:
     key-store: classpath:any.jks
     key-password: 214174460510953
@@ -13,6 +14,7 @@ server:
 spring:
   redis:
     host: localhost
+    password:
 #  使用 MySQL 不用做任何修改
   datasource:
     url: jdbc:mysql://localhost:3306/any_db?useUnicode=true&characterEncoding=UTF-8

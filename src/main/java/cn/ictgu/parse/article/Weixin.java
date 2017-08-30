@@ -1,8 +1,8 @@
 package cn.ictgu.parse.article;
 
 import cn.ictgu.bean.response.Article;
-import cn.ictgu.parse.Parser;
 import cn.ictgu.bean.response.Episode;
+import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import org.jsoup.nodes.Document;
 
@@ -26,7 +26,7 @@ public class Weixin implements Parser<Article> {
     @Override
     public Article parse(String url) {
         final Article article = new Article();
-        this.initArticle(article);
+        article.setProvider(PROVIDER);
         article.setValue(url);
         Document document = JsoupUtils.getDocWithPC(url);
         String title = document.select("title").text();
@@ -48,12 +48,6 @@ public class Weixin implements Parser<Article> {
     @Override
     public List<Episode> parseEpisodes(String url) {
         return null;
-    }
-
-    private void initArticle(Article article) {
-        article.setProvider(PROVIDER);
-        article.setParserName("Github");
-        article.setParser("http://github.com");
     }
 
 }
