@@ -17,11 +17,11 @@ public interface HubItemService {
     /**
      * 插入一条记录
      */
-    boolean insert(HubItem item);
+    void insert(HubItem item);
 
     /**
      * 删除一条记录
      */
-    boolean delete(Long id, Long userId);
+    void delete(Long id, Long userId);
 
 }

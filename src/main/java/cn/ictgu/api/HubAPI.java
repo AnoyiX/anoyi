@@ -1,6 +1,5 @@
 package cn.ictgu.api;
 
-import cn.ictgu.bean.Response;
 import cn.ictgu.bean.ResponseBean;
 import cn.ictgu.serv.model.Hub;
 import cn.ictgu.serv.model.User;
@@ -25,12 +24,9 @@ public class HubAPI {
     @GetMapping("/user/hub/delete/{hubId}")
     public ResponseBean deleteCategory(@AuthenticationPrincipal UsernamePasswordAuthenticationToken authenticationToken, @PathVariable("hubId") Long hubId) {
         User user = (User) authenticationToken.getPrincipal();
-        if (hubService.deleteByUserIdAndId(user.getId(), hubId)) {
-            return Response.success(null);
-        }
-        return Response.noAuthority();
+        hubService.deleteByUserIdAndId(user.getId(), hubId);
+        return ResponseBean.ok();
     }
-
 
     /**
      * 添加分类
@@ -41,10 +37,8 @@ public class HubAPI {
         User user = (User) authenticationToken.getPrincipal();
         hub.setUserId(user.getId());
         hub.setAvatar(user.getAvatar());
-        if (hubService.insert(hub)) {
-            return Response.success(null);
-        }
-        return Response.noAuthority();
+        hubService.insert(hub);
+        return ResponseBean.ok();
     }
 
     /**

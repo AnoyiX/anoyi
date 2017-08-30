@@ -28,11 +28,11 @@ public interface HubService {
   /**
    * 根据ID删除分类信息
    */
-  boolean deleteByUserIdAndId(Long userId, Long id);
+  void deleteByUserIdAndId(Long userId, Long id);
 
   /**
    * 插入一条记录
    */
-  boolean insert(Hub hub);
+  void insert(Hub hub);
 
 }

@@ -1,7 +1,6 @@
 package cn.ictgu.api;
 
 
-import cn.ictgu.bean.Response;
 import cn.ictgu.bean.ResponseBean;
 import cn.ictgu.serv.model.User;
 import cn.ictgu.serv.service.AttentionService;
@@ -26,7 +25,7 @@ public class AttentionAPI {
         User user = (User) principal.getPrincipal();
         Long userId = user.getId();
         Boolean flag = attentionService.attention(userId, otherId);
-        return Response.success(flag);
+        return ResponseBean.ok(flag);
     }
 
 }

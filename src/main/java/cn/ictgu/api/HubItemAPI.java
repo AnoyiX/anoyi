@@ -1,6 +1,5 @@
 package cn.ictgu.api;
 
-import cn.ictgu.bean.Response;
 import cn.ictgu.bean.ResponseBean;
 import cn.ictgu.serv.model.HubItem;
 import cn.ictgu.serv.model.User;
@@ -24,9 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 @AllArgsConstructor
 public class HubItemAPI {
 
-    private final static int ERROR_SAVE = 4001;
-    private final static String ERROR_SAVE_MESSAGE = "收藏失败";
-
     private final HubItemService itemService;
 
     /**
@@ -36,10 +32,8 @@ public class HubItemAPI {
     public ResponseBean add(@AuthenticationPrincipal UsernamePasswordAuthenticationToken authenticationToken, HttpServletRequest request) {
         User user = (User) authenticationToken.getPrincipal();
         HubItem item = createItem(user.getId(), request);
-        if (itemService.insert(item)) {
-            return Response.success(null);
-        }
-        return Response.error(ERROR_SAVE, ERROR_SAVE_MESSAGE);
+        itemService.insert(item);
+        return ResponseBean.ok();
     }
 
     /**
@@ -48,11 +42,8 @@ public class HubItemAPI {
     @GetMapping("/user/hub/item/delete/{id}")
     public ResponseBean delete(@AuthenticationPrincipal UsernamePasswordAuthenticationToken authenticationToken, @PathVariable("id") Long id) {
         User user = (User) authenticationToken.getPrincipal();
-        if (itemService.delete(id, user.getId())) {
-            return Response.success(null);
-        }
-        log.error("操作失败，userId:" + user.getOpenId() + ", hubItemId: " + id);
-        return Response.errorParams();
+        itemService.delete(id, user.getId());
+        return ResponseBean.ok();
     }
 
     private HubItem createItem(Long userId, HttpServletRequest request) {

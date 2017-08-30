@@ -2,6 +2,8 @@ package cn.ictgu.parse.video;
 
 import cn.ictgu.bean.response.Episode;
 import cn.ictgu.bean.response.Video;
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONArray;
@@ -31,24 +33,17 @@ public class Youku implements Parser<Video> {
         final Video video = new Video();
         video.setValue(url);
         String vid = matchVid(url);
-        if (StringUtils.isEmpty(vid)) {
-            return null;
-        }
         String api = createPlayRequestApi(vid);
-        try {
-            String result = getResponse(api);
-            JSONObject json = JSONObject.parseObject(result);
-            JSONObject videoInfo = json.getJSONObject("data").getJSONObject("video");
-            String title = videoInfo.getString("title");
-            video.setTitle(title);
-            String image = videoInfo.getString("logo");
-            video.setImage(image);
-            String playUrl = getPlayUrl(json);
-            video.setPlayUrl(playUrl);
-        } catch (IOException io) {
-            log.error("Youku request error:" + url);
-            return null;
-        }
+        String result = getResponse(api);
+        JSONObject json = JSONObject.parseObject(result);
+        JSONObject videoInfo = json.getJSONObject("data").getJSONObject("video");
+        String title = videoInfo.getString("title");
+        video.setTitle(title);
+        String image = videoInfo.getString("logo");
+        video.setImage(image);
+        String playUrl = getPlayUrl(json);
+        video.setPlayUrl(playUrl);
+
         return video;
     }
 
@@ -56,35 +51,27 @@ public class Youku implements Parser<Video> {
     public List<Episode> parseEpisodes(String url) {
         List<Episode> episodes = new ArrayList<>();
         String vid = matchVid(url);
-        if (StringUtils.isEmpty(vid)) {
-            return null;
-        }
         String api = createPlayRequestApi(vid);
-        try {
-            String result = getResponse(api);
-            JSONObject json = JSONObject.parseObject(result);
-            String id = json.getJSONObject("data").getJSONObject("video").getString("id");
-            String showId = json.getJSONObject("data").getJSONObject("show").getString("id");
-            String cateId = json.getJSONObject("data").getJSONObject("video").getString("category_id");
-            String episodeApi = createEpisodeRequestApi(id, showId, cateId);
-            String response = getResponse(episodeApi);
-            JSONObject jsonResult = JSONObject.parseObject(response);
-            JSONArray items = jsonResult.getJSONObject("data").getJSONArray("items");
-            for (int i = 0; i < items.size(); i++) {
-                Episode episode = new Episode();
-                JSONObject item = items.getJSONObject(i);
-                String index = item.getString("show_videostage");
-                String value = "http://v.youku.com/v_show/id_" + item.getString("videoid") + ".html";
-                if (Integer.valueOf(index) < 10) {
-                    index = "0" + index;
-                }
-                episode.setIndex(index);
-                episode.setValue(value);
-                episodes.add(episode);
+        String result = getResponse(api);
+        JSONObject json = JSONObject.parseObject(result);
+        String id = json.getJSONObject("data").getJSONObject("video").getString("id");
+        String showId = json.getJSONObject("data").getJSONObject("show").getString("id");
+        String cateId = json.getJSONObject("data").getJSONObject("video").getString("category_id");
+        String episodeApi = createEpisodeRequestApi(id, showId, cateId);
+        String response = getResponse(episodeApi);
+        JSONObject jsonResult = JSONObject.parseObject(response);
+        JSONArray items = jsonResult.getJSONObject("data").getJSONArray("items");
+        for (int i = 0; i < items.size(); i++) {
+            Episode episode = new Episode();
+            JSONObject item = items.getJSONObject(i);
+            String index = item.getString("show_videostage");
+            String value = "http://v.youku.com/v_show/id_" + item.getString("videoid") + ".html";
+            if (Integer.valueOf(index) < 10) {
+                index = "0" + index;
             }
-        } catch (IOException io) {
-            log.error("Youku request error:" + url);
-            return null;
+            episode.setIndex(index);
+            episode.setValue(value);
+            episodes.add(episode);
         }
         return episodes;
     }
@@ -97,7 +84,7 @@ public class Youku implements Parser<Video> {
         if (matcher.find()) {
             return matcher.group(1);
         }
-        return null;
+        throw new AnyException(ExceptionEnum.VID_CANNOT_MATCH);
     }
 
     /**
@@ -106,7 +93,6 @@ public class Youku implements Parser<Video> {
     private String getPlayUrl(JSONObject json) {
         JSONArray playList = json.getJSONObject("data").getJSONArray("stream");
         JSONObject bestStream = playList.getJSONObject(playList.size() - 1);
-        log.info("video level:" + bestStream.getString("stream_type"));
         return bestStream.getString("m3u8_url");
     }
 
@@ -130,25 +116,29 @@ public class Youku implements Parser<Video> {
     /**
      * 获取 HTTP 请求返回的结果
      */
-    private String getResponse(String api) throws IOException {
-        URL url = new URL(api);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        connection.addRequestProperty("user-agent", JsoupUtils.getUaPad());
-        connection.connect();
-        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-            // 得到响应信息
-            InputStream is = connection.getInputStream();
-            byte[] bs = new byte[1024];
-            int len;
-            StringBuilder sb = new StringBuilder();
-            while ((len = is.read(bs)) != -1) {
-                String str = new String(bs, 0, len);
-                sb.append(str);
+    private String getResponse(String api) {
+        try {
+            URL url = new URL(api);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.addRequestProperty("user-agent", JsoupUtils.getUaPad());
+            connection.connect();
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                // 得到响应信息
+                InputStream is = connection.getInputStream();
+                byte[] bs = new byte[1024];
+                int len;
+                StringBuilder sb = new StringBuilder();
+                while ((len = is.read(bs)) != -1) {
+                    String str = new String(bs, 0, len);
+                    sb.append(str);
+                }
+                return sb.toString();
             }
-            return sb.toString();
+            throw new AnyException(ExceptionEnum.HTTP_REQUEST_ERROR);
+        } catch (IOException exception) {
+            throw new AnyException("youku api request error: " + api);
         }
-        return null;
     }
 
 }

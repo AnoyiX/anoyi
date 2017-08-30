@@ -1,5 +1,7 @@
 package cn.ictgu.parse;
 
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
 import cn.ictgu.exception.ParserNotFoundException;
 import cn.ictgu.parse.article.Jianshu;
 import cn.ictgu.parse.article.Weixin;
@@ -40,7 +42,7 @@ public class VideoParserManager implements ParserManager {
         log.info("Parser key: " + key);
         Parser parser = this.getParser(key);
         if (parser == null) {
-            throw new ParserNotFoundException();
+            throw new AnyException(ExceptionEnum.NO_PARSER);
         }
         return parser.parse(url);
     }

@@ -153,15 +153,4 @@ public class LetvCrawler {
         return videos;
     }
 
-//    private Document getDocument(String ztid, String leafids) {
-//        try {
-//            return Jsoup.connect("http://mobile.video.qq.com/fcgi-bin/getjimudata").data("type", "1").data("otype", "json")
-//                    .data("platform", "103").data("version", "2")
-//                    .data("ztid", ztid).data("leafids", leafids).ignoreContentType(true).get();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
 }

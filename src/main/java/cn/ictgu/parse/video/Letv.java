@@ -1,6 +1,8 @@
 package cn.ictgu.parse.video;
 
 import cn.ictgu.bean.response.Video;
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.bean.response.Episode;
 import cn.ictgu.tools.JsoupUtils;
@@ -102,8 +104,8 @@ public class Letv implements Parser<Video> {
             matcher = Pattern.compile("vid:\"(.*?)\"").matcher(realDocument.html());
             if (matcher.find())
                 return matcher.group(1);
+            throw new AnyException(ExceptionEnum.VID_CANNOT_MATCH);
         }
-        return "";
     }
 
     /**
@@ -115,7 +117,7 @@ public class Letv implements Parser<Video> {
                 return dispatch.getJSONArray(dis).getString(0);
             }
         }
-        return null;
+        throw new AnyException(ExceptionEnum.NO_VIDEO);
     }
 
     /**
