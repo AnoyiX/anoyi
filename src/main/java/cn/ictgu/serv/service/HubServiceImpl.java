@@ -1,5 +1,7 @@
 package cn.ictgu.serv.service;
 
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
 import cn.ictgu.serv.mapper.HubItemMapper;
 import cn.ictgu.serv.mapper.HubMapper;
 import cn.ictgu.serv.model.Hub;
@@ -36,8 +38,8 @@ public class HubServiceImpl implements HubService {
             return category;
         } else {
             log.error("获取分享信息失败,MD5:" + md5);
+            throw new AnyException(ExceptionEnum.HUB_ERROR);
         }
-        return null;
     }
 
     public Hub getById(Long id, Long userId) {
@@ -45,20 +47,18 @@ public class HubServiceImpl implements HubService {
     }
 
     @Transactional
-    public boolean deleteByUserIdAndId(Long userId, Long id) {
+    public void deleteByUserIdAndId(Long userId, Long id) {
         if (mapper.delete(userId, id) > 0) {
             // 删除分类后，删除分类下所有的内容
             itemMapper.deleteHub(id, userId);
-            return true;
         }
-        return false;
     }
 
     @Override
-    public boolean insert(Hub hub) {
+    public void insert(Hub hub) {
         String md5 = generateMD5(hub.getUserId(), hub.getName());
         hub.setMd5(md5);
-        return mapper.insert(hub) > 0;
+        mapper.insert(hub);
     }
 
     private String generateMD5(Long userId, String name) {

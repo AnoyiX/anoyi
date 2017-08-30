@@ -1,13 +1,14 @@
 package cn.ictgu.parse.search;
 
 import cn.ictgu.bean.response.Video;
-import com.alibaba.fastjson.JSON;
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
  * 视频搜索
  */
 @Component
+@Log4j2
 public class VideoSearch {
 
     private static final String le = "http://m.le.com";
@@ -29,12 +31,9 @@ public class VideoSearch {
     public List<Video> searchVideos(String keyword) {
         List<Video> videos = new ArrayList<>();
         Document document = requestAPI(keyword);
-        if (document == null)
-            return videos;
         Elements elements = document.select("div.a_temp2.j-list");
         for (Element element : elements) {
             Video video = createVideo(element);
-            System.out.println(JSON.toJSONString(video));
             videos.add(video);
         }
         return videos;
@@ -44,9 +43,8 @@ public class VideoSearch {
         try {
             return Jsoup.connect(api).userAgent(ua).ignoreContentType(true).data("wd", keyword).get();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new AnyException(ExceptionEnum.VIDEO_SEARCH_ERROR);
         }
-        return null;
     }
 
     private Video createVideo(Element element) {
@@ -60,7 +58,6 @@ public class VideoSearch {
         String image = element.select("a.a_img img").attr("data-src");
         image = image.replace("http:", "");
         String title = element.select("a.item_r_title").text();
-        String provider = element.select("a.a_cnt_icon").text();
         video.setTitle(title);
         video.setImage(image);
         return video;

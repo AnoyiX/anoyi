@@ -1,6 +1,8 @@
 package cn.ictgu.parse.video;
 
 import cn.ictgu.bean.response.Video;
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.bean.response.Episode;
 import cn.ictgu.tools.JsoupUtils;
@@ -42,12 +44,11 @@ public class Panda implements Parser<Video>{
        * 从 URL 中获取房间号
        */
     private String getRoomId(String videoUrl){
-      String roomId = "";
       Matcher matcher = Pattern.compile("([0-9]{3,})").matcher(videoUrl);
       if (matcher.find()){
-        roomId = matcher.group(1);
+        return matcher.group(1);
       }
-      return roomId;
+      throw new AnyException(ExceptionEnum.VID_CANNOT_MATCH);
     }
 
 }

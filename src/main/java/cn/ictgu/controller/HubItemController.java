@@ -44,7 +44,7 @@ public class HubItemController {
     public String share(@PathVariable("md5") String md5, Model model) {
         Hub hub = hubService.getByMd5(md5);
         if (hub == null) {
-            return "error";
+            throw new RuntimeException("仓库不存在！");
         }
         List<HubItem> items = hubItemService.list(hub.getId(), hub.getUserId());
         model.addAttribute("hub", hub);

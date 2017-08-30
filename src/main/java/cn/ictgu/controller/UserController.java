@@ -33,9 +33,6 @@ public class UserController {
         User user = (User) authenticationToken.getPrincipal();
         model.addAttribute("user", user);
         List<Hub> hubs = hubService.getByUserId(user.getId());
-        if (hubs == null){
-            System.out.println( " hubs is nill ");
-        }
         model.addAttribute("hubs", hubs);
         List<User> idols = userService.getIdols(user.getId(), 1);
         model.addAttribute("idols", idols);

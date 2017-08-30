@@ -2,6 +2,8 @@ package cn.ictgu.parse.video;
 
 import cn.ictgu.bean.response.Episode;
 import cn.ictgu.bean.response.Video;
+import cn.ictgu.constant.ExceptionEnum;
+import cn.ictgu.exception.AnyException;
 import cn.ictgu.parse.Parser;
 import cn.ictgu.tools.JsoupUtils;
 import com.alibaba.fastjson.JSONObject;
@@ -40,7 +42,7 @@ public class Tencent implements Parser<Video> {
         List<Episode> episodes = new ArrayList<>();
         Document document = JsoupUtils.getDocWithPhone(url);
         Elements elements = document.select("div[data-tpl='episode'] span a");
-        for (Element element : elements){
+        for (Element element : elements) {
             Episode episode = new Episode();
             String value = "http://v.qq.com" + element.attr("href");
             String index = element.text();
@@ -48,15 +50,15 @@ public class Tencent implements Parser<Video> {
             episode.setIndex(index);
             episodes.add(episode);
         }
-        if(episodes.size() < 1){
+        if (episodes.size() < 1) {
             elements = document.select("a.U_color_b");
-            for (Element element : elements){
+            for (Element element : elements) {
                 Episode episode = new Episode();
                 String value = "http://m.v.qq.com" + element.attr("href");
                 String index = element.text().replace("会员", "-V");
                 episode.setValue(value);
                 episode.setIndex(index);
-                if (!index.equals("登录")){
+                if (!index.equals("登录")) {
                     episodes.add(episode);
                 }
             }
@@ -67,7 +69,7 @@ public class Tencent implements Parser<Video> {
     /**
      * 解析腾讯视频片段
      */
-    public Episode parsePart(String fileName, Integer index){
+    public Episode parsePart(String fileName, Integer index) {
         Episode episode = new Episode();
         String[] params = fileName.split("\\.");
         String file = fileName.replace("1.mp4", index + ".mp4");
@@ -82,13 +84,13 @@ public class Tencent implements Parser<Video> {
     /**
      * 获取 vid
      */
-    private String getVid(String url){
+    private String getVid(String url) {
         Document document = JsoupUtils.getDocWithPhone(url);
         Matcher matcher = Pattern.compile("\"vid\":\"(.*?)\"").matcher(document.html());
-        if (matcher.find()){
+        if (matcher.find()) {
             return matcher.group(1);
         }
-        return "";
+        throw new AnyException(ExceptionEnum.VID_CANNOT_MATCH);
     }
 
     /**
@@ -104,14 +106,14 @@ public class Tencent implements Parser<Video> {
             return result.substring(0, result.length() - 1);
         } catch (IOException e) {
             log.info("request tencent api error, vid : " + vid);
+            throw new AnyException("request tencent api error, vid : " + vid);
         }
-        return "";
     }
 
     /**
      * 初始化视频信息
      */
-    private void initVideo(Video video, JSONObject json){
+    private void initVideo(Video video, JSONObject json) {
         JSONObject videoJson = json.getJSONObject("vl").getJSONArray("vi").getJSONObject(0);
         int random = RandomUtils.nextInt(3);
         String url = videoJson.getJSONObject("ul").getJSONArray("ui").getJSONObject(random).getString("url");
@@ -146,11 +148,11 @@ public class Tencent implements Parser<Video> {
                     .data("filename", filename).data("sdtfrom", "v1010")
                     .data("format", format).data("guid", GUID).ignoreContentType(true).get();
             String result = document.text().replace("QZOutputJson=", "");
-            result =  result.substring(0, result.length() - 1);
-            return  JSONObject.parseObject(result).getString("key");
+            result = result.substring(0, result.length() - 1);
+            return JSONObject.parseObject(result).getString("key");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info("request tencent video part api error, vid : " + vid);
+            throw new AnyException("request tencent api error, vid : " + vid);
         }
-        return "";
     }
 }
