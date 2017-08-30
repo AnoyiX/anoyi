@@ -2,7 +2,6 @@ package cn.ictgu.parse;
 
 import cn.ictgu.constant.ExceptionEnum;
 import cn.ictgu.exception.AnyException;
-import cn.ictgu.exception.ParserNotFoundException;
 import cn.ictgu.parse.article.Jianshu;
 import cn.ictgu.parse.article.Weixin;
 import cn.ictgu.parse.video.*;
