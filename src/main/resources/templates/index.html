@@ -65,11 +65,11 @@
             <button class="ui red button right-absolute refresh" value="5"><i class="refresh icon"></i>换一批</button>
         </div>
 
-        <div class="ui five column doubling grid">
+        <div class="ui six column doubling grid">
 
-            <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+            <div th:class="${iterStat.index} < 12 ? 'column videoItem' : 'videoItem'"
                  th:each="recommend, iterStat:${recommends}">
-                <div class="ui fluid link card" th:if="${iterStat.index} < 5">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 6">
                     <a class="image videoUrl" th:href="@{/view(u=${recommend.value})}">
                         <img th:src="${recommend.image}" alt="" class="videoImage"/>
                     </a>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-                <div th:if="${iterStat.index} >= 5" hidden>
+                <div th:if="${iterStat.index} >= 6" hidden>
                     <ul class="videoImage">[[${recommend.image}]]</ul>
                     <ul class="videoTitle">[[${recommend.title}]]</ul>
                     <a class="videoUrl" th:href="@{/view(u=${recommend.value})}"></a>
@@ -87,11 +87,7 @@
 
         </div>
 
-    </div>
-
-    <div class="ui hidden divider"></div>
-
-    <div class="ui container">
+        <div class="ui hidden divider"></div>
 
         <div class="row relative">
             <h2 class="ui dividing header red">
@@ -101,11 +97,11 @@
             <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批</button>
         </div>
 
-        <div class="ui five column doubling grid">
+        <div class="ui six column doubling grid">
 
-            <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
+            <div th:class="${iterStat.index} < 12 ? 'column videoItem' : 'videoItem'"
                  th:each="movie, iterStat:${movies}">
-                <div class="ui fluid link card" th:if="${iterStat.index} < 10">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 12">
                     <a class="image videoUrl" th:href="@{/view(u=${movie.value})}">
                         <img class="videoImage" th:src="${movie.image}" alt=""/>
                     </a>
@@ -114,7 +110,7 @@
                     </div>
                 </div>
 
-                <div th:if="${iterStat.index} >= 10" hidden>
+                <div th:if="${iterStat.index} >= 12" hidden>
                     <ul class="videoImage">[[${movie.image}]]</ul>
                     <ul class="videoTitle">[[${movie.title}]]</ul>
                     <a class="videoUrl" th:href="@{/view(u=${movie.value})}"></a>
@@ -122,95 +118,34 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="ui hidden divider"></div>
-
-    <div class="ui container">
-
-        <div class="ui stackable grid">
-            <div class="twelve wide column">
-
-                <div class="row relative">
-                    <h2 class="ui dividing header red">
-                        <i class="yelp icon"></i>
-                        电视剧
-                    </h2>
-                    <button class="ui red button right-absolute refresh" value="8"><i class="refresh icon"></i>换一批
-                    </button>
-                </div>
-
-                <div class="ui four column doubling grid">
-
-                    <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
-                         th:each="tvHot, iterStat:${tvHots}">
-                        <div class="ui fluid link card" th:if="${iterStat.index} < 8">
-                            <a class="image videoUrl" th:href="@{/view(u=${tvHot.value})}">
-                                <img class="videoImage" th:src="${tvHot.image}" alt=""/>
-                            </a>
-                            <div class="content">
-                                <a class="videoTitle" th:text="${tvHot.title}">电视剧</a>
-                            </div>
-                        </div>
-
-                        <div th:if="${iterStat.index} >= 8" hidden>
-                            <ul class="videoImage">[[${tvHot.image}]]</ul>
-                            <ul class="videoTitle">[[${tvHot.title}]]</ul>
-                            <a class="videoUrl" th:href="@{/view(u=${tvHot.value})}"></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="four wide computer only column">
-
-                <h2 class="ui dividing header red">
-                    <i class="modx icon"></i>
-                    排行榜
-                </h2>
-
-                <div class="ui segments">
-                    <div class="ui red segment" th:each="tvTop : ${tvTops}">
-                        <a th:href="@{/view(u=${tvTop.value})}" th:text="${tvTop.title}">Top</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
         <div class="ui hidden divider"></div>
 
-        <div class="ui container">
+        <div class="row relative">
+            <h2 class="ui dividing header red">
+                <i class="yelp icon"></i>
+                电视剧
+            </h2>
+            <button class="ui red button right-absolute refresh" value="8"><i class="refresh icon"></i>换一批
+            </button>
+        </div>
 
-            <div class="row relative">
-                <h2 class="ui dividing header red">
-                    <i class="reddit yelp icon item"></i>
-                    熊猫TV
-                </h2>
-                <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
-                </button>
-            </div>
+        <div class="ui six column doubling grid">
 
-            <div class="ui five column doubling grid">
-
-                <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
-                     th:each="live, iterStat:${lives}">
-                    <div class="ui fluid link card" th:if="${iterStat.index} < 10">
-                        <a class="image videoUrl" th:href="@{/view(u=${live.value})}">
-                            <img class="videoImage" th:src="${live.image}" alt=""/>
-                        </a>
-                        <div class="content">
-                            <a class="videoTitle" th:text="${live.title}">直播</a>
-                        </div>
+            <div th:class="${iterStat.index} < 12 ? 'column videoItem' : 'videoItem'"
+                 th:each="tvHot, iterStat:${tvHots}">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 12">
+                    <a class="image videoUrl" th:href="@{/view(u=${tvHot.value})}">
+                        <img class="videoImage" th:src="${tvHot.image}" alt=""/>
+                    </a>
+                    <div class="content">
+                        <a class="videoTitle" th:text="${tvHot.title}">电视剧</a>
                     </div>
+                </div>
 
-                    <div th:if="${iterStat.index} >= 10" hidden>
-                        <ul class="videoImage">[[${live.image}]]</ul>
-                        <ul class="videoTitle">[[${live.title}]]</ul>
-                        <a class="videoUrl" th:href="@{/view(u=${live.value})}"></a>
-                    </div>
+                <div th:if="${iterStat.index} >= 12" hidden>
+                    <ul class="videoImage">[[${tvHot.image}]]</ul>
+                    <ul class="videoTitle">[[${tvHot.title}]]</ul>
+                    <a class="videoUrl" th:href="@{/view(u=${tvHot.value})}"></a>
                 </div>
             </div>
 
@@ -218,41 +153,69 @@
 
         <div class="ui hidden divider"></div>
 
-        <div class="ui container">
 
-            <div class="row relative">
-                <h2 class="ui dividing header red">
-                    <i class="reddit yelp icon item"></i>
-                    热血动漫
-                </h2>
-                <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
-                </button>
-            </div>
+        <div class="row relative">
+            <h2 class="ui dividing header red">
+                <i class="reddit yelp icon item"></i>
+                熊猫TV
+            </h2>
+            <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
+            </button>
+        </div>
 
-            <div class="ui five column doubling grid">
+        <div class="ui six column doubling grid">
 
-                <div th:class="${iterStat.index} < 10 ? 'column videoItem' : 'videoItem'"
-                     th:each="animeHot, iterStat:${animeHots}">
-                    <div class="ui fluid link card" th:if="${iterStat.index} < 10">
-                        <a class="image videoUrl" th:href="@{/view(u=${animeHot.value})}">
-                            <img class="videoImage" th:src="${animeHot.image}" alt=""/>
-                        </a>
-                        <div class="content">
-                            <a class="videoTitle" th:text="${animeHot.title}">动漫</a>
-                        </div>
-                    </div>
-
-                    <div th:if="${iterStat.index} >= 10" hidden>
-                        <ul class="videoImage">[[${animeHot.image}]]</ul>
-                        <ul class="videoTitle">[[${animeHot.title}]]</ul>
-                        <a class="videoUrl" th:href="@{/view(u=${animeHot.value})}"></a>
+            <div th:class="${iterStat.index} < 12 ? 'column videoItem' : 'videoItem'"
+                 th:each="live, iterStat:${lives}">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 12">
+                    <a class="image videoUrl" th:href="@{/view(u=${live.value})}">
+                        <img class="videoImage" th:src="${live.image}" alt=""/>
+                    </a>
+                    <div class="content">
+                        <a class="videoTitle" th:text="${live.title}">直播</a>
                     </div>
                 </div>
 
+                <div th:if="${iterStat.index} >= 12" hidden>
+                    <ul class="videoImage">[[${live.image}]]</ul>
+                    <ul class="videoTitle">[[${live.title}]]</ul>
+                    <a class="videoUrl" th:href="@{/view(u=${live.value})}"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui hidden divider"></div>
+
+        <div class="row relative">
+            <h2 class="ui dividing header red">
+                <i class="reddit yelp icon item"></i>
+                热血动漫
+            </h2>
+            <button class="ui red button right-absolute refresh" value="10"><i class="refresh icon"></i>换一批
+            </button>
+        </div>
+
+        <div class="ui six column doubling grid">
+
+            <div th:class="${iterStat.index} < 12 ? 'column videoItem' : 'videoItem'"
+                 th:each="animeHot, iterStat:${animeHots}">
+                <div class="ui fluid link card" th:if="${iterStat.index} < 12">
+                    <a class="image videoUrl" th:href="@{/view(u=${animeHot.value})}">
+                        <img class="videoImage" th:src="${animeHot.image}" alt=""/>
+                    </a>
+                    <div class="content">
+                        <a class="videoTitle" th:text="${animeHot.title}">动漫</a>
+                    </div>
+                </div>
+
+                <div th:if="${iterStat.index} >= 12" hidden>
+                    <ul class="videoImage">[[${animeHot.image}]]</ul>
+                    <ul class="videoTitle">[[${animeHot.title}]]</ul>
+                    <a class="videoUrl" th:href="@{/view(u=${animeHot.value})}"></a>
+                </div>
             </div>
 
         </div>
-
 
         <div class="ui hidden divider"></div>
 
@@ -367,7 +330,7 @@
     var friendLinkAPI = "/link/list";
     $.get(friendLinkAPI, function (data) {
         for (var i = 0; i < data.length; i++) {
-            var link = $("<a class='ui blue basic button' target='_blank'></a>");
+            var link = $("<a class='ui blue basic button bottom-space play-episode' target='_blank'></a>");
             link.attr("href", data[i].domain);
             link.text(data[i].name);
             $("#friendLinks").append(link);
