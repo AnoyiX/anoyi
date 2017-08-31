@@ -109,7 +109,7 @@
         var attentionAPI = "/user/attention/" + otherId;
         $.get(attentionAPI,
             function (data) {
-                if (data.object) {
+                if (data.data) {
                     btn.attr("class", "ui right floated basic button red");
                     btn.text("已关注");
                 } else {
