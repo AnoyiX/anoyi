@@ -24,8 +24,8 @@ import java.util.regex.Pattern;
 public class Tencent implements Parser<Video> {
     private final static String VIDEO_API = "http://vv.video.qq.com/getinfo";
     private final static String KEY_API = "http://vv.video.qq.com/getkey";
-    private final static String COOKIE = "pgv_pvi=9348187136; RK=CHGK8Lmqbf; tvfe_boss_uuid=c85c752b5873df15; luin=o0545544032; lskey=00010000f361e190a6b7ef8be0b7a9164521ee812ab4e4f7ead3bb2b349d052506de9e9c88780f0030ae6a6e; main_login=qq; login_time_init=2017-8-1 23:14:27; ptui_loginuin=545544032; mobileUV=1_15db7e2ce1a_9e2f3; login_time_last=2017-8-6 22:37:14; pgv_si=s6543401984; _qpsvr_localtk=0.20678077268566541; ptisp=cnc; ptcz=b062b006ce39963456220087e5601343eed03f8ca077b082b3501170da06c53c; pt2gguin=o0545544032; uin=o0545544032; skey=@UExBxyw2a; uid=100414728; pgv_info=ssid=s9067698750; pgv_pvid=4489122330; o_cookie=545544032";
-    private final static String GUID = "19a2e3090861a0e3e107fa4e8f4c9373";
+    private final static String COOKIE = "gv_pvi=8764138496; RK=vQGLRHUKYP; tvfe_boss_uuid=ad92b8f6187d6ab5; tvfe_search_uid=630d832e-c681-42d1-b40a-723eba41e708; luin=o0545544032; lskey=000100003bf74539b22218b1fcb0dbccb7b495b5aa099d6647b0e378199609a9edc8ebf8ca0c42d9bb1809fd; login_remember=qq; eas_sid=A1z5v0A3O2g0B0J2D5Z3L6q438; LW_uid=01V5m0Q3u4y5u3p9J231a948i8; ue_uid=ab7040ed4b966b7d3a5373441f04df91; ue_ts=1503500816; ue_uk=62b40f67948a56967557d9b652e8fb9f; ue_skey=fcad5c2f589f34abb84fb72ed5cd863f; LW_TS=1503500817; LW_PsKey=cb7f1de4c8bd86cdda5bbc44d16c5b3c; LW_pid=ae8a016e9a78dfd394a80346465acb94; mobileUV=1_15e0fc5b713_e36c3; LW_sid=01D560v3X9i2E7H1q8N4u2p0p1; ts_refer=m.v.qq.com/tv.html; pgv_si=s2744110080; ptui_loginuin=228701992; ptisp=cnc; ptcz=dc0405a72e903fd13ee3dedc75b9dd35988e50a3d71c91b062bfd12689ee2ea2; pt2gguin=o0545544032; uin=o0545544032; skey=@snAZhVtqM; uid=100414728; ad_play_index=68; ptag=|new_vs_focus:img_2; main_login=qq; qv_als=VsfJ2nlWWoKpT5cXA11504239914OmtYHA==; encuin=f4e7225172efe340bcfe344f11a106c5|545544032; lw_nick=Anoy|545544032|//thirdqq.qlogo.cn/g?b=sdk&k=cCwJCaXUjR9ySsCVyu8Rfw&s=40&t=1488113923|1; pgv_info=ssid=s7643493700; ts_last=v.qq.com/x/cover/09t5p6rdhrnxiig/k0024bgath5.html; pgv_pvid=1685846680; o_cookie=545544032; ts_uid=5590511376";
+    private final static String GUID = "fb74ffcc7b14377db9cb5308e598d6e5";
 
     @Override
     public Video parse(String url) {
@@ -134,7 +134,7 @@ public class Tencent implements Parser<Video> {
      * 片段播放地址
      */
     private String playUrl(String url, String part, String vkey) {
-        return url + part + "?sdtfrom=v1010&guid=" + GUID + "&vkey=" + vkey;
+        return url + part + "?sdtfrom=v1010&platform=2&guid=" + GUID + "&vkey=" + vkey;
     }
 
     /**
