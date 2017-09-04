@@ -75,7 +75,7 @@
     var itemLoder = $('#itemLoader');
     /** 创建列表内容 */
     function createItem(data) {
-        var $item = $('#itemTemplate');
+        var $item = $($('#itemTemplate').html());
         $item.find('a.videoUrl').eq(0).attr('href', '/view?u=' + data.value);
         $item.find('img.videoImage').eq(0).attr('src', data.image);
         $item.find('a.videoTitle').eq(0).text(data.title);
