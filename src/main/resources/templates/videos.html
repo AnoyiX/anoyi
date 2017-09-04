@@ -56,26 +56,30 @@
 </div>
 </div>
 
+<script id="itemTemplate" type="text/html">
+    <div class="column videoItem">
+        <div class="ui fluid link card">
+            <a class="image videoUrl" href="">
+                <img class="videoImage" src="" alt="">
+            </a>
+            <div class="content">
+                <a class="videoTitle"></a>
+            </div>
+        </div>
+    </div>
+</script>
+
 <script>
 
     var itemsDiv = $('#itemsDiv');
     var itemLoder = $('#itemLoader');
     /** 创建列表内容 */
     function createItem(data) {
-        var item = $('<div class="column videoItem">\n' +
-            '                <div class="ui fluid link card">\n' +
-            '                    <a class="image videoUrl" href="">\n' +
-            '                        <img class="videoImage" src="" alt="">\n' +
-            '                    </a>\n' +
-            '                    <div class="content">\n' +
-            '                        <a class="videoTitle"></a>\n' +
-            '                    </div>\n' +
-            '                </div>\n' +
-            '            </div>');
-        item.find('a.videoUrl').eq(0).attr('href', '/view?u=' + data.value);
-        item.find('img.videoImage').eq(0).attr('src', data.image);
-        item.find('a.videoTitle').eq(0).text(data.title);
-        return item;
+        var $item = $('#itemTemplate');
+        $item.find('a.videoUrl').eq(0).attr('href', '/view?u=' + data.value);
+        $item.find('img.videoImage').eq(0).attr('src', data.image);
+        $item.find('a.videoTitle').eq(0).text(data.title);
+        return $item;
     }
 
     /** 渲染列表内容 */
