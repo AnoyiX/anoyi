@@ -13,6 +13,8 @@
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.min.js"></script>
     <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/tagcloud.min.js"></script>
+    <link href="/css/tagcloud.min.css" rel="stylesheet">
     <script src="/js/siderbar.js"></script>
 </head>
 
@@ -56,15 +58,8 @@
                     </h2>
                 </div>
 
-                <div class="ui items ">
-                    <div class="hub-box item" th:each="hub, iterStat:${hubs}">
-                        <a class="ui mini image circular">
-                            <img th:src="${hub.avatar}" alt="" class="">
-                        </a>
-                        <div class="middle aligned content">
-                            <a class="header" th:text="${hub.name}"  th:href="'/share/' + ${hub.md5}"></a>
-                        </div>
-                    </div>
+                <div class="tagcloud">
+                    <a th:href="'/share/' + ${hub.md5}" th:each="hub, iterStat:${hubs}" th:text="${hub.name}"></a>
                 </div>
 
                 <h2 class="ui dividing header green">
@@ -103,6 +98,9 @@
 </div>
 
 <script>
+
+    /** 加载标签云 */
+    tagcloud();
 
     var itemsDiv = $('#itemsDiv');
     var loadMore = $('#loadMore');
