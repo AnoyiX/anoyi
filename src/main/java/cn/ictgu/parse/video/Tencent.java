@@ -24,8 +24,10 @@ import java.util.regex.Pattern;
 public class Tencent implements Parser<Video> {
     private final static String VIDEO_API = "http://h5vv.video.qq.com/getinfo";
     private final static String KEY_API = "http://h5vv.video.qq.com/getkey";
-    private final static String COOKIE = "pgv_pvi=8764138496; RK=vQGLRHUKYP; tvfe_boss_uuid=ad92b8f6187d6ab5; login_time_init=2017-8-20 11:20:6; eas_sid=A1z5v0A3O2g0B0J2D5Z3L6q438; LW_uid=01V5m0Q3u4y5u3p9J231a948i8; ue_uid=ab7040ed4b966b7d3a5373441f04df91; ue_ts=1503500816; ue_uk=62b40f67948a56967557d9b652e8fb9f; ue_skey=fcad5c2f589f34abb84fb72ed5cd863f; LW_TS=1503500817; LW_PsKey=cb7f1de4c8bd86cdda5bbc44d16c5b3c; LW_pid=ae8a016e9a78dfd394a80346465acb94; mobileUV=1_15e0fc5b713_e36c3; LW_sid=01D560v3X9i2E7H1q8N4u2p0p1; luin=o0545544032; lskey=0001000005518d26e6dad5d2bd3077ac672ad2e585c039481344d864c741806fb2fb457351669ba8ae0435f4; main_login=qq; login_time_last=2017-10-2 19:53:21; ptui_loginuin=228701992; ptcz=dc0405a72e903fd13ee3dedc75b9dd35988e50a3d71c91b062bfd12689ee2ea2; pt2gguin=o0228701992; uid=100414728; o_cookie=545544032; pgv_info=ssid=s1650351868; pgv_pvid=1685846680";
-    private final static String GUID = "6873a92fac8345141bf2475637b6b17f";
+    private final static String COOKIE = "pgv_pvi=8764138496; RK=vQGLRHUKYP; tvfe_boss_uuid=ad92b8f6187d6ab5; login_time_init=2017-8-20 11:20:6; eas_sid=A1z5v0A3O2g0B0J2D5Z3L6q438; LW_uid=01V5m0Q3u4y5u3p9J231a948i8; ue_uid=ab7040ed4b966b7d3a5373441f04df91; ue_ts=1503500816; ue_uk=62b40f67948a56967557d9b652e8fb9f; ue_skey=fcad5c2f589f34abb84fb72ed5cd863f; LW_TS=1503500817; LW_PsKey=cb7f1de4c8bd86cdda5bbc44d16c5b3c; LW_pid=ae8a016e9a78dfd394a80346465acb94; mobileUV=1_15e0fc5b713_e36c3; LW_sid=01D560v3X9i2E7H1q8N4u2p0p1; login_time_last=2017-10-2 19:53:21; ptui_loginuin=3041836568; _ga=GA1.2.1683665787.1507542171; _gid=GA1.2.1502727203.1507542171; pgv_si=s6475018240; gid=b81b8a3c-30b1-4c18-8a7c-8d0a242083d9; ptisp=cnc; ptcz=dc0405a72e903fd13ee3dedc75b9dd35988e50a3d71c91b062bfd12689ee2ea2; pt2gguin=o0545544032; uin=o0545544032; skey=@DrTJkm7x5; IED_LOG_INFO2=userUin%3D545544032%26nickName%3DAnoy%26userLoginTime%3D1507615292; uid=100414728; o_cookie=545544032; pgv_info=ssid=s8547989812&pgvReferrer=; pgv_pvid=1685846680";
+    private final static String GUID = "fb74ffcc7b14377db9cb5308e598d6e5";
+    private final static String SDTFROM = "v1010";
+    private final static String PLATFORM = "10901";
 
     @Override
     public Video parse(String url) {
@@ -99,8 +101,8 @@ public class Tencent implements Parser<Video> {
     private String videoInfo(String vid) {
         try {
             Document document = Jsoup.connect(VIDEO_API).header("Cookie", COOKIE)
-                    .data("vids", vid).data("platform", "10901")
-                    .data("sdtfrom", "v1010")
+                    .data("vids", vid).data("platform", PLATFORM)
+                    .data("sdtfrom", SDTFROM)
                     .data("format", "10209")
                     .data("otype", "json").data("defn", "fhd")
                     .data("defaultfmt", "fhd").data("guid", GUID).ignoreContentType(true).get();
@@ -136,7 +138,7 @@ public class Tencent implements Parser<Video> {
      * 片段播放地址
      */
     private String playUrl(String url, String part, String vkey) {
-        return url + part + "?sdtfrom=v1010&guid=" + GUID + "&vkey=" + vkey + "&platform=2";
+        return url + part + "?sdtfrom=" + "v1010" + "&guid=" + GUID + "&vkey=" + vkey;
     }
 
     /**
@@ -145,9 +147,9 @@ public class Tencent implements Parser<Video> {
     private String videoKey(String vid, String filename, String format) {
         try {
             Document document = Jsoup.connect(KEY_API).header("Cookie", COOKIE)
-                    .data("vid", vid).data("platform", "10901")
+                    .data("vid", vid).data("platform", PLATFORM)
                     .data("otype", "json")
-                    .data("filename", filename).data("sdtfrom", "v1010")
+                    .data("filename", filename).data("sdtfrom", SDTFROM)
                     .data("format", format).data("guid", GUID).ignoreContentType(true).get();
             String result = document.text().replace("QZOutputJson=", "");
             System.out.println(result);
