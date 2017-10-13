@@ -17,14 +17,6 @@
     <link href="/css/style.css" rel="stylesheet">
     <script src="/js/siderbar.js"></script>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-4838879027806199",
-            enable_page_level_ads: true
-        });
-    </script>
-
 </head>
 
 <body>
@@ -58,11 +50,10 @@
     <div class="ui container">
 
         <div class="row relative">
-            <h2 class="ui dividing header red">
-                <i class="red yelp icon item"></i>
-                综艺节目
-            </h2>
-            <button class="ui red button right-absolute refresh" value="6"><i class="refresh icon"></i>换一批</button>
+            <h3 class="ui dividing header red">
+                <i class="red tv icon item"></i>综艺节目
+            </h3>
+            <button class="ui mini red button right-absolute refresh" value="6"><i class="refresh icon"></i>换一批</button>
         </div>
 
         <div class="ui six column doubling grid">
@@ -73,8 +64,8 @@
                     <a class="image videoUrl" th:href="@{/view(u=${recommend.value})}">
                         <img th:src="${recommend.image}" alt="" class="videoImage"/>
                     </a>
-                    <div class="content">
-                        <a class="videoTitle" th:text="${recommend.title}">综艺节目</a>
+                    <div class="extra content">
+                        <a class="ui teal videoTitle" th:text="${recommend.title}"></a>
                     </div>
                 </div>
 
@@ -90,11 +81,10 @@
         <div class="ui hidden divider"></div>
 
         <div class="row relative">
-            <h2 class="ui dividing header red">
-                <i class="reddit yelp icon item"></i>
-                最新电影
-            </h2>
-            <button class="ui red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批</button>
+            <h3 class="ui dividing header red">
+                <i class="tv icon item"></i>最新电影
+            </h3>
+            <button class="ui mini red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批</button>
         </div>
 
         <div class="ui six column doubling grid">
@@ -105,8 +95,8 @@
                     <a class="image videoUrl" th:href="@{/view(u=${movie.value})}">
                         <img class="videoImage" th:src="${movie.image}" alt=""/>
                     </a>
-                    <div class="content">
-                        <a class="videoTitle" th:text="${movie.title}">电影</a>
+                    <div class="extra content">
+                        <a class="ui teal videoTitle" th:text="${movie.title}">电影</a>
                     </div>
                 </div>
 
@@ -121,11 +111,10 @@
         <div class="ui hidden divider"></div>
 
         <div class="row relative">
-            <h2 class="ui dividing header red">
-                <i class="yelp icon"></i>
-                电视剧
-            </h2>
-            <button class="ui red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批
+            <h3 class="ui dividing header red">
+                <i class="tv icon item"></i>电视剧
+            </h3>
+            <button class="ui mini red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批
             </button>
         </div>
 
@@ -137,8 +126,8 @@
                     <a class="image videoUrl" th:href="@{/view(u=${tvHot.value})}">
                         <img class="videoImage" th:src="${tvHot.image}" alt=""/>
                     </a>
-                    <div class="content">
-                        <a class="videoTitle" th:text="${tvHot.title}">电视剧</a>
+                    <div class="extra content">
+                        <a class="ui teal videoTitle" th:text="${tvHot.title}">电视剧</a>
                     </div>
                 </div>
 
@@ -155,11 +144,10 @@
 
 
         <div class="row relative">
-            <h2 class="ui dividing header red">
-                <i class="reddit yelp icon item"></i>
-                熊猫TV
-            </h2>
-            <button class="ui red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批
+            <h3 class="ui dividing header red">
+                <i class="tv icon item"></i>熊猫TV
+            </h3>
+            <button class="ui mini red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批
             </button>
         </div>
 
@@ -171,8 +159,8 @@
                     <a class="image videoUrl" th:href="@{/view(u=${live.value})}">
                         <img class="videoImage" th:src="${live.image}" alt=""/>
                     </a>
-                    <div class="content">
-                        <a class="videoTitle" th:text="${live.title}">直播</a>
+                    <div class="extra content">
+                        <a class="ui teal videoTitle" th:text="${live.title}">直播</a>
                     </div>
                 </div>
 
@@ -187,11 +175,10 @@
         <div class="ui hidden divider"></div>
 
         <div class="row relative">
-            <h2 class="ui dividing header red">
-                <i class="reddit yelp icon item"></i>
-                热血动漫
-            </h2>
-            <button class="ui red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批
+            <h3 class="ui dividing header red">
+                <i class="tv icon item"></i>热血动漫
+            </h3>
+            <button class="ui mini red button right-absolute refresh" value="12"><i class="refresh icon"></i>换一批
             </button>
         </div>
 
@@ -203,8 +190,8 @@
                     <a class="image videoUrl" th:href="@{/view(u=${animeHot.value})}">
                         <img class="videoImage" th:src="${animeHot.image}" alt=""/>
                     </a>
-                    <div class="content">
-                        <a class="videoTitle" th:text="${animeHot.title}">动漫</a>
+                    <div class="extra content">
+                        <a class="ui teal videoTitle" th:text="${animeHot.title}">动漫</a>
                     </div>
                 </div>
 
@@ -221,18 +208,16 @@
 
         <div class="ui container" id="friendLinks">
             <div class="row relative">
-                <h2 class="ui dividing header red">
-                    <i class="theme icon"></i>
-                    友情链接
-                </h2>
-                <button class="ui red button right-absolute" id="applyJoin"><i class="add user icon"></i>申请加入</button>
+                <h3 class="ui dividing header red">
+                    <i class="gg icon"></i>友情链接
+                </h3>
+                <button class="ui mini red button right-absolute" id="applyJoin"><i class="plus icon"></i> 申请加入</button>
             </div>
-
         </div>
 
     </div>
 
-    <div class="ui inverted vertical footer segment">
+    <div class="ui mini inverted vertical footer segment">
         <div class="ui center aligned container">
             <div class="ui stackable inverted divided grid">
                 <div class="three wide column">
@@ -330,7 +315,7 @@
     var friendLinkAPI = "/link/list";
     $.get(friendLinkAPI, function (data) {
         for (var i = 0; i < data.length; i++) {
-            var link = $("<a class='ui blue basic button bottom-space play-episode' target='_blank'></a>");
+            var link = $("<a class='ui mini blue basic button bottom-space play-episode' target='_blank'></a>");
             link.attr("href", data[i].domain);
             link.text(data[i].name);
             $("#friendLinks").append(link);

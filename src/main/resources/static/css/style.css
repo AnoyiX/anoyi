@@ -49,7 +49,7 @@ body {
 .right-absolute{
 	position: absolute; 
 	right: 0; 
-	top: 0;
+	top: -4px;
 }
 
 .right-absolute-left{

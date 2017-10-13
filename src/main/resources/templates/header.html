@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <!-- following menu-->
-<div class="ui fixed inverted menu" th:fragment="fmenu">
+<div class="ui mini fixed inverted menu" th:fragment="fmenu">
     <div class="ui container">
         <a href="/" class="header item">
             <img class="logo" src="/images/atm.png">
@@ -13,14 +13,14 @@
         <a href="/parse" class="item">解析</a>
         <a href="/tip" class="item">赞赏</a>
         <div class="right item">
-            <a class="ui inverted olive button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
-            <a class="ui inverted red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
+            <a class="ui red button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
+            <a class="ui red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
         </div>
     </div>
 </div>
 
 <!-- Sidebar Menu -->
-<div class="ui vertical inverted sidebar menu" th:fragment="smenu">
+<div class="ui mini vertical inverted sidebar menu" th:fragment="smenu">
     <a href="/" class="item">首页</a>
     <a href="/see" class="item">动态</a>
     <a href="/videos" class="item">视频</a>
@@ -29,13 +29,13 @@
 </div>
 
 <!-- pointing menu -->
-<div class="ui large secondary pointing menu" th:fragment="pmenu">
+<div class="ui mini secondary pointing menu" th:fragment="pmenu">
     <a class="toc item">
         <i class="large sidebar icon red"></i>
     </a>
     <div class="right item">
-        <a class="ui basic red button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
-        <a class="ui basic red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
+        <a class="ui teal button" th:href="@{/login}" th:unless="${#httpServletRequest.remoteUser}">登录</a>
+        <a class="ui teal red button" th:href="@{/user}" th:if="${#httpServletRequest.remoteUser}">个人中心</a>
     </div>
 </div>
 </body>
