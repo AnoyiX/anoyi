@@ -41,6 +41,8 @@
                         <i class="video play outline icon"></i>
                         [[${source.title}]]
                     </h3>
+                    <button th:class="${#httpServletRequest.remoteUser} ? 'negative ui mini red button right-absolute refresh' : 'negative ui disabled mini red button right-absolute refresh'"
+                            id="collectBtn">收藏</button>
                 </div>
 
                 <div class="hidden" id="videoImage" th:data-value="${source.image}"></div>
@@ -62,12 +64,6 @@
                     <div class="bar">
                         <div class="progress"></div>
                     </div>
-                </div>
-
-                <div class="container ui center aligned">
-                    <button th:class="${#httpServletRequest.remoteUser} ? 'negative ui button' : 'negative ui disabled button'"
-                            id="collectBtn"><i class="heart icon"></i>收藏
-                    </button>
                 </div>
 
             </div>
@@ -165,7 +161,7 @@
             $("#listLoader").attr("class", "");
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
-                    var episode = $("<button class='ui basic red button bottom-space play-episode'></button>")
+                    var episode = $("<button class='ui mini basic red button bottom-space play-episode'></button>")
                     episode.text(data[i].index);
                     episode.attr("value", data[i].value);
                     $("#playList").append(episode);
