@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<body>
+<div  th:fragment="comments" >
+<div class = "ui comments">
+    <br/>
+    <h3 class="ui dividing header">评论</h3>
+    <!--评论窗口-->
+    <form class="ui comment form">
+        <div class="field" id = "commentText">
+            <textarea></textarea>
+        </div>
+        <div class="ui blue labeled submit icon button" onclick="addComment(this,1)"><i class="icon edit"></i> 评论 </div>
+    </form>
+    <br/>
+    <div class="ui" id="comments"></div>
+
+</div>
+
+<script>
+    var commentDiv = $('#comments');
+
+    /*加载评论信息*/
+    $(document).ready(function(){
+        var title = $('#articleTitle').text();
+        if(!title){
+            title = $('#videoTitle').text();
+        }
+        console.log(title);
+        var url = '/view/comment/loadComments?title='+title;
+        $.get(url,function(data){
+        renderCommentList(data);
+        //console.log(data);
+        })
+    })
+    /** 渲染评论列表 */
+    function renderCommentList(data) {
+        commentDiv.empty();
+        for(var i=0;i<data.length;i++){
+           var comment = createComment(data[i],1);
+           console.log(comment);
+           commentDiv.append(comment);
+        }
+    }
+    //创建 评论/回复 item  status=1 表示评论  status = 2 表示回复(回复为二级评论)
+    function createComment(data,status){
+        //console.log(data);
+        var item = $("<div class='comment'></div>");
+        var avatarA = $("<a class='avatar'></a>");
+        //头像
+        var avatar = $("<img />");
+        avatar.attr("src",data.avatar);
+        avatarA.append(avatar);
+
+        //评论主体(包括 昵称,时间,文本内容)
+        var commentedDiv = $("<div class='content'></div>")
+
+        //评论人昵称
+        var userName = $("<a class='author'> </a>")
+        userName.text(data.userName);
+        commentedDiv.append(userName);
+
+        //评论时间
+        var timeDiv = $("<div class='metadata'></div>");
+        var timeSpan =$("<span class='date'></span>");
+        var time = new Date(parseInt(data.createTime) ).toLocaleString().replace(/:\d{1,2}$/,' ');
+        console.log(new Date(parseInt(data.createTime) ).toLocaleString())
+
+        timeSpan.text(time);
+        timeDiv.append(timeSpan);
+        commentedDiv.append(timeDiv);
+
+        //评论文本
+        var contentDiv = $("<div class='text'></div>");
+        contentDiv.text(data.content);
+        commentedDiv.append(contentDiv);
+
+        //操作(添加回复)
+        var commentDiv = $("<div class='actions'></div>");
+
+        //判断是评论还是回复,回复不执行下面这部分内容
+        if(status==1){
+            //循环添加属于该评论的回复
+            for(var i=0; i<data.reply.length ; i++){
+                var replyDiv =  $("<div class='comments'></div>");
+                var reply =  createComment(data.reply[i],2);
+                replyDiv.append(reply);
+                commentedDiv.append(replyDiv);
+            }
+            //显示回复窗口的按钮
+            var replyBtn = $("<a class='reply'>Reply</a>");
+            replyBtn.attr("onclick","showReplyWin(this)");
+            commentDiv.append(replyBtn);
+
+            //回复form
+            var replyForm = $("<form class='ui reply form' style='display:none'></form>");
+
+                //回复form : 隐藏属性, 值为所在评论的id
+                var In_pid = $(" <input type='hidden' name='parentId' />");
+                In_pid.attr("value",data.id);
+                replyForm.append(In_pid);
+
+                //回复form : 输入回复内容的窗口
+                var In_win = $("<div class='field'><textarea></textarea></div>")
+                replyForm.append(In_win);
+
+                //回复form : 提交按钮
+                var submitBtn = $("<div class='ui blue labeled submit icon button' ><i class='icon edit'></i> Add Reply </div>")
+                submitBtn.attr("onclick","addComment(this,2)")
+                replyForm.append(submitBtn);
+
+                //回复form : 取消按钮---隐藏回复窗口
+                var cancelBtn = $("<div class='ui red icon button' onclick='hideReplyWin(this)'>取消</div>")
+                replyForm.append(cancelBtn);
+
+            commentDiv.append(replyForm);
+
+            commentedDiv.append(replyDiv);
+            commentedDiv.append(commentDiv);
+        }
+
+        item.append(avatarA);
+        item.append(commentedDiv);
+
+        return item;
+    }
+    //隐藏回复窗口
+    function hideReplyWin(btn){
+        console.log($(btn).parent());
+        var par = $(btn).parent();
+        par.hide();
+        $(btn).parent().parent().find('a').show();
+    }
+    //显示回复窗口
+    function showReplyWin(btn){
+        console.log($(btn).parent());
+        $(btn).parent().find('form').show();
+        $(btn).hide();
+    }
+    //ajax添加评论/回复
+    function addComment(btn,status){
+        console.log("status:"+status);
+        var title = $('#articleTitle').text();
+        if(!title){
+            title = $('#videoTitle').text();
+        }
+
+        var content = $(btn).parent().find("div").find("textarea").val();
+        console.log(content);
+
+        console.log(title+":"+content);
+        var par ;
+        var pid = $(btn).parent().find("input").val();
+
+        if(status==2)
+         par = {'title': title, 'status': status, 'content':content , 'parentId':pid};
+        else par = {'title': title, 'status': status, 'content':content };
+
+        $.ajax({
+              url: "/comment/addComment",
+              type : "post",
+              cache: false,
+              success: function(data){
+
+                if(!$.isArray(data)){
+                    window.location = "/login";
+                    alert("请先登录");
+                }else{
+                    renderCommentList(data);
+                    $(btn).parent().find("div").find("textarea").val("");
+                }
+              },
+              data: par
+            });
+    }
+
+</script>
+</div>
+
+</body>
+
+</html>
