@@ -5,7 +5,7 @@ const IndexPage = () => {
   return (
     <div className='bg-gray-100 w-screen min-h-screen p-10 flex flex-col space-y-6'>
 
-      <div className='flex flex-row space-x-6'>
+      <div className='flex flex-row flex-1 space-x-6'>
 
         <div className='flex flex-col space-y-6'>
           <div className='bg-white w-72 h-72 rounded-lg shadow flex flex-col space-y-4 items-center justify-center'>
@@ -55,7 +55,7 @@ const IndexPage = () => {
             <div className='flex flex-row flex-wrap items-center justify-center'>
               {
                 ['No. A', 'No. B', 'No. C', 'No. D', 'No. E', 'No. F'].map(item => (
-                  <div className='flex flex-col space-y-2 items-center m-2'>
+                  <div className='flex flex-col space-y-2 items-center m-2' key={item}>
                     <div className='bg-gray-100 w-16 h-16 rounded-full'></div>
                     <span className='text-gray-400 text-xs'>{item}</span>
                   </div>
@@ -74,7 +74,7 @@ const IndexPage = () => {
       </div>
 
       <div className='bg-white w-full rounded-lg shadow flex flex-row items-center justify-center space-x-2 p-4'>
-        <span className="text-gray-500 text-sm">Anoyi © 2021 All Rights Reserved.</span>
+        <span className="text-gray-500 text-sm">Anoyi © 2022 All Rights Reserved.</span>
         <a className="text-gray-500 text-sm hover:text-blue-500" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备16007917号-1</a>
       </div>
     </div>
