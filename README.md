@@ -1,7 +1,7 @@
 <p align="center">
   <img width="140" src="https://cdn.anoyi.com/logo.png" />  
   <h2 align="center">Anoyi's Personal Website</h2>
-  <p align="center">🍭 Light web application development</p>
+  <p align="center">Lightweight full stack web application development 🐬</p>
 </p>
 <p align="center">
   <a href="https://github.com/AnoyiX/anoyi/issues">
