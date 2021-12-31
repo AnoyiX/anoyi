@@ -68,10 +68,10 @@ python3 run.py
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ```shell
-$ cd fontend/
+cd fontend/
 
 # install packages
-$ yarn
+yarn
 
 # run
 yarn dev
