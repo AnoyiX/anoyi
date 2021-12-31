@@ -36,28 +36,24 @@ const IndexPage = () => {
           </div>
 
           <div className='bg-white w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
-            <div className='flex flex-col space-y-2 items-center'>
-              <div className='bg-gray-100 w-16 h-16 rounded-md'></div>
-              <span className='text-gray-400 text-xs'>开发语言</span>
-            </div>
-            <div className='flex flex-col space-y-2 items-center'>
-              <div className='bg-gray-100 w-16 h-16 rounded-md'></div>
-              <span className='text-gray-400 text-xs'>技术栈</span>
-            </div>
-            <div className='flex flex-col space-y-2 items-center'>
-              <div className='bg-gray-100 w-16 h-16 rounded-md'></div>
-              <span className='text-gray-400 text-xs'>工具包</span>
-            </div>
+            {
+              ['Languages', 'Frameworks', 'ToolBox'].map((item, index) => (
+                <div className='flex flex-col space-y-2 items-center' key={index}>
+                  <div className='bg-gray-100 w-16 h-16 rounded-md'></div>
+                  <span className='text-gray-400 text-xs'>{item}</span>
+                </div>
+              ))
+            }
           </div>
 
           <div className='bg-white w-72 rounded-lg shadow flex flex-col space-y-2 items-center py-4'>
             <div className="text-gray-600 text-sm">社交网络</div>
             <div className='flex flex-row flex-wrap items-center justify-center'>
               {
-                ['No. A', 'No. B', 'No. C', 'No. D', 'No. E', 'No. F'].map(item => (
+                ['A', 'B', 'C', 'D', 'E', 'F'].map(item => (
                   <div className='flex flex-col space-y-2 items-center m-2' key={item}>
                     <div className='bg-gray-100 w-16 h-16 rounded-full'></div>
-                    <span className='text-gray-400 text-xs'>{item}</span>
+                    <span className='text-gray-400 text-xs'>No. {item}</span>
                   </div>
                 ))
               }
@@ -65,11 +61,15 @@ const IndexPage = () => {
           </div>
         </div>
 
-        <div className='bg-white flex flex-1 flex-col rounded-lg shadow'>
-          <div className='w-full h-full flex flex-col space-y-2 items-center justify-center'>
-              <Doing className='w-64' />
-              <span className='text-gray-400'>开发中，敬请期待！</span>
-          </div>
+        <div className='bg-white flex flex-1 flex-row flex-wrap rounded-lg shadow p-8'>
+          {
+            ['博客', '短视频', '书架', '理财'].map((item, index) => (
+              <div className='flex flex-col space-y-2 items-center mr-6 mb-6' key={index}>
+                <div className='bg-gray-100 w-20 h-20 rounded-md'></div>
+                <span className='text-gray-800 text-sm'>{item}</span>
+              </div>
+            ))
+          }
         </div>
       </div>
 
