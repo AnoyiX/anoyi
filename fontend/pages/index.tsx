@@ -1,3 +1,4 @@
+import Dock from '../components/Dock'
 import { Doing, Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
 
 const IndexPage = () => {
@@ -38,10 +39,7 @@ const IndexPage = () => {
           <div className='bg-white w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
             {
               ['Languages', 'Frameworks', 'ToolBox'].map((item, index) => (
-                <div className='flex flex-col space-y-2 items-center' key={index}>
-                  <div className='bg-gray-100 w-16 h-16 rounded-md'></div>
-                  <span className='text-gray-400 text-xs'>{item}</span>
-                </div>
+                <Dock name={item} key={index}></Dock>
               ))
             }
           </div>
