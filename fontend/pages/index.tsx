@@ -18,19 +18,19 @@ const IndexPage = () => {
               </div>
             </div>
             <div className='flex flex-row space-x-4 items-center justify-center text-lg border-t border-gray-200 pt-4 w-full'>
-              <a href="">
+              <a href="https://github.com/AnoyiX" target="_blank">
                 <Github className='h-6 w-6 text-gray-400' />
               </a>
-              <a href="">
+              <a href="https://www.yuque.com/anoyi" target="_blank">
                 <Yuque className='h-6 w-6 text-gray-400' />
               </a>
-              <a href="">
+              <a href="https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0" target="_blank">
                 <Douyin className='h-6 w-6 text-gray-400' />
               </a>
-              <a href="">
+              <a href="https://www.jianshu.com/u/7b7ec6f2db21" target="_blank">
                 <Jianshu className='h-6 w-6 text-gray-400' />
               </a>
-              <a href="">
+              <a href="https://www.zhihu.com/people/anoyi-x" target="_blank">
                 <Zhihu className='h-6 w-6 text-gray-400' />
               </a>
             </div>
