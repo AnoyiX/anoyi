@@ -1,0 +1,12 @@
+# Basic 基本配置
+application:
+  title: VecFlow Service
+  version: 0.1.0
+  openapi_url: /openapi.json
+  docs_url: /docs
+  redoc_url: /redoc
+
+# YuQue 语雀
+yuque:
+    host: https://www.yuque.com/api/v2
+    token: ''
