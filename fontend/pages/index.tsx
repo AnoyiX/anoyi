@@ -1,10 +1,11 @@
 import Dock from '../components/Dock'
-import { Doing, Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
+import { Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
+import Link from 'next/link'
 
 const IndexPage = () => {
 
   return (
-    <div className='bg-gray-100 w-screen min-h-screen p-10 flex flex-col space-y-6'>
+    <div className='w-full flex flex-col space-y-6 p-10'>
 
       <div className='flex flex-row flex-1 space-x-6'>
 
@@ -61,17 +62,20 @@ const IndexPage = () => {
 
         <div className='bg-white flex flex-1 flex-row flex-wrap rounded-lg shadow p-8'>
           {
-            ['博客', '短视频', '书架', '理财'].map((item, index) => (
+            [{ name: '博客', link: '/blog' }, { name: '短视频', link: '/video' }].map((item, index) => (
               <div className='flex flex-col space-y-2 items-center mr-6 mb-6' key={index}>
-                <div className='bg-gray-100 w-20 h-20 rounded-md'></div>
-                <span className='text-gray-800 text-sm'>{item}</span>
+                <Link href={item.link}>
+                  <div className='bg-gray-100 w-20 h-20 rounded-md'></div>
+
+                </Link>
+                <span className='text-gray-800 text-sm'>{item.name}</span>
               </div>
             ))
           }
         </div>
       </div>
 
-      <div className='bg-white w-full rounded-lg shadow flex flex-row items-center justify-center space-x-2 p-4'>
+      <div className='bg-white rounded-lg shadow flex flex-row items-center justify-center space-x-2 p-4'>
         <span className="text-gray-500 text-sm">Anoyi © 2022 All Rights Reserved.</span>
         <a className="text-gray-500 text-sm hover:text-blue-500" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备16007917号-1</a>
       </div>

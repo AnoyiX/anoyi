@@ -1,7 +1,7 @@
 const BlogPage = () => {
 
   return (
-    <div className='bg-gray-100 w-screen h-screen p-10 flex flex-col space-y-6'>
+    <div className='w-full p-10 flex flex-col space-y-6'>
 
       <div className='flex flex-row flex-1 space-x-6'>
 
