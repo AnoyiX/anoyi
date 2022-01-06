@@ -1,11 +1,29 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import OutsideLink, { IOutsideLink } from './OutsideLink'
-
 
 interface IDock {
     name: string
-    data: IOutsideLink[]
+    data: IDockItem[]
+}
+
+export interface IDockItem {
+    name: string
+    url: string
+    icon?: string
+
+}
+
+export function DockItem({ name, url, icon }: IDockItem) {
+
+    return (
+        <div className='flex flex-col w-32 items-center'>
+            <a href={url} className='w-20 h-20 border border-gray-200 rounded-2xl p-2 bg-gray-200 bg-opacity-10' target='_blank'>
+                <img src={icon} alt="" className="w-full h-full" />
+            </a>
+            <span className="text-sm text-gray-700 my-2">{name}</span>
+        </div>
+    )
+
 }
 
 export default function Dock({ name, data }: IDock) {
@@ -24,11 +42,9 @@ export default function Dock({ name, data }: IDock) {
             <div className='flex flex-col space-y-2 items-center' onClick={openModal}>
                 <div className='bg-gray-100 w-16 h-16 rounded-md p-2'>
                     {
-                        data.map((item, index) => (
-                            <div key={index} className='w-1/3 h-1/3 inline-block border border-transparent'>
-                                <img src={item.icon} alt="" />
-                            </div>
-                        ))
+                        data.length > 0 && (
+                            <img src={data[0].icon} alt=""/>
+                        )
                     }
                 </div>
                 <span className='text-gray-400 text-xs'>{name}</span>
@@ -54,10 +70,10 @@ export default function Dock({ name, data }: IDock) {
                             <div className='w-full h-full transition-all transform'>
                                 <p className='text-gray-500 text-lg mb-4'>{name}</p>
                                 <div className='bg-white w-full h-full p-8 shadow-xl rounded-2xl overflow-y-scroll'>
-                                    <div className=" flex flex-wrap justify-center gap-10">
+                                    <div className=" flex flex-wrap justify-center gap-2">
                                         {
                                             data.map((item, index) => (
-                                                <OutsideLink name={item.name} icon={item.icon} url={item.url} key={index}></OutsideLink>
+                                                <DockItem key={index} name={item.name} icon={item.icon} url={item.url} />
                                             ))
                                         }
                                     </div>
