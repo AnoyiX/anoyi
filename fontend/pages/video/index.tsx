@@ -7,10 +7,10 @@ const VideoPage = () => {
 
       <AppHeader></AppHeader>
 
-      <div className="bg-gray-900 w-full flex flex-row rounded-lg shadow shadow-white">
-        <video src="" controls={true} className="flex flex-1 rounded-l-lg">
+      <div className="w-full flex flex-row space-x-4 shadow shadow-white">
+        <video src="" controls={true} className="flex flex-1 rounded-lg">
         </video>
-        <div className="w-72 flex-none"></div>
+        <div className="bg-gray-900 w-72 flex-none rounded-lg"></div>
       </div>
 
       <div className='flex flex-col space-y-6'>
