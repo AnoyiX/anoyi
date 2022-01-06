@@ -22,7 +22,7 @@ export default function AppHeader({ ...props }: IAppHeader & React.DetailedHTMLP
                     name="company-website"
                     id="company-website"
                     className="bg-gray-100 focus:ring-blue-500 focus:border-blue-500 w-full rounded-md sm:text-sm p-2 pl-10"
-                    placeholder="Search"
+                    placeholder="搜索"
                 />
                 <Search className='h-5 w-5 text-gray-400 absolute top-2 left-2' />
             </div>
