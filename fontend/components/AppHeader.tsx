@@ -1,11 +1,16 @@
 import { useRouter } from 'next/router'
 import { Return, Search } from '../components/Icons'
 
-interface IAppHeader {
-
+interface IApp {
+    name: string
+    icon: string
 }
 
-export default function AppHeader({ ...props }: IAppHeader & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) {
+interface IAppHeader {
+    app: IApp
+}
+
+export default function AppHeader({ app, ...props }: IAppHeader & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) {
 
     const router = useRouter()
 
@@ -16,15 +21,9 @@ export default function AppHeader({ ...props }: IAppHeader & React.DetailedHTMLP
                     <Return className='h-5 w-5 text-gray-400' />
                 </div>
             </div>
-            <div className="relative w-64">
-                <input
-                    type="text"
-                    name="company-website"
-                    id="company-website"
-                    className="bg-gray-100 focus:ring-blue-500 focus:border-blue-500 w-full rounded-md sm:text-sm p-2 pl-10"
-                    placeholder="搜索"
-                />
-                <Search className='h-5 w-5 text-gray-400 absolute top-2 left-2' />
+            <div className='flex flex-row items-center space-x-1'>
+                <img src={app.icon} alt="" className='w-6 h-6' />
+                <span className='text-sm text-gray-900'>{app.name}</span>
             </div>
             <div></div>
         </div>

@@ -37,7 +37,7 @@ export const Search = (props: React.SVGProps<SVGSVGElement>) => {
 
 export const Return = (props: React.SVGProps<SVGSVGElement>) => {
     return (
-        <svg {...props} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M541.052632 238.315789V0L29.052632 512l512 512V785.684211L267.368421 512l273.684211-273.684211z" fill="currentColor"></path><path d="M424.421053 511.915789L543.578947 392.842105l119.073685 119.073684L543.578947 630.989474zM826.526316 427.789474h168.421052v168.421052h-168.421052z" fill="currentColor"></path></svg>
+        <svg {...props} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M261.04 478.06L649.74 89.38c18.74-18.74 49.14-18.74 67.88 0l45.34 45.34c18.72 18.72 18.74 49.04 0.08 67.8L454.98 512l308.04 309.5c18.68 18.76 18.64 49.08-0.08 67.8l-45.34 45.34c-18.74 18.74-49.14 18.74-67.88 0L261.04 545.94c-18.74-18.74-18.74-49.14 0-67.88z" fill="currentColor"></path></svg>
     )
 }
 
