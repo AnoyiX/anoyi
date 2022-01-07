@@ -2,11 +2,15 @@ const http = {
 
   get: async (url: string) => {
     const resp = await fetch(url)
-    const data = await resp.json()
-    if (data.code === 0) {
-      return data.data
+    if (resp.status == 200) {
+      const data = await resp.json()
+      if (data.code === 0) {
+        return data.data
+      }
+      throw new Error(data.message)
+    } else {
+      throw new Error('请求失败')
     }
-    throw new Error(data.message)
   }
 
 }
