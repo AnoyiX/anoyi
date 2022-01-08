@@ -15,7 +15,7 @@ const BlogPage = () => {
         <meta name="referrer" content="no-referrer" />
       </Head>
 
-      <AppHeader app={InlineApps[0]} />
+      <AppHeader path={[InlineApps[0],]} />
 
       <div className='bg-white flex flex-1 rounded-lg shadow p-8'>
         <div className='flex-none w-full h-full'>

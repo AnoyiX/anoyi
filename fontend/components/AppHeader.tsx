@@ -1,29 +1,56 @@
-import { useRouter } from 'next/router'
-import { Return, Search } from '../components/Icons'
+import Link from 'next/link'
+import { Right } from '../components/Icons'
 
-interface IApp {
+interface IPath {
     name: string
-    icon: string
+    icon?: string
+    url?: string
 }
 
 interface IAppHeader {
-    app: IApp
+    path: IPath[]
 }
 
-export default function AppHeader({ app, ...props }: IAppHeader & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) {
+export default function AppHeader({ path }: IAppHeader) {
 
-    const router = useRouter()
+    const HOME = {
+        name: '首页',
+        icon: 'https://cdn.anoyi.com/icon/home.svg',
+        url: '/'
+    }
+
+    const fullPath = [HOME, ...path]
+
+    const renderPath = (pathItem: IPath) => (
+        <div className={`flex flex-row items-center space-x-1 ${!!pathItem.url && 'cursor-pointer'}`}>
+            {
+                pathItem.icon && <img src={pathItem.icon} alt="" className='w-6 h-6' />
+            }
+            <span className='text-sm text-gray-900'>{pathItem.name}</span>
+        </div>
+    )
 
     return (
-        <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 px-4 py-2'>
-            <div>
-                <div className='py-2' onClick={router.back}>
-                    <Return className='h-5 w-5 text-gray-400' />
-                </div>
-            </div>
-            <div className='flex flex-row items-center space-x-1'>
-                <img src={app.icon} alt="" className='w-6 h-6' />
-                <span className='text-sm text-gray-900'>{app.name}</span>
+        <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 p-4'>
+            <div className='flex flex-row items-center space-x-2'>
+
+                {
+                    fullPath.map((item, index) => (
+                        <>
+                            {
+                                item.url ? (
+                                    <Link href={item.url}>
+                                        {renderPath(item)}
+                                    </Link>
+                                ) : renderPath(item)
+                            }
+                            {
+                                index < fullPath.length - 1 && <Right className='h-4 w-4 text-gray-400' />
+                            }
+                        </>
+                    ))
+                }
+
             </div>
             <div></div>
         </div>

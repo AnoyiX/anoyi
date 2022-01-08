@@ -4,11 +4,9 @@ import { InlineApps } from "../../constants/app"
 const VideoPage = () => {
 
   return (
-
-
       <div className='w-full p-10 flex flex-col space-y-6'>
 
-        <AppHeader app={InlineApps[1]} />
+        <AppHeader path={[InlineApps[1],]}  />
 
         <div className="w-full flex flex-row space-x-4 ">
           <video src="" controls={true} className="flex flex-1 rounded-lg shadow shadow-white">
