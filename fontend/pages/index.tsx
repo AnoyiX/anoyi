@@ -58,6 +58,9 @@ const IndexPage = () => {
               <a className="hover:text-blue-400" href="#">开源协议</a>
             </div>
             <div className='text-center'>
+              <span>Anoyi © 2022 All Rights Reserved.</span>
+            </div>
+            <div className='text-center'>
               <a className="text-gray-400 text-xs hover:text-blue-400" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备16007917号-1</a>
             </div>
           </div>
@@ -80,9 +83,6 @@ const IndexPage = () => {
         </div>
       </div>
 
-      <div className='bg-white rounded-lg shadow flex flex-row items-center justify-center space-x-2 p-4'>
-        <span className="text-gray-500 text-sm">Anoyi © 2022 All Rights Reserved.</span>
-      </div>
     </div>
   )
 
