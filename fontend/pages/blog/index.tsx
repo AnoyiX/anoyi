@@ -33,6 +33,7 @@ const BlogPage = () => {
               ))
             }
           </div>
+
         </div>
       </div>
     </div>
