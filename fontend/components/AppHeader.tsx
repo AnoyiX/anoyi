@@ -29,7 +29,7 @@ export default function AppHeader({ path }: IAppHeader) {
                 {
                     path.map((item, index) => (
                         <Fragment key={index}>
-                            <Right className='h-4 w-4 text-gray-400' />
+                            <Right className='h-3 w-3 text-gray-400' />
                             <div onClick={() => !!item.url && routeTo(item.url)} className={`flex flex-row items-center space-x-1 ${!!item.url && 'cursor-pointer'}`}>
                                 <span className='text-sm text-gray-900'>{item.name}</span>
                             </div>
