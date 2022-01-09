@@ -1,6 +1,6 @@
 # Basic 基本配置
 application:
-  title: VecFlow Service
+  title: Anoyi Service
   version: 0.1.0
   openapi_url: /openapi.json
   docs_url: /docs
@@ -10,3 +10,11 @@ application:
 yuque:
     host: https://www.yuque.com/api/v2
     token: ''
+
+# Mongo
+mongo:
+  host: 127.0.0.1
+  port: 27017
+  authSource: admin
+  username: admin
+  password: ''

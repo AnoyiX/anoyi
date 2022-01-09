@@ -2,5 +2,4 @@ fastapi==0.70.1
 fastlab==0.2.0
 uvicorn==0.15.0
 requests==2.27.0
-PyYAML==6.0
-beautifulsoup4==4.10.0
+pymongo==4.0.1
