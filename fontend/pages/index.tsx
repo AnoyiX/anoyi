@@ -3,6 +3,7 @@ import { Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
 import Link from 'next/link'
 import { Skills, Languages, ToolBox } from '../constants/user'
 import { InlineApps } from '../constants/app'
+import FullContainer from '../components/Containers'
 
 const IndexPage = () => {
 
@@ -50,7 +51,7 @@ const IndexPage = () => {
           <div className='flex flex-col items-center space-y-2 text-gray-400 text-xs'>
             <div className='flex flex-row space-x-1'>
               <a className="hover:text-blue-400" href="#">关于作者</a>
-              <span>{'·'}</span> 
+              <span>{'·'}</span>
               <a className="hover:text-blue-400" href="#">工作内推</a>
               <span>{'·'}</span>
               <a className="hover:text-blue-400" href="#">投诉建议</a>
@@ -58,29 +59,31 @@ const IndexPage = () => {
               <a className="hover:text-blue-400" href="#">开源协议</a>
             </div>
             <div className='text-center'>
-              <span>Anoyi © 2022 All Rights Reserved.</span>
+              <span>Anoyi © 2022 All Rights Reserved</span>
             </div>
             <div className='text-center'>
               <a className="text-gray-400 text-xs hover:text-blue-400" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备16007917号-1</a>
             </div>
           </div>
-
         </div>
 
-        <div className='bg-white flex flex-1 flex-row flex-wrap rounded-lg shadow p-8 gap-6'>
-          {
-            InlineApps.map((item, index) => (
-              <div className='flex flex-col items-center' key={index}>
-                <Link href={item.url}>
-                  <div className='w-20 h-20'>
-                    <img src={item.icon} alt="" className='w-full h-full' />
-                  </div>
-                </Link>
-                <span className='text-gray-800 text-sm'>{item.name}</span>
-              </div>
-            ))
-          }
-        </div>
+        <FullContainer>
+          <div className='flex flex-1 flex-row flex-wrap p-8 gap-6'>
+            {
+              InlineApps.map((item, index) => (
+                <div className='flex flex-col items-center' key={index}>
+                  <Link href={item.url}>
+                    <div className='w-20 h-20'>
+                      <img src={item.icon} alt="" className='w-full h-full' />
+                    </div>
+                  </Link>
+                  <span className='text-gray-800 text-sm'>{item.name}</span>
+                </div>
+              ))
+            }
+          </div>
+        </FullContainer>
+
       </div>
     </div>
   )

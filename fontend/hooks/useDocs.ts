@@ -1,39 +1,58 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import http from "../utils/http"
 
 export interface IDoc {
+    book_id: number
+    comments_count: number
+    content_updated_at: string
+    cover: null | string
+    created_at: string
+    custom_description: string
+    first_published_at: string
+    format: string
     id: number
+    last_editor: {
+        avatar_url: string
+        description: string
+        followers_count: number
+        following_count: number
+        id: number
+        login: string
+        name: string
+        _serializer: string
+    }
+    last_editor_id: number
     likes_count: number
-    list_image_url: string
-    public_abbr: string
-    public_comments_count: number
+    public: number
+    published_at: string
+    read_status: number
     slug: string
     title: string
-    total_fp_amount: number
-    total_rewards_count: number
-    views_count: number
+    updated_at: string
+    user_id: number
+    view_status: number
+    word_count: number
+    _serializer: string
 }
 
-export default function useDocs(_repoId: string, _skip = 0) {
+export default function useDocs(slug: string, skip: number, limit: number) {
 
-    const limit = 18
     const [docs, setDocs] = useState<IDoc[]>([])
-    const [repoId, setRepoId] = useState(_repoId)
-    const [skip, setSkip] = useState(_skip)
-
-    const getDocs = useCallback(async () => {
-        let data = await http.get(`/api/blog/repo/${repoId}/docs?skip=${skip}&limit=${limit}`)
-        setDocs(data)
-    }, [])
 
     useEffect(() => {
-        getDocs()
-    }, [repoId, skip])
+        slug && http.get(`/api/blog/repo/${slug}/docs?skip=${skip}&limit=${limit}`)
+            .then(data => setDocs(data.data))
+    }, [slug])
+
+    useEffect(() => {
+        if (skip > 0) {
+            http.get(`/api/blog/repo/${slug}/docs?skip=${skip}&limit=${limit}`)
+                .then(data => setDocs(old => [...old, ...data.data]))
+        }
+    }, [skip])
 
     return {
         docs,
-        setRepoId,
-        setSkip
     }
 
 }

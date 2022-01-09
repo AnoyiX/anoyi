@@ -1,9 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { Fragment } from 'react'
 import { Right } from '../components/Icons'
 
 interface IPath {
     name: string
-    icon?: string
     url?: string
 }
 
@@ -13,44 +14,28 @@ interface IAppHeader {
 
 export default function AppHeader({ path }: IAppHeader) {
 
-    const HOME = {
-        name: '首页',
-        icon: 'https://cdn.anoyi.com/icon/home.svg',
-        url: '/'
+    const router = useRouter()
+
+    const routeTo = (url: string) => {
+        router.push(url, undefined, { shallow: true })
     }
-
-    const fullPath = [HOME, ...path]
-
-    const renderPath = (pathItem: IPath) => (
-        <div className={`flex flex-row items-center space-x-1 ${!!pathItem.url && 'cursor-pointer'}`}>
-            {
-                pathItem.icon && <img src={pathItem.icon} alt="" className='w-6 h-6' />
-            }
-            <span className='text-sm text-gray-900'>{pathItem.name}</span>
-        </div>
-    )
 
     return (
         <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 p-4'>
             <div className='flex flex-row items-center space-x-2'>
-
+                <Link href={'/'}>
+                    <img src={'https://cdn.anoyi.com/icon/home.svg'} alt="" className='w-6 h-6 cursor-pointer' />
+                </Link>
                 {
-                    fullPath.map((item, index) => (
-                        <>
-                            {
-                                item.url ? (
-                                    <Link href={item.url}>
-                                        {renderPath(item)}
-                                    </Link>
-                                ) : renderPath(item)
-                            }
-                            {
-                                index < fullPath.length - 1 && <Right className='h-4 w-4 text-gray-400' />
-                            }
-                        </>
+                    path.map((item, index) => (
+                        <Fragment key={index}>
+                            <Right className='h-4 w-4 text-gray-400' />
+                            <div onClick={() => !!item.url && routeTo(item.url)} className={`flex flex-row items-center space-x-1 ${!!item.url && 'cursor-pointer'}`}>
+                                <span className='text-sm text-gray-900'>{item.name}</span>
+                            </div>
+                        </Fragment>
                     ))
                 }
-
             </div>
             <div></div>
         </div>

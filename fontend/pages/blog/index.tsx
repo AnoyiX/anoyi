@@ -1,12 +1,10 @@
 import AppHeader from "../../components/AppHeader"
 import { InlineApps } from '../../constants/app'
-import useRepos from '../../hooks/useRepos'
 import Head from 'next/head'
-import Link from 'next/link'
+import FullContainer from "../../components/Containers"
+import { Doing } from "../../components/Icons"
 
-const BlogPage = () => {
-
-  const { repos } = useRepos()
+const Blog = () => {
 
   return (
     <div className='w-full p-10 flex flex-col space-y-6'>
@@ -17,27 +15,14 @@ const BlogPage = () => {
 
       <AppHeader path={[InlineApps[0],]} />
 
-      <div className='bg-white flex flex-1 rounded-lg shadow p-8'>
-        <div className='flex-none w-full h-full'>
-          <div className=" flex flex-wrap gap-y-8 gap-x-2">
-            {
-              repos.map(repo => (
-                <div className='flex flex-col w-32 items-center'>
-                  <Link href={'' + repo.id} >
-                    <div className='w-20 h-20'>
-                      <img src={'https://cdn.anoyi.com/icon/folder.svg'} alt="" className="w-full h-full" />
-                    </div>
-                  </Link>
-                  <span className="text-sm text-gray-700 my-1">{repo.name}</span>
-                </div>
-              ))
-            }
-          </div>
-
+      <FullContainer>
+        <div className="h-full flex flex-col items-center justify-center gap-4 pb-24">
+          <Doing className="w-64 h-64"></Doing>
+          <span className="text-gray-500">为了更好的用户体验，作者正在奋力开发中，可前往「<a href="https://www.jianshu.com/u/7b7ec6f2db21" className="text-blue-500" target='_blank'>简书</a>」查看所有文章。</span>
         </div>
-      </div>
+      </FullContainer>
     </div>
   )
 }
 
-export default BlogPage
+export default Blog
