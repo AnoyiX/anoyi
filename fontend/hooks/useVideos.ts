@@ -63,7 +63,7 @@ export default function useVideos(skip: number, limit: number) {
                 sort: sort
             }).then(data => {
                 setVideos(old => [...old, ...data.data])
-                setHasMore(data.hasMore)
+                setHasMore(data.has_more)
             })
         }
     }, [skip])

@@ -7,7 +7,7 @@ import { Doing } from "../../components/Icons"
 const Blog = () => {
 
   return (
-    <div className='w-full p-10 flex flex-col space-y-6'>
+    <div className='w-full p-8 flex flex-col space-y-6'>
 
       <Head>
         <meta name="referrer" content="no-referrer" />

@@ -8,7 +8,7 @@ import FullContainer from '../components/Containers'
 const IndexPage = () => {
 
   return (
-    <div className='w-full flex flex-col flex-1 space-y-6 p-10'>
+    <div className='w-full flex flex-col flex-1 space-y-6 p-8'>
 
       <div className='flex flex-row flex-1 space-x-6'>
 
