@@ -23,19 +23,19 @@ const IndexPage = () => {
             </div>
             <div className='flex flex-row space-x-4 items-center justify-center text-lg border-t border-gray-200 pt-4 w-full'>
               <a href="https://github.com/AnoyiX" target="_blank">
-                <Github className='h-6 w-6 text-gray-400' />
+                <Github className='h-6 w-6 text-gray-400 hover:text-gray-800' />
               </a>
               <a href="https://www.yuque.com/anoyi" target="_blank">
-                <Yuque className='h-6 w-6 text-gray-400' />
+                <Yuque className='h-6 w-6 text-gray-400 hover:text-gray-800' />
               </a>
               <a href="https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0" target="_blank">
-                <Douyin className='h-6 w-6 text-gray-400' />
+                <Douyin className='h-6 w-6 text-gray-400 hover:text-gray-800' />
               </a>
               <a href="https://www.jianshu.com/u/7b7ec6f2db21" target="_blank">
-                <Jianshu className='h-6 w-6 text-gray-400' />
+                <Jianshu className='h-6 w-6 text-gray-400 hover:text-gray-800' />
               </a>
               <a href="https://www.zhihu.com/people/anoyi-x" target="_blank">
-                <Zhihu className='h-6 w-6 text-gray-400' />
+                <Zhihu className='h-6 w-6 text-gray-400 hover:text-gray-800' />
               </a>
             </div>
           </div>
@@ -71,7 +71,7 @@ const IndexPage = () => {
           <div className='flex flex-1 flex-row flex-wrap p-8 gap-6'>
             {
               InlineApps.map((item, index) => (
-                <div className='flex flex-col items-center' key={index}>
+                <div className='flex flex-col items-center gap-1' key={index}>
                   <Link href={item.url}>
                     <div className='w-20 h-20'>
                       <img src={item.icon} alt="" className='w-full h-full' />

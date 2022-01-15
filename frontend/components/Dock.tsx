@@ -16,7 +16,7 @@ export interface IDockItem {
 export function DockItem({ name, url, icon }: IDockItem) {
     return (
         <div className='flex flex-col w-32 items-center'>
-            <div onClick={() => window.open(url, '_blank')} className='w-20 h-20 border border-gray-200 rounded-2xl p-2 bg-gray-200 bg-opacity-10 no-underline hover:border-blue-500'>
+            <div onClick={() => window.open(url, '_blank')} className='w-20 h-20 border border-gray-200 rounded-2xl p-2 bg-gray-200 bg-opacity-10 no-underline'>
                 <img src={icon} alt="" className="w-full h-full" />
             </div>
             <span className="text-sm text-gray-700 my-2">{name}</span>

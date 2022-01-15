@@ -10,8 +10,13 @@ export const InlineApps = [
         url: '/video'
     },
     {
+        name: '相册',
+        icon: 'https://cdn.anoyi.com/apps/ios-photos.svg',
+        url: '/photo'
+    },
+    {
         name: '理财',
-        icon: 'https://cdn.anoyi.com/apps/cash.svg',
+        icon: 'https://cdn.anoyi.com/apps/bitcoin.svg',
         url: '/finances'
     },
 ]
