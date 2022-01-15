@@ -65,11 +65,17 @@ export const Location = (props: React.SVGProps<SVGSVGElement>) => {
     )
 }
 
+export const Close = (props: React.SVGProps<SVGSVGElement>) => {
+    return (
+        <svg {...props} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M225.834667 225.834667a42.666667 42.666667 0 0 1 60.330666 0L512 451.669333l225.834667-225.834666a42.666667 42.666667 0 1 1 60.330666 60.330666L572.330667 512l225.834666 225.834667a42.666667 42.666667 0 0 1-60.330666 60.330666L512 572.330667l-225.834667 225.834666a42.666667 42.666667 0 0 1-60.330666-60.330666L451.669333 512 225.834667 286.165333a42.666667 42.666667 0 0 1 0-60.330666z" fill="currentColor"></path></svg>
+    )
+}
+
 export const Doing = (props: React.SVGProps<SVGSVGElement>) => {
     return (
         <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <defs>
-                <filter id="ldio-0xnhyi3v9qt-filter" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
+                <filter id="ldio-0xnhyi3v9qt-filter" x="-100%" y="-100%" width="300%" height="300%" colorInterpolationFilters="sRGB">
                     <feGaussianBlur in="SourceGraphic" stdDeviation="2.4000000000000004"></feGaussianBlur>
                     <feComponentTransfer result="cutoff">
                         <feFuncA type="table" tableValues="0 0 0 0 0 0 1 1 1 1 1"></feFuncA>

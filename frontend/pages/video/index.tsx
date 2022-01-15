@@ -7,19 +7,31 @@ import { InlineApps } from "../../constants/app"
 import useVideos from "../../hooks/useVideos"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Doing, Location } from '../../components/Icons'
+import VideoModal from "../../components/video/VideoModal"
+import Head from "next/head"
 
 const Video = () => {
   const limit = 20
   const [skip, setSkip] = useState(0)
   const { videos, hasMore } = useVideos(skip, limit)
+  const [showVideo, setShowVideo] = useState(false)
+  const [vid, setVid] = useState('')
 
   const fetchMore = () => {
-    console.log('load more')
     setSkip(pre => pre + limit)
+  }
+
+  const playVideo = (vid: string) => {
+    setVid(vid)
+    setShowVideo(true)
   }
 
   return (
     <div className='w-full p-8 flex flex-col space-y-6'>
+
+      <Head>
+        <meta name="referrer" content="no-referrer" />
+      </Head>
 
       <AppHeader path={[InlineApps[1],]} />
 
@@ -30,12 +42,12 @@ const Video = () => {
           dataLength={videos.length}
           next={fetchMore}
           hasMore={hasMore}
-          loader={<div className="my-8 mx-auto lg:col-span-2"><Doing className='h-20 w-20'/></div>}
+          loader={<div className="my-8 mx-auto lg:col-span-2"><Doing className='h-20 w-20' /></div>}
         >
           {
             videos.map((item, index) => (
               <div key={index} className="border rounded-lg h-64 w-full flex flex-row">
-                <img src={item.video.cover.url_list[0]} alt="" className="rounded-l-lg" />
+                <img src={item.video.cover.url_list[0]} alt="" className="rounded-l-lg cursor-pointer hover:opacity-75" onClick={() => playVideo(item.video.play_addr.uri)} />
                 <div className="flex flex-col p-4 justify-between">
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
@@ -69,8 +81,9 @@ const Video = () => {
             ))
           }
         </InfiniteScroll>
-
       </FullContainer>
+
+      <VideoModal isOpen={showVideo} vid={vid} onClose={() => setShowVideo(false)} />
     </div>
   )
 
