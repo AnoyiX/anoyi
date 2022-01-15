@@ -14,4 +14,4 @@ app.add_middleware(
 )
 
 
-__all__ = ['app', 'blog', 'mongo']
+__all__ = ['app', 'blog', 'mongo', 'video']
