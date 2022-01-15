@@ -54,7 +54,7 @@ export default function VideoModal({ isOpen, vid, onClose }: IVideo) {
                     >
                         <div className='w-full h-full transition-all transform'>
                             <div className='w-full h-full flex items-center justify-center'>
-                                <video ref={videoRef} controls className='w-full max-w-4xl rounded-lg'></video>
+                                <video ref={videoRef} controls className='w-full max-w-4xl rounded-lg shadow shadow-gray-900'></video>
                             </div>
                         </div>
                     </Transition.Child>
