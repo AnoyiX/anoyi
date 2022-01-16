@@ -1,4 +1,5 @@
 module.exports = {
+    distDir: 'dist',
     async rewrites() {
         return {
             // After checking all Next.js pages (including dynamic routes)
