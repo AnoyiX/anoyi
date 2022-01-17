@@ -10,10 +10,11 @@ const Blog = () => {
     <div className='w-full p-8 flex flex-col space-y-6'>
 
       <Head>
+        <title>{InlineApps[3].name}</title>
         <meta name="referrer" content="no-referrer" />
       </Head>
 
-      <AppHeader path={[InlineApps[2],]} />
+      <AppHeader path={[InlineApps[3],]} />
 
       <FullContainer>
         <div className="h-full flex flex-col items-center justify-center gap-4 pb-24">

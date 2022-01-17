@@ -29,6 +29,7 @@ const Video = () => {
     <div className='w-full p-8 flex flex-col space-y-6'>
 
       <Head>
+        <title>{InlineApps[1].name}</title>
         <meta name="referrer" content="no-referrer" />
       </Head>
 

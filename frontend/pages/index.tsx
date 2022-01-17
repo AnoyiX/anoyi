@@ -4,11 +4,16 @@ import Link from 'next/link'
 import { Skills, Languages, ToolBox } from '../constants/user'
 import { InlineApps } from '../constants/app'
 import FullContainer from '../components/Containers'
+import Head from 'next/head'
 
 const IndexPage = () => {
 
   return (
     <div className='w-full flex flex-col flex-1 space-y-6 p-8'>
+
+      <Head>
+        <title>轻量级云原生架构实验室</title>
+      </Head>
 
       <div className='flex flex-row flex-1 space-x-6'>
 
