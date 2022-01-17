@@ -30,7 +30,6 @@ const Video = () => {
 
       <Head>
         <title>{InlineApps[1].name}</title>
-        <meta name="referrer" content="no-referrer" />
       </Head>
 
       <AppHeader path={[InlineApps[1],]} />

@@ -11,7 +11,6 @@ const Blog = () => {
 
       <Head>
         <title>{InlineApps[0].name}</title>
-        <meta name="referrer" content="no-referrer" />
       </Head>
 
       <AppHeader path={[InlineApps[0],]} />
