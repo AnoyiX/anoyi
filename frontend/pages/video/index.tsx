@@ -35,7 +35,6 @@ const Video = () => {
       <AppHeader path={[InlineApps[1],]} />
 
       <FullContainer>
-
         <InfiniteScroll
           className="grid grid-cols-1 p-8 gap-8 lg:grid-cols-2"
           dataLength={videos.length}
