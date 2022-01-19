@@ -57,16 +57,16 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                     >
                         <div className='max-w-4xl mx-auto h-full transition-all transform'>
                             <div className='w-full h-full flex flex-col items-center justify-center'>
-                                <div className='flex flex-row w-full justify-end bg-gray-900 p-2 rounded-t-lg shadow shadow-gray-900'>
-                                    <Close className="w-5 h-5 cursor-pointer text-gray-500" onClick={onClose} />
+                                <div className='relative w-full'>
+                                    <Close className="absolute top-0 -right-8 w-6 h-6 cursor-pointer text-gray-100" onClick={onClose} />
                                 </div>
                                 {
                                     isError ? (
-                                        <div className='h-96 w-full flex flex-col gap-4 justify-center items-center bg-gray-800 rounded-b-lg shadow shadow-gray-900'>
+                                        <div className='h-96 w-full flex flex-col gap-4 justify-center items-center bg-gray-800 rounded-lg shadow shadow-gray-900'>
                                             <Warning className='w-16 h-16 text-gray-500' />
                                             <span className='text-gray-500'>视频加载失败，请观看其它视频！</span>
                                         </div>
-                                    ) : <video ref={videoRef} controls className='w-full rounded-b-lg outline-0 shadow shadow-gray-900' /> 
+                                    ) : <video ref={videoRef} controls className='w-full rounded-lg outline-0 shadow shadow-gray-900' /> 
                                 }
                             </div>
                         </div>

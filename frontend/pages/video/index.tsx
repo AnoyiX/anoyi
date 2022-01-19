@@ -36,11 +36,11 @@ const Video = () => {
 
       <FullContainer>
         <InfiniteScroll
-          className="grid grid-cols-1 p-8 gap-8 lg:grid-cols-2"
+          className="w-full grid grid-cols-1 p-8 gap-8 lg:grid-cols-2"
           dataLength={videos.length}
           next={fetchMore}
           hasMore={hasMore}
-          loader={<div className="my-8 mx-auto lg:col-span-2"><Doing className='h-20 w-20' /></div>}
+          loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
         >
           {
             videos.map((item, index) => <VideoCard key={index} video={item} onPlay={playVideo} />)
