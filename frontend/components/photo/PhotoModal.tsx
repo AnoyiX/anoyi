@@ -2,7 +2,6 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect } from 'react'
 import { IPhoto } from '../../hooks/usePhotos'
 import { Close } from '../Icons'
-import 'swiper/css'
 
 interface PhotoModalProps {
     isOpen: boolean
@@ -41,9 +40,9 @@ export default function PhotoModal({ isOpen, photos, photoIndex, onClose }: Phot
                                     <Close className='h-5 w-5 text-gray-400 cursor-pointer' onClick={onClose} />
                                 </div>
                             </div>
-                            <div className='flex flex-1 items-center justify-center'>
+                            <div className='flex h-full items-center justify-center'>
                                 {
-                                    photos.length > 0 && <img src={photos[photoIndex].file} alt="" className='h-full w-full object-contain' />
+                                    photos.length > 0 && <img src={photos[photoIndex].file} alt="" className='max-h-full object-contain' />
                                 }
                             </div>
                         </div>
