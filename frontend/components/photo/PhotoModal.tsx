@@ -41,12 +41,10 @@ export default function PhotoModal({ isOpen, photos, photoIndex, onClose }: Phot
                                     <Close className='h-5 w-5 text-gray-400 cursor-pointer' onClick={onClose} />
                                 </div>
                             </div>
-                            <div className='flex flex-1 w-full items-center justify-center'>
-                                <div className='flex-none w-full h-full'>
-                                    {
-                                        photos.length > 0 && <img src={photos[photoIndex].file} alt="" className='h-full w-full object-contain' />
-                                    }
-                                </div>
+                            <div className='flex flex-1 items-center justify-center'>
+                                {
+                                    photos.length > 0 && <img src={photos[photoIndex].file} alt="" className='h-full w-full object-contain' />
+                                }
                             </div>
                         </div>
                     </Transition.Child>
