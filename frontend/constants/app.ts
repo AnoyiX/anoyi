@@ -11,12 +11,17 @@ export const InlineApps = [
     },
     {
         name: '相册',
-        icon: 'https://cdn.anoyi.com/apps/ios-photos.svg',
+        icon: 'https://cdn.anoyi.com/apps/photos.svg',
         url: '/photo'
     },
     {
         name: '理财',
-        icon: 'https://cdn.anoyi.com/apps/bitcoin.svg',
-        url: '/finances'
+        icon: 'https://cdn.anoyi.com/apps/finance.svg',
+        url: '/finance'
+    },
+    {
+        name: 'CNCF',
+        icon: 'https://cdn.anoyi.com/apps/cncf.svg',
+        url: '/cncf'
     },
 ]

@@ -4,7 +4,7 @@ import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import { Doing } from "../../components/Icons"
 
-const Blog = () => {
+const Finace = () => {
 
   return (
     <div className='w-full p-8 flex flex-col space-y-6'>
@@ -25,4 +25,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Finace
