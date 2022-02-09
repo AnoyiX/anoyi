@@ -1,19 +1,14 @@
 from fastlab.models import Response
 from api import app
 import requests
-import json
+from common import UA
 
-@app.get('/api/stock/overview/{code}')
-def stock_overview(code: str):
+
+@app.get('/api/stock/index/{category}')
+def stock_index(category: str):
     """
     综合指数
     """
-    headers = {
-        'Host': 'd.10jqka.com.cn',
-        'Referer': 'http://q.10jqka.com.cn/',
-        'Pragma': 'no-cache'
-    }
-    api = f'http://d.10jqka.com.cn/v6/time/{code}/last.js'
-    resp = requests.get(api, headers=headers).text
-    data = resp.replace(f'quotebridge_v6_time_{code}_last(', '')[0:-1]
-    return Response(data=json.loads(data))
+    api = f'https://danjuanfunds.com/djapi/fundx/base/index/quotes?category={category}'
+    resp = requests.get(api, headers=UA.iphone,).json()
+    return Response(data=resp['data'][category])
