@@ -2,9 +2,25 @@ import AppHeader from "../../components/AppHeader"
 import { InlineApps } from '../../constants/app'
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
-import { Doing } from "../../components/Icons"
+import StockIndicesGroup from "../../components/finance/StockIndicesGroup"
+import { Tab } from '@headlessui/react'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const Finace = () => {
+
+  const categories = [{
+    name: '沪深指数',
+    type: 'hszs',
+  }, {
+    name: '港股指数',
+    type: 'ggzs',
+  }, {
+    name: '美股指数',
+    type: 'mgzs',
+  }]
 
   return (
     <div className='w-full p-8 flex flex-col space-y-6'>
@@ -16,10 +32,35 @@ const Finace = () => {
       <AppHeader path={[InlineApps[3],]} />
 
       <FullContainer>
-        <div className="h-full flex flex-col items-center justify-center gap-4 pb-24">
-          <Doing className="w-64 h-64"></Doing>
-          <span className="text-gray-500">专注 ETF，正在开发，敬请期待！</span>
+        <div className="p-8">
+          <Tab.Group>
+            <div className="w-full flex justify-center">
+              <Tab.List className="flex w-96 p-1 gap-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl">
+                {categories.map((category) => (
+                  <Tab
+                    key={category.type}
+                    className={({ selected }) =>
+                      classNames(
+                        'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
+                        selected ? 'bg-white shadow' : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
+                      )
+                    }
+                  >
+                    {category.name}
+                  </Tab>
+                ))}
+              </Tab.List>
+            </div>
+            <Tab.Panels className="mt-4">
+              {categories.map((category, idx) => (
+                <Tab.Panel key={idx} className={'bg-white rounded-xl p-3'}>
+                  <StockIndicesGroup category={category.type} />
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
         </div>
+
       </FullContainer>
     </div>
   )
