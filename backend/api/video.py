@@ -1,7 +1,10 @@
 from fastlab.models import Response
+from fastlab.utils import TimeUtils
 from api import app
 import requests
+from models import APIBody
 from common import UA
+from db import mongo
 
 
 @app.get('/api/video/play')
@@ -32,3 +35,17 @@ def play_share(share_url: str):
             if resp.get('item_list'):
                 return play_url(resp['item_list'][0]['video']['vid'])
     return Response(code=400, message='invlid share url')
+
+
+@app.post('/api/video/fetch/favorite')
+def fetch_favorite(body: APIBody):
+    """
+    收藏 -> 抖音 -> 我的喜欢
+    """
+    headers = {x.name: x.value for x in body.headers}
+    resp = requests.get(body.url, headers=headers).json()
+    if resp['status_code'] == 0:
+            for item in resp['aweme_list']:
+                item['collect_time'] = TimeUtils.timestamp()
+                mongo['anoyi']['videos'].update({'aweme_id': item['aweme_id']}, item, upsert=True)
+    return Response(data=(resp['status_code'] == 0))
