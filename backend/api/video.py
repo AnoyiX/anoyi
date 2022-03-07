@@ -47,5 +47,5 @@ def fetch_favorite(body: APIBody):
     if resp['status_code'] == 0:
             for item in resp['aweme_list']:
                 item['collect_time'] = TimeUtils.timestamp()
-                mongo['anoyi']['videos'].update({'aweme_id': item['aweme_id']}, item, upsert=True)
+                mongo['anoyi']['videos'].update_one({'aweme_id': item['aweme_id']}, {'$set': item}, upsert=True)
     return Response(data=(resp['status_code'] == 0))
