@@ -6,7 +6,7 @@ export interface IVideo {
     desc: string
     author: {
         nickname: string
-        avatar_168x168: {
+        avatar_thumb: {
             url_list: string[]
         }
         custom_verify: string
@@ -35,7 +35,7 @@ const projection = {
     'author.nickname': 1,
     'video.cover': 1,
     'video.play_addr.uri': 1,
-    'author.avatar_168x168': 1,
+    'author.avatar_thumb': 1,
     'author.custom_verify': 1,
     create_time: 1,
     'poi_info.poi_name': 1,
