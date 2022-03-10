@@ -66,7 +66,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                                             <Warning className='w-16 h-16 text-gray-500' />
                                             <span className='text-gray-500'>视频加载失败，请观看其它视频！</span>
                                         </div>
-                                    ) : <video ref={videoRef} controls className='w-full rounded-lg outline-0 shadow shadow-gray-900' /> 
+                                    ) : <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' /> 
                                 }
                             </div>
                         </div>

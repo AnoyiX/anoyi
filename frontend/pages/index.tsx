@@ -78,7 +78,7 @@ const IndexPage = () => {
               InlineApps.map((item, index) => (
                 <div className='flex flex-col items-center gap-1' key={index}>
                   <Link href={item.url}>
-                    <div className='w-20 h-20'>
+                    <div className='w-20 h-20 cursor-pointer'>
                       <img src={item.icon} alt="" className='w-full h-full' />
                     </div>
                   </Link>

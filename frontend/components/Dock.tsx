@@ -37,7 +37,7 @@ export default function Dock({ name, data }: IDock) {
 
     return (
         <>
-            <div className='flex flex-col space-y-2 items-center' onClick={openModal}>
+            <div className='flex flex-col space-y-2 items-center cursor-pointer' onClick={openModal}>
                 <div className='bg-gray-100 w-16 h-16 rounded-md p-2'>
                     {
                         data.length > 0 && (
