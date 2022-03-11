@@ -6,7 +6,7 @@ import FullContainer from "../../components/Containers"
 const CNCF = () => {
 
   return (
-    <div className='w-full p-8 flex flex-col space-y-6'>
+    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
         <title>{InlineApps[4].name}</title>

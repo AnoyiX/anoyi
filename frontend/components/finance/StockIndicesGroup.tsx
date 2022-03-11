@@ -22,7 +22,7 @@ export default function StockIndicesGroup({ category }: StockIndexGroupProps) {
     }
 
     return (
-        <div className="grid grid-cols-3 gap-8 text-white">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-white">
             {
                 indices.map((item, index) => (
                     <div key={index} className={`rounded-lg w-full flex flex-col shadow-lg gap-1 py-6 justify-center items-center ${getBackgroundColor(item.percentage)}`}>

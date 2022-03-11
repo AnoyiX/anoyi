@@ -23,7 +23,7 @@ const Finace = () => {
   }]
 
   return (
-    <div className='w-full p-8 flex flex-col space-y-6'>
+    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
         <title>{InlineApps[3].name}</title>
@@ -32,7 +32,7 @@ const Finace = () => {
       <AppHeader path={[InlineApps[3],]} />
 
       <FullContainer>
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <Tab.Group>
             <div className="w-full flex justify-center">
               <Tab.List className="flex w-96 p-1 gap-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl">
@@ -53,7 +53,7 @@ const Finace = () => {
             </div>
             <Tab.Panels className="mt-4">
               {categories.map((category, idx) => (
-                <Tab.Panel key={idx} className={'bg-white rounded-xl p-3'}>
+                <Tab.Panel key={idx} className={'bg-white rounded-xl md:p-4'}>
                   <StockIndicesGroup category={category.type} />
                 </Tab.Panel>
               ))}

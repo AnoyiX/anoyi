@@ -12,8 +12,8 @@ interface VideoCardProps {
 export default function VideoCard({ video, onPlay }: VideoCardProps) {
 
     return (
-        <div className="border rounded-lg h-64 w-full flex flex-row">
-            <img src={video.video.cover.url_list[0]} alt="" className="rounded-l-lg cursor-pointer hover:opacity-75" onClick={() => onPlay(video.video.play_addr.uri)} />
+        <div className="border rounded-lg lg:h-64 w-full flex flex-col lg:flex-row">
+            <img src={video.video.cover.url_list[0]} alt="" className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg cursor-pointer hover:opacity-75" onClick={() => onPlay(video.video.play_addr.uri)} />
             <div className="flex flex-col p-4 justify-between">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
@@ -28,7 +28,7 @@ export default function VideoCard({ video, onPlay }: VideoCardProps) {
                     </div>
                 </div>
 
-                <div className="flex flex-row gap-4 text-xs items-center">
+                <div className="flex flex-row gap-4 text-xs items-center pt-2">
                     {
                         video.poi_info && (
                             <a href={`https://gaode.com/search?query=${video.poi_info.poi_name}&geoobj=${video.poi_info.poi_longitude}%7C${video.poi_info.poi_latitude}`}

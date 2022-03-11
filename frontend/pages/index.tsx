@@ -9,24 +9,24 @@ import Head from 'next/head'
 const IndexPage = () => {
 
   return (
-    <div className='w-full flex flex-col flex-1 space-y-6 p-8'>
+    <div className='w-full flex flex-col flex-1 gap-4 md:gap-6 p-4 md:p-8'>
 
       <Head>
         <title>轻量级云原生架构实验室</title>
       </Head>
 
-      <div className='flex flex-row flex-1 space-x-6'>
+      <div className='flex flex-col md:flex-row flex-1 gap-4 md:gap-6'>
 
-        <div className='flex flex-col space-y-6'>
-          <div className='bg-white w-72 h-72 rounded-lg shadow flex flex-col space-y-4 items-center justify-center'>
-            <div className='flex flex-col items-center justify-center space-y-2'>
+        <div className='flex flex-col gap-4 md:gap-6'>
+          <div className='bg-white w-full md:w-72 p-4 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
+            <div className='flex flex-col items-center justify-center gap-2'>
               <img className="w-32 h-32 rounded-full" src="https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="" />
               <div className="text-xl font-medium">Anoyi 🐬</div>
               <div className='text-gray-400'>
                 <span className='text-sm'>轻量级云原生架构实验室</span>
               </div>
             </div>
-            <div className='flex flex-row space-x-4 items-center justify-center text-lg border-t border-gray-200 pt-4 w-full'>
+            <div className='flex flex-row gap-4 items-center justify-center text-lg border-t border-gray-200 pt-4 w-full'>
               <a href="https://github.com/AnoyiX" target="_blank">
                 <Github className='h-6 w-6 text-gray-400 hover:text-gray-800' />
               </a>
@@ -45,7 +45,7 @@ const IndexPage = () => {
             </div>
           </div>
 
-          <div className='bg-white w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
+          <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
             {
               [Languages, Skills, ToolBox].map((item, index) => (
                 <Dock name={item.name} key={index} data={item.children}></Dock>
@@ -53,7 +53,7 @@ const IndexPage = () => {
             }
           </div>
 
-          <div className='flex flex-col items-center space-y-2 text-gray-400 text-xs'>
+          <div className='md:flex hidden flex-col items-center space-y-2 text-gray-400 text-xs '>
             <div className='flex flex-row space-x-1'>
               <a className="hover:text-blue-400" href="#">关于作者</a>
               <span>{'·'}</span>

@@ -44,7 +44,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                 className="fixed inset-0 z-10 overflow-y-auto"
                 onClose={onClose}
             >
-                <div className="h-full w-full mx-auto text-center px-32 pt-20 pb-32">
+                <div className="h-full w-full mx-auto text-center lg:px-32 lg:pt-20 lg:pb-32">
                     <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-60"/>
                     <Transition.Child
                         as={Fragment}
@@ -58,7 +58,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                         <div className='max-w-4xl mx-auto h-full transition-all transform'>
                             <div className='w-full h-full flex flex-col items-center justify-center'>
                                 <div className='relative w-full'>
-                                    <Close className="absolute top-0 -right-8 w-6 h-6 cursor-pointer text-gray-100" onClick={onClose} />
+                                    <Close className="absolute -top-8 right-1 lg:top-0 lg:-right-8 w-6 h-6 cursor-pointer text-gray-100" onClick={onClose} />
                                 </div>
                                 {
                                     isError ? (

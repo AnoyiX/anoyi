@@ -26,7 +26,7 @@ const Video = () => {
   }
 
   return (
-    <div className='w-full p-8 flex flex-col space-y-6'>
+    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
         <title>{InlineApps[1].name}</title>
@@ -36,7 +36,7 @@ const Video = () => {
 
       <FullContainer>
         <InfiniteScroll
-          className="w-full grid grid-cols-1 p-8 gap-8 lg:grid-cols-2"
+          className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 lg:grid-cols-2"
           dataLength={videos.length}
           next={fetchMore}
           hasMore={hasMore}
