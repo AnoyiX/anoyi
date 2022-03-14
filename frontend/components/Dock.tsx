@@ -51,10 +51,10 @@ export default function Dock({ name, data }: IDock) {
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog
                     as="div"
-                    className="fixed inset-0 z-10 overflow-y-auto"
+                    className="fixed inset-0 z-10"
                     onClose={closeModal}
                 >
-                    <div className="h-full w-full mx-auto text-center px-32 pt-20 pb-32">
+                    <div className="h-full w-full mx-auto text-center p-4 md:px-32 md:pt-20 md:pb-32">
                         <Dialog.Overlay className="fixed inset-0 bg-gray-200" />
                         <Transition.Child
                             as={Fragment}
@@ -65,10 +65,10 @@ export default function Dock({ name, data }: IDock) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <div className='w-full h-full transition-all transform'>
+                            <div className='w-full md:h-full transition-all transform'>
                                 <p className='text-gray-500 text-lg mb-4'>{name}</p>
-                                <div className='bg-white w-full h-full p-8 shadow-xl rounded-2xl overflow-y-scroll'>
-                                    <div className=" flex flex-wrap justify-center gap-2">
+                                <div className='bg-white w-full h-full p-4 md:p-8 shadow-xl rounded-2xl overflow-y-scroll'>
+                                    <div className=" flex flex-wrap justify-center gap-1 md:gap-2">
                                         {
                                             data.map((item, index) => (
                                                 <DockItem key={index} name={item.name} icon={item.icon} url={item.url} />
