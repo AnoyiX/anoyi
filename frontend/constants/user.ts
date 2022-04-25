@@ -62,6 +62,16 @@ export const Skills = {
             icon: 'https://cdn.anoyi.com/icons/spring.svg',
             url: 'https://spring.io'
         },
+        {
+            name: 'NextJS',
+            icon: 'https://cdn.anoyi.com/icons/nextjs.svg',
+            url: 'https://nextjs.org'
+        },
+        {
+            name: 'TailwindCSS',
+            icon: 'https://cdn.anoyi.com/icons/tailwind.svg',
+            url: 'https://tailwindcss.com'
+        },
     ]
 }
 
@@ -73,5 +83,15 @@ export const ToolBox = {
             icon: 'https://cdn.anoyi.com/icons/vs-code.svg',
             url: 'https://code.visualstudio.com'
         },
+        {
+            name: 'Warp',
+            icon: 'https://cdn.anoyi.com/icons/warp.svg',
+            url: 'https://warp.dev'
+        },
+        {
+            name: 'ClashX',
+            icon: 'https://cdn.anoyi.com/icons/clashx.png',
+            url: 'https://github.com/yichengchen/clashX/releases'
+        },  
     ]
 }
