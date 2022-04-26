@@ -6,10 +6,9 @@ application:
   docs_url: /docs
   redoc_url: /redoc
 
-# YuQue 语雀
-yuque:
-    host: https://www.yuque.com/api/v2
-    token: ''
+# JianShu 简书
+jianshu:
+    user_slug: ''
 
 # Mongo
 mongo:
