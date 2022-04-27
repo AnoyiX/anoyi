@@ -3,8 +3,20 @@ import { InlineApps } from '../../constants/app'
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import { Doing } from "../../components/Icons"
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useState } from "react"
+import useBlogs from "../../hooks/useBlogs"
+import BlogCard from "../../components/blog/BlogCard"
 
 const Blog = () => {
+
+  const count = 10
+  const [page, setPage] = useState(1)
+  const { blogs, hasMore } = useBlogs(page, count)
+
+  const fetchMore = () => {
+    setPage(pre => pre + 1)
+  }
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
@@ -16,10 +28,17 @@ const Blog = () => {
       <AppHeader path={[InlineApps[0],]} />
 
       <FullContainer>
-        <div className="h-full flex flex-col items-center justify-center gap-4 pb-24 p-4">
-          <Doing className="w-64 h-64"></Doing>
-          <span className="text-gray-500 text-center">为了更好的用户体验，作者正在奋力开发中，可前往「<a href="https://www.jianshu.com/u/7b7ec6f2db21" className="text-blue-500" target='_blank'>简书</a>」查看所有文章。</span>
-        </div>
+        <InfiniteScroll
+          className="w-full flex flex-col px-4 divide-y"
+          dataLength={blogs.length}
+          next={fetchMore}
+          hasMore={hasMore}
+          loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
+        >
+          {
+            blogs.map((item, index) => <BlogCard key={index} blog={item} />)
+          }
+        </InfiniteScroll>
       </FullContainer>
     </div>
   )

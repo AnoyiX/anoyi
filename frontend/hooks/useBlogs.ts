@@ -1,58 +1,47 @@
 import { useEffect, useState } from "react"
 import http from "../utils/http"
 
-export interface IDoc {
-    book_id: number
-    comments_count: number
-    content_updated_at: string
-    cover: null | string
-    created_at: string
-    custom_description: string
-    first_published_at: string
-    format: string
+export interface IBlog {
+    commentable: boolean
+    first_shared_at: string
     id: number
-    last_editor: {
-        avatar_url: string
-        description: string
-        followers_count: number
-        following_count: number
-        id: number
-        login: string
-        name: string
-        _serializer: string
-    }
-    last_editor_id: number
+    is_top: boolean
     likes_count: number
-    public: number
-    published_at: string
-    read_status: number
+    list_image_url: string
+    paid: boolean
+    public_abbr: string
+    public_comments_count: number
     slug: string
     title: string
-    updated_at: string
-    user_id: number
-    view_status: number
-    word_count: number
-    _serializer: string
+    total_fp_amount: number
+    total_rewards_count: number
+    user: {
+        avatar: string
+        id: number
+        nickname: string
+        slug: string
+    }
+    views_count: number
 }
 
-export default function useDocs(slug: string, skip: number, limit: number) {
+export default function useBlogs(page: number, count: number) {
 
-    const [docs, setDocs] = useState<IDoc[]>([])
-
-    useEffect(() => {
-        slug && http.get(`/api/blog/repo/${slug}/docs?skip=${skip}&limit=${limit}`)
-            .then(data => setDocs(data.data))
-    }, [slug])
+    const [blogs, setBlogs] = useState<IBlog[]>([])
+    const [hasMore, setHasMore] = useState(true)
 
     useEffect(() => {
-        if (skip > 0) {
-            http.get(`/api/blog/repo/${slug}/docs?skip=${skip}&limit=${limit}`)
-                .then(data => setDocs(old => [...old, ...data.data]))
+        if (page > 0) {
+            http.get(`/api/blog/notes?page=${page}&count=${count}`)
+                .then(data => {
+                    setBlogs(old => [...old, ...data.data])
+                    setHasMore(data.has_more)
+                })
         }
-    }, [skip])
+    }, [page])
 
     return {
-        docs,
+        blogs,
+        hasMore
     }
 
 }
