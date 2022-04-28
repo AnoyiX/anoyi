@@ -8,7 +8,7 @@ interface BlogCardProps {
 export default function BlogCard({ blog }: BlogCardProps) {
 
     return (
-        <div className="w-full flex flex-col lg:flex-row py-4 gap-2">
+        <div className="w-full flex flex-row py-4 gap-2">
             <Link href={`/blog/${blog.slug}`}>
                 <img src={blog.list_image_url + '?imageMogr2/auto-orient/strip|imageView2/1/w/256/h/160'} alt="" className="rounded-lg cursor-pointer hover:opacity-75 w-64 h-40 object-cover bg-slate-200" />
             </Link>

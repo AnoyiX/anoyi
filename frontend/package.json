@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
+    "highlight.js": "^11.5.1",
     "moment": "^2.29.3",
     "next": "^12.1.5",
     "react": "^18.0.0",

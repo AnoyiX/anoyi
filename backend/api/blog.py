@@ -25,10 +25,6 @@ async def blog_article(slug):
     """
     html_doc = requests.get(f'https://www.jianshu.com/p/{slug}', headers=UA.iphone).text
     html = BeautifulSoup(html_doc, 'html.parser')
-    html.find('div', class_='image-container-fill').decompose()
-    images = html.select('div.image-view > img')
-    for image in images:
-        image['src'] = image['data-original-src']
     return Response(data={
         'id': slug,
         'title': html.select('h1.title')[0].text,
