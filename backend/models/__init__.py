@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel, Field
 
 
@@ -10,3 +10,8 @@ class NameValue(BaseModel):
 class APIBody(BaseModel):
     url: str
     headers: List[NameValue]
+
+
+class StockMarketRealBody(BaseModel):
+    code: List[str]
+    fields: List[str]

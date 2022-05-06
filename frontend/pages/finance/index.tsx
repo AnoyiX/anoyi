@@ -4,6 +4,7 @@ import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import StockIndicesGroup from "../../components/finance/StockIndicesGroup"
 import { Tab } from '@headlessui/react'
+import StockLivesGroup from "../../components/finance/StockLivesGroup"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -31,37 +32,15 @@ const Finace = () => {
 
       <AppHeader path={[InlineApps[3],]} />
 
-      <FullContainer>
-        <div className="p-4 md:p-8">
-          <Tab.Group>
-            <div className="w-full flex justify-center">
-              <Tab.List className="flex w-96 p-1 gap-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl">
-                {categories.map((category) => (
-                  <Tab
-                    key={category.type}
-                    className={({ selected }) =>
-                      classNames(
-                        'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                        selected ? 'bg-white shadow' : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
-                      )
-                    }
-                  >
-                    {category.name}
-                  </Tab>
-                ))}
-              </Tab.List>
-            </div>
-            <Tab.Panels className="mt-4">
-              {categories.map((category, idx) => (
-                <Tab.Panel key={idx} className={'bg-white rounded-xl md:p-4'}>
-                  <StockIndicesGroup category={category.type} />
-                </Tab.Panel>
-              ))}
-            </Tab.Panels>
-          </Tab.Group>
-        </div>
+      <StockIndicesGroup />
 
-      </FullContainer>
+      <div className="flex flex-row gap-4">
+        <FullContainer>
+          <StockLivesGroup />
+        </FullContainer>
+        <div className="w-64 bg-white flex flex-0 rounded-lg shadow p-4">
+        </div>
+      </div>
     </div>
   )
 }

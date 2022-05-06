@@ -1,39 +1,64 @@
-import useStockIndices from '../../hooks/useStockIndices'
+import useMarketRealData from '../../hooks/useMarketRealData'
 
-interface StockIndexGroupProps {
-    category: string
-}
 
-export default function StockIndicesGroup({ category }: StockIndexGroupProps) {
+export default function StockIndicesGroup() {
 
-    const { indices } = useStockIndices(category)
+    const code = [
+        '000001.SS',
+        '399001.SZ',
+        '399006.SZ',
+        '000300.SS',
+        '000905.SS',
+        '000688.SS',
+    ]
 
-    const getBackgroundColor = (percentage: string) => {
-        const num = parseFloat(percentage)
-        if (num > 0) return 'bg-red-400'
-        if (num == 0) return 'bg-gray-500'
-        return 'bg-green-500'
+    const fields = [
+        'symbol',
+        'prod_code',
+        'prod_name',
+        'prod_en_name',
+        'preclose_px',
+        'price_precision',
+        'open_px',
+        'high_px',
+        'update_time',
+        'last_px',
+        'px_change',
+        'px_change_rate',
+        'trade_status'
+    ]
+
+    const { realData } = useMarketRealData(code, fields)
+
+    const getBackgroundColor = (num: number) => {
+        if (num > 0) return 'from-red-400 to-red-600'
+        if (num == 0) return 'from-gray-400 to-gray-600'
+        return 'from-green-400 to-green-600'
     }
 
-    const format = (str: string) => {
-        const num = parseFloat(str)
-        if (num > 0) return `+${num}`
-        return str
+    const format = (num: number) => {
+        if (num > 0) return `+${num.toFixed(2)}`
+        return num.toFixed(2)
     }
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-white">
+        <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
-                indices.map((item, index) => (
-                    <div key={index} className={`rounded-lg w-full flex flex-col shadow-lg gap-1 py-6 justify-center items-center ${getBackgroundColor(item.percentage)}`}>
-                        <span className='text'>{item.name}</span>
-                        <span className='text-3xl font-semibold'>{item.current}</span>
-                        <div className='flex flex-row gap-2 text-sm'>
-                            <span>{format(item.chg)}</span>
-                            <span>{format(item.percentage)}%</span>
-                        </div>
-                    </div>
-                ))
+                code.map((item, index) => {
+                    if (Object.keys(realData.snapshot).length > 0) {
+                        const stock = realData.snapshot[item]
+                        return (
+                            <div key={index} className={`rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-gradient-to-b ${getBackgroundColor(stock[11] as number)}`}>
+                                <span className='text'>{stock[2]}</span>
+                                <span className='text-3xl font-semibold'>{(stock[9] as number).toFixed(2)}</span>
+                                <div className='flex flex-row gap-2 text-sm'>
+                                    <span>{format(stock[10] as number)}</span>
+                                    <span>{format(stock[11] as number)}%</span>
+                                </div>
+                            </div>
+                        )
+                    }
+                })
             }
         </div>
     )
