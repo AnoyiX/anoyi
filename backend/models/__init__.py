@@ -12,6 +12,14 @@ class APIBody(BaseModel):
     headers: List[NameValue]
 
 
-class StockMarketRealBody(BaseModel):
+class StockIndicesBody(BaseModel):
     code: List[str]
     fields: List[str]
+
+
+class StockPlatesBody(BaseModel):
+    limit: int
+    is_acs: bool
+    rank_field: str
+    rank_type: str
+    data_fields: List[str]

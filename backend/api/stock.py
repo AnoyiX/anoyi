@@ -3,12 +3,12 @@ from fastapi import Query
 from fastlab.models import Response
 from api import app
 import requests
-from models import StockMarketRealBody
+from models import StockIndicesBody, StockPlatesBody
 from common import UA
 
 
-@app.post('/api/stock/market/real')
-def market_real(body: StockMarketRealBody):
+@app.post('/api/stock/indices')
+def market_real(body: StockIndicesBody):
     """
     综合指数
     """
@@ -19,7 +19,7 @@ def market_real(body: StockMarketRealBody):
     return Response(data=resp['data'])
 
 
-@app.get('/api/stock/content/lives')
+@app.get('/api/stock/lives')
 def content_lives(cursor: Optional[str] = Query(None)):
     """
     实时资讯
@@ -28,3 +28,18 @@ def content_lives(cursor: Optional[str] = Query(None)):
     api = f'https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&{query}'
     resp = requests.get(api, headers=UA.mac).json()
     return Response(data=resp['data'])
+
+
+@app.post('/api/stock/plates')
+def market_plate(body: StockPlatesBody):
+    """
+    板块排行
+    """
+    rank_api = f'https://flash-api.xuangubao.cn/api/plate/rank?field={body.rank_field}&type={body.rank_type}'
+    rank_resp = requests.get(rank_api, headers=UA.mac).json()
+    codes = rank_resp['data'][:body.limit] if body.is_acs else rank_resp['data'][-body.limit:]
+    plates_code = ",".join([str(x) for x in codes])
+    data_fields = ",".join(body.data_fields)
+    data_api = f'https://flash-api.xuangubao.cn/api/plate/data?plates={plates_code}&fields={data_fields}'
+    data_resp = requests.get(data_api, headers=UA.mac).json()
+    return Response(data=data_resp['data'])

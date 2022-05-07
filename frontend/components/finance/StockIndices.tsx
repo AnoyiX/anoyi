@@ -1,7 +1,7 @@
-import useMarketRealData from '../../hooks/useMarketRealData'
+import useStockIndices from '../../hooks/useStockIndices'
 
 
-export default function StockIndicesGroup() {
+export default function StockIndices() {
 
     const code = [
         '000001.SS',
@@ -28,7 +28,7 @@ export default function StockIndicesGroup() {
         'trade_status'
     ]
 
-    const { realData } = useMarketRealData(code, fields)
+    const { indices } = useStockIndices(code, fields)
 
     const getBackgroundColor = (num: number) => {
         if (num > 0) return 'from-red-400 to-red-600'
@@ -45,8 +45,8 @@ export default function StockIndicesGroup() {
         <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
                 code.map((item, index) => {
-                    if (Object.keys(realData.snapshot).length > 0) {
-                        const stock = realData.snapshot[item]
+                    if (Object.keys(indices.snapshot).length > 0) {
+                        const stock = indices.snapshot[item]
                         return (
                             <div key={index} className={`rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-gradient-to-b ${getBackgroundColor(stock[11] as number)}`}>
                                 <span className='text'>{stock[2]}</span>

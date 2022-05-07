@@ -40,23 +40,23 @@ export interface ILive {
 }
 
 export interface ILivesMap {
-    [date: string]: ILive[]
+    [date: string]: number[]
 }
 
-export default function useMarketLives() {
+export default function useStockLives() {
 
     const [cursor, setCursor] = useState('')
     const [lives, setLives] = useState<ILive[]>([])
     const [livesMap, setLivesMap] = useState<ILivesMap>({})
 
     const fetchLives = useCallback(async () => {
-        const data = await http.get(`/api/stock/content/lives`)
+        const data = await http.get(`/api/stock/lives`)
         setCursor(data.next_cursor)
         setLives(data.items)
     }, [])
 
     const fetchMore = () => {
-        http.get(`/api/stock/content/lives?cursor=${cursor}`).then(data => {
+        http.get(`/api/stock/lives?cursor=${cursor}`).then(data => {
             setLives(pre => [...pre, ...(data.items)])
             setCursor(data.next_cursor)
         })
@@ -69,12 +69,12 @@ export default function useMarketLives() {
     useEffect(() => {
         if(lives.length > 0) {
             let tmp: ILivesMap = {}
-            lives.forEach(item => {
+            lives.forEach((item, index) => {
                 const date = new Date(item.display_time * 1000).toLocaleDateString('zh-CN')
                 if (date in tmp) {
-                    tmp[date].push(item)
+                    tmp[date].push(index)
                 } else {
-                    tmp[date] = [item]
+                    tmp[date] = [index]
                 }
             })
             setLivesMap(tmp)

@@ -1,13 +1,13 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
 import InfiniteScroll from "react-infinite-scroll-component"
-import useMarketLives from '../../hooks/useMarketLives'
+import useStockLives from '../../hooks/useStockLives'
 import { Doing } from "../Icons"
 
 
-export default function StockLivesGroup() {
+export default function StockLives() {
 
-    const { lives, livesMap, fetchMore } = useMarketLives()
+    const { lives, livesMap, fetchMore } = useStockLives()
 
     return (
 
@@ -27,14 +27,14 @@ export default function StockLivesGroup() {
                                 <span className="absolute bg-gray-800 font-medium px-4 py-2 text-gray-100 rounded-r-full -left-8">{month}月{day}日</span>
                             </div>
                             {
-                                livesMap[date].map((item, index) => (
+                                livesMap[date].map((liveIndex, index) => (
                                     <div key={index} className={`w-full flex flex-row py-4 border-b`}>
-                                        <div className="w-16 py-[2px]">{moment(item.display_time * 1000).format('HH:mm')}</div>
+                                        <div className="w-16 py-[2px]">{moment(lives[liveIndex].display_time * 1000).format('HH:mm')}</div>
                                         <div className='w-full border-l border-dashed pl-5 py-[2px]'>
                                             {
-                                                item.title.length > 0 && <div className="font-medium mb-2">【{item.title}】</div>
+                                                lives[liveIndex].title.length > 0 && <div className="font-medium mb-2">【{lives[liveIndex].title}】</div>
                                             }
-                                            <article className="text-op" dangerouslySetInnerHTML={{ __html: item.content }} />
+                                            <article className="text-op" dangerouslySetInnerHTML={{ __html: lives[liveIndex].content }} />
                                         </div>
                                     </div>
                                 ))
