@@ -8,7 +8,7 @@ from common import UA
 
 
 @app.post('/api/stock/indices')
-def market_real(body: StockIndicesBody):
+def indices(body: StockIndicesBody):
     """
     综合指数
     """
@@ -20,7 +20,7 @@ def market_real(body: StockIndicesBody):
 
 
 @app.get('/api/stock/lives')
-def content_lives(cursor: Optional[str] = Query(None)):
+def lives(cursor: Optional[str] = Query(None)):
     """
     实时资讯
     """
@@ -31,7 +31,7 @@ def content_lives(cursor: Optional[str] = Query(None)):
 
 
 @app.post('/api/stock/plates')
-def market_plate(body: StockPlatesBody):
+def plates(body: StockPlatesBody):
     """
     板块排行
     """
