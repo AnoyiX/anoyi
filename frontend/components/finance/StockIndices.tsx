@@ -48,7 +48,7 @@ export default function StockIndices() {
                     if (Object.keys(indices.snapshot).length > 0) {
                         const stock = indices.snapshot[item]
                         return (
-                            <div key={index} className={`rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-gradient-to-b ${getBackgroundColor(stock[11] as number)}`}>
+                            <div key={index} className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-gradient-to-b ${getBackgroundColor(stock[11] as number)}`}>
                                 <span className='text'>{stock[2]}</span>
                                 <span className='text-3xl font-semibold'>{(stock[9] as number).toFixed(2)}</span>
                                 <div className='flex flex-row gap-2 text-sm'>

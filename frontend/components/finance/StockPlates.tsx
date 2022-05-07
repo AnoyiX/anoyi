@@ -26,9 +26,9 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
     const { plates } = useStockPlates(limit, is_acs, fields)
 
     const getColor = (num: number) => {
-        if (num > 0) return 'red'
-        if (num == 0) return 'gray'
-        return 'green'
+        if (num > 0) return 'bg-red-500 hover:bg-red-400'
+        if (num == 0) return 'bg-gray-500 hover:bg-gray-400'
+        return 'bg-green-500 hover:bg-green-400'
     }
 
     const format = (num: number) => {
@@ -42,7 +42,7 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
         <div className="grid grid-cols-3 gap-1 w-full text-white">
             {
                 Object.values(plates).sort(sort).map((item, index) => (
-                    <div key={index} className={`rounded-sm cursor-pointer w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-${getColor(item.core_avg_pcp)}-500 hover:bg-${getColor(item.core_avg_pcp)}-400`}>
+                    <div key={index} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(item.core_avg_pcp)}`}>
                         <span className='text-xs'>{item.plate_name}</span>
                         <span className=''>{format(item.core_avg_pcp * 100)}%</span>
                     </div>
