@@ -7,10 +7,10 @@ from models import StockIndicesBody, StockPlatesBody
 from common import UA
 
 
-@app.post('/api/stock/indices')
-def indices(body: StockIndicesBody):
+@app.post('/api/stock/real')
+def real(body: StockIndicesBody):
     """
-    综合指数
+    实时数据
     """
     prod_code = ",".join(body.code)
     fields = ",".join(body.fields)
