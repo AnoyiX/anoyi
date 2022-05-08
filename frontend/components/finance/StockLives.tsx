@@ -1,5 +1,6 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
+import Link from "next/link"
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useStockLives, { ILive } from '../../hooks/useStockLives'
@@ -21,7 +22,7 @@ function StockTag({ code, name }: { code: string, name: string }) {
             const stock = realData.snapshot[code]
             const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
             console.log(stockObj)
-            setState(pre => ({...pre, rate: (stockObj['px_change_rate'] as number).toFixed(2)}))
+            setState(pre => ({ ...pre, rate: (stockObj['px_change_rate'] as number).toFixed(2) }))
             if (stockObj['px_change'] as number > 0) {
                 setState({
                     icon: '▲',
@@ -45,9 +46,11 @@ function StockTag({ code, name }: { code: string, name: string }) {
     }, [realData])
 
     return (
-        <span className={`cursor-pointer flex flex-row rounded-sm border py-1 px-2 text-sm ${state.style}`}>
-            {state.icon} {name}({code}) {state.rate}%
-        </span>
+        <Link href={`/finance/${code}`}>
+            <span className={`cursor-pointer flex flex-row rounded-sm border py-1 px-2 text-sm ${state.style}`}>
+                {state.icon} {name}({code}) {state.rate}%
+            </span>
+        </Link>
     )
 
 }

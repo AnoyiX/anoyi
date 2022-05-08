@@ -15,14 +15,15 @@ export default function useStockRealData(code: string[], fields: string[]) {
     const fetchRealData = useCallback(async () => {
         const data = await http.post(`/api/stock/real`, {code, fields})
         setRealData(data)
-    }, [])
+    }, [code])
 
     useEffect(() => {
-        fetchRealData()
+        code[0] != undefined && fetchRealData()
     }, [])
 
     return {
-        realData
+        realData,
+        fetchRealData
     }
 
 }

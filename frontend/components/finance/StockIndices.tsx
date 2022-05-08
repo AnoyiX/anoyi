@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import useStockRealData from '../../hooks/useStockRealData'
 
 export default function StockIndices() {
@@ -43,14 +44,16 @@ export default function StockIndices() {
                         const stock = realData.snapshot[item]
                         const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
                         return (
-                            <div key={index} className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
-                                <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
-                                <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
-                                <div className='flex flex-row gap-2 text-sm'>
-                                    <span>{format(stockObj['px_change'] as number)}</span>
-                                    <span>{format(stockObj['px_change_rate'] as number)}%</span>
+                            <Link href={`/finance/${item}`}>
+                                <div key={index} className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
+                                    <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
+                                    <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
+                                    <div className='flex flex-row gap-2 text-sm'>
+                                        <span>{format(stockObj['px_change'] as number)}</span>
+                                        <span>{format(stockObj['px_change_rate'] as number)}%</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     }
                 })

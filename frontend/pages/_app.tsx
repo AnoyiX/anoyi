@@ -1,4 +1,3 @@
-import moment from 'moment';
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
 
