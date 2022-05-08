@@ -1,5 +1,4 @@
-import useStockIndices from '../../hooks/useStockIndices'
-
+import useStockRealData from '../../hooks/useStockRealData'
 
 export default function StockIndices() {
 
@@ -13,14 +12,9 @@ export default function StockIndices() {
     ]
 
     const fields = [
-        'symbol',
         'prod_code',
         'prod_name',
-        'prod_en_name',
-        'preclose_px',
         'price_precision',
-        'open_px',
-        'high_px',
         'update_time',
         'last_px',
         'px_change',
@@ -28,12 +22,12 @@ export default function StockIndices() {
         'trade_status'
     ]
 
-    const { indices } = useStockIndices(code, fields)
+    const { realData } = useStockRealData(code, fields)
 
-    const getBackgroundColor = (num: number) => {
-        if (num > 0) return 'from-red-400 to-red-600'
-        if (num == 0) return 'from-gray-400 to-gray-600'
-        return 'from-green-400 to-green-600'
+    const getTextColor = (num: number) => {
+        if (num > 0) return 'text-red-600'
+        if (num == 0) return 'text-gray-600'
+        return 'text-green-600'
     }
 
     const format = (num: number) => {
@@ -45,15 +39,16 @@ export default function StockIndices() {
         <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
                 code.map((item, index) => {
-                    if (Object.keys(indices.snapshot).length > 0) {
-                        const stock = indices.snapshot[item]
+                    if (Object.keys(realData.snapshot).length > 0) {
+                        const stock = realData.snapshot[item]
+                        const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
                         return (
-                            <div key={index} className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-gradient-to-b ${getBackgroundColor(stock[11] as number)}`}>
-                                <span className='text'>{stock[2]}</span>
-                                <span className='text-3xl font-semibold'>{(stock[9] as number).toFixed(2)}</span>
+                            <div key={index} className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
+                                <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
+                                <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
                                 <div className='flex flex-row gap-2 text-sm'>
-                                    <span>{format(stock[10] as number)}</span>
-                                    <span>{format(stock[11] as number)}%</span>
+                                    <span>{format(stockObj['px_change'] as number)}</span>
+                                    <span>{format(stockObj['px_change_rate'] as number)}%</span>
                                 </div>
                             </div>
                         )

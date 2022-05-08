@@ -6,9 +6,6 @@ import StockIndices from "../../components/finance/StockIndices"
 import StockLives from "../../components/finance/StockLives"
 import StockPlates from "../../components/finance/StockPlates"
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 const Finace = () => {
 
