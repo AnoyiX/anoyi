@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { IBlog } from "../../hooks/useBlogs"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faComment, faHeart } from '@fortawesome/free-regular-svg-icons'
 
 interface BlogCardProps {
     blog: IBlog
@@ -26,15 +28,18 @@ export default function BlogCard({ blog }: BlogCardProps) {
                         {blog.public_abbr}
                     </div>
                 </div>
-                <div className="text-gray-600 flex flex-row gap-3">
-                    <div className="border border-gray-600 rounded py-1 px-2 text-xs cursor-default">
-                        阅读 {blog.views_count}
+                <div className="text-gray-600 flex flex-row gap-3 text-xs cursor-default">
+                    <div className="cursor-default">
+                        <FontAwesomeIcon icon={faEye} className="mr-1"/>
+                        {blog.views_count}
                     </div>
-                    <div className="border border-gray-600 rounded py-1 px-2 text-xs cursor-default">
-                        评论 {blog.public_comments_count}
+                    <div className="cursor-default">
+                        <FontAwesomeIcon icon={faComment} className="mr-1"/>
+                        {blog.public_comments_count}
                     </div>
-                    <div className="border border-gray-600 rounded py-1 px-2 text-xs cursor-default">
-                        喜欢 {blog.likes_count}
+                    <div className="cursor-default">
+                        <FontAwesomeIcon icon={faHeart} className="mr-1"/> 
+                        {blog.likes_count}
                     </div>
                 </div>
             </div>

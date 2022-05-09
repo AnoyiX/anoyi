@@ -1,7 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect } from 'react'
 import { IPhoto } from '../../hooks/usePhotos'
-import { Close } from '../Icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 interface PhotoModalProps {
     isOpen: boolean
@@ -35,9 +36,9 @@ export default function PhotoModal({ isOpen, photos, photoIndex, onClose }: Phot
                         leaveTo="opacity-0 scale-95"
                     >
                         <div className='flex flex-col h-full transition-all transform'>
-                            <div className='flex-none h-10 bg-black bg-opacity-90 px-2'>
+                            <div className='flex-none h-10 bg-black bg-opacity-90 px-4'>
                                 <div className='flex flex-row h-full justify-end items-center'>
-                                    <Close className='h-5 w-5 text-gray-400 cursor-pointer' onClick={onClose} />
+                                    <FontAwesomeIcon icon={faXmark} className='text-xl text-gray-400 cursor-pointer' onClick={onClose} />
                                 </div>
                             </div>
                             <div className='flex h-full items-center justify-center'>

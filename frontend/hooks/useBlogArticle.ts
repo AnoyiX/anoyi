@@ -6,6 +6,7 @@ export interface IBlogArticle {
     content: string
     title: string
     time: string
+    author_name: string
 }
 
 export default function useBlogArticle(slug: string) {
@@ -14,16 +15,19 @@ export default function useBlogArticle(slug: string) {
         id: slug,
         content: '',
         title: '',
-        time: ''
+        time: '',
+        author_name: ''
     })
 
+    const fetchArticle = () => http.get(`/api/blog/article/${slug}`).then(setArticle)
+
     useEffect(() => {
-        http.get(`/api/blog/article/${slug}`)
-            .then(setArticle)
+        slug != undefined && fetchArticle()
     }, [])
 
     return {
-        article
+        article,
+        fetchArticle
     }
 
 }

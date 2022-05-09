@@ -29,5 +29,6 @@ async def blog_article(slug):
         'id': slug,
         'title': html.select('h1.title')[0].text,
         'time': html.select('div.meta > span')[-1].text,
+        'author_name': html.select('div.nickname > p.oneline')[0].text,
         'content': str(html.select('div.note-content')[0])
     }) 
