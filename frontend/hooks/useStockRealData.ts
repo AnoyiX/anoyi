@@ -19,6 +19,8 @@ export default function useStockRealData(code: string[], fields: string[]) {
 
     useEffect(() => {
         code[0] != undefined && fetchRealData()
+        let autoRefresh = setInterval(fetchRealData, 5000)
+        return () => clearInterval(autoRefresh)
     }, [])
 
     return {

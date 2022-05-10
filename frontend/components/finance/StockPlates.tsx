@@ -41,8 +41,8 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
     return (
         <div className="grid grid-cols-3 gap-1 w-full text-white">
             {
-                Object.values(plates).sort(sort).map((item, index) => (
-                    <div key={index} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(item.core_avg_pcp)}`}>
+                Object.values(plates).sort(sort).map((item) => (
+                    <div key={item.plate_id} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(item.core_avg_pcp)}`}>
                         <span className='text-xs'>{item.plate_name}</span>
                         <span className=''>{format(item.core_avg_pcp * 100)}%</span>
                     </div>

@@ -41,6 +41,8 @@ export default function useStockPlates(limit: number, is_acs: boolean, data_fiel
 
     useEffect(() => {
         fetchIndices()
+        let autoRefresh = setInterval(fetchIndices, 10000)
+        return () => clearInterval(autoRefresh)
     }, [])
 
     return {

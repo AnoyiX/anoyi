@@ -39,13 +39,13 @@ export default function StockIndices() {
     return (
         <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
-                code.map((item, index) => {
+                code.map((item) => {
                     if (Object.keys(realData.snapshot).length > 0) {
                         const stock = realData.snapshot[item]
                         const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
                         return (
-                            <Link href={`/finance/${item}`}>
-                                <div key={index} className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
+                            <Link href={`/finance/${item}`} key={stockObj['prod_code']}>
+                                <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
                                     <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
                                     <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
                                     <div className='flex flex-row gap-2 text-sm'>

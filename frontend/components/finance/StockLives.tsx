@@ -21,7 +21,6 @@ function StockTag({ code, name }: { code: string, name: string }) {
         if (Object.keys(realData.snapshot).length > 0) {
             const stock = realData.snapshot[code]
             const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
-            console.log(stockObj)
             setState(pre => ({ ...pre, rate: (stockObj['px_change_rate'] as number).toFixed(2) }))
             if (stockObj['px_change'] as number > 0) {
                 setState({
@@ -62,20 +61,19 @@ export default function StockLives() {
 
     const contentStyle = (score: number) => score > 1 ? "text-red-600" : ''
 
-    const renderLive = (live: ILive, index: number) => (
-        <div key={index} className={`w-full flex flex-row py-4 border-b ${contentStyle(live.score)}`}>
+    const renderLive = (live: ILive) => (
+        <div key={live.id} className={`w-full flex flex-row py-4 border-b ${contentStyle(live.score)}`}>
             <div className="w-16 py-[2px]">{moment(live.display_time * 1000).format('HH:mm')}</div>
             <div className='flex flex-col gap-2 w-full border-l border-dashed pl-5 py-[2px]'>
                 {
                     live.title.length > 0 && <div className="font-medium">【{live.title}】</div>
                 }
                 <article className="" dangerouslySetInnerHTML={{ __html: live.content }} />
-
                 {
                     live.symbols.length > 0 && (
                         <div className="flex flex-row gap-2">
                             {
-                                live.symbols.map((symbol, index) => <StockTag key={index} code={symbol.key} name={symbol.name} />)
+                                live.symbols.map((symbol) => <StockTag key={symbol.key} code={symbol.key} name={symbol.name} />)
                             }
                         </div>
                     )
@@ -85,7 +83,6 @@ export default function StockLives() {
     )
 
     return (
-
         <InfiniteScroll
             className="flex flex-col w-full px-8 py-4 text-sm gap-6"
             dataLength={lives.length}
@@ -102,7 +99,7 @@ export default function StockLives() {
                                 <span className="absolute bg-gray-800 font-medium px-4 py-2 text-gray-100 rounded-r-full -left-8">{month}月{day}日</span>
                             </div>
                             {
-                                livesMap[date].map((liveIndex, index) => renderLive(lives[liveIndex], index))
+                                livesMap[date].map((liveIndex) => lives[liveIndex] != undefined && renderLive(lives[liveIndex]))
                             }
                         </div>
                     )

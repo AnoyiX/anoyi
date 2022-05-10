@@ -51,8 +51,14 @@ export default function useStockLives() {
 
     const fetchLives = useCallback(async () => {
         const data = await http.get(`/api/stock/lives`)
-        setCursor(data.next_cursor)
-        setLives(data.items)
+        data.next_cursor > cursor && setCursor(data.next_cursor)
+        if (lives.length === 0) {
+            setLives(data.items)
+        } else {
+            const index = data.items.findIndex((item: ILive) => item.id === lives[0].id)
+            index > 0 && setLives(pre => [...(data.items.subarray(0, index)), ...pre])
+            index < 0 && setLives(pre => [...(data.items), ...pre])
+        }
     }, [])
 
     const fetchMore = () => {

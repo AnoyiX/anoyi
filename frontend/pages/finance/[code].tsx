@@ -86,7 +86,15 @@ const Stock = () => {
               <span>{(stockObj['px_change_rate'] as number) > 0 ? '+' : ''}{(stockObj['px_change_rate'] as number).toFixed(2)}%</span>
             </div>
             <div className="text-xs text-gray-500">
-              <span className="border rounded px-2 py-1 mr-2">{stockObj['trade_status']}</span>
+              {
+                stockObj['trade_status'] === 'TRADE' && <span className="border rounded px-2 py-1 mr-2 border-blue-500 text-blue-500">交易中</span>
+              }
+              {
+                stockObj['trade_status'] === 'BREAK' && <span className="border rounded px-2 py-1 mr-2 border-gray-500 text-gray-500">休市</span>
+              }
+              {
+                stockObj['trade_status'] === 'HALT' && <span className="border rounded px-2 py-1 mr-2 border-red-500 text-red-500">停牌</span>
+              }
               <span>{moment((stockObj['update_time'] as number) * 1000).format('YYYY-MM-DD HH:mm:ss')}</span>
             </div>
           </div>
@@ -126,7 +134,7 @@ const Stock = () => {
         <title>{InlineApps[0].name}</title>
       </Head>
 
-      <AppHeader path={[InlineApps[3], {name: '数据'}]} />
+      <AppHeader path={[InlineApps[3], {name: '实时数据'}]} />
 
       <FullContainer>
         {
