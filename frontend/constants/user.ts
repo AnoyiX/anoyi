@@ -75,8 +75,8 @@ export const Skills = {
     ]
 }
 
-export const ToolBox = {
-    name: '工具箱',
+export const Softwares = {
+    name: '软件',
     children: [
         {
             name: 'VS Code',
@@ -92,6 +92,16 @@ export const ToolBox = {
             name: 'ClashX',
             icon: 'https://cdn.anoyi.com/icons/clashx.png',
             url: 'https://github.com/yichengchen/clashX/releases'
+        },  
+        {
+            name: 'Postman',
+            icon: 'https://cdn.anoyi.com/icons/postman.svg',
+            url: 'https://www.postman.com'
+        },  
+        {
+            name: '剪映',
+            icon: 'https://cdn.anoyi.com/icons/jianyin.webp',
+            url: 'https://lv.ulikecam.com'
         },  
     ]
 }

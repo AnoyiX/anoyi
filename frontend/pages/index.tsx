@@ -1,7 +1,7 @@
 import Dock from '../components/Dock'
 import { Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
 import Link from 'next/link'
-import { Skills, Languages, ToolBox } from '../constants/user'
+import { Skills, Languages, Softwares } from '../constants/user'
 import { InlineApps } from '../constants/app'
 import FullContainer from '../components/Containers'
 import Head from 'next/head'
@@ -47,7 +47,7 @@ const IndexPage = () => {
 
           <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
             {
-              [Languages, Skills, ToolBox].map((item, index) => (
+              [Languages, Skills, Softwares].map((item, index) => (
                 <Dock name={item.name} key={index} data={item.children}></Dock>
               ))
             }
