@@ -92,7 +92,12 @@ export const Softwares = {
             name: 'ClashX',
             icon: 'https://cdn.anoyi.com/icons/clashx.png',
             url: 'https://github.com/yichengchen/clashX/releases'
-        },  
+        },
+        {
+            name: 'TablePlus',
+            icon: 'https://cdn.anoyi.com/icons/TablePlus.png',
+            url: 'https://tableplus.com'
+        }, 
         {
             name: 'Postman',
             icon: 'https://cdn.anoyi.com/icons/postman.svg',
