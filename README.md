@@ -78,3 +78,7 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Activity
+
+![](https://repobeats.axiom.co/api/embed/a35b540b024b7b7aeac7ef2e9ec4340aab76cff3.svg)
