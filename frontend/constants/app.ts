@@ -15,7 +15,7 @@ export const InlineApps = [
         url: '/photo'
     },
     {
-        name: '理财',
+        name: '股市',
         icon: 'https://cdn.anoyi.com/apps/finance.svg',
         url: '/finance'
     },

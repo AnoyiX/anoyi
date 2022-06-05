@@ -36,7 +36,7 @@ const Doc = () => {
       <AppHeader path={[{ name: doc.title }]} />
 
       <FullContainer>
-        <article className="max-w-full prose text-base p-4 md:p-8 " dangerouslySetInnerHTML={{ __html: html }} />
+        <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: html }} />
       </FullContainer>
     </div>
   )

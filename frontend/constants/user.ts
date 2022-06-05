@@ -104,7 +104,7 @@ export const Softwares = {
             url: 'https://www.postman.com'
         },  
         {
-            name: '剪映',
+            name: '剪映专业版',
             icon: 'https://cdn.anoyi.com/icons/jianyin.webp',
             url: 'https://lv.ulikecam.com'
         },  

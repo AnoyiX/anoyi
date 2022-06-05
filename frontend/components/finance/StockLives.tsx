@@ -71,7 +71,7 @@ export default function StockLives() {
                 <article className="" dangerouslySetInnerHTML={{ __html: live.content }} />
                 {
                     live.symbols.length > 0 && (
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row flex-wrap gap-2">
                             {
                                 live.symbols.map((symbol) => <StockTag key={symbol.key} code={symbol.key} name={symbol.name} />)
                             }
