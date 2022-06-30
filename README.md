@@ -30,12 +30,6 @@
   <a href="https://tailwindcss.com/">
     <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=Tailwind-CSS&logoColor=fff"/> 
   </a>
-  <a href="https://www.python.org/">
-    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=fff"/> 
-  </a>
-  <a href="https://fastapi.tiangolo.com/">
-    <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=FastAPI&logoColor=fff"/> 
-  </a>
   <a href="https://www.mongodb.com/">
     <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff"/> 
   </a>
@@ -49,27 +43,11 @@ First, clone the repo:
 git clone https://github.com/AnoyiX/anoyi.git
 ```
 
-### 🚀 Run Server
-
-This is a [FastAPI](https://github.com/tiangolo/fastapi) project.
-
-```shell
-cd backend/
-
-# install packages
-pip3 install -r requirements.txt
-
-# run
-python3 run.py
-```
-
-### 🚀 Run Web
+### 🚀 Local Development
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ```shell
-cd fontend/
-
 # install packages
 yarn
 
@@ -79,6 +57,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Activity
+
+## 🧿 Activity
 
 ![](https://repobeats.axiom.co/api/embed/a35b540b024b7b7aeac7ef2e9ec4340aab76cff3.svg)

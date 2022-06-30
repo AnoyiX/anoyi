@@ -1,7 +1,0 @@
-fastapi==0.75.0
-fastlab==0.2.1
-uvicorn==0.17.5
-requests==2.27.1
-pymongo==4.0.2
-Brotli==1.0.9
-beautifulsoup4==4.11.1
