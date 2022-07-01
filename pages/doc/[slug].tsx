@@ -1,45 +1,63 @@
 import AppHeader from "../../components/AppHeader"
-import { InlineApps } from '../../constants/app'
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkHtml from 'remark-html'
-import { useEffect, useState } from "react"
-import { useRouter } from 'next/router'
-import useDoc from "../../hooks/useDoc"
+import { GetStaticPropsContext } from "next/types"
+import { readFileSync } from 'fs'
+import path from "path"
 
-const Doc = () => {
-  const router = useRouter()
-  const { slug } = router.query
-  const { doc } = useDoc(slug as string)
-
-  const [html, setHtml] = useState('')
-
-  useEffect(() => {
-    if (!!doc) {
-      unified()
-        .use(remarkParse)
-        .use(remarkHtml)
-        .process(doc.content)
-        .then(file => setHtml(file.value.toString()))
-    }
-  }, [doc])
+const Doc = ({ title, html }) => {
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
 
       <Head>
-        <title>{InlineApps[0].name}</title>
+        <title>{title}</title>
       </Head>
 
-      <AppHeader path={[{ name: doc.title }]} />
+      <AppHeader path={[{ name: title }]} />
 
       <FullContainer>
         <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: html }} />
       </FullContainer>
     </div>
   )
+
+}
+
+export async function getStaticPaths() {
+  const mds = ['about', 'jobs', 'links', 'terms']
+  return {
+    paths: mds.map(slug => ({ params: { slug } })),
+    fallback: true
+  };
+}
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+
+  const { slug } = context.params
+
+  // page title
+  const titles = {
+    about: '关于作者',
+    jobs: '工作内推',
+    links: '友情链接',
+    terms: '用户协议',
+  }
+
+  // content: markdown -> html
+  const content = readFileSync(path.join(process.cwd(), 'docs', `${slug}.md`), 'utf-8')
+  const file = await unified().use(remarkParse).use(remarkHtml).process(content)
+
+  return {
+    props: {
+      title: titles[slug as string] || '',
+      html: file.value.toString(),
+    },
+  }
+
 }
 
 export default Doc

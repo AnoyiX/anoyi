@@ -66,9 +66,6 @@ const IndexPage = () => {
             <div className='text-center'>
               <span>Anoyi © 2022 All Rights Reserved</span>
             </div>
-            <div className='text-center'>
-              <a className="text-gray-400 text-xs hover:text-blue-400" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备16007917号-1</a>
-            </div>
           </div>
         </div>
 
