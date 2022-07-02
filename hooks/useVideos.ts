@@ -27,7 +27,6 @@ export interface IVideo {
     create_time: number
 }
 
-const query = {}
 const projection = {
     _id: 0,
     aweme_id: 1,
@@ -50,9 +49,6 @@ const projection = {
         poi_longitude: 1
     }
 }
-const sort = {
-    create_time: -1
-}
 
 export default function useVideos(skip: number, limit: number) {
 
@@ -61,14 +57,16 @@ export default function useVideos(skip: number, limit: number) {
 
     useEffect(() => {
         if (hasMore) {
-            http.post(`/api/mongo/docs`, {
-                db: 'cloud',
+            http.post(`/api/mongo/find`, {
+                database: 'cloud',
                 collection: 'videos',
-                query:  query,
+                filter: {},
                 projection: projection,
                 skip,
                 limit,
-                sort: sort
+                sort: {
+                    create_time: -1
+                },
             }).then(data => {
                 setVideos(old => [...old, ...data.data])
                 setHasMore(data.has_more)

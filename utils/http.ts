@@ -1,7 +1,7 @@
 const http = {
 
-  get: async (url: string) => {
-    const resp = await fetch(url)
+  get: async (url: string, init?: RequestInit) => {
+    const resp = await fetch(url, init)
     if (resp.status == 200) {
       const data = await resp.json()
       if (data.code === 0) {

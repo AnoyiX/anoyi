@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AppHeader from "../../components/AppHeader"
 import FullContainer from "../../components/Containers"
 import { InlineApps } from "../../constants/app"
@@ -9,8 +9,7 @@ import usePhotos from "../../hooks/usePhotos"
 import PhotoCard from "../../components/photo/PhotoCard"
 import PhotoModal from "../../components/photo/PhotoModal";
 
-
-const Blog = () => {
+const Page = () => {
 
   const limit = 24
   const [skip, setSkip] = useState(0)
@@ -54,4 +53,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Page

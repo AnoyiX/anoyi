@@ -8,7 +8,7 @@ import { useState } from "react"
 import useBlogs from "../../hooks/useBlogs"
 import BlogCard from "../../components/blog/BlogCard"
 
-const Blog = () => {
+const Page = () => {
 
   const count = 10
   const [page, setPage] = useState(1)
@@ -44,4 +44,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Page

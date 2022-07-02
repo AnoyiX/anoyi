@@ -3,7 +3,7 @@ import { InlineApps } from '../../constants/app'
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 
-const CNCF = () => {
+const Page = () => {
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
@@ -23,4 +23,4 @@ const CNCF = () => {
   )
 }
 
-export default CNCF
+export default Page

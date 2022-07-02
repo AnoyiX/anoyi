@@ -8,7 +8,7 @@ import { GetStaticPropsContext } from "next/types"
 import { readFileSync } from 'fs'
 import path from "path"
 
-const Doc = ({ title, html }) => {
+const Page = ({ title, html }) => {
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
@@ -39,7 +39,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   const { slug } = context.params
 
-  // page title
+  // pages title
   const titles = {
     about: '关于作者',
     jobs: '工作内推',
@@ -60,4 +60,4 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 }
 
-export default Doc
+export default Page

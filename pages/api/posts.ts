@@ -1,20 +1,17 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { NextRequest } from 'next/server'
 import UA from '../../utils/ua'
+import { WebResponse } from '../../utils/web'
 
-export default function handler(req: NextApiRequest, resp: NextApiResponse) {
-    const page = req.query.page || 1
-    const count = req.query.count || 10
-    fetch(`https://www.jianshu.com/asimov/users/slug/7b7ec6f2db21/public_notes?page=${page}&count=${count}&order_by=shared_at`, {
-        headers: UA.iphone
-    }).then(resp => resp.json()).then(data => {
-        const posts = data.map(x => x.object.data)
-        resp.status(200).json({
-            code: 0,
-            message: 'success',
-            data: {
-                has_more: posts.length >= count,
-                data: posts,
-            }
-        })
-    })
+export const config = {
+    runtime: 'experimental-edge',
+}
+
+export default async function handler(req: NextRequest) {
+    const { searchParams } = new URL(req.url)
+    const page = searchParams.get('page') || 1
+    const count = searchParams.get('count') || 10
+    const resp = await fetch(`https://www.jianshu.com/asimov/users/slug/7b7ec6f2db21/public_notes?page=${page}&count=${count}&order_by=shared_at`, { headers: UA.iphone })
+    const data = await resp.json()
+    const posts = data.map(x => x.object.data)
+    return WebResponse.successList(posts, posts.length >= count)
 }

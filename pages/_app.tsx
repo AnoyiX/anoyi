@@ -10,6 +10,7 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="referrer" content="no-referrer" />
+        <link rel="shortcut icon" href="https://cdn.anoyi.com/anoyi-favicon.ico" />
       </Head>
 
       <div className="bg-gray-200 min-h-screen w-full ">

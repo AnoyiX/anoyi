@@ -20,7 +20,7 @@ const StockMetric = ({ name, value, valueStyle = '' }: { name: string, value: st
 
 }
 
-const Stock = () => {
+const Page = () => {
   const router = useRouter()
   const { code } = router.query
   const fields = [
@@ -145,4 +145,4 @@ const Stock = () => {
   )
 }
 
-export default Stock
+export default Page

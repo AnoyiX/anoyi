@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState } from "react"
 import http from "../../utils/http"
 import moment from "moment"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload, faFingerprint, faGear, faPlus, faMagnifyingGlass, faTrashCan, faEject, faXmark, faBoxOpen, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { faFingerprint, faGear, faPlus, faMagnifyingGlass, faTrashCan, faXmark, faBoxOpen, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { Dialog, Transition } from "@headlessui/react"
 import { Doing } from "../../components/Icons"
 

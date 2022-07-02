@@ -1,16 +1,16 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { NextRequest } from 'next/server'
 import UA from '../../../utils/ua'
+import { WebResponse } from '../../../utils/web'
 
-export default function handler(req: NextApiRequest, resp: NextApiResponse) {
-    const prod_code = req.body.code.join(',')
-    const fields = req.body.fields.join(',')
-    fetch(`https://api-ddc.wallstcn.com/market/real?prod_code=${prod_code}&fields=${fields}`, {
-        headers: UA.mac
-    }).then(resp => resp.json()).then(data => {
-        resp.status(200).json({
-            code: 0,
-            message: 'success',
-            data: data.data,
-        })
-    })
+export const config = {
+    runtime: 'experimental-edge',
+}
+
+export default async function handler(req: NextRequest) {
+    const body = await req.json()
+    const prod_code = body.code.join(',')
+    const fields = body.fields.join(',')
+    const resp = await fetch(`https://api-ddc.wallstcn.com/market/real?prod_code=${prod_code}&fields=${fields}`, { headers: UA.mac })
+    const data = await resp.json()
+    return WebResponse.success(data.data)
 }

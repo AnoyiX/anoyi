@@ -9,7 +9,7 @@ import VideoModal from "../../components/video/VideoModal"
 import Head from "next/head"
 import VideoCard from "../../components/video/VideoCard"
 
-const Video = () => {
+const Page = () => {
   const limit = 20
   const [skip, setSkip] = useState(0)
   const { videos, hasMore } = useVideos(skip, limit)
@@ -54,4 +54,4 @@ const Video = () => {
 
 }
 
-export default Video
+export default Page

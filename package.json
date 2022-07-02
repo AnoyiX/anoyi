@@ -14,7 +14,6 @@
     "@headlessui/react": "^1.6.5",
     "highlight.js": "^11.5.1",
     "moment": "^2.29.3",
-    "mongodb": "^4.7.0",
     "next": "^12.2.0",
     "node-html-parser": "^5.3.3",
     "react": "^18.2.0",

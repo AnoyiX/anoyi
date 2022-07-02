@@ -9,12 +9,6 @@ export interface IPhoto {
     address: string
 }
 
-const query = {}
-const projection = {_id: 0}
-const sort = {
-    create_time: -1
-}
-
 export default function usePhotos(skip: number, limit: number) {
 
     const [photos, setPhotos] = useState<IPhoto[]>([])
@@ -22,15 +16,18 @@ export default function usePhotos(skip: number, limit: number) {
 
     useEffect(() => {
         if (hasMore) {
-            http.post(`/api/mongo/docs`, {
-                db: 'cloud',
+            http.post(`/api/mongo/find`, {
+                database: 'cloud',
                 collection: 'photos',
-                query:  query,
-                projection: projection,
+                filter: {},
+                projection: {_id: 0},
                 skip,
                 limit,
-                sort: sort
+                sort: {
+                    create_time: -1
+                },
             }).then(data => {
+                console.log(data)
                 setPhotos(pre => [...pre, ...data.data])
                 setHasMore(data.has_more)
             })
