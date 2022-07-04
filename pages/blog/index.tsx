@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react"
 import useBlogs from "../../hooks/useBlogs"
 import BlogCard from "../../components/blog/BlogCard"
+import Notebooks from "../../components/blog/Notebooks";
 
 const Page = () => {
 
@@ -24,21 +25,32 @@ const Page = () => {
         <title>博客</title>
       </Head>
 
-      <AppHeader path={[{name: '博客'}]} />
+      <AppHeader path={[{ name: '博客' }]} />
 
-      <FullContainer>
-        <InfiniteScroll
-          className="w-full flex flex-col px-4 divide-y"
-          dataLength={blogs.length}
-          next={fetchMore}
-          hasMore={hasMore}
-          loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
-        >
-          {
-            blogs.map((item, index) => <BlogCard key={index} blog={item} />)
-          }
-        </InfiniteScroll>
-      </FullContainer>
+      <div className="w-full flex flex-1 gap-4 md:gap-6">
+        <FullContainer>
+          <InfiniteScroll
+            className="w-full flex flex-col px-4 divide-y"
+            dataLength={blogs.length}
+            next={fetchMore}
+            hasMore={hasMore}
+            loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
+          >
+            {
+              blogs.map((item, index) => <BlogCard key={index} blog={item} />)
+            }
+          </InfiniteScroll>
+        </FullContainer>
+
+        <div className="w-72">
+          <div className="w-full bg-white h-fit flex-none rounded-lg shadow p-4">
+            <div className="text-gray-500 font-normal text-sm">我的文集</div>
+            <Notebooks />
+          </div>
+        </div>
+
+      </div>
+
     </div>
   )
 }

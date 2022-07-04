@@ -45,7 +45,7 @@ function StockTag({ code, name }: { code: string, name: string }) {
     }, [realData])
 
     return (
-        <Link href={`/finance/${code}`}>
+        <Link href={`/stock/${code}`}>
             <span className={`cursor-pointer flex flex-row rounded-sm border py-1 px-2 text-sm ${state.style}`}>
                 {state.icon} {name}({code}) {state.rate}%
             </span>
