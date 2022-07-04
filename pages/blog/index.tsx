@@ -43,8 +43,8 @@ const Page = () => {
         </FullContainer>
 
         <div className="w-72">
-          <div className="w-full bg-white h-fit flex-none rounded-lg shadow p-4">
-            <div className="text-gray-500 font-normal text-sm">我的文集</div>
+          <div className="w-full bg-white h-fit flex-none rounded-lg shadow">
+            <div className="text-gray-900 font-normal border-b p-4">文章分类</div>
             <Notebooks />
           </div>
         </div>
