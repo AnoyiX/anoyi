@@ -1,9 +1,9 @@
 import AppHeader from "../../components/AppHeader"
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
-import StockIndices from "../../components/finance/StockIndices"
-import StockLives from "../../components/finance/StockLives"
-import StockPlates from "../../components/finance/StockPlates"
+import StockIndices from "../../components/stock/StockIndices"
+import StockLives from "../../components/stock/StockLives"
+import StockPlates from "../../components/stock/StockPlates"
 
 
 const Page = () => {

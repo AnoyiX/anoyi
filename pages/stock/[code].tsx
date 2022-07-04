@@ -133,7 +133,7 @@ const Page = () => {
         <title>股市行情</title>
       </Head>
 
-      <AppHeader path={[{name: '股市'}, {name: '实时数据'}]} />
+      <AppHeader path={[{name: '股市', url: '/stock'}, {name: '实时数据'}]} />
 
       <FullContainer>
         {

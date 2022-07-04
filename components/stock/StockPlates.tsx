@@ -1,6 +1,5 @@
 import useStockPlates, { IPlate } from '../../hooks/useStockPlates'
 
-
 interface StockPlatesProps {
     limit: number
     is_acs: boolean

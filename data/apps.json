@@ -16,8 +16,8 @@
     },
     {
         "name": "股市",
-        "icon": "https://cdn.anoyi.com/apps/finance.svg",
-        "url": "/finance"
+        "icon": "https://cdn.anoyi.com/apps/stock.svg",
+        "url": "/stock"
     },
     {
         "name": "CNCF",
