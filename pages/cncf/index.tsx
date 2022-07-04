@@ -1,5 +1,4 @@
 import AppHeader from "../../components/AppHeader"
-import { InlineApps } from '../../constants/app'
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 
@@ -9,10 +8,10 @@ const Page = () => {
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
-        <title>{InlineApps[4].name}</title>
+        <title>Cloud Native Interactive Landscape</title>
       </Head>
 
-      <AppHeader path={[InlineApps[4],]} />
+      <AppHeader path={[{name: 'Cloud Native Landscape'}]} />
 
       <FullContainer>
         <div className="w-full h-full">

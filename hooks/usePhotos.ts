@@ -27,7 +27,6 @@ export default function usePhotos(skip: number, limit: number) {
                     create_time: -1
                 },
             }).then(data => {
-                console.log(data)
                 setPhotos(pre => [...pre, ...data.data])
                 setHasMore(data.has_more)
             })

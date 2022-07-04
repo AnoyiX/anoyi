@@ -1,7 +1,6 @@
 import { useState } from "react"
 import AppHeader from "../../components/AppHeader"
 import FullContainer from "../../components/Containers"
-import { InlineApps } from "../../constants/app"
 import useVideos from "../../hooks/useVideos"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Doing } from '../../components/Icons'
@@ -29,10 +28,10 @@ const Page = () => {
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
-        <title>{InlineApps[1].name}</title>
+        <title>短视频</title>
       </Head>
 
-      <AppHeader path={[InlineApps[1],]} />
+      <AppHeader path={[{name: '短视频'},]} />
 
       <FullContainer>
         <InfiniteScroll

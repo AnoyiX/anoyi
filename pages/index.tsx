@@ -1,12 +1,12 @@
 import Dock from '../components/Dock'
 import { Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
 import Link from 'next/link'
-import { Skills, Languages, Softwares } from '../constants/user'
-import { InlineApps } from '../constants/app'
 import FullContainer from '../components/Containers'
 import Head from 'next/head'
+import { readFileSync } from 'fs'
+import path from "path"
 
-const IndexPage = () => {
+const Page = ({apps, my}) => {
 
   return (
     <div className='w-full flex flex-col flex-1 gap-4 md:gap-6 p-4 md:p-8'>
@@ -47,7 +47,7 @@ const IndexPage = () => {
 
           <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
             {
-              [Languages, Skills, Softwares].map((item, index) => (
+              [my.languages, my.skills, my.softwares].map((item, index) => (
                 <Dock name={item.name} key={index} data={item.children}></Dock>
               ))
             }
@@ -72,7 +72,7 @@ const IndexPage = () => {
         <FullContainer>
           <div className='flex flex-1 flex-row flex-wrap p-8 gap-6'>
             {
-              InlineApps.map((item, index) => (
+              apps.map((item, index) => (
                 <div className='flex flex-col items-center gap-1' key={index}>
                   <Link href={item.url}>
                     <div className='w-20 h-20 cursor-pointer'>
@@ -85,11 +85,24 @@ const IndexPage = () => {
             }
           </div>
         </FullContainer>
-
       </div>
     </div>
   )
 
 }
 
-export default IndexPage
+export async function getStaticProps() {
+
+  const apps = readFileSync(path.join(process.cwd(), 'data', `apps.json`), 'utf-8')
+  const my = readFileSync(path.join(process.cwd(), 'data', `my.json`), 'utf-8')
+
+  return {
+    props: {
+      apps: JSON.parse(apps),
+      my: JSON.parse(my),
+    },
+  }
+
+}
+
+export default Page

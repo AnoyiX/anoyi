@@ -1,12 +1,11 @@
 import AppHeader from "../../components/AppHeader"
-import { InlineApps } from '../../constants/app'
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import useBlogArticle from "../../hooks/useBlogArticle"
 import { useRouter } from 'next/router'
 import highlight from "highlight.js";
 import "highlight.js/styles/atom-one-dark-reasonable.css";
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 const Page = () => {
 
@@ -33,10 +32,10 @@ const Page = () => {
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
-        <title>{InlineApps[0].name}</title>
+        <title>{article.title}</title>
       </Head>
 
-      <AppHeader path={[InlineApps[0], { name: '内容' }]} />
+      <AppHeader path={[{name: '博客', url: '/blog'}, { name: '内容' }]} />
 
       <FullContainer>
         <div className="max-w-screen-lg mx-auto py-8">
