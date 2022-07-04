@@ -7,7 +7,10 @@ export const config = {
 }
 
 export default async function handler(req: NextRequest) {
-    const resp = await fetch(`https://www.jianshu.com/users/7b7ec6f2db21/notebooks?slug=7b7ec6f2db21`, { headers: UA.mac })
+    const resp = await fetch(`https://www.jianshu.com/users/7b7ec6f2db21/notebooks?slug=7b7ec6f2db21`, { headers: {
+        ...(UA.mac),
+        Accept: 'application/json'
+    } })
     const data = await resp.json()
     return WebResponse.success(data.notebooks)
 }
