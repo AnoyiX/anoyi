@@ -4,8 +4,9 @@ import AppHeader from "../../components/AppHeader"
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import { useRouter } from 'next/router'
-import useStockRealData from "../../hooks/useStockRealData"
-import { useEffect } from "react"
+import useSWR from "swr"
+import { TRealData } from "../../types/stock"
+import http from "../../utils/http"
 
 
 const StockMetric = ({ name, value, valueStyle = '' }: { name: string, value: string, valueStyle?: string }) => {
@@ -49,11 +50,8 @@ const Page = () => {
     "source",
     "delisting_date"
   ]
-  const { realData, fetchRealData } = useStockRealData([code as string], fields)
 
-  useEffect(() => {
-    router.isReady && fetchRealData()
-  }, [router.isReady])
+  const { data: realData = { fields: [], snapshot: {} } } = useSWR<TRealData>([`/api/stock/real`, { code: [code as string], fields }], http.post, { refreshInterval: 5000 })
 
   const getTextColor = (num: number) => {
     if (num > 0) return 'text-red-600'

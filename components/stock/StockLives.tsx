@@ -1,67 +1,62 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import useStockLives, { ILive } from '../../hooks/useStockLives'
-import useStockRealData from "../../hooks/useStockRealData"
+import useSWR from "swr"
+import { TLive, TLivesMap, TRealData, TSymbol } from "../../types/stock"
+import http from "../../utils/http"
 import { Doing } from "../Icons"
 
-function StockTag({ code, name }: { code: string, name: string }) {
+function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
-    const fields = ["px_change", "px_change_rate", "price_precision"]
-    const { realData } = useStockRealData([code], fields)
-    const [state, setState] = useState({
-        icon: '',
-        rate: '0.00',
-        style: 'text-gray-600 border-gray-600'
-    })
+    const fields = ["prod_code", "prod_name", "px_change", "px_change_rate", "price_precision", "delisting_date"]
+    const { data = { fields: [], snapshot: {} } } = useSWR<TRealData>([`/api/stock/real`, { code: symbols.map(item => item.key), fields }], http.post, { refreshInterval: 5000 })
 
-    useEffect(() => {
-        if (Object.keys(realData.snapshot).length > 0) {
-            const stock = realData.snapshot[code]
-            const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
-            setState(pre => ({ ...pre, rate: (stockObj['px_change_rate'] as number).toFixed(2) }))
-            if (stockObj['px_change'] as number > 0) {
-                setState({
-                    icon: '▲',
-                    rate: '+' + (stockObj['px_change_rate'] as number).toFixed(2),
-                    style: 'text-red-600 border-red-600'
-                })
-            } else if (stockObj['px_change'] as number < 0) {
-                setState({
-                    icon: '▼',
-                    rate: (stockObj['px_change_rate'] as number).toFixed(2),
-                    style: 'text-green-600 border-green-600'
-                })
-            } else {
-                setState({
-                    icon: '',
-                    rate: '0.00',
-                    style: 'text-gray-600 border-gray-600'
-                })
+    const render = (stock: Array<string | number>) => {
+        const stockObj = Object.fromEntries(fields.map((_, i) => [fields[i], stock[i]]))
+        let state = {
+            icon: '',
+            rate: '0.00',
+            style: 'text-gray-600 border-gray-600'
+        }
+        if (stockObj['px_change'] as number > 0) {
+            state = {
+                icon: '▲',
+                rate: '+' + (stockObj['px_change_rate'] as number).toFixed(2),
+                style: 'text-red-600 border-red-600'
+            }
+        } else if (stockObj['px_change'] as number < 0) {
+            state = {
+                icon: '▼',
+                rate: (stockObj['px_change_rate'] as number).toFixed(2),
+                style: 'text-green-600 border-green-600'
             }
         }
-    }, [realData])
+        return (
+            <Link href={`/stock/${stockObj['prod_code']}`} key={stockObj['prod_code']}>
+                <span className={`cursor-pointer flex flex-row rounded-sm border py-1 px-2 text-sm ${state.style}`}>
+                    {state.icon} {stockObj['prod_name']}({stockObj['prod_code']}) {state.rate}%
+                </span>
+            </Link>
+        )
+    }
 
     return (
-        <Link href={`/stock/${code}`}>
-            <span className={`cursor-pointer flex flex-row rounded-sm border py-1 px-2 text-sm ${state.style}`}>
-                {state.icon} {name}({code}) {state.rate}%
-            </span>
-        </Link>
+        <div className="flex flex-row flex-wrap gap-2">
+            {
+                Object.values(data.snapshot).map(item => render(item))
+            }
+        </div>
     )
 
 }
 
-
-export default function StockLives() {
-
-    const { lives, livesMap, fetchMore } = useStockLives()
+function Live({ live }: { live: TLive }) {
 
     const contentStyle = (score: number) => score > 1 ? "text-red-600" : ''
 
-    const renderLive = (live: ILive) => (
+    return (
         <div key={live.id} className={`w-full flex flex-row py-4 border-b ${contentStyle(live.score)}`}>
             <div className="w-16 py-[2px]">{moment(live.display_time * 1000).format('HH:mm')}</div>
             <div className='flex flex-col gap-2 w-full border-l border-dashed pl-5 py-[2px]'>
@@ -70,17 +65,57 @@ export default function StockLives() {
                 }
                 <article className="" dangerouslySetInnerHTML={{ __html: live.content }} />
                 {
-                    live.symbols.length > 0 && (
-                        <div className="flex flex-row flex-wrap gap-2">
-                            {
-                                live.symbols.map((symbol) => <StockTag key={symbol.key} code={symbol.key} name={symbol.name} />)
-                            }
-                        </div>
-                    )
+                    live.symbols.length > 0 && <StocksTag symbols={live.symbols} />
                 }
             </div>
         </div>
     )
+}
+
+
+export default function StockLives() {
+
+    const [cursor, setCursor] = useState('')
+    const [lives, setLives] = useState<TLive[]>([])
+    const [livesMap, setLivesMap] = useState<TLivesMap>({})
+
+    const fetchLives = useCallback(async () => {
+        const data = await http.get(`/api/stock/lives`)
+        data.next_cursor > cursor && setCursor(data.next_cursor)
+        if (lives.length === 0) {
+            setLives(data.items)
+        } else {
+            const index = data.items.findIndex((item: TLive) => item.id === lives[0].id)
+            index > 0 && setLives(pre => [...(data.items.subarray(0, index)), ...pre])
+            index < 0 && setLives(pre => [...(data.items), ...pre])
+        }
+    }, [])
+
+    const fetchMore = () => {
+        http.get(`/api/stock/lives?cursor=${cursor}`).then(data => {
+            setLives(pre => [...pre, ...(data.items)])
+            setCursor(data.next_cursor)
+        })
+    }
+
+    useEffect(() => {
+        fetchLives()
+    }, [])
+
+    useEffect(() => {
+        if(lives.length > 0) {
+            let tmp: TLivesMap = {}
+            lives.forEach((item, index) => {
+                const date = new Date(item.display_time * 1000).toLocaleDateString('zh-CN')
+                if (date in tmp) {
+                    tmp[date].push(index)
+                } else {
+                    tmp[date] = [index]
+                }
+            })
+            setLivesMap(tmp)
+        }
+    }, [lives])
 
     return (
         <InfiniteScroll
@@ -99,7 +134,7 @@ export default function StockLives() {
                                 <span className="absolute bg-gray-800 font-medium px-4 py-2 text-gray-100 rounded-r-full -left-8">{month}月{day}日</span>
                             </div>
                             {
-                                livesMap[date].map((liveIndex) => lives[liveIndex] != undefined && renderLive(lives[liveIndex]))
+                                livesMap[date].map((liveIndex) => lives[liveIndex] != undefined && <Live live={lives[liveIndex]} />)
                             }
                         </div>
                     )

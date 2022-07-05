@@ -93,8 +93,8 @@ const Page = ({apps, my}) => {
 
 export async function getStaticProps() {
 
-  const apps = readFileSync(path.join(process.cwd(), 'data', `apps.json`), 'utf-8')
-  const my = readFileSync(path.join(process.cwd(), 'data', `my.json`), 'utf-8')
+  const apps = readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8')
+  const my = readFileSync(path.join(process.cwd(), 'data/json/my.json'), 'utf-8')
 
   return {
     props: {

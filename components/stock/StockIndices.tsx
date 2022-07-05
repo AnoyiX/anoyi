@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import useStockRealData from '../../hooks/useStockRealData'
+import useSWR from 'swr'
+import { TRealData } from '../../types/stock'
+import http from '../../utils/http'
 
 export default function StockIndices() {
 
@@ -23,7 +25,7 @@ export default function StockIndices() {
         'trade_status'
     ]
 
-    const { realData } = useStockRealData(code, fields)
+    const { data: realData = { fields: [], snapshot: {} } } = useSWR<TRealData>([`/api/stock/real`, { code, fields }], http.post, { refreshInterval: 5000 })
 
     const getTextColor = (num: number) => {
         if (num > 0) return 'text-red-600'
@@ -44,7 +46,7 @@ export default function StockIndices() {
                         const stock = realData.snapshot[item]
                         const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
                         return (
-                            <Link href={`/finance/${item}`} key={stockObj['prod_code']}>
+                            <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
                                 <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
                                     <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
                                     <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>

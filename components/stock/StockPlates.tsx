@@ -1,13 +1,10 @@
-import useStockPlates, { IPlate } from '../../hooks/useStockPlates'
-
-interface StockPlatesProps {
-    limit: number
-    is_acs: boolean
-}
+import useSWR from 'swr'
+import { TPlate, TPlates, StockPlatesProps } from '../../types/stock'
+import http from '../../utils/http'
 
 export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
 
-    const fields = [
+    const data_fields = [
         'plate_id',
         'plate_name',
         'fund_flow',
@@ -22,7 +19,10 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
         'is_new',
     ]
 
-    const { plates } = useStockPlates(limit, is_acs, fields)
+    const rank_field = "core_avg_pcp"
+    const rank_type = "0"
+
+    const { data: plates = [] } = useSWR<TPlates>([`/api/stock/plates`, { limit, is_acs, rank_field, rank_type, data_fields }], http.post, { refreshInterval: 10000 })
 
     const getColor = (num: number) => {
         if (num > 0) return 'bg-red-500 hover:bg-red-400'
@@ -35,7 +35,7 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
         return num.toFixed(2)
     }
 
-    const sort = (a: IPlate, b: IPlate) => is_acs ? b.core_avg_pcp - a.core_avg_pcp : a.core_avg_pcp - b.core_avg_pcp
+    const sort = (a: TPlate, b: TPlate) => is_acs ? b.core_avg_pcp - a.core_avg_pcp : a.core_avg_pcp - b.core_avg_pcp
 
     return (
         <div className="grid grid-cols-3 gap-1 w-full text-white">

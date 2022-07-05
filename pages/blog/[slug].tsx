@@ -42,8 +42,8 @@ const Page = () => {
           {
             article.title.length > 0 && (
               <>
-                <div className="text-center text-3xl font-semibold">{article.title}</div>
-                <article className="max-w-full prose text-base p-4 md:p-8 " dangerouslySetInnerHTML={{ __html: article.content }} />
+                <div className="text-center text-3xl font-semibold mb-4">{article.title}</div>
+                <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: article.content }} />
               </>
             )
           }

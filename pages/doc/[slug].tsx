@@ -48,7 +48,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   }
 
   // content: markdown -> html
-  const content = readFileSync(path.join(process.cwd(), 'docs', `${slug}.md`), 'utf-8')
+  const content = readFileSync(path.join(process.cwd(), `data/md/${slug}.md`), 'utf-8')
   const file = await unified().use(remarkParse).use(remarkHtml).process(content)
 
   return {
