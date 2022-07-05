@@ -63,7 +63,7 @@ const Page = ({ data }) => {
 
 export async function getStaticProps() {
 
-  const content = readFileSync(path.join(process.cwd(), 'data', `gitmojis.json`), 'utf-8')
+  const content = readFileSync(path.join(process.cwd(), 'data/json/gitmojis.json'), 'utf-8')
 
   return {
     props: {
