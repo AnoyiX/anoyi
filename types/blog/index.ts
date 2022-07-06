@@ -20,3 +20,12 @@ export type TBlog = {
     }
     views_count: number
 }
+
+
+export type TBlogArticle = {
+    id: string
+    content: string
+    title: string
+    time: string
+    author_name: string
+}
