@@ -1,13 +1,9 @@
 import Link from "next/link"
-import { IBlog } from "../../hooks/useBlogs"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faComment, faHeart } from '@fortawesome/free-regular-svg-icons'
+import { TBlog } from "../../types/blog"
 
-interface BlogCardProps {
-    blog: IBlog
-}
-
-export default function BlogCard({ blog }: BlogCardProps) {
+export default function BlogCard({ blog }: {blog: TBlog}) {
 
     return (
         <div className="w-full flex flex-row py-4 gap-2">

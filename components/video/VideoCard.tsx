@@ -1,10 +1,10 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
-import { IVideo } from "../../hooks/useVideos";
 import { Location } from '../../components/Icons'
+import { TVideo } from "../../types/video"
 
 interface VideoCardProps {
-    video: IVideo
+    video: TVideo
     onPlay: (vid: string) => void
 }
 

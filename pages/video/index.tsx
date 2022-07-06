@@ -1,23 +1,59 @@
 import { useState } from "react"
 import AppHeader from "../../components/AppHeader"
 import FullContainer from "../../components/Containers"
-import useVideos from "../../hooks/useVideos"
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component"
 import { Doing } from '../../components/Icons'
 import VideoModal from "../../components/video/VideoModal"
 import Head from "next/head"
 import VideoCard from "../../components/video/VideoCard"
+import useSWRInfinite from 'swr/infinite'
+import http from "../../utils/http"
+import { TVideo } from "../../types/video"
+
+const projection = {
+  _id: 0,
+  aweme_id: 1,
+  desc: 1,
+  author: {
+    nickname: 1,
+    avatar_thumb: 1,
+    custom_verify: 1
+  },
+  video: {
+    cover: 1,
+    play_addr: {
+      uri: 1
+    }
+  },
+  create_time: 1,
+  poi_info: {
+    poi_name: 1,
+    poi_latitude: 1,
+    poi_longitude: 1
+  }
+}
 
 const Page = () => {
+
   const limit = 20
-  const [skip, setSkip] = useState(0)
-  const { videos, hasMore } = useVideos(skip, limit)
+  const getKey = (pageIndex: number, previousPageData: { data: TVideo[] }) => {
+    if (previousPageData && !previousPageData.data.length) return null
+    return [`/api/mongo/find`, {
+      database: 'cloud',
+      collection: 'videos',
+      filter: {},
+      skip: pageIndex * limit,
+      limit,
+      projection,
+      sort: {
+        create_time: -1
+      },
+    }]
+  }
+  const { data = [], size, setSize } = useSWRInfinite<{ data: TVideo[] }>(getKey, http.post, { revalidateFirstPage: false })
+
   const [showVideo, setShowVideo] = useState(false)
   const [vid, setVid] = useState('')
-
-  const fetchMore = () => {
-    setSkip(pre => pre + limit)
-  }
 
   const playVideo = (vid: string) => {
     setVid(vid)
@@ -25,30 +61,30 @@ const Page = () => {
   }
 
   return (
-    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
+    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6' >
 
       <Head>
         <title>短视频</title>
       </Head>
 
-      <AppHeader path={[{name: '短视频'},]} />
+      <AppHeader path={[{ name: '短视频' },]} />
 
       <FullContainer>
         <InfiniteScroll
           className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 lg:grid-cols-2"
-          dataLength={videos.length}
-          next={fetchMore}
-          hasMore={hasMore}
+          dataLength={[].concat.apply([], data.map(item => item.data)).length}
+          next={() => setSize(size + 1)}
+          hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
           loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
         >
           {
-            videos.map((item, index) => <VideoCard key={index} video={item} onPlay={playVideo} />)
+            data.map(item => item.data.map(video => <VideoCard key={video.aweme_id} video={video} onPlay={playVideo} />))
           }
         </InfiniteScroll>
       </FullContainer>
 
       <VideoModal isOpen={showVideo} vid={vid} onClose={() => setShowVideo(false)} />
-    </div>
+    </div >
   )
 
 }

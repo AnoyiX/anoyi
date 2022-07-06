@@ -1,10 +1,10 @@
 import moment from "moment"
 import 'moment/locale/zh-cn'
-import { IPhoto } from "../../hooks/usePhotos";
+import { TPhoto } from "../../types/photo"
 import { Location } from '../Icons'
 
 interface PhotoCardProps {
-    photo: IPhoto
+    photo: TPhoto
     onPlay: () => void
 }
 

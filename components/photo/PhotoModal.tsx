@@ -1,17 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect } from 'react'
-import { IPhoto } from '../../hooks/usePhotos'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { TPhoto } from '../../types/photo'
 
 interface PhotoModalProps {
     isOpen: boolean
-    photos: IPhoto[]
-    photoIndex: number
+    photo?: TPhoto
     onClose: () => void
 }
 
-export default function PhotoModal({ isOpen, photos, photoIndex, onClose }: PhotoModalProps) {
+export default function PhotoModal({ isOpen, photo, onClose }: PhotoModalProps) {
 
     useEffect(() => {
 
@@ -43,7 +42,7 @@ export default function PhotoModal({ isOpen, photos, photoIndex, onClose }: Phot
                             </div>
                             <div className='flex h-full items-center justify-center'>
                                 {
-                                    photos.length > 0 && <img src={photos[photoIndex].file} alt="" className='max-h-full object-contain' />
+                                    !!photo && <img src={photo.file} alt="" className='max-h-full object-contain' />
                                 }
                             </div>
                         </div>
