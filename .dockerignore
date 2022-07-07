@@ -1,0 +1,4 @@
+.next/
+.swc/
+node_modules/
+.env

@@ -8,6 +8,7 @@
       locales: ["zh"],
       defaultLocale: "zh",
     },
+    output: 'standalone',
   }
   
   module.exports = nextConfig
