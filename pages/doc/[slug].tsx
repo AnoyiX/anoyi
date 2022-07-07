@@ -7,6 +7,7 @@ import remarkHtml from 'remark-html'
 import { GetStaticPropsContext } from "next/types"
 import { readFileSync } from 'fs'
 import path from "path"
+import HighlightJS from "../../components/HighlightJS"
 
 const Page = ({ title, html }) => {
 
@@ -22,6 +23,9 @@ const Page = ({ title, html }) => {
       <FullContainer>
         <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: html }} />
       </FullContainer>
+
+      <HighlightJS />
+      
     </div>
   )
 

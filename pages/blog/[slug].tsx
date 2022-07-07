@@ -2,23 +2,11 @@ import AppHeader from "../../components/AppHeader"
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import { parse } from 'node-html-parser'
-import highlight from "highlight.js";
-import "highlight.js/styles/atom-one-dark-reasonable.css";
-import { useEffect } from "react"
 import { TBlogArticle } from "../../types/blog"
 import UA from "../../utils/ua"
+import HighlightJS from "../../components/HighlightJS"
 
 const Page = ({ article }: { article: TBlogArticle }) => {
-
-  useEffect(() => {
-    document.querySelectorAll("pre code").forEach((block: any) => {
-      try {
-        highlight.highlightBlock(block)
-      } catch (e) {
-        console.log(e)
-      }
-    })
-  }, [])
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
@@ -41,6 +29,8 @@ const Page = ({ article }: { article: TBlogArticle }) => {
           }
         </div>
       </FullContainer>
+
+      <HighlightJS />
 
     </div>
   )
