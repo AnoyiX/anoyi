@@ -8,15 +8,18 @@ import Notebooks from "../../components/blog/Notebooks"
 import { TBlog } from "../../types/blog"
 import useSWRInfinite from 'swr/infinite'
 import http from "../../utils/http"
+import { PageData } from "../../types"
+import { getFromJianShu } from "../api/posts"
 
-const Page = () => {
+const limit = 10
 
-  const count = 10
-  const getKey = (pageIndex: number, previousPageData: { data: TBlog[] }) => {
+const Page = ({ fallbackData }) => {
+
+  const getKey = (pageIndex: number, previousPageData: PageData<TBlog>) => {
     if (previousPageData && !previousPageData.data.length) return null
-    return `/api/posts?page=${pageIndex + 1}&count=${count}`
+    return `/api/posts?page=${pageIndex + 1}&count=${limit}`
   }
-  const { data = [], size, setSize } = useSWRInfinite<{ data: TBlog[] }>(getKey, http.get, { revalidateFirstPage: false })
+  const { data, size, setSize } = useSWRInfinite<PageData<TBlog>>(getKey, http.get, { fallbackData, revalidateFirstPage: false })
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
@@ -33,7 +36,7 @@ const Page = () => {
             className="w-full flex flex-col px-4 divide-y"
             dataLength={[].concat.apply([], data.map(item => item.data)).length}
             next={() => setSize(size + 1)}
-            hasMore={!data.length || data.slice(-1)[0].data.length >= count}
+            hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
             loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
           >
             {
@@ -53,6 +56,16 @@ const Page = () => {
 
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const data = await getFromJianShu(0, limit)
+  return {
+    props: {
+      fallbackData: [{ data, has_more: data.length >= limit }],
+    },
+    revalidate: 60,
+  }
 }
 
 export default Page

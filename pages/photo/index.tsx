@@ -9,24 +9,28 @@ import PhotoModal from "../../components/photo/PhotoModal"
 import useSWRInfinite from 'swr/infinite'
 import { TPhoto } from "../../types/photo"
 import http from "../../utils/http"
+import { findFromMongo } from "../api/mongo/find"
+import { PageData } from "../../types"
 
-const Page = () => {
+const limit = 24
+const genBody = (page: number) => ({
+  database: 'cloud',
+  collection: 'photos',
+  filter: {},
+  skip: page * limit,
+  limit,
+  sort: {
+    create_time: -1
+  },
+})
 
-  const limit = 24
-  const getKey = (pageIndex: number, previousPageData: { data: TPhoto[] }) => {
+const Page = ({ fallbackData }) => {
+
+  const getKey = (pageIndex: number, previousPageData: PageData<TPhoto>) => {
     if (previousPageData && !previousPageData.data.length) return null
-    return [`/api/mongo/find`, {
-      database: 'cloud',
-      collection: 'photos',
-      filter: {},
-      skip: pageIndex * limit,
-      limit,
-      sort: {
-          create_time: -1
-      },
-  }]
+    return [`/api/mongo/find`, genBody(pageIndex)]
   }
-  const { data = [], size, setSize } = useSWRInfinite<{ data: TPhoto[] }>(getKey, http.post, { revalidateFirstPage: false })
+  const { data, size, setSize } = useSWRInfinite<PageData<TPhoto>>(getKey, http.post, { fallbackData, revalidateFirstPage: false })
 
   const [photo, setPhoto] = useState<TPhoto | undefined>()
   const [showPhotos, setShowPhotos] = useState(false)
@@ -61,6 +65,16 @@ const Page = () => {
       <PhotoModal isOpen={showPhotos} photo={photo} onClose={() => setShowPhotos(false)} />
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const data = await findFromMongo(genBody(0))
+  return {
+    props: {
+      fallbackData: [{data, has_more: data.length >= limit}],
+    },
+    revalidate: 60,
+  }
 }
 
 export default Page

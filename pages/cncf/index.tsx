@@ -20,6 +20,7 @@ const Page = () => {
       </FullContainer>
     </div>
   )
+
 }
 
 export default Page

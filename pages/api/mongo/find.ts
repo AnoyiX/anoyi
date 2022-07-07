@@ -5,8 +5,7 @@ export const config = {
     runtime: 'experimental-edge',
 }
 
-export default async function handler(req: NextRequest) {
-    const body = await req.json()
+export async function findFromMongo(body: any) {
     const resp = await fetch(`${process.env.MONGODB_API}/action/find`, {
         method: 'POST',
         headers: {
@@ -20,5 +19,11 @@ export default async function handler(req: NextRequest) {
         })
     })
     const data = await resp.json()
-    return WebResponse.successList(data.documents, data.documents.length >= body.limit)
+    return data.documents
+}
+
+export default async function handler(req: NextRequest) {
+    const body = await req.json()
+    const documents = await findFromMongo(body)
+    return WebResponse.successList(documents, documents.length >= body.limit)
 }

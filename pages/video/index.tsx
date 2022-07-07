@@ -9,7 +9,10 @@ import VideoCard from "../../components/video/VideoCard"
 import useSWRInfinite from 'swr/infinite'
 import http from "../../utils/http"
 import { TVideo } from "../../types/video"
+import { findFromMongo } from "../api/mongo/find"
+import { PageData } from "../../types"
 
+const limit = 20
 const projection = {
   _id: 0,
   aweme_id: 1,
@@ -32,25 +35,28 @@ const projection = {
     poi_longitude: 1
   }
 }
+const genBody = (page: number) => (
+  {
+    database: 'cloud',
+    collection: 'videos',
+    filter: {},
+    skip: page * limit,
+    limit,
+    projection,
+    sort: {
+      create_time: -1
+    },
+  }
+)
 
-const Page = () => {
+const Page = ({ fallbackData }) => {
 
   const limit = 20
-  const getKey = (pageIndex: number, previousPageData: { data: TVideo[] }) => {
+  const getKey = (pageIndex: number, previousPageData: PageData<TVideo>) => {
     if (previousPageData && !previousPageData.data.length) return null
-    return [`/api/mongo/find`, {
-      database: 'cloud',
-      collection: 'videos',
-      filter: {},
-      skip: pageIndex * limit,
-      limit,
-      projection,
-      sort: {
-        create_time: -1
-      },
-    }]
+    return [`/api/mongo/find`, genBody(pageIndex)]
   }
-  const { data = [], size, setSize } = useSWRInfinite<{ data: TVideo[] }>(getKey, http.post, { revalidateFirstPage: false })
+  const { data = [], size, setSize } = useSWRInfinite<PageData<TVideo>>(getKey, http.post, { fallbackData, revalidateFirstPage: false })
 
   const [showVideo, setShowVideo] = useState(false)
   const [vid, setVid] = useState('')
@@ -87,6 +93,16 @@ const Page = () => {
     </div >
   )
 
+}
+
+export async function getStaticProps() {
+  const data = await findFromMongo(genBody(0))
+  return {
+    props: {
+      fallbackData: [{ data, has_more: data.length >= limit }],
+    },
+    revalidate: 60,
+  }
 }
 
 export default Page
