@@ -64,7 +64,7 @@ const Page = ({apps, my}) => {
               <a className="hover:text-blue-400" href="/doc/terms">用户协议</a>
             </div>
             <div className='text-center'>
-              <span>Anoyi © 2022 All Rights Reserved</span>
+              Anoyi © 2022 All Rights Reserved
             </div>
           </div>
         </div>

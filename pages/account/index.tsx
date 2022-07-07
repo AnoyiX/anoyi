@@ -127,10 +127,10 @@ const Account = () => {
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
 
       <Head>
-        <title>账号</title>
+        <title>账号切换</title>
       </Head>
 
-      <AppHeader path={[{ name: '账号' }]} />
+      <AppHeader path={[{ name: '账号切换' }]} />
 
       <FullContainer>
         <div className="h-full flex flex-col justify-between">
