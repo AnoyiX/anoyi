@@ -57,14 +57,14 @@ const Page = ({ data }) => {
                   className="rounded-t w-full py-14 mb-6 cursor-pointer " style={{ backgroundColor: item.color }}
                   onClick={() => navigator.clipboard.writeText(item.emoji)}
                 >
-                  <div className="text-7xl">
+                  <div className="text-7xl select-none">
                     {
                       item.emoji
                     }
                   </div>
                 </div>
                 <p
-                  className="inline text-lg cursor-pointer font-mono font-semibold py-1 border-b-0 bg-no-repeat bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-[length:100%_3px] bg-[length:0_3px] bg-left-bottom transition-[background-size] duration-500 ease-in-out"
+                  className="inline text-lg cursor-pointer select-none font-mono font-semibold py-1 border-b-0 bg-no-repeat bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-[length:100%_3px] bg-[length:0_3px] bg-left-bottom transition-[background-size] duration-500 ease-in-out"
                   onClick={() => navigator.clipboard.writeText(item.code)}
                 >{item.code}</p>
                 <p className="text-sm text-gray-500 mt-4 mb-6 px-4 font-sans">{item.description}</p>
