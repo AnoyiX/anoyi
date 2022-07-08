@@ -1,5 +1,4 @@
 import Dock from '../components/Dock'
-import { Douyin, Github, Jianshu, Yuque, Zhihu } from '../components/Icons'
 import Link from 'next/link'
 import FullContainer from '../components/Containers'
 import Head from 'next/head'
@@ -28,19 +27,19 @@ const Page = ({apps, my}) => {
             </div>
             <div className='flex flex-row gap-4 items-center justify-center text-lg border-t border-gray-200 pt-4 w-full'>
               <a href="https://github.com/AnoyiX" target="_blank">
-                <Github className='h-6 w-6 text-gray-400 hover:text-gray-800' />
-              </a>
-              <a href="https://www.yuque.com/anoyi" target="_blank">
-                <Yuque className='h-6 w-6 text-gray-400 hover:text-gray-800' />
+                <i className="fa-brands fa-github text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
               <a href="https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0" target="_blank">
-                <Douyin className='h-6 w-6 text-gray-400 hover:text-gray-800' />
+                <i className="fa-brands fa-tiktok text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
-              <a href="https://www.jianshu.com/u/7b7ec6f2db21" target="_blank">
-                <Jianshu className='h-6 w-6 text-gray-400 hover:text-gray-800' />
+              <a href="https://twitter.com/AnoyiX" target="_blank">
+                <i className="fa-brands fa-twitter text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
-              <a href="https://www.zhihu.com/people/anoyi-x" target="_blank">
-                <Zhihu className='h-6 w-6 text-gray-400 hover:text-gray-800' />
+              <a href="https://twitter.com/AnoyiX" target="_blank">
+                <i className="fa-brands fa-youtube text-xl text-gray-400 hover:text-gray-800"></i>
+              </a>
+              <a href="https://etherscan.io/address/0x80DF1CaB786398503f991AAF3B48Be06044CF42F" target="_blank">
+                <i className="fa-brands fa-ethereum text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import AppHeader from "../../components/AppHeader"
 import Head from 'next/head'
 import FullContainer from "../../components/Containers"
-import { Doing } from "../../components/Icons"
+import { Loading } from "../../components/Icons"
 import InfiniteScroll from "react-infinite-scroll-component"
 import BlogCard from "../../components/blog/BlogCard"
 import Notebooks from "../../components/blog/Notebooks"
@@ -37,7 +37,7 @@ const Page = ({ fallbackData }) => {
             dataLength={[].concat.apply([], data.map(item => item.data)).length}
             next={() => setSize(size + 1)}
             hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
-            loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
+            loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
           >
             {
               data.map(resp => resp.data.map(blog => <BlogCard key={blog.id} blog={blog} />))

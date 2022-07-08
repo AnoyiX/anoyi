@@ -2,7 +2,7 @@ import { useState } from "react"
 import AppHeader from "../../components/AppHeader"
 import FullContainer from "../../components/Containers"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { Doing } from '../../components/Icons'
+import { Loading } from '../../components/Icons'
 import VideoModal from "../../components/video/VideoModal"
 import Head from "next/head"
 import VideoCard from "../../components/video/VideoCard"
@@ -81,7 +81,7 @@ const Page = ({ fallbackData }) => {
           dataLength={[].concat.apply([], data.map(item => item.data)).length}
           next={() => setSize(size + 1)}
           hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
-          loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
+          loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
         >
           {
             data.map(item => item.data.map(video => <VideoCard key={video.aweme_id} video={video} onPlay={playVideo} />))

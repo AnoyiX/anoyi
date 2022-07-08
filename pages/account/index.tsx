@@ -7,7 +7,7 @@ import moment from "moment"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFingerprint, faGear, faPlus, faMagnifyingGlass, faTrashCan, faXmark, faBoxOpen, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { Dialog, Transition } from "@headlessui/react"
-import { Doing } from "../../components/Icons"
+import { Loading } from "../../components/Icons"
 
 const ACCOUNTS_ACCESS_TOKEN = "ACCOUNTS_ACCESS_TOKEN"
 
@@ -165,7 +165,7 @@ const Account = () => {
             {
               loading ?
                 <div className="my-32 w-full flex justify-center items-center">
-                  <Doing className='h-20 w-20' />
+                  <Loading className='h-20 w-20' />
                 </div>
                 : <>
                   {

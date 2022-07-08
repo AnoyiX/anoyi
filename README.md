@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="140" src="https://cdn.anoyi.com/logo.png" />  
+  <img width="140" src="https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/logo.png" />  
   <h2 align="center">Anoyi's Personal Website</h2>
   <p align="center">Lightweight full stack web application development 🐬</p>
 </p>

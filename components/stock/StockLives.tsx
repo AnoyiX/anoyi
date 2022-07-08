@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import useSWR from "swr"
 import { TLive, TLivesMap, TRealData, TSymbol } from "../../types/stock"
 import http from "../../utils/http"
-import { Doing } from "../Icons"
+import { Loading } from "../Icons"
 
 function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
@@ -123,7 +123,7 @@ export default function StockLives() {
             dataLength={lives.length}
             next={fetchMore}
             hasMore={true}
-            loader={<div className="my-8 mx-auto col-span-full"><Doing className='h-20 w-20' /></div>}
+            loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
         >
             {
                 Object.keys(livesMap).map((date, index) => {
