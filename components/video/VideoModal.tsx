@@ -1,8 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import http from '../../utils/http'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
 interface VideoModalProps {
     isOpen: boolean
@@ -59,12 +57,12 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                         <div className='max-w-4xl mx-auto h-full transition-all transform'>
                             <div className='w-full h-full flex flex-col items-center justify-center'>
                                 <div className='relative w-full'>
-                                    <FontAwesomeIcon icon={faXmark} className="absolute -top-8 right-1 lg:top-0 lg:-right-6 text-2xl cursor-pointer text-gray-100" onClick={onClose} />
+                                    <i className="fa-solid fa-xmark absolute -top-8 right-1 lg:top-0 lg:-right-6 text-2xl cursor-pointer text-gray-100" onClick={onClose}></i>
                                 </div>
                                 {
                                     isError ? (
                                         <div className='h-96 w-full flex flex-col gap-4 justify-center items-center bg-gray-800 rounded-lg shadow shadow-gray-900'>
-                                            <FontAwesomeIcon icon={faTriangleExclamation} className='text-5xl text-gray-500' />
+                                            <i className="fa-solid fa-triangle-exclamation text-5xl text-gray-500"></i>
                                             <span className='text-gray-500'>视频加载失败，请观看其它视频！</span>
                                         </div>
                                     ) : <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' /> 

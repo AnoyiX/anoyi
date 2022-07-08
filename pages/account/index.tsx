@@ -4,8 +4,6 @@ import FullContainer from "../../components/Containers"
 import { Fragment, useEffect, useState } from "react"
 import http from "../../utils/http"
 import moment from "moment"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFingerprint, faGear, faPlus, faMagnifyingGlass, faTrashCan, faXmark, faBoxOpen, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { Dialog, Transition } from "@headlessui/react"
 import { Loading } from "../../components/Icons"
 
@@ -56,7 +54,7 @@ export function SettingModal({ isOpen, accessToken, setAccessToken, onClose }: S
           >
             <div className="relative bg-white w-[25rem] mx-auto rounded-lg shadow">
               <button onClick={onClose} className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-3 ml-auto inline-flex items-center">
-                <FontAwesomeIcon icon={faXmark} />
+                <i className="fa-solid fa-xmark"></i>
               </button>
               <div className="py-6 px-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900">设置</h3>
@@ -140,7 +138,7 @@ const Account = () => {
                 <label htmlFor="table-search" className="sr-only">搜索</label>
                 <div className="relative mt-1">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-1 text-gray-400" />
+                    <i className="fa-solid fa-magnifying-glass mr-1 text-gray-400"></i>
                   </div>
                   <input
                     value={keyword}
@@ -153,11 +151,11 @@ const Account = () => {
               <div className="flex gap-4 items-center">
                 <div className="hidden" onClick={() => setIsLoadPlugin(true)} id="ExtensionActions"></div>
                 <button onClick={() => setShowSetting(true)} className="border border-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:text-blue-600 hover:border-blue-500">
-                  <FontAwesomeIcon icon={faGear} className="mr-1" />
+                  <i className="fa-solid fa-gear mr-1"></i>
                   设置
                 </button>
                 <button id="reset" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                  <FontAwesomeIcon icon={faPlus} className="mr-1" />
+                  <i className="fa-solid fa-plus mr-1"></i>
                   添加账号
                 </button>
               </div>
@@ -191,11 +189,11 @@ const Account = () => {
                               </div>
                               <div className="inline-flex gap-2" role="group">
                                 <button onClick={() => document.dispatchEvent(new CustomEvent('loginAccount', { detail: item.cookie }))} className="py-2 px-4 text-sm text-blue-500 border-blue-300 rounded-md border hover:text-blue-600 hover:border-blue-500">
-                                  <FontAwesomeIcon icon={faFingerprint} className="mr-1" />
+                                  <i className="fa-solid fa-fingerprint mr-1"></i>
                                   登录
                                 </button>
                                 <button onClick={() => deleteAccount(item._id)} className="py-2 px-4 text-sm text-red-500 border-red-300 rounded-md border hover:text-red-600 hover:border-red-500">
-                                  <FontAwesomeIcon icon={faTrashCan} className="mr-1" />
+                                  <i className="fa-solid fa-trash-can mr-1"></i>
                                   删除
                                 </button>
                               </div>
@@ -212,13 +210,13 @@ const Account = () => {
                             onClick={() => setQuery(pre => ({...pre, skip: pre.skip - query.limit}))}
                             disabled={query.skip < 1}
                             className="py-1 px-4 text-xl text-gray-900 bg-white rounded-l-lg border border-gray-200 cursor-pointer hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-default">
-                            <FontAwesomeIcon icon={faCaretLeft} />
+                            <i className="fa-solid fa-caret-left"></i>
                           </button>
                           <button
                             onClick={() => setQuery(pre => ({...pre, skip: pre.skip + query.limit}))}
                             disabled={Math.ceil(total /query.limit) <= (query.skip / query.limit + 1)}
                             className="py-1 px-4 text-xl text-gray-900 bg-white rounded-r-md border border-gray-200 cursor-pointer hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-default">
-                            <FontAwesomeIcon icon={faCaretRight} />
+                            <i className="fa-solid fa-caret-right"></i>
                           </button>
                         </div>
                       </div>
@@ -229,7 +227,7 @@ const Account = () => {
           </div>
           {
             !loading && accounts.length == 0 && <div className="my-32 w-full flex flex-col gap-8 justify-center items-center">
-              <FontAwesomeIcon icon={faBoxOpen} className="text-7xl text-gray-400" />
+              <i className="fa-solid fa-box-open text-7xl text-gray-400"></i>
               <span className="text-gray-500 text-sm">当前账号库为空，请先采集账号后，刷新本页面！</span>
             </div>
           }

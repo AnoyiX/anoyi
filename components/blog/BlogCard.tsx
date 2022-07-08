@@ -1,6 +1,4 @@
 import Link from "next/link"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faComment, faHeart } from '@fortawesome/free-regular-svg-icons'
 import { TBlog } from "../../types/blog"
 
 export default function BlogCard({ blog }: {blog: TBlog}) {
@@ -26,15 +24,15 @@ export default function BlogCard({ blog }: {blog: TBlog}) {
                 </div>
                 <div className="text-gray-600 flex flex-row gap-3 text-xs cursor-default">
                     <div className="cursor-default">
-                        <FontAwesomeIcon icon={faEye} className="mr-1"/>
+                        <i className="fa-regular fa-eye mr-1"></i>
                         {blog.views_count}
                     </div>
                     <div className="cursor-default">
-                        <FontAwesomeIcon icon={faComment} className="mr-1"/>
+                        <i className="fa-regular fa-comment mr-1"></i>
                         {blog.public_comments_count}
                     </div>
                     <div className="cursor-default">
-                        <FontAwesomeIcon icon={faHeart} className="mr-1"/> 
+                        <i className="fa-regular fa-heart mr-1"></i>
                         {blog.likes_count}
                     </div>
                 </div>
