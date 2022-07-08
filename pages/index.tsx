@@ -35,7 +35,7 @@ const Page = ({apps, my}) => {
               <a href="https://twitter.com/AnoyiX" target="_blank">
                 <i className="fa-brands fa-twitter text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
-              <a href="https://twitter.com/AnoyiX" target="_blank">
+              <a href="https://www.youtube.com/channel/UCL-w1IbRfznZauYz6JIZOBw" target="_blank">
                 <i className="fa-brands fa-youtube text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
               <a href="https://etherscan.io/address/0x80DF1CaB786398503f991AAF3B48Be06044CF42F" target="_blank">
