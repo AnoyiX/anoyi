@@ -1,11 +1,11 @@
 <p align="center">
   <img width="140" src="https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/logo.png" />  
-  <h2 align="center">Anoyi's Personal Website</h2>
-  <p align="center">Lightweight full stack web application development 🐬</p>
+  <h2 align="center">Anoyi's Personal Website 🐬</h2>
+  <p align="center">Lightweight full stack web application development</p>
 </p>
 <p align="center">
-  <a href="https://github.com/AnoyiX/anoyi/issues">
-    <img src="https://img.shields.io/github/issues/AnoyiX/anoyi"/> 
+  <a href="https://github.com/AnoyiX/anoyi/LICENSE">
+    <img src="https://img.shields.io/github/license/AnoyiX/anoyi"/> 
   </a>
   <a href="https://github.com/AnoyiX/anoyi/network/members">
     <img src="https://img.shields.io/github/forks/AnoyiX/anoyi"/> 
@@ -13,8 +13,8 @@
   <a href="https://github.com/AnoyiX/anoyi/stargazers">
     <img src="https://img.shields.io/github/stars/AnoyiX/anoyi"/> 
   </a>
-  <a href="https://github.com/AnoyiX/anoyi/LICENSE">
-    <img src="https://img.shields.io/github/license/AnoyiX/anoyi"/> 
+    <a href="https://github.com/AnoyiX/anoyi/issues">
+    <img src="https://img.shields.io/github/issues/AnoyiX/anoyi"/> 
   </a>
 </p>
 <p align="center">
@@ -35,7 +35,7 @@
   </a>
 </p>
 
-## Quick Start
+## 🚀 Quick Start
 
 First, clone the repo:
 
@@ -43,9 +43,7 @@ First, clone the repo:
 git clone https://github.com/AnoyiX/anoyi.git
 ```
 
-### 🚀 Local Development
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### ▼ Local Development
 
 ```shell
 # install packages
@@ -57,6 +55,37 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### ▼ Configuration
+
+You can use the following environment variables to modify the application's configuration:
+
+Name|Default|Description
+--|--|--
+MONGODB_API|`null`|MongoDB Atlas API 
+MONGODB_API_KEY|`null`|MongoDB Atlas API Key
+MONGODB_DATASOURCE|`null`|MongoDB Atlas DataSource
+NEXT_PUBLIC_GA_MEASUREMENT_ID|`null`|Google Analytics Measurement ID
+
+Custom user data saved in `./data`, you can change them to yourself.
+
+### ▼ Deployment
+
+#### Docker
+
+- Build: `docker build -t nextjs-anoyi .`
+- Run: `docker run -d -p 3000:3000 nextjs-anoyi`
+
+#### Vercel
+
+- New Project
+- Add Your Github Account
+- Import Your Git Repository
+
+Then vercel will deploy your application automatically when you push your code.
+
+#### Others
+
+To learn more, see [Next.js Deployment](https://nextjs.org/docs/deployment).
 
 ## 🧿 Activity
 
