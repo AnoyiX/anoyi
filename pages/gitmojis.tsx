@@ -28,7 +28,7 @@ const Page = ({ data }) => {
       <div className='bg-gradient-to-br from-gray-900 to-gray-500 w-full lg:h-96 h-48 rounded-lg shadow relative p-6 lg:p-16 text-center lg:text-left'>
 
         <div className="h-full flex flex-col justify-center">
-          <p className="text-2xl lg:text-5xl tracking-wide">😊🤣😂😇😉😘😜🙄😡😰🤢😴</p>
+          <p className="text-2xl lg:text-5xl tracking-wide">😊🤣😂😇😉😘😜🙄😡😰😴</p>
           <p className="text-white text-lg lg:text-4xl font-semibold my-4">Git Commit Messages 表情包使用指南</p>
           <p className="text-gray-400 text-xs lg:text-sm"><i className="fa-solid fa-circle-info mr-2"></i>点击任意彩色表情或者黑色标题即可完成复制！</p>
           <div className="relative w-fit mt-6 hidden lg:block">
