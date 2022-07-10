@@ -11,9 +11,9 @@ interface PhotoCardProps {
 export default function PhotoCard({ photo, onPlay }: PhotoCardProps) {
 
     return (
-        <div className="rounded-lg w-full shadow-lg">
+        <div className="rounded-lg w-full shadow hover:shadow-xl">
             <div className="overflow-hidden rounded-t-lg">
-                <img src={photo.thumbnail} alt="" className="w-full h-32 md:h-48 object-cover cursor-pointer transition ease-in-out hover:scale-110" onClick={onPlay} />
+                <img src={photo.thumbnail} alt="" className="w-full h-32 md:h-48 object-cover cursor-pointer" onClick={onPlay} />
             </div>
             <div className="p-4 flex flex-row text-sm text-gray-700 justify-between items-center">
                 <a className="flex flex-fow gap-1 items-center" href={photo.address} target="_blank">

@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { readFileSync } from 'fs'
 import path from "path"
 
-const Page = ({apps, my}) => {
+const Page = ({ apps, home }) => {
 
   return (
     <div className='w-full flex flex-col flex-1 gap-4 md:gap-6 p-4 md:p-8'>
@@ -17,15 +17,15 @@ const Page = ({apps, my}) => {
       <div className='flex flex-col md:flex-row flex-1 gap-4 md:gap-6'>
 
         <div className='flex flex-col gap-4 md:gap-6'>
-          <div className='bg-white w-full md:w-72 p-4 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
-            <div className='flex flex-col items-center justify-center gap-2'>
-              <img className="w-32 h-32 rounded-full" src="https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="" />
-              <div className="text-xl font-medium">Anoyi 🐬</div>
+          <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
+            <div className='flex flex-col items-center justify-center gap-2 pt-6 pb-2'>
+              <img className="w-28 h-28 rounded-full" src={home.user.avatar} alt="" />
+              <div className="text-xl font-medium">{home.user.nickname}</div>
               <div className='text-gray-400'>
-                <span className='text-sm'>轻量级云原生架构实验室</span>
+                <span className='text-sm'>{home.user.bio}</span>
               </div>
             </div>
-            <div className='flex flex-row gap-4 items-center justify-center text-lg border-t border-gray-200 pt-4 w-full'>
+            <div className='flex flex-row gap-4 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
               <a href="https://github.com/AnoyiX" target="_blank">
                 <i className="fa-brands fa-github text-xl text-gray-400 hover:text-gray-800"></i>
               </a>
@@ -46,7 +46,7 @@ const Page = ({apps, my}) => {
 
           <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
             {
-              [my.languages, my.skills, my.softwares].map((item, index) => (
+              [home.languages, home.skills, home.softwares].map((item, index) => (
                 <Dock name={item.name} key={index} data={item.children}></Dock>
               ))
             }
@@ -63,7 +63,7 @@ const Page = ({apps, my}) => {
               <a className="hover:text-blue-400" href="/doc/terms">用户协议</a>
             </div>
             <div className='text-center'>
-              Anoyi © 2022 All Rights Reserved
+              <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2022 All Rights Reserved
             </div>
           </div>
         </div>
@@ -93,12 +93,12 @@ const Page = ({apps, my}) => {
 export async function getStaticProps() {
 
   const apps = readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8')
-  const my = readFileSync(path.join(process.cwd(), 'data/json/my.json'), 'utf-8')
+  const home = readFileSync(path.join(process.cwd(), 'data/json/home.json'), 'utf-8')
 
   return {
     props: {
       apps: JSON.parse(apps),
-      my: JSON.parse(my),
+      home: JSON.parse(home),
     },
   }
 

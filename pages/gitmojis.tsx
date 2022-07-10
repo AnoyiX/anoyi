@@ -52,9 +52,9 @@ const Page = ({ data }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-8 gap-10">
           {
             data.map((item: Emoji) => (
-              <div key={item.name} className="shadow w-full rounded text-center hover:shadow-xl">
+              <div key={item.name} className="shadow w-full rounded-lg text-center hover:shadow-xl">
                 <div
-                  className="rounded-t w-full py-14 mb-6 cursor-pointer " style={{ backgroundColor: item.color }}
+                  className="rounded-t-lg w-full py-14 mb-6 cursor-pointer " style={{ backgroundColor: item.color }}
                   onClick={() => navigator.clipboard.writeText(item.emoji)}
                 >
                   <div className="text-7xl select-none">
