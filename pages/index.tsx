@@ -54,13 +54,13 @@ const Page = ({ apps, home }) => {
 
           <div className='md:flex hidden flex-col items-center space-y-2 text-gray-400 text-xs '>
             <div className='flex flex-row space-x-1'>
-              <a className="hover:text-blue-400" href="/doc/about">关于作者</a>
+              <a className="hover:text-blue-600" href="/doc/about">关于作者</a>
               <span>·</span>
-              <a className="hover:text-blue-400" href="/doc/jobs">工作内推</a>
+              <a className="hover:text-blue-600" href="/doc/jobs">工作内推</a>
               <span>·</span>
-              <a className="hover:text-blue-400" href="/doc/links">友情链接</a>
+              <a className="hover:text-blue-600" href="/doc/links">友情链接</a>
               <span>·</span>
-              <a className="hover:text-blue-400" href="/doc/terms">用户协议</a>
+              <a className="hover:text-blue-600" href="/doc/terms">用户协议</a>
             </div>
             <div className='text-center'>
               <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2022 All Rights Reserved

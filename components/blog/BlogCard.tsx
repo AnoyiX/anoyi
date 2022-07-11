@@ -25,18 +25,19 @@ export default function BlogCard({ blog }: {blog: TBlog}) {
                 <div className="text-gray-600 flex flex-row gap-3 text-xs cursor-default">
                     <div className="cursor-default">
                         <i className="fa-regular fa-eye mr-1"></i>
-                        {blog.views_count}
+                        {blog.views_count.toLocaleString()}
                     </div>
                     <div className="cursor-default">
                         <i className="fa-regular fa-comment mr-1"></i>
-                        {blog.public_comments_count}
+                        {blog.public_comments_count.toLocaleString()}
                     </div>
                     <div className="cursor-default">
                         <i className="fa-regular fa-heart mr-1"></i>
-                        {blog.likes_count}
+                        {blog.likes_count.toLocaleString()}
                     </div>
                 </div>
             </div>
         </div>
     )
+
 }

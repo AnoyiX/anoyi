@@ -13,6 +13,15 @@ const http = {
     }
   },
 
+  getAll: async (url: string, init?: RequestInit) => {
+    const resp = await fetch(url, init)
+    if (resp.status == 200) {
+      return await resp.json()
+    } else {
+      throw new Error('请求失败')
+    }
+  },
+
   post: async (url: string, body: any) => {
     const resp = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
     if (resp.status == 200) {

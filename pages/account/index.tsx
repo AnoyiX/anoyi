@@ -188,7 +188,7 @@ const Account = () => {
                                 </div>
                               </div>
                               <div className="inline-flex gap-2" role="group">
-                                <button onClick={() => document.dispatchEvent(new CustomEvent('loginAccount', { detail: item.cookie }))} className="py-2 px-4 text-sm text-blue-500 border-blue-300 rounded-md border hover:text-blue-600 hover:border-blue-500">
+                                <button onClick={() => document.dispatchEvent(new CustomEvent('loginAccount', { detail: item.cookie }))} className="py-2 px-4 text-sm text-blue-600 border-blue-300 rounded-md border hover:text-blue-600 hover:border-blue-500">
                                   <i className="fa-solid fa-fingerprint mr-1"></i>
                                   登录
                                 </button>

@@ -28,5 +28,10 @@
         "name": "Git Emojis",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
         "url": "/gitmojis"
+    },
+    {
+        "name": "精选开源",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GithubStars.svg",
+        "url": "/github/stars"
     }
 ]

@@ -84,7 +84,7 @@ const Page = () => {
             </div>
             <div className="text-xs text-gray-500">
               {
-                stockObj['trade_status'] === 'TRADE' && <span className="border rounded px-2 py-1 mr-2 border-blue-500 text-blue-500">交易中</span>
+                stockObj['trade_status'] === 'TRADE' && <span className="border rounded px-2 py-1 mr-2 border-blue-500 text-blue-600">交易中</span>
               }
               {
                 stockObj['trade_status'] === 'BREAK' && <span className="border rounded px-2 py-1 mr-2 border-gray-500 text-gray-500">休市</span>

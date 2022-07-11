@@ -32,7 +32,7 @@ export default function VideoCard({ video, onPlay }: VideoCardProps) {
                     {
                         video.poi_info && (
                             <a href={`https://gaode.com/search?query=${video.poi_info.poi_name}&geoobj=${video.poi_info.poi_longitude}%7C${video.poi_info.poi_latitude}`}
-                                className="bg-blue-500 rounded bg-opacity-10 border border-blue-500 px-2 py-1 text-blue-500 flex flex-row gap-1 items-center"
+                                className="bg-blue-500 rounded bg-opacity-10 border border-blue-500 px-2 py-1 text-blue-600 flex flex-row gap-1 items-center"
                                 target="_blank"
                             >
                                 <Location className="h-4 w-4" />
