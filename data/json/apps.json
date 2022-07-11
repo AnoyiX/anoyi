@@ -30,8 +30,8 @@
         "url": "/gitmojis"
     },
     {
-        "name": "精选开源",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GithubStars.svg",
+        "name": "Github Stars",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitStars.svg",
         "url": "/github/stars"
     }
 ]

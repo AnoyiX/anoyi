@@ -24,10 +24,10 @@ const Page = ({ fallbackData, colors }) => {
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
-        <title>Github 精选项目</title>
+        <title>Github Stars</title>
       </Head>
 
-      <AppHeader path={[{ name: 'Github 精选项目' },]} />
+      <AppHeader path={[{ name: 'Github Stars' },]} />
 
       <FullContainer>
         <InfiniteScroll
@@ -42,7 +42,7 @@ const Page = ({ fallbackData, colors }) => {
               <div key={item.id} className="flex border w-full rounded-lg p-4 gap-4">
                 <div className="flex-0 text-center">
                   <a href={item.owner.html_url} target="_blank">
-                    <img src={item.owner.avatar_url} alt="" className="h-16 w-16 rounded-md shadow shadow-gray-300" />
+                    <img src={item.owner.avatar_url} alt="" className="h-16 w-16 rounded-lg shadow shadow-gray-300" />
                   </a>
                 </div>
                 <div className="flex-1">
