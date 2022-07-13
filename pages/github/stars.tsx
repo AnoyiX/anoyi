@@ -9,7 +9,7 @@ import { TRepo } from "../../types/github/repo"
 import { readFileSync } from "fs"
 import path from "path"
 
-const limit = 24
+const limit = 12
 const genAPI = (page: number) => `https://api.github.com/users/AnoyiX/starred?page=${page + 1}&per_page=${limit}`
 
 const Page = ({ fallbackData, colors }) => {
@@ -39,10 +39,10 @@ const Page = ({ fallbackData, colors }) => {
         >
           {
             data.map(resp => resp.map(item => (
-              <div key={item.id} className="flex border w-full rounded-lg p-4 gap-4">
+              <div key={item.id} className="flex border w-full rounded-lg p-4 gap-4 md:gap-6">
                 <div className="flex-0 text-center">
                   <a href={item.owner.html_url} target="_blank">
-                    <img src={item.owner.avatar_url} alt="" className="h-16 w-16 rounded-lg shadow shadow-gray-300" />
+                    <img src={item.owner.avatar_url} alt="" className="h-14 w-14 rounded-lg shadow shadow-gray-300" />
                   </a>
                 </div>
                 <div className="flex-1">
@@ -84,7 +84,7 @@ const Page = ({ fallbackData, colors }) => {
                   <div className="text-gray-600 flex flex-row gap-2 text-xs cursor-default flex-wrap">
                     {
                       item.topics.map(topic => (
-                        <a className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white">
+                        <a key={topic} className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white">
                           {topic}
                         </a>
                       ))
