@@ -3,7 +3,9 @@ import Head from 'next/head'
 import FullContainer from "../../components/Containers"
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
-import remarkHtml from 'remark-html'
+import remarkRehype from 'remark-rehype'
+import rehypeRaw from 'rehype-raw'
+import rehypeStringify from 'rehype-stringify'
 import { GetStaticPropsContext } from "next/types"
 import { readFileSync } from 'fs'
 import path from "path"
@@ -25,7 +27,7 @@ const Page = ({ title, html }) => {
       </FullContainer>
 
       <HighlightJS />
-      
+
     </div>
   )
 
@@ -53,7 +55,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   // content: markdown -> html
   const content = readFileSync(path.join(process.cwd(), `data/md/${slug}.md`), 'utf-8')
-  const file = await unified().use(remarkParse).use(remarkHtml).process(content)
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    // .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .process(content)
 
   return {
     props: {
