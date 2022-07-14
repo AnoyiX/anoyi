@@ -26,21 +26,13 @@ const Page = ({ apps, home }) => {
               </div>
             </div>
             <div className='flex flex-row gap-4 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
-              <a href="https://github.com/AnoyiX" target="_blank">
-                <i className="fa-brands fa-github text-xl text-gray-400 hover:text-gray-800"></i>
-              </a>
-              <a href="https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0" target="_blank">
-                <i className="fa-brands fa-tiktok text-xl text-gray-400 hover:text-gray-800"></i>
-              </a>
-              <a href="https://twitter.com/AnoyiX" target="_blank">
-                <i className="fa-brands fa-twitter text-xl text-gray-400 hover:text-gray-800"></i>
-              </a>
-              <a href="https://www.youtube.com/channel/UCL-w1IbRfznZauYz6JIZOBw" target="_blank">
-                <i className="fa-brands fa-youtube text-xl text-gray-400 hover:text-gray-800"></i>
-              </a>
-              <a href="https://etherscan.io/address/0x80DF1CaB786398503f991AAF3B48Be06044CF42F" target="_blank">
-                <i className="fa-brands fa-ethereum text-xl text-gray-400 hover:text-gray-800"></i>
-              </a>
+              {
+                home.user.brands.map(item => (
+                  <a href={item.url} target="_blank" key={item.icon}>
+                    <i className={`fa-brands fa-${item.icon} text-xl text-gray-400/75 hover:text-gray-700`}></i>
+                  </a>
+                ))
+              }
             </div>
           </div>
 

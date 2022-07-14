@@ -7,6 +7,7 @@ export type TVideo = {
             url_list: string[]
         }
         custom_verify: string
+        sec_uid: string
     }
     poi_info: {
         poi_name: string

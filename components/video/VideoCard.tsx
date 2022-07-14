@@ -17,9 +17,11 @@ export default function VideoCard({ video, onPlay }: VideoCardProps) {
             <div className="flex flex-col p-4 justify-between">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
-                        <img src={video.author.avatar_thumb.url_list[0]} alt="" className="w-12 h-12 rounded-full" />
+                        <a href={`https://www.douyin.com/user/${video.author.sec_uid}`} target="_blank">
+                            <img src={video.author.avatar_thumb.url_list[0]} alt="" className="w-12 h-12 rounded-full" />
+                        </a>
                         <div className="flex flex-col justify-center gap-1">
-                            <span className="text-lg font-bold text-gray-900">{video.author.nickname}</span>
+                            <a href={`https://www.douyin.com/user/${video.author.sec_uid}`} className="text-lg font-bold text-gray-900 hover:text-blue-600" target="_blank">{video.author.nickname}</a>
                             <span className="text-xs text-gray-400">{video.author.custom_verify || '抖音创作者'}</span>
                         </div>
                     </div>

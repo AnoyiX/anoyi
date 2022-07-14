@@ -46,7 +46,7 @@ const Page = ({ fallbackData, colors }) => {
                   </a>
                 </div>
                 <div className="flex-1">
-                  <a className="text-xl cursor-pointer select-none font-semibold hover:text-blue-600" href={item.html_url}>{item.full_name}</a>
+                  <a className="text-xl cursor-pointer select-none font-semibold hover:text-blue-600" href={item.html_url} target="_blank">{item.full_name}</a>
                   <p className="text-sm text-gray-500 my-2 font-sans">{item.description}</p>
                   <div className="text-gray-600 flex flex-row gap-3 text-xs cursor-default flex-wrap mt-4">
                     {
@@ -84,7 +84,7 @@ const Page = ({ fallbackData, colors }) => {
                   <div className="text-gray-600 flex flex-row gap-2 text-xs cursor-default flex-wrap">
                     {
                       item.topics.map(topic => (
-                        <a key={topic} className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white">
+                        <a key={topic} href={`https://github.com/topics/${topic}`} className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white" target="_blank">
                           {topic}
                         </a>
                       ))

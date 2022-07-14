@@ -3,7 +3,24 @@
         "nickname": "Anoyi 🐬",
         "avatar": "https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240",
         "bio": "轻量级云原生架构实验室",
-        "banner": "https://upload-images.jianshu.io/upload_images/3424642-4f2dbb5bdb9060c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/720"
+        "banner": "https://upload-images.jianshu.io/upload_images/3424642-4f2dbb5bdb9060c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/720",
+        "brands": [{
+                "icon": "github",
+                "url": "https://github.com/AnoyiX"
+            }, {
+                "icon": "tiktok",
+                "url": "https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0"
+            }, {
+                "icon": "twitter",
+                "url": "https://twitter.com/AnoyiX"
+            }, {
+                "icon": "youtube",
+                "url": "https://www.youtube.com/channel/UCL-w1IbRfznZauYz6JIZOBw"
+            }, {
+                "icon": "ethereum",
+                "url": "https://etherscan.io/address/0x80DF1CaB786398503f991AAF3B48Be06044CF42F"
+            }
+        ]
     },
     "languages": {
         "name": "语言",

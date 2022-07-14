@@ -20,7 +20,8 @@ const projection = {
   author: {
     nickname: 1,
     avatar_thumb: 1,
-    custom_verify: 1
+    custom_verify: 1,
+    sec_uid: 1,
   },
   video: {
     cover: 1,
