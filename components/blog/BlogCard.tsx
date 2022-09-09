@@ -5,12 +5,12 @@ export default function BlogCard({ blog }: {blog: TBlog}) {
 
     return (
         <div className="w-full flex flex-row py-4 gap-2">
-            <a href={`/blog/${blog.slug}`} target='_blank' rel='noreferrer'>
+            <a href={`https://www.jianshu.com/p/${blog.slug}`} target='_blank' rel='noreferrer'>
                 <img src={blog.list_image_url + '?imageMogr2/auto-orient/strip|imageView2/1/w/256/h/160'} alt="" className="rounded-lg cursor-pointer hover:opacity-75 w-64 h-40 object-cover bg-slate-200" />
             </a>
             <div className="flex flex-col p-2 justify-between">
                 <div className="flex flex-col gap-2">
-                    <a href={`/blog/${blog.slug}`} target='_blank' rel='noreferrer'>
+                    <a href={`https://www.jianshu.com/p/${blog.slug}`} target='_blank' rel='noreferrer'>
                         <div className="text-black text-xl cursor-pointer hover:text-blue-600">
                             {blog.title}
                         </div>
