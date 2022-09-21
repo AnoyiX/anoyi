@@ -8,6 +8,7 @@ import http from "../../utils/http"
 import { TRepo } from "../../types/github/repo"
 import { readFileSync } from "fs"
 import path from "path"
+import ImageSkeleton from "../../components/ImageSkeleton"
 
 const limit = 12
 const genAPI = (page: number) => `https://api.github.com/users/AnoyiX/starred?page=${page + 1}&per_page=${limit}`
@@ -24,10 +25,10 @@ const Page = ({ fallbackData, colors }) => {
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
 
       <Head>
-        <title>Github Stars</title>
+        <title>开源项目</title>
       </Head>
 
-      <AppHeader path={[{ name: 'Github Stars' },]} />
+      <AppHeader path={[{ name: '开源项目' },]} />
 
       <FullContainer>
         <InfiniteScroll
@@ -41,12 +42,12 @@ const Page = ({ fallbackData, colors }) => {
             data.map(resp => resp.map(item => (
               <div key={item.id} className="flex border w-full rounded-lg p-4 gap-4 md:gap-6">
                 <div className="flex-0 text-center">
-                  <a href={item.owner.html_url} target="_blank">
-                    <img src={item.owner.avatar_url} alt="" className="h-14 w-14 rounded-lg shadow shadow-gray-300" />
+                  <a href={item.owner.html_url} target="_blank" rel='noreferrer'>
+                    <ImageSkeleton src={item.owner.avatar_url} className="h-14 w-14 rounded-lg" />
                   </a>
                 </div>
                 <div className="flex-1">
-                  <a className="text-xl cursor-pointer select-none font-semibold hover:text-blue-600" href={item.html_url} target="_blank">{item.full_name}</a>
+                  <a className="text-xl cursor-pointer select-none font-semibold hover:text-blue-600" href={item.html_url} target="_blank" rel='noreferrer'>{item.full_name}</a>
                   <p className="text-sm text-gray-500 my-2 font-sans">{item.description}</p>
                   <div className="text-gray-600 flex flex-row gap-3 text-xs cursor-default flex-wrap mt-4">
                     {
@@ -84,7 +85,7 @@ const Page = ({ fallbackData, colors }) => {
                   <div className="text-gray-600 flex flex-row gap-2 text-xs cursor-default flex-wrap">
                     {
                       item.topics.map(topic => (
-                        <a key={topic} href={`https://github.com/topics/${topic}`} className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white" target="_blank">
+                        <a key={topic} href={`https://github.com/topics/${topic}`} className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white" target="_blank" rel='noreferrer'>
                           {topic}
                         </a>
                       ))

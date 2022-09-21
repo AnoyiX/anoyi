@@ -23,7 +23,7 @@ const Page = ({ data }) => {
         <title>An emoji guide for your commit messages</title>
       </Head>
 
-      <AppHeader path={[{ name: 'Git Emojis' }]} />
+      <AppHeader path={[{ name: 'Git 表情' }]} />
 
       <div className='bg-gradient-to-br from-gray-900 to-gray-500 w-full lg:h-96 h-48 rounded-lg shadow relative p-6 lg:p-16 text-center lg:text-left'>
 
@@ -32,7 +32,7 @@ const Page = ({ data }) => {
           <p className="text-white text-lg lg:text-4xl font-semibold my-4">Git Commit Messages 表情包使用指南</p>
           <p className="text-gray-400 text-xs lg:text-sm"><i className="fa-solid fa-circle-info mr-2"></i>点击任意彩色表情或者黑色标题即可完成复制！</p>
           <div className="relative w-fit mt-6 hidden lg:block">
-            <a href="https://github.com/AnoyiX/anoyi" target="_blank" className="relative p-0.5 inline-flex items-center justify-center font-semibold overflow-hidden group rounded-md">
+            <a href="https://github.com/AnoyiX/anoyi" target="_blank" className="relative p-0.5 inline-flex items-center justify-center font-semibold overflow-hidden group rounded-md" rel='noreferrer'>
               <span className="w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
               <span className="relative px-4 py-2 transition-all ease-out bg-gray-700 rounded-md group-hover:bg-opacity-0 duration-400">
                 <span className="relative text-white"><i className="fa-brands fa-github mr-2"></i>查看演示</span>

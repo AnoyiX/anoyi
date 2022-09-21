@@ -25,12 +25,12 @@
         "url": "/cncf"
     },
     {
-        "name": "Git Emojis",
+        "name": "Git 表情",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
         "url": "/gitmojis"
     },
     {
-        "name": "Github Stars",
+        "name": "开源项目",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitStars.svg",
         "url": "/github/stars"
     }

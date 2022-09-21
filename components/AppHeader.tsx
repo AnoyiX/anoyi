@@ -15,10 +15,6 @@ export default function AppHeader({ path }: IAppHeader) {
 
     const router = useRouter()
 
-    const routeTo = (url: string) => {
-        router.push(url, undefined, { shallow: true })
-    }
-
     return (
         <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 p-4'>
             <div className='flex flex-row items-center space-x-2'>
@@ -29,14 +25,13 @@ export default function AppHeader({ path }: IAppHeader) {
                     path.map((item, index) => (
                         <Fragment key={index}>
                             <i className="fa-solid fa-angle-right text-gray-400"></i>
-                            <div onClick={() => !!item.url && routeTo(item.url)} className={`flex flex-row items-center space-x-2 ${!!item.url && 'cursor-pointer'}`}>
+                            <div onClick={() => !!item.url && router.push(item.url)} className={`flex flex-row items-center space-x-2 ${!!item.url && 'cursor-pointer'}`}>
                                 <span className='text-sm text-gray-900'>{item.name}</span>
                             </div>
                         </Fragment>
                     ))
                 }
             </div>
-            <div></div>
         </div>
     )
 
