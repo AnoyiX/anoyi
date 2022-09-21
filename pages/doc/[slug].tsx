@@ -37,7 +37,7 @@ export async function getStaticPaths() {
   const mds = ['about', 'jobs', 'links', 'terms']
   return {
     paths: mds.map(slug => ({ params: { slug } })),
-    fallback: true
+    fallback: false
   };
 }
 
@@ -59,7 +59,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     .use(remarkParse)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    // .use(rehypeSanitize)
     .use(rehypeStringify)
     .process(content)
 

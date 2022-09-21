@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useState } from 'react'
 import Router from "next/router"
+import { GoogleAnalytics } from "nextjs-google-analytics"
 
 function App({ Component, pageProps }: AppProps) {
 
@@ -34,6 +35,9 @@ function App({ Component, pageProps }: AppProps) {
       <div className='min-h-screen container mx-auto flex'>
         <Component {...pageProps} />
       </div>
+      {
+        !!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && <GoogleAnalytics strategy="lazyOnload" />
+      }
     </div>
   )
 }

@@ -11,7 +11,7 @@ const Page = () => {
         <title>Cloud Native Interactive Landscape</title>
       </Head>
 
-      <AppHeader path={[{name: 'Cloud Native Landscape'}]} />
+      <AppHeader path={[{ name: 'Cloud Native Landscape' }]} />
 
       <FullContainer>
         <div className="w-full h-full">
