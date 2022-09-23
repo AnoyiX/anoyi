@@ -4,8 +4,18 @@ import FullContainer from '../components/Containers'
 import Head from 'next/head'
 import { readFileSync } from 'fs'
 import path from "path"
+import { useRouter } from 'next/router'
 
 const Page = ({ apps, home }) => {
+  const router = useRouter()
+
+  const openApp = (url: string) => {
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      window.location.href = url
+    } else {
+      router.push(url)
+    }
+  }
 
   return (
     <div className='w-full flex flex-col flex-1 gap-4 md:gap-6 p-4 md:p-8'>
@@ -21,7 +31,7 @@ const Page = ({ apps, home }) => {
             <div className='flex flex-col items-center justify-center gap-2 pt-6 pb-2'>
               <img className="w-28 h-28 rounded-full" src={home.user.avatar} alt="" />
               <div className="text-xl font-medium">{home.user.nickname}</div>
-              <div className='text-gray-400'>
+              <div className='text-gray-500'>
                 <span className='text-sm'>{home.user.bio}</span>
               </div>
             </div>
@@ -29,7 +39,7 @@ const Page = ({ apps, home }) => {
               {
                 home.user.brands.map(item => (
                   <a href={item.url} target="_blank" key={item.icon}>
-                    <i className={`fa-brands fa-${item.icon} text-xl text-gray-400/75 hover:text-gray-700`}></i>
+                    <i className={`fa-brands fa-${item.icon} text-xl text-gray-500/75 hover:text-gray-700`}></i>
                   </a>
                 ))
               }
@@ -44,17 +54,25 @@ const Page = ({ apps, home }) => {
             }
           </div>
 
-          <div className='md:flex hidden flex-col items-center space-y-2 text-gray-400 text-xs '>
+          <div className='md:flex hidden flex-col items-center space-y-2 text-gray-500 text-xs'>
             <div className='flex flex-row space-x-1'>
-              <a className="hover:text-blue-600" href="/doc/about">关于作者</a>
+              <Link href='/doc/about'>
+                <span className="hover:text-blue-600 cursor-pointer">关于作者</span>
+              </Link>
               <span>·</span>
-              <a className="hover:text-blue-600" href="/doc/jobs">工作内推</a>
+              <Link href='/doc/jobs'>
+                <span className="hover:text-blue-600 cursor-pointer">工作内推</span>
+              </Link>
               <span>·</span>
-              <a className="hover:text-blue-600" href="/doc/links">友情链接</a>
+              <Link href='/doc/links'>
+                <span className="hover:text-blue-600 cursor-pointer">友情链接</span>
+              </Link>
               <span>·</span>
-              <a className="hover:text-blue-600" href="/doc/terms">用户协议</a>
+              <Link href='/doc/terms'>
+                <span className="hover:text-blue-600 cursor-pointer">用户协议</span>
+              </Link>
             </div>
-            <div className='text-center'>
+            <div className='text-center text-gray-400'>
               <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2022 All Rights Reserved
             </div>
           </div>
@@ -65,11 +83,9 @@ const Page = ({ apps, home }) => {
             {
               apps.map((item, index) => (
                 <div className='flex flex-col items-center gap-1' key={index}>
-                  <Link href={item.url}>
-                    <div className='w-20 h-20 cursor-pointer'>
-                      <img src={item.icon} alt="" className='w-full h-full' />
-                    </div>
-                  </Link>
+                  <div className='w-20 h-20 cursor-pointer' onClick={() => openApp(item.url)}>
+                    <img src={item.icon} alt="" className='w-full h-full' />
+                  </div>
                   <span className='text-gray-800 text-sm'>{item.name}</span>
                 </div>
               ))

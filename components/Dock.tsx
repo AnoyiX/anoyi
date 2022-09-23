@@ -37,15 +37,13 @@ export default function Dock({ name, data }: IDock) {
 
     return (
         <>
-            <div className='flex flex-col space-y-2 items-center cursor-pointer' onClick={openModal}>
-                <div className='bg-gray-100 w-16 h-16 rounded-md p-2'>
+            <div className='flex flex-col gap-2 text-center cursor-pointer' onClick={openModal}>
+                <div className='w-16 h-16 p-2 rounded-md bg-gray-100'>
                     {
-                        data.length > 0 && (
-                            <img src={data[0].icon} alt=""/>
-                        )
+                        data.length > 0 && <img src={data[0].icon} alt='' />
                     }
                 </div>
-                <span className='text-gray-400 text-xs'>{name}</span>
+                <span className='text-gray-800 text-xs'>{name}</span>
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>

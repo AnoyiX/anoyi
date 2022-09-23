@@ -21,7 +21,7 @@ export default function PhotoCard({ photo, onPlay }: PhotoCardProps) {
                     <Location className="h-4 w-4" />
                     <span className="" >{photo.name}</span>
                 </a>
-                <span className="text-gray-400">{moment(photo.create_time).fromNow()}</span>
+                <span className="text-gray-500">{moment(photo.create_time).fromNow()}</span>
             </div>
         </div>
     )

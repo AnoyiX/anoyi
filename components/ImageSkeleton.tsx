@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
-export type ImageSkeletonProps = {
-    src: string
+type ImageSkeletonProps = {
     className?: string
+    src: string
 }
 
-export default function ImageSkeleton({ src, className }: ImageSkeletonProps) {
+export default function ImageSkeleton({ className, src }: ImageSkeletonProps) {
 
     const [loading, setLoading] = useState(true)
 
@@ -16,7 +16,7 @@ export default function ImageSkeleton({ src, className }: ImageSkeletonProps) {
         image.src = src
     }, [])
 
-    if (loading) return <div className={`${className} animate-pulse bg-slate-200`} />
-    return <img className={className} src={src} alt="" />
+    if (loading) return <div className={`${className} animate-pulse bg-gray-200`}></div>
 
+    return <img className={className} src={src} alt="" />
 }

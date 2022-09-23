@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <div className="bg-gray-200 min-h-screen w-full ">
+    <div className="bg-gray-100 min-h-screen w-full ">
       {
         progress > 0 && progress < 100 && <div className='h-[2px] w-1/2 bg-blue-500 rounded-r-full fixed left-0 top-0 shadow-lg transition-[width] duration-500 z-50' style={{ width: `${progress}%` }}></div>
       }
