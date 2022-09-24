@@ -33,5 +33,10 @@
         "name": "开源项目",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitStars.svg",
         "url": "/github/stars"
+    },
+    {
+        "name": "Dev Icons",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
+        "url": "/dev-icons"
     }
 ]
