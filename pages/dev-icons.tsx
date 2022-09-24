@@ -26,7 +26,11 @@ const Page = ({ data }) => {
         <div className="flex flex-row flex-wrap p-8 gap-2 mx-auto">
           {
             data.map((item: DevIcon) => (
-              <div key={item.name} className="py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg hover:bg-gray-200 text-gray-500 hover:text-gray-900" onClick={() => navigator.clipboard.writeText(item.emoji)}>
+              <div
+                key={item.name}
+                className="py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg hover:bg-gray-200 text-gray-500 hover:text-gray-900"
+                onClick={() => navigator.clipboard.writeText(item.name)}
+              >
                 <ImageSkeleton src={`https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/${item.dark}`} className='w-16 h-16 mx-auto rounded-md' />
                 <p className="text-sm">{item.name}</p>
               </div>
