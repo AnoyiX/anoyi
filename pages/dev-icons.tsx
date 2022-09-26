@@ -18,11 +18,11 @@ const Page = ({ data }) => {
   const [search, setSearch] = useState('')
   const [mode, setMode] = useState('深色模式')
 
-  const icons: DevIcon[] = useMemo(() => {
 
+  const icons: DevIcon[] = useMemo(() => {
     return [...data.filter(item => item.name.toLowerCase().includes(search.toLowerCase())).map(item => ({
       name: item.name,
-      url: 'https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/' + (mode === '深色模式' ? item.dark : item.light)
+      url: 'https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/' + item.name + (item.themed ? mode === '深色模式' ? `.Dark` : `.Light` : '') + '.svg'
     }))]
   }, [search, mode])
 
