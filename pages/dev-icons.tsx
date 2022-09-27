@@ -11,13 +11,10 @@ export interface DevIcon {
   url: string
 }
 
-export type DevIconMode = '深色模式' | '浅色模式'
-
 const Page = ({ data }) => {
 
   const [search, setSearch] = useState('')
   const [mode, setMode] = useState('深色模式')
-
 
   const icons: DevIcon[] = useMemo(() => {
     return [...data.filter(item => item.name.toLowerCase().includes(search.toLowerCase())).map(item => ({
@@ -123,6 +120,7 @@ export async function getStaticProps() {
     props: {
       data,
     },
+    revalidate: 60,
   }
 
 }
