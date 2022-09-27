@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { useState } from 'react'
 import Router from "next/router"
 import { GoogleAnalytics } from "nextjs-google-analytics"
+import { Toaster } from 'react-hot-toast'
 
 function App({ Component, pageProps }: AppProps) {
 
@@ -33,6 +34,7 @@ function App({ Component, pageProps }: AppProps) {
         progress > 0 && progress < 100 && <div className='h-[2px] w-1/2 bg-blue-500 rounded-r-full fixed left-0 top-0 shadow-lg transition-[width] duration-500 z-50' style={{ width: `${progress}%` }}></div>
       }
       <div className='min-h-screen container mx-auto flex'>
+        <Toaster />
         <Component {...pageProps} />
       </div>
       {

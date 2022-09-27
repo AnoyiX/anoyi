@@ -3,6 +3,7 @@ import Head from 'next/head'
 import FullContainer from "../components/Containers"
 import { readFileSync } from 'fs'
 import path from "path"
+import toast from "react-hot-toast"
 
 export interface Emoji {
   emoji: string
@@ -15,6 +16,16 @@ export interface Emoji {
 }
 
 const Page = ({ data }) => {
+
+  const copyEmoji = (icon: string) => {
+    navigator.clipboard.writeText(icon)
+    toast(`已复制！`, { position: 'top-right', icon })
+  }
+
+  const copyEmojiCode = (code: string) => {
+    navigator.clipboard.writeText(code)
+    toast(`已复制！`, { position: 'top-right', icon: <code className="px-2 py-1 text-xs bg-gray-100 text-red-500 rounded-md">{code}</code> })
+  }
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
@@ -55,17 +66,13 @@ const Page = ({ data }) => {
               <div key={item.name} className="shadow w-full rounded-lg text-center hover:shadow-xl">
                 <div
                   className="rounded-t-lg w-full py-14 mb-6 cursor-pointer " style={{ backgroundColor: item.color }}
-                  onClick={() => navigator.clipboard.writeText(item.emoji)}
+                  onClick={() => copyEmoji(item.emoji)}
                 >
-                  <div className="text-7xl select-none">
-                    {
-                      item.emoji
-                    }
-                  </div>
+                  <div className="text-7xl select-none">{item.emoji}</div>
                 </div>
                 <p
                   className="inline text-lg cursor-pointer select-none font-mono font-semibold py-1 border-b-0 bg-no-repeat bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-[length:100%_3px] bg-[length:0_3px] bg-left-bottom transition-[background-size] duration-500 ease-in-out"
-                  onClick={() => navigator.clipboard.writeText(item.code)}
+                  onClick={() => copyEmojiCode(item.code)}
                 >{item.code}</p>
                 <p className="text-sm text-gray-500 mt-4 mb-6 px-4 font-sans">{item.description}</p>
               </div>

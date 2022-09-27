@@ -14,10 +14,10 @@ module.exports = {
               }
             },
             code: {
-              color: theme('colors.red.600'),
-              backgroundColor: theme('colors.gray.100'),
+              color: theme('colors.red.500'),
+              backgroundColor: theme('colors.slate.100'),
               padding: '2px 4px',
-              'border-radius': '2px',
+              'border-radius': '4px',
               fontWeight: 500,
             },
             'code::before': {

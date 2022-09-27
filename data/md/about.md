@@ -11,5 +11,5 @@ Anoyi，目前就职于 [特赞（上海）信息科技有限公司](https://tez
 如果您访问本站遇到什么问题，或者您对本站的设计、交互体验有任何建议，都可以通过以下联系方式联系作者。也可以通过 [Github Issue](https://github.com/AnoyiX/anoyi/issues) 直接反馈。
 
 ### 联系方式
-- 微信：AnoyiX
-- 邮箱：anoyi@qq.com
+- 微信：`AnoyiX`
+- 邮箱：`anoyi@qq.com`
