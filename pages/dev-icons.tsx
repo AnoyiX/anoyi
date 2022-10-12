@@ -4,7 +4,6 @@ import toast from 'react-hot-toast'
 import AppHeader from "../components/AppHeader"
 import FullContainer from "../components/Containers"
 import ImageSkeleton from "../components/ImageSkeleton"
-import Selector from '../components/input/Selector'
 import http from "../utils/http"
 
 export interface DevIcon {
@@ -15,14 +14,13 @@ export interface DevIcon {
 const Page = ({ data }) => {
 
   const [search, setSearch] = useState('')
-  const [mode, setMode] = useState('深色模式')
 
   const icons: DevIcon[] = useMemo(() => {
-    return [...data.filter(item => item.name.toLowerCase().includes(search.toLowerCase())).map(item => ({
-      name: item.name,
-      url: 'https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/' + item.name + (item.themed ? mode === '深色模式' ? `.Dark` : `.Light` : '') + '.svg'
-    }))]
-  }, [search, mode])
+    return data.filter(item => item.toLowerCase().includes(search.toLowerCase())).map(item => ({
+      name: item,
+      url: 'https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/' + item + '.svg'
+    }))
+  }, [search])
 
   const copyName = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -39,8 +37,6 @@ const Page = ({ data }) => {
       <AppHeader path={[{ name: 'Dev Icons' }]} />
 
       <div className='flex flex-row items-center gap-4 justify-center'>
-
-        <Selector value={mode} onChange={setMode} options={['深色模式', '浅色模式']} className='w-32' />
 
         <div className="relative flex-1">
           <i className='flex absolute text-gray-400 inset-y-0 left-0 items-center pl-3 pointer-events-none fa-solid fa-magnifying-glass'></i>
