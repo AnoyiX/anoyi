@@ -79,12 +79,12 @@ const Page = ({ apps, home }) => {
         </div>
 
         <FullContainer>
-          <div className='flex flex-1 flex-row flex-wrap p-8 gap-6'>
+          <div className='flex flex-1 flex-row flex-wrap p-8 gap-10'>
             {
               apps.map((item, index) => (
-                <div className='flex flex-col items-center gap-1' key={index}>
-                  <div className='w-20 h-20 cursor-pointer' onClick={() => openApp(item.url)}>
-                    <img src={item.icon} alt="" className='w-full h-full' />
+                <div className='flex flex-col items-center gap-3' key={index}>
+                  <div className='cursor-pointer' onClick={() => openApp(item.url)}>
+                    <img src={item.icon} alt="" className='w-16 h-16 shadow-md rounded-2xl' />
                   </div>
                   <span className='text-gray-800 text-sm'>{item.name}</span>
                 </div>

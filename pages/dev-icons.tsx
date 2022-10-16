@@ -37,7 +37,6 @@ const Page = ({ data }) => {
       <AppHeader path={[{ name: 'Dev Icons' }]} />
 
       <div className='flex flex-row items-center gap-4 justify-center'>
-
         <div className="relative flex-1">
           <i className='flex absolute text-gray-400 inset-y-0 left-0 items-center pl-3 pointer-events-none fa-solid fa-magnifying-glass'></i>
           <input
@@ -49,8 +48,8 @@ const Page = ({ data }) => {
         </div>
 
         <div className='bg-white shadow text-gray-900 text-sm rounded-lg py-2 px-3 cursor-pointer' onClick={() => window.open('https://github.com/AnoyiX/dev-icons')}>
-          <i className="fa-solid fa-arrow-up-right-from-square mr-2"></i>
           帮助文档
+          <i className="fa-solid fa-arrow-up-right-from-square ml-2"></i>
         </div>
       </div>
 
@@ -66,7 +65,7 @@ const Page = ({ data }) => {
                   className="py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg hover:bg-gray-200 text-gray-500 hover:text-gray-900"
                   onClick={() => copyName(item.name.toLowerCase())}
                 >
-                  <ImageSkeleton src={item.url} className='w-16 h-16 mx-auto rounded-md' />
+                  <ImageSkeleton src={item.url} className='w-16 h-16 mx-auto rounded-xl bg-slate-50' />
                   <p className="text-sm">{item.name}</p>
                 </div>
               ))

@@ -1,42 +1,37 @@
 [
     {
         "name": "博客",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/blog.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Blog.svg",
         "url": "https://anoyi.notion.site/Anoyi-s-Blog-bd186759ade54832bfdbef73e0c8b1a0"
     },
     {
-        "name": "短视频",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/video.svg",
-        "url": "/video"
-    },
-    {
-        "name": "相册",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/photos.svg",
-        "url": "/photo"
-    },
-    {
-        "name": "股市",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/stock.svg",
-        "url": "/stock"
-    },
-    {
-        "name": "CNCF",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/cncf.svg",
-        "url": "/cncf"
-    },
-    {
-        "name": "Git 表情",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
-        "url": "/gitmojis"
-    },
-    {
         "name": "开源项目",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitStars.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Github.svg",
         "url": "/github/stars"
     },
     {
+        "name": "股市",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Stock.svg",
+        "url": "/stock"
+    },
+    {
+        "name": "短视频",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Tiktok.svg",
+        "url": "/video"
+    },
+    {
         "name": "Dev Icons",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/DevIcons.svg",
         "url": "/dev-icons"
+    },
+    {
+        "name": "相册",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Photos.svg",
+        "url": "/photo"
+    },
+    {
+        "name": "Git 表情",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/GitEmojis.svg",
+        "url": "/gitmojis"
     }
 ]

@@ -3,7 +3,6 @@
         "nickname": "Anoyi 🐬",
         "avatar": "https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240",
         "bio": "轻量级云原生架构实验室",
-        "banner": "https://upload-images.jianshu.io/upload_images/3424642-4f2dbb5bdb9060c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/720",
         "brands": [{
                 "icon": "github",
                 "url": "https://github.com/AnoyiX"
@@ -27,33 +26,33 @@
         "children": [
             {
                 "name": "Python",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/python.svg",
+                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/Python.svg",
                 "url": "https://python.org"
             },
             {
                 "name": "Java",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/java.svg",
+                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/Java.svg",
                 "url": "https://www.java.com"
             },
             {
-                "name": "JavaScript",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/javascript.svg",
-                "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
-            },
-            {
-                "name": "TypeScript",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/typescript.svg",
-                "url": "https://www.typescriptlang.org/"
-            },
-            {
                 "name": "HTML5",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/html5.svg",
+                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/HTML5.svg",
                 "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML"
             },
             {
                 "name": "CSS3",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/css3.svg",
+                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/CSS3.svg",
                 "url": "https://developer.mozilla.org/zh-CN/docs/Web/CSS"
+            },
+            {
+                "name": "JavaScript",
+                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/JavaScript.svg",
+                "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
+            },
+            {
+                "name": "TypeScript",
+                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/TypeScript.svg",
+                "url": "https://www.typescriptlang.org/"
             }
         ]
     },
