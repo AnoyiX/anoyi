@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import AppHeader from "../components/AppHeader"
 import FullContainer from "../components/Containers"
 import ImageSkeleton from "../components/ImageSkeleton"
+import CDN from '../utils/cdn'
 import http from "../utils/http"
 
 export interface DevIcon {
@@ -18,7 +19,7 @@ const Page = ({ data }) => {
   const icons: DevIcon[] = useMemo(() => {
     return data.filter(item => item.toLowerCase().includes(search.toLowerCase())).map(item => ({
       name: item,
-      url: 'https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/' + item + '.svg'
+      url: CDN.icon(item)
     }))
   }, [search])
 
@@ -62,7 +63,7 @@ const Page = ({ data }) => {
               icons.map((item) => (
                 <div
                   key={item.name}
-                  className="py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg hover:bg-gray-200 text-gray-500 hover:text-gray-900"
+                  className="py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg text-gray-500 hover:shadow hover:bg-slate-50"
                   onClick={() => copyName(item.name.toLowerCase())}
                 >
                   <ImageSkeleton src={item.url} className='w-16 h-16 mx-auto rounded-xl bg-slate-50' />
@@ -81,7 +82,7 @@ const Page = ({ data }) => {
 
 export async function getStaticProps() {
 
-  const data = await http.getAll('https://icons.anoyi.com/api/icons')
+  const data = await http.getAll('https://dev-icons.deta.dev/api/icons')
 
   return {
     props: {

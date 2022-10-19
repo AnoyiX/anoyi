@@ -26,32 +26,37 @@
         "children": [
             {
                 "name": "Python",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/Python.svg",
+                "icon": "Python",
                 "url": "https://python.org"
             },
             {
+                "name": "C",
+                "icon": "C",
+                "url": "https://www.runoob.com/cprogramming/c-tutorial.html"
+            },
+            {
                 "name": "Java",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/Java.svg",
+                "icon": "Java",
                 "url": "https://www.java.com"
             },
             {
                 "name": "HTML5",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/HTML5.svg",
+                "icon": "HTML5",
                 "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML"
             },
             {
                 "name": "CSS3",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/CSS3.svg",
+                "icon": "CSS3",
                 "url": "https://developer.mozilla.org/zh-CN/docs/Web/CSS"
             },
             {
                 "name": "JavaScript",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/JavaScript.svg",
+                "icon": "JavaScript",
                 "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
             },
             {
                 "name": "TypeScript",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/dev-icons@main/icons/TypeScript.svg",
+                "icon": "TypeScript",
                 "url": "https://www.typescriptlang.org/"
             }
         ]
@@ -61,38 +66,73 @@
         "children": [
             {
                 "name": "Docker",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/docker.svg",
+                "icon": "Docker",
                 "url": "https://www.docker.com"
             },
             {
                 "name": "Kubernetes",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/kubernetes.svg",
+                "icon": "Kubernetes",
                 "url": "https://kubernetes.io"
             },
             {
+                "name": "FastAPI",
+                "icon": "FastAPI",
+                "url": "https://fastapi.tiangolo.com"
+            },
+            {
                 "name": "React",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/react.svg",
+                "icon": "React",
                 "url": "https://reactjs.org"
             },
             {
-                "name": "React Native",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/react-native.svg",
-                "url": "https://reactnative.dev"
-            },
-            {
                 "name": "Spring",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/spring.svg",
+                "icon": "Spring",
                 "url": "https://spring.io"
             },
             {
                 "name": "NextJS",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/nextjs.svg",
+                "icon": "NextJS",
                 "url": "https://nextjs.org"
             },
             {
                 "name": "TailwindCSS",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/tailwind.svg",
+                "icon": "TailwindCSS",
                 "url": "https://tailwindcss.com"
+            },
+            {
+                "name": "Terraform",
+                "icon": "Terraform",
+                "url": "https://www.terraform.io"
+            },
+            {
+                "name": "Grafana",
+                "icon": "Grafana",
+                "url": "https://grafana.com"
+            },
+            {
+                "name": "Nginx",
+                "icon": "Nginx",
+                "url": "https://www.nginx.com"
+            },
+            {
+                "name": "Mysql",
+                "icon": "Mysql",
+                "url": "https://www.mysql.com"
+            },
+            {
+                "name": "Redis",
+                "icon": "Redis",
+                "url": "https://redis.io"
+            },
+            {
+                "name": "MongoDB",
+                "icon": "MongoDB",
+                "url": "https://www.mongodb.com"
+            },
+            {
+                "name": "Prometheus",
+                "icon": "Prometheus",
+                "url": "https://prometheus.io"
             }
         ]
     },
@@ -101,33 +141,23 @@
         "children": [
             {
                 "name": "VS Code",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/vs-code.svg",
+                "icon": "VSCode",
                 "url": "https://code.visualstudio.com"
             },
             {
                 "name": "Warp",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/warp.svg",
+                "icon": "Warp",
                 "url": "https://warp.dev"
             },
             {
-                "name": "ClashX",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/clashx.png",
-                "url": "https://github.com/yichengchen/clashX/releases"
-            },
-            {
-                "name": "TablePlus",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/TablePlus.png",
-                "url": "https://tableplus.com"
-            },
-            {
                 "name": "Postman",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/postman.svg",
+                "icon": "Postman",
                 "url": "https://www.postman.com"
             },
             {
-                "name": "剪映专业版",
-                "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icons/jianyin.webp",
-                "url": "https://lv.ulikecam.com"
+                "name": "Git",
+                "icon": "Git",
+                "url": "https://git-scm.com"
             }
         ]
     }
