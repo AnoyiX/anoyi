@@ -85,7 +85,7 @@ const Page = ({ fallbackData, colors }) => {
                   <div className="text-gray-600 flex flex-row gap-2 text-xs cursor-default flex-wrap">
                     {
                       item.topics.map(topic => (
-                        <a key={topic} href={`https://github.com/topics/${topic}`} className="cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white" target="_blank" rel='noreferrer'>
+                        <a key={topic} href={`https://github.com/topics/${topic}`} className="github-repo-topic" target="_blank" rel='noreferrer'>
                           {topic}
                         </a>
                       ))

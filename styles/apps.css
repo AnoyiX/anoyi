@@ -1,0 +1,31 @@
+.icon-card {
+    @apply py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg text-gray-500 hover:shadow hover:bg-slate-50;
+}
+
+.icon-image {
+    @apply w-16 h-16 mx-auto rounded-xl bg-slate-50;
+}
+
+.github-repo-topic {
+    @apply cursor-pointer py-1 px-2 bg-gray-100 text-gray-800 rounded-full hover:bg-blue-600 hover:text-white;
+}
+
+.gitmoji-card {
+    @apply shadow w-full rounded-lg text-center hover:shadow-xl;
+}
+
+.gitmoji-code {
+    @apply inline text-lg cursor-pointer select-none font-mono font-semibold py-1 border-b-0 bg-no-repeat bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-[length:100%_3px] bg-[length:0_3px] bg-left-bottom transition-[background-size] duration-500 ease-in-out;
+}
+
+.gitmoji-desc {
+    @apply text-sm text-gray-500 mt-4 mb-6 px-4 font-sans;
+}
+
+.video-card {
+    @apply border rounded-lg lg:h-64 w-full flex flex-col lg:flex-row;
+}
+
+.video-cover {
+    @apply rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg cursor-pointer hover:opacity-75 h-full object-cover;
+}

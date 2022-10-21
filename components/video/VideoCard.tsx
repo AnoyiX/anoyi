@@ -13,9 +13,9 @@ interface VideoCardProps {
 export default function VideoCard({ video, onPlay }: VideoCardProps) {
 
     return (
-        <div className="border rounded-lg lg:h-64 w-full flex flex-col lg:flex-row">
+        <div className="video-card">
             <div onClick={() => onPlay(video.video.play_addr.uri)} className='h-full aspect-[7/10]'>
-                <ImageSkeleton src={video.video.cover.url_list[0]} className="rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg cursor-pointer hover:opacity-75 h-full object-cover" />
+                <ImageSkeleton src={video.video.cover.url_list[0]} className="video-cover" />
             </div>
             <div className="flex flex-col p-4 justify-between">
                 <div className="flex flex-col gap-4">

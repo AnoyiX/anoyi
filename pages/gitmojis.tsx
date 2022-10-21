@@ -63,7 +63,7 @@ const Page = ({ data }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-8 gap-10">
           {
             data.map((item: Emoji) => (
-              <div key={item.name} className="shadow w-full rounded-lg text-center hover:shadow-xl">
+              <div key={item.name} className="gitmoji-card">
                 <div
                   className="rounded-t-lg w-full py-14 mb-6 cursor-pointer " style={{ backgroundColor: item.color }}
                   onClick={() => copyEmoji(item.emoji)}
@@ -71,10 +71,10 @@ const Page = ({ data }) => {
                   <div className="text-7xl select-none">{item.emoji}</div>
                 </div>
                 <p
-                  className="inline text-lg cursor-pointer select-none font-mono font-semibold py-1 border-b-0 bg-no-repeat bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-[length:100%_3px] bg-[length:0_3px] bg-left-bottom transition-[background-size] duration-500 ease-in-out"
+                  className="gitmoji-code"
                   onClick={() => copyEmojiCode(item.code)}
                 >{item.code}</p>
-                <p className="text-sm text-gray-500 mt-4 mb-6 px-4 font-sans">{item.description}</p>
+                <p className="gitmoji-desc">{item.description}</p>
               </div>
             ))
           }

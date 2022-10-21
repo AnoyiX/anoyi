@@ -7,31 +7,32 @@ import { Toaster } from 'react-hot-toast'
 
 function App({ Component, pageProps }: AppProps) {
 
+  const [showProcess, setShowProcess] = useState(false)
   const [progress, setProgress] = useState(0)
 
   Router.events.on("routeChangeStart", (url) => {
-    if (url !== window.location.pathname) {
-      setProgress(20)
+    if (url.split('?')[0] !== window.location.pathname) {
+      setShowProcess(true)
+      setProgress(10)
       setTimeout(() => {
-        setProgress(pre => (pre >= 20 && pre < 95) ? pre + Math.floor(Math.max(1, Math.random() * 20)) : pre)
-      }, 500)
+        setProgress(pre => pre < 95 ? pre + Math.floor(Math.max(1, Math.random() * 20)) : pre)
+      }, 200)
     }
   })
-
-  Router.events.on("routeChangeComplete", () => {
+  Router.events.on("routeChangeComplete", (url) => {
     setProgress(100)
-    setTimeout(() => setProgress(0), 100)
+    setTimeout(() => setShowProcess(false), 100)
+  })
+  Router.events.on("routeChangeError", (url) => {
+    setProgress(100)
+    setTimeout(() => setShowProcess(false), 100)
   })
 
-  Router.events.on("routeChangeError", () => {
-    setProgress(100)
-    setTimeout(() => setProgress(0), 100)
-  })
 
   return (
     <div className="bg-gray-100 min-h-screen w-full ">
       {
-        progress > 0 && progress < 100 && <div className='h-[2px] w-1/2 bg-blue-500 rounded-r-full fixed left-0 top-0 shadow-lg transition-[width] duration-500 z-50' style={{ width: `${progress}%` }}></div>
+        showProcess && <div className='h-[2px] w-1/2 bg-blue-500 rounded-r-full fixed left-0 top-0 shadow-lg shadow-blue-500/75 transition-[width] duration-200 z-50' style={{ width: `${progress}%` }}></div>
       }
       <div className='min-h-screen container mx-auto flex'>
         <Toaster />

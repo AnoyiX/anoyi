@@ -38,7 +38,7 @@ export default function Dock({ name, data }: IDock) {
     return (
         <>
             <div className='flex flex-col gap-2 text-center cursor-pointer' onClick={openModal}>
-                <div className='w-16 h-16 rounded-2xl bg-gray-100 p-1 border'>
+                <div className='w-16 h-16 rounded-2xl bg-slate-100 p-1'>
                     {
                         data.length > 0 && <img src={CDN.icon(data[0].icon)} alt='' />
                     }

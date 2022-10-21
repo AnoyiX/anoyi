@@ -63,10 +63,10 @@ const Page = ({ data }) => {
               icons.map((item) => (
                 <div
                   key={item.name}
-                  className="py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg text-gray-500 hover:shadow hover:bg-slate-50"
+                  className="icon-card"
                   onClick={() => copyName(item.name.toLowerCase())}
                 >
-                  <ImageSkeleton src={item.url} className='w-16 h-16 mx-auto rounded-xl bg-slate-50' />
+                  <ImageSkeleton src={item.url} className='icon-image' />
                   <p className="text-sm">{item.name}</p>
                 </div>
               ))
