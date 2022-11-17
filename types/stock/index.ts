@@ -26,14 +26,21 @@ export type TPlate = {
 }
 
 export type TPlates = {
-    [key: string]: TPlate
+    code: number
+    data: {
+        [key: string]: TPlate
+    }
 }
 
 export type TRealData = {
-    fields: string[]
-    snapshot: {
-        [key: string]: Array<string | number>
+    code: number
+    data: {
+        fields: string[]
+        snapshot: {
+            [key: string]: Array<string | number>
+        }
     }
+
 }
 
 export type TLive = {

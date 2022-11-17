@@ -25,7 +25,7 @@ export default function StockIndices() {
         'trade_status'
     ]
 
-    const { data: realData = { fields: [], snapshot: {} } } = useSWR<TRealData>([`/api/stock/real`, { code, fields }], http.post, { refreshInterval: 5000 })
+    const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
     const getTextColor = (num: number) => {
         if (num > 0) return 'text-red-600'
@@ -42,9 +42,9 @@ export default function StockIndices() {
         <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
                 code.map((item) => {
-                    if (Object.keys(realData.snapshot).length > 0) {
-                        const stock = realData.snapshot[item]
-                        const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
+                    if (Object.keys(realResp.data.snapshot).length > 0) {
+                        const stock = realResp.data.snapshot[item]
+                        const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
                         return (
                             <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
                                 <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow-lg gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>

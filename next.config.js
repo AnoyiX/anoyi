@@ -8,6 +8,9 @@ const nextConfig = {
     locales: ["zh"],
     defaultLocale: "zh",
   },
+  // experimental: {
+  //   runtime: 'experimental-edge',
+  // },
 }
 
 module.exports = nextConfig

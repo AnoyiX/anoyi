@@ -1,12 +1,8 @@
-import type { NextRequest } from 'next/server'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { WebResponse } from '../../../utils/web'
 
-export const config = {
-    runtime: 'experimental-edge',
-}
-
-export default async function handler(req: NextRequest) {
-    const body = await req.json()
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const body = req.body
     const resp = await fetch(`${process.env.MONGODB_API}/action/findOne`, {
         method: 'POST',
         headers: {
@@ -20,5 +16,5 @@ export default async function handler(req: NextRequest) {
         })
     })
     const data = await resp.json()
-    return WebResponse.success(data.document)
+    res.status(200).json(WebResponse.success(data.document))
 }

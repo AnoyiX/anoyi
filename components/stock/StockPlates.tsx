@@ -22,7 +22,9 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
     const rank_field = "core_avg_pcp"
     const rank_type = "0"
 
-    const { data: plates = [] } = useSWR<TPlates>([`/api/stock/plates`, { limit, is_acs, rank_field, rank_type, data_fields }], http.post, { refreshInterval: 10000 })
+    const { data: rankResp } = useSWR(`https://flash-api.xuangubao.cn/api/plate/rank?field=${rank_field}&type=${rank_type}`, http.getAll, { refreshInterval: 10000 })
+
+    const { data = { data: []} } = useSWR<TPlates>(rankResp ? `https://flash-api.xuangubao.cn/api/plate/data?plates=${(is_acs ? rankResp.data.slice(0, limit) : rankResp.data.slice(-limit)).join(',')}&fields=${data_fields.join(',')}` : null, http.getAll, { refreshInterval: 10000 })
 
     const getColor = (num: number) => {
         if (num > 0) return 'bg-red-500 hover:bg-red-400'
@@ -40,7 +42,7 @@ export default function StockPlates({ limit, is_acs }: StockPlatesProps) {
     return (
         <div className="grid grid-cols-3 gap-1 w-full text-white">
             {
-                Object.values(plates).sort(sort).map((item) => (
+                Object.values(data.data).sort(sort).map((item) => (
                     <div key={item.plate_id} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(item.core_avg_pcp)}`}>
                         <span className='text-xs'>{item.plate_name}</span>
                         <span className=''>{format(item.core_avg_pcp * 100)}%</span>

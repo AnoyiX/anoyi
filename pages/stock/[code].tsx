@@ -51,7 +51,7 @@ const Page = () => {
     "delisting_date"
   ]
 
-  const { data: realData = { fields: [], snapshot: {} } } = useSWR<TRealData>([`/api/stock/real`, { code: [code as string], fields }], http.post, { refreshInterval: 5000 })
+  const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
   const getTextColor = (num: number) => {
     if (num > 0) return 'text-red-600'
@@ -71,8 +71,8 @@ const Page = () => {
 
   const renderResult = () => {
 
-    const stock = realData.snapshot[code as string]
-    const stockObj = Object.fromEntries(realData.fields.map((_, i) => [realData.fields[i], stock[i]]))
+    const stock = realResp.data.snapshot[code as string]
+    const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
     return (
       <div className="w-full flex flex-col gap-8 p-4">
         <div>
@@ -100,7 +100,7 @@ const Page = () => {
         <div className="flex flex-row gap-8 w-full">
           <iframe
             src={`https://xuangubao.cn/tools/chart-widget/ashares/${code}`}
-            className="w-[780px] h-[475px] rounded flex-none"
+            className="w-[780px] h-[475px] rounded flex-none bg-gray-50"
           />
           <div className="flex flex-col flex-1">
             <div className="font-semibold border-l-4 border-red-500 pl-2 mb-4 text-xl">主要指标</div>
@@ -131,11 +131,11 @@ const Page = () => {
         <title>股市行情</title>
       </Head>
 
-      <AppHeader path={[{name: '股市', url: '/stock'}, {name: '实时数据'}]} />
+      <AppHeader path={[{ name: '股市', url: '/stock' }, { name: '实时数据' }]} />
 
       <FullContainer>
         {
-          router.isReady && realData.fields.length > 0 && renderResult()
+          router.isReady && realResp.data.fields.length > 0 && renderResult()
         }
       </FullContainer>
     </div>

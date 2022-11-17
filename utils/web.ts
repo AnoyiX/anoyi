@@ -1,5 +1,32 @@
 export const WebResponse = {
 
+  success: (data: any) => ({
+    code: 0,
+    message: 'success',
+    data
+  }),
+
+  successList: (data: any, has_more: boolean, skip?: number, limit?: number, total?: number) => ({
+    code: 0,
+    message: 'success',
+    data: {
+      data,
+      has_more,
+      skip,
+      limit,
+      total,
+    }
+  }),
+
+  error: (message: string) => ({
+    code: 500,
+    message: message,
+  }),
+
+}
+
+export const EdgeWebResponse = {
+
   success: (data: any) => {
     return new Response(
       JSON.stringify({
@@ -54,5 +81,5 @@ export const WebResponse = {
     )
   },
 
-
 }
+

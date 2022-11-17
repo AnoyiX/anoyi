@@ -11,7 +11,7 @@ import { Loading } from "../Icons"
 function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
     const fields = ["prod_code", "prod_name", "px_change", "px_change_rate", "price_precision", "delisting_date"]
-    const { data = { fields: [], snapshot: {} } } = useSWR<TRealData>([`/api/stock/real`, { code: symbols.map(item => item.key), fields }], http.post, { refreshInterval: 5000 })
+    const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${symbols.map(item => item.key).join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
     const render = (stock: Array<string | number>) => {
         const stockObj = Object.fromEntries(fields.map((_, i) => [fields[i], stock[i]]))
@@ -45,7 +45,7 @@ function StocksTag({ symbols }: { symbols: TSymbol[] }) {
     return (
         <div className="flex flex-row flex-wrap gap-2">
             {
-                Object.values(data.snapshot).map(item => render(item))
+                Object.values(realResp.data.snapshot).map(item => render(item))
             }
         </div>
     )
@@ -80,7 +80,8 @@ export default function StockLives() {
     const [livesMap, setLivesMap] = useState<TLivesMap>({})
 
     const fetchLives = useCallback(async () => {
-        const data = await http.get(`/api/stock/lives`)
+        const resp = await http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=true`)
+        const data = resp.data
         data.next_cursor > cursor && setCursor(data.next_cursor)
         if (lives.length === 0) {
             setLives(data.items)
@@ -92,7 +93,8 @@ export default function StockLives() {
     }, [])
 
     const fetchMore = () => {
-        http.get(`/api/stock/lives?cursor=${cursor}`).then(data => {
+        http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=false&cursor=${cursor}`).then(resp => {
+            const data = resp.data
             setLives(pre => [...pre, ...(data.items)])
             setCursor(data.next_cursor)
         })
@@ -103,7 +105,7 @@ export default function StockLives() {
     }, [])
 
     useEffect(() => {
-        if(lives.length > 0) {
+        if (lives.length > 0) {
             let tmp: TLivesMap = {}
             lives.forEach((item, index) => {
                 const date = new Date(item.display_time * 1000).toLocaleDateString('zh-CN')

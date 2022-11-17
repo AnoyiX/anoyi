@@ -1,9 +1,5 @@
-import type { NextRequest } from 'next/server'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { WebResponse } from '../../../utils/web'
-
-export const config = {
-    runtime: 'experimental-edge',
-}
 
 export async function findFromMongo(body: any) {
     const resp = await fetch(`${process.env.MONGODB_API}/action/find`, {
@@ -22,8 +18,8 @@ export async function findFromMongo(body: any) {
     return data.documents
 }
 
-export default async function handler(req: NextRequest) {
-    const body = await req.json()
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const body = req.body
     const documents = await findFromMongo(body)
-    return WebResponse.successList(documents, documents.length >= body.limit)
+    res.status(200).json(WebResponse.successList(documents, documents.length >= body.limit))
 }
