@@ -7,17 +7,17 @@
                 "icon": "github",
                 "url": "https://github.com/AnoyiX"
             }, {
-                "icon": "tiktok",
-                "url": "https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0"
+                "icon": "telegram",
+                "url": "https://t.me/fastweb3"
             }, {
                 "icon": "twitter",
                 "url": "https://twitter.com/AnoyiX"
             }, {
+                "icon": "tiktok",
+                "url": "https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0"
+            }, {
                 "icon": "youtube",
                 "url": "https://www.youtube.com/channel/UCL-w1IbRfznZauYz6JIZOBw"
-            }, {
-                "icon": "ethereum",
-                "url": "https://etherscan.io/address/0x80DF1CaB786398503f991AAF3B48Be06044CF42F"
             }
         ]
     },

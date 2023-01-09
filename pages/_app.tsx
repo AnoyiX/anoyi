@@ -28,7 +28,6 @@ function App({ Component, pageProps }: AppProps) {
     setTimeout(() => setShowProcess(false), 100)
   })
 
-
   return (
     <div className="bg-gray-100 min-h-screen w-full ">
       {

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Fragment } from 'react'
+import { ChevronRightIcon } from './Icons'
 
 interface IPath {
     name: string
@@ -17,14 +18,14 @@ export default function AppHeader({ path }: IAppHeader) {
 
     return (
         <div className='bg-white rounded-lg shadow flex flex-row items-center justify-between space-x-2 p-4'>
-            <div className='flex flex-row items-center space-x-2'>
+            <div className='flex flex-row items-center space-x-1'>
                 <Link href={'/'}>
                     <img src={'https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/icon/home.svg'} alt="" className='w-6 h-6 cursor-pointer' />
                 </Link>
                 {
                     path.map((item, index) => (
                         <Fragment key={index}>
-                            <i className="fa-solid fa-angle-right text-gray-400"></i>
+                            <ChevronRightIcon className="fa-solid fa-angle-right text-gray-400" />
                             <div onClick={() => !!item.url && router.push(item.url)} className={`flex flex-row items-center space-x-2 ${!!item.url && 'cursor-pointer'}`}>
                                 <span className='text-sm text-gray-900'>{item.name}</span>
                             </div>

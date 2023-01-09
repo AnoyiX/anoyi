@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { readFileSync } from 'fs'
 import path from "path"
 import { useRouter } from 'next/router'
+import { Logos } from '../components/Icons'
 
 const Page = ({ apps, home }) => {
   const router = useRouter()
@@ -35,11 +36,13 @@ const Page = ({ apps, home }) => {
                 <span className='text-sm'>{home.user.bio}</span>
               </div>
             </div>
-            <div className='flex flex-row gap-4 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
+            <div className='flex flex-row gap-3 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
               {
                 home.user.brands.map(item => (
                   <a href={item.url} target="_blank" key={item.icon}>
-                    <i className={`fa-brands fa-${item.icon} text-xl text-gray-500/75 hover:text-gray-700`}></i>
+                    {
+                      Logos[item.icon]({ className: 'text-xl text-gray-500/75 hover:text-gray-700' })
+                    }
                   </a>
                 ))
               }
@@ -73,7 +76,7 @@ const Page = ({ apps, home }) => {
               </Link>
             </div>
             <div className='text-center text-gray-400'>
-              <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2022 All Rights Reserved
+              <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2023 All Rights Reserved
             </div>
           </div>
         </div>
