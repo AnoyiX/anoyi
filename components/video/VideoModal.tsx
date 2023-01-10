@@ -16,7 +16,6 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
     useEffect(() => {
         if (isOpen && vid.length > 0) {
             http.get(`/api/video/play?vid=${vid}`).then(data => {
-                console.log(data);
                 let videoPlayer = videoRef.current;
                 if (videoPlayer) {
                     videoPlayer.setAttribute("src", data);

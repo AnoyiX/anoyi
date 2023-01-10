@@ -1,6 +1,6 @@
-import AppHeader from "../../components/AppHeader"
+import AppHeader from "../components/AppHeader"
 import Head from 'next/head'
-import FullContainer from "../../components/Containers"
+import FullContainer from "../components/Containers"
 
 const Page = () => {
 

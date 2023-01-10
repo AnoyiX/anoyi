@@ -1,37 +1,47 @@
 [
     {
-        "name": "博客",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Blog.svg",
-        "url": "https://www.jianshu.com/u/7b7ec6f2db21"
-    },
-    {
         "name": "开源项目",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Github.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Github.svg",
         "url": "/github/stars"
     },
     {
         "name": "股市",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Stock.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Stock.svg",
         "url": "/stock"
     },
     {
         "name": "短视频",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Tiktok.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Tiktok.svg",
         "url": "/video"
     },
     {
+        "name": "Rainbow",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Rainbow.svg",
+        "url": "/rainbow"
+    },
+    {
+        "name": "博客",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/JianShu.svg",
+        "url": "https://www.jianshu.com/u/7b7ec6f2db21"
+    },
+    {
         "name": "Dev Icons",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/DevIcons.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
         "url": "/dev-icons"
     },
     {
         "name": "相册",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/Photos.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Photos.svg",
         "url": "/photo"
     },
     {
         "name": "Git 表情",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/imgs/GitEmojis.svg",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
         "url": "/gitmojis"
+    },
+    {
+        "name": "CNCF",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
+        "url": "/cncf"
     }
 ]

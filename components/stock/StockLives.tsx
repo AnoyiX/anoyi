@@ -136,7 +136,7 @@ export default function StockLives() {
                                 <span className="absolute bg-gray-800 font-medium px-4 py-2 text-gray-100 rounded-r-full -left-8">{month}月{day}日</span>
                             </div>
                             {
-                                livesMap[date].map((liveIndex) => lives[liveIndex] != undefined && <Live live={lives[liveIndex]} />)
+                                livesMap[date].map((liveIndex) => lives[liveIndex] != undefined && <Live key={liveIndex} live={lives[liveIndex]} />)
                             }
                         </div>
                     )

@@ -22,7 +22,7 @@ const http = {
     }
   },
 
-  post: async (url: string, body: any) => {
+  post: async ([url, body]) => {
     const resp = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
     if (resp.status == 200) {
       const data = await resp.json()
