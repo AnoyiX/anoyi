@@ -2,6 +2,7 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import { TRealData } from '../../types/stock'
 import http from '../../utils/http'
+import Skeleton from '../Skeleton'
 
 export default function StockIndices() {
 
@@ -25,7 +26,7 @@ export default function StockIndices() {
         'trade_status'
     ]
 
-    const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+    const { isLoading, data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
     const getTextColor = (num: number) => {
         if (num > 0) return 'text-red-600'
@@ -41,7 +42,7 @@ export default function StockIndices() {
     return (
         <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
-                code.map((item) => {
+                isLoading ? [...Array.from(Array(6).keys())].map(i => <Skeleton key={i} className="rounded-lg w-full shadow-lg h-28" />) : code.map((item) => {
                     if (Object.keys(realResp.data.snapshot).length > 0) {
                         const stock = realResp.data.snapshot[item]
                         const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
