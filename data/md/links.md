@@ -1,7 +1,6 @@
 ### 友情链接
 - [程序员DD](https://blog.didispace.com/)
 - [芋道源码](https://www.iocoder.cn/)
-- [小明云](https://687267.com/)
 
 ### 申请友链
 
