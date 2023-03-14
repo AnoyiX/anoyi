@@ -66,4 +66,5 @@ MANIFEST
 
 # local code
 .swc/
+.vscode/
 pages/account
