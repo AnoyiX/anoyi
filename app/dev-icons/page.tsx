@@ -6,7 +6,7 @@ import DevIcon, { DevIconProps } from './DevIcon'
 
 export default async function Page() {
 
-    const iconNames = await http.getAll('https://dev-icons.deta.dev/api/icons')
+    const iconNames: string[] = await http.getAll('https://dev-icons.deta.dev/api/icons')
 
     const icons = iconNames.filter(item => item.toLowerCase()).map(item => ({
         name: item,

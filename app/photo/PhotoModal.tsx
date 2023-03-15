@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { TPhoto } from './type'
 
-interface PhotoModalProps {
+export type PhotoModalProps = {
     isOpen: boolean
     photo?: TPhoto
     onClose: () => void

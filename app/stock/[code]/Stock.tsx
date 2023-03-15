@@ -48,9 +48,9 @@ export default function Stock({ code }: { code: string }) {
         "delisting_date"
     ]
 
-    const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+    const { data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
-    if (Object.keys(realResp.data.snapshot).length === 0){
+    if (!realResp){
         return <div className="h-full w-full flex items-center justify-center"><Loading /></div>
     }
     

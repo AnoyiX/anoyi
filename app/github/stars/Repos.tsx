@@ -3,12 +3,12 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWRInfinite from 'swr/infinite'
 import http from "../../../utils/http"
-import { Loading } from "../../../components/Icons"
+import { ForkIcon, IssueIcon, LicenseIcon, Loading, StarIcon } from "../../../components/Icons"
 import ImageSkeleton from "../../../components/client/ImageSkeleton"
 import { TRepo } from "./type"
 
 
-export default function Repos({ colors }) {
+export default function Repos({ colors }: { colors: { [key: string]: string } }) {
 
     const limit = 12
     const genAPI = (page: number) => `https://api.github.com/users/AnoyiX/starred?page=${page + 1}&per_page=${limit}`
@@ -23,7 +23,7 @@ export default function Repos({ colors }) {
 
         <InfiniteScroll
             className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 md:grid-cols-2"
-            dataLength={[].concat.apply([], data.map(resp => resp)).length}
+            dataLength={new Array<TRepo>().concat.apply([], data.map(resp => resp)).length}
             next={() => setSize(size + 1)}
             hasMore={!data.length || data.slice(-1)[0].length >= limit}
             loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
@@ -43,27 +43,28 @@ export default function Repos({ colors }) {
                                 {
                                     item.language && (
                                         <div className="cursor-default">
-                                            <i className="fa-solid fa-circle mr-1" style={Object.keys(colors).includes(item.language) ? { color: colors[item.language].color } : {}}></i>
-                                            {item.language}
+                                            <span className="px-2 py-1 rounded-full mr-1 text-white" style={Object.keys(colors).includes(item.language) ? { backgroundColor: colors[item.language] } : {}}>
+                                                {item.language}
+                                            </span>
                                         </div>
                                     )
                                 }
-                                <div className="">
-                                    <i className="fa-regular fa-star mr-1"></i>
+                                <div className="flex flex-row items-center">
+                                    <StarIcon className="mr-1" />
                                     {item.stargazers_count.toLocaleString()}
                                 </div>
-                                <div className="">
-                                    <i className="fa-solid fa-code-fork mr-1"></i>
+                                <div className="flex flex-row items-center">
+                                    <ForkIcon className="mr-1" />
                                     {item.forks.toLocaleString()}
                                 </div>
-                                <div className="">
-                                    <i className="fa-regular fa-circle-dot mr-1"></i>
+                                <div className="flex flex-row items-center">
+                                    <IssueIcon className="mr-1" />
                                     {item.open_issues.toLocaleString()}
                                 </div>
                                 {
                                     item.license && (
-                                        <div className="">
-                                            <i className="fa-solid fa-scale-balanced mr-1"></i>
+                                        <div className="flex flex-row items-center">
+                                            <LicenseIcon className="mr-1" />
                                             {item.license.spdx_id}
                                         </div>
                                     )

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import { TRealData } from './type'
 import http from '../../utils/http'
+import { Fragment } from 'react'
 
 export default function Indices() {
 
@@ -27,7 +28,17 @@ export default function Indices() {
         'trade_status'
     ]
 
-    const { isLoading, data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+    const { isLoading, data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code.join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+
+    if (isLoading || !realResp) {
+        return (
+            <Fragment>
+                {
+                    [...Array.from(Array(6).keys())].map(i => <div key={i} className="rounded-lg w-full shadow h-28 bg-white" />)
+                }
+            </Fragment>
+        )
+    }
 
     const getTextColor = (num: number) => {
         if (num > 0) return 'text-red-600'
@@ -43,7 +54,7 @@ export default function Indices() {
     return (
         <div className="grid grid-cols-6 gap-4 w-full text-white">
             {
-                isLoading ? [...Array.from(Array(6).keys())].map(i => <div key={i} className="rounded-lg w-full shadow h-28 bg-white" />) : code.map((item) => {
+                code.map((item) => {
                     if (Object.keys(realResp.data.snapshot).length > 0) {
                         const stock = realResp.data.snapshot[item]
                         const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))

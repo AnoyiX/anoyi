@@ -4,7 +4,7 @@ import { Fragment, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWRInfinite from 'swr/infinite'
 import { Loading } from '../../components/Icons'
-import { PageData } from "../../types"
+import { PageData } from "../../utils/types"
 import http from "../../utils/http"
 import Photo from "./Photo"
 import PhotoModal from "./PhotoModal"
@@ -41,7 +41,7 @@ export default function Photos() {
         <Fragment>
             <InfiniteScroll
                 className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-4"
-                dataLength={[].concat.apply([], data.map(item => item.data)).length}
+                dataLength={new Array<TPhoto>().concat.apply([], data.map(item => item.data)).length}
                 next={() => setSize(size + 1)}
                 hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
                 loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}

@@ -6,7 +6,7 @@ import ImageSkeleton from "../../components/client/ImageSkeleton"
 import { Location } from "../../components/Icons"
 import { TPhoto } from "./type"
 
-interface PhotoProps {
+export type PhotoProps = {
     photo: TPhoto
     onPlay: () => void
 }
