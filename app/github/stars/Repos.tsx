@@ -22,7 +22,7 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
     return (
 
         <InfiniteScroll
-            className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 md:grid-cols-2"
+            className="w-full grid grid-cols-1 p-4 gap-4 lg:p-8 lg:gap-8 lg:grid-cols-2"
             dataLength={new Array<TRepo>().concat.apply([], data.map(resp => resp)).length}
             next={() => setSize(size + 1)}
             hasMore={!data.length || data.slice(-1)[0].length >= limit}
@@ -30,7 +30,7 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
         >
             {
                 data.map(resp => resp.map(item => (
-                    <div key={item.id} className="flex border w-full rounded-lg p-4 gap-4 md:gap-6">
+                    <div key={item.id} className="repo-card">
                         <div className="flex-0 text-center">
                             <a href={item.owner.html_url} target="_blank" rel='noreferrer'>
                                 <ImageSkeleton src={item.owner.avatar_url} className="h-14 w-14 rounded-lg" />
@@ -49,21 +49,21 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
                                         </div>
                                     )
                                 }
-                                <div className="flex flex-row items-center">
+                                <div className="flex-row-center">
                                     <StarIcon className="mr-1" />
                                     {item.stargazers_count.toLocaleString()}
                                 </div>
-                                <div className="flex flex-row items-center">
+                                <div className="flex-row-center">
                                     <ForkIcon className="mr-1" />
                                     {item.forks.toLocaleString()}
                                 </div>
-                                <div className="flex flex-row items-center">
+                                <div className="flex-row-center">
                                     <IssueIcon className="mr-1" />
                                     {item.open_issues.toLocaleString()}
                                 </div>
                                 {
                                     item.license && (
-                                        <div className="flex flex-row items-center">
+                                        <div className="flex-row-center">
                                             <LicenseIcon className="mr-1" />
                                             {item.license.spdx_id}
                                         </div>
@@ -73,7 +73,7 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
                             {
                                 item.topics.length > 0 && <div className="border-t my-4"></div>
                             }
-                            <div className="text-gray-600 flex flex-row gap-2 text-xs cursor-default flex-wrap">
+                            <div className="text-gray-600 flex flex-row gap-2 text-xs flex-wrap">
                                 {
                                     item.topics.map(topic => (
                                         <a key={topic} href={`https://github.com/topics/${topic}`} className="github-repo-topic" target="_blank" rel='noreferrer'>

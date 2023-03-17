@@ -79,7 +79,7 @@ export default function Page() {
                             }, index: number) => (
                                 <div className='flex flex-col items-center gap-3' key={index}>
                                     <Link href={item.url} target={(item.url.startsWith('http://') || item.url.startsWith('https://')) ? '_blank' : '_self'} className='cursor-pointer'>
-                                        <img src={item.icon} alt="" className='w-16 h-16 shadow-md rounded-2xl' />
+                                        <img src={item.icon} alt="" className='w-16 h-16 shadow rounded-2xl' />
                                     </Link>
                                     <span className='text-gray-800 text-sm'>{item.name}</span>
                                 </div>

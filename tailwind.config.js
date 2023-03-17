@@ -10,6 +10,8 @@ module.exports = {
         DEFAULT: {
           css: {
             a: {
+              'text-decoration': 'none',
+              color: theme('colors.blue.500'),
               '&:hover': {
                 color: theme('colors.blue.600'),
               }

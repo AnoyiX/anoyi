@@ -8,7 +8,6 @@ import { TRealData } from "../type"
 import { Loading } from "@/components/Icons"
 
 const StockMetric = ({ name, value, valueStyle = '' }: { name: string, value: string, valueStyle?: string }) => {
-
     return (
         <div className="w-full flex flex-row items-center justify-between">
             <span className="text-gray-600">{name}</span>
@@ -50,10 +49,14 @@ export default function Stock({ code }: { code: string }) {
 
     const { data: realResp } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${code}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
-    if (!realResp){
-        return <div className="h-full w-full flex items-center justify-center"><Loading /></div>
+    if (!realResp) {
+        return (
+            <div className="h-full w-full flex items-center justify-center">
+                <Loading className='h-20 w-20' />
+            </div>
+        )
     }
-    
+
     const getTextColor = (num: number) => {
         if (num > 0) return 'text-red-600'
         if (num == 0) return 'text-gray-600'
@@ -71,9 +74,9 @@ export default function Stock({ code }: { code: string }) {
     }
     const stock = realResp.data.snapshot[code]
     const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
-    
+
     return (
-        <div className="w-full flex flex-col gap-8 p-4">
+        <div className="w-full flex flex-col gap-8 p-6">
             <div>
                 <div className="flex flex-col gap-2">
                     <span className="text-xl">{stockObj['prod_name']}（{stockObj['symbol']}）</span>

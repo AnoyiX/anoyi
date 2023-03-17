@@ -29,3 +29,11 @@
 .video-cover {
     @apply rounded-t-lg lg:rounded-tr-none lg:rounded-l-lg cursor-pointer hover:opacity-75 h-full object-cover;
 }
+
+.repo-card {
+    @apply flex border border-slate-200 w-full rounded-lg p-4 gap-4 md:gap-6;
+}
+
+.flex-row-center {
+    @apply flex flex-row items-center;
+}

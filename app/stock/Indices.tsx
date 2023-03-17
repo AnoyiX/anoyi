@@ -32,11 +32,11 @@ export default function Indices() {
 
     if (isLoading || !realResp) {
         return (
-            <Fragment>
+            <div className="grid grid-cols-6 gap-4 w-full">
                 {
                     [...Array.from(Array(6).keys())].map(i => <div key={i} className="rounded-lg w-full shadow h-28 bg-white" />)
                 }
-            </Fragment>
+            </div>
         )
     }
 

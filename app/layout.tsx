@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang='zh'>
       <body className="bg-gray-100 min-h-screen w-full">
-        <div className='min-h-screen container mx-auto flex'>
+        <div className='min-h-screen mx-auto flex lg:container'>
           {children}
         </div>
         <Toaster />
