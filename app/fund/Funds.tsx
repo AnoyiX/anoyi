@@ -41,11 +41,11 @@ export default function Funds() {
     const limit = 20
     const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
     const values = Array.from({ length: Object.keys(TYPE).length + Object.keys(RISKLEVEL).length + Object.keys(SH).length }, _ => false)
-    const genBody = (query: Query, filter: any) => {
+    const genBody = (query: Query) => {
         let body: any = {
             database: 'cloud',
             collection: 'funds',
-            filter,
+            filter: query.filter,
             skip: query.page * limit,
             limit,
             sort: {
@@ -69,6 +69,7 @@ export default function Funds() {
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState<TFund[]>([])
     const onSearch = debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 500)
+    const onFilter = debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 500)
 
     useEffect(() => {
         if (loading) return
@@ -96,7 +97,7 @@ export default function Funds() {
             }
         }
 
-        http.post([`/api/mongo/find`, genBody(query, filter)]).then(resp => {
+        http.post([`/api/mongo/find`, genBody(query)]).then(resp => {
             setHasMore(resp.has_more)
             if (query.page > 0) {
                 setData([...data, ...(resp.data)])
@@ -105,8 +106,31 @@ export default function Funds() {
             }
             setLoading(false)
         })
-    }, [query, filters])
+    }, [query])
 
+    useEffect(() => {
+        let filter: any = {}
+        const typeKeys = Object.keys(TYPE).filter(key => filters[key])
+        if (typeKeys.length > 0) {
+            filter.FTYPE = { '$regex': typeKeys.map(key => TYPE[key as keyof typeof TYPE]).join('|') }
+        }
+        const riskLevelKeys = Object.keys(RISKLEVEL).filter(key => filters[key])
+        if (riskLevelKeys.length > 0) {
+            filter.RISKLEVEL = { '$in': riskLevelKeys.map(key => key.replace('R', ''))}
+        }
+        const shKeys = Object.keys(SH).filter(key => filters[key])
+        if (shKeys.length > 0) {
+            filter.sh = {
+                '$elemMatch': {
+                    feeRate: '0.00%',
+                    rateSection: {
+                        $in: shKeys.map(key => SH[key as keyof typeof SH])
+                    }
+                }
+            }
+        }
+        onFilter(filter)
+    }, [filters])
 
     const onToggleFilterItem = (id: string) => {
         setFilters(pre => {
