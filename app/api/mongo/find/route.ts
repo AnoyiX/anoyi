@@ -17,5 +17,4 @@ export async function POST(request: NextRequest) {
     })
     const data = await resp.json()
     return NextResponse.json(WebResponse.successList(data.documents, data.documents.length >= body.limit))
-
 }

@@ -15,19 +15,18 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
     const videoRef = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
+        if (!isOpen) return
         setTimeout(() => {
-            if (isOpen) {
-                let videoPlayer = videoRef.current;
-                if (videoPlayer) {
-                    videoPlayer.setAttribute("src", `https://aweme.snssdk.com/aweme/v1/play/?video_id=${vid}&ratio=1080p&line=0`);
-                    videoPlayer.loop = true;
-                    videoPlayer.load();
-                    videoPlayer.play();
-                }
+            let videoPlayer = videoRef.current
+            if (videoPlayer) {
+                videoPlayer.setAttribute("src", `https://aweme.snssdk.com/aweme/v1/play/?video_id=${vid}&ratio=1080p&line=0`);
+                videoPlayer.loop = true;
+                videoPlayer.load();
+                videoPlayer.play();
             }
         }, 100)
         return () => {
-            let videoPlayer = videoRef.current;
+            let videoPlayer = videoRef.current
             if (videoPlayer) {
                 videoPlayer.pause()
                 videoPlayer.currentTime = 0

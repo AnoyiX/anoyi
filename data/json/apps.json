@@ -10,6 +10,11 @@
         "url": "/stock"
     },
     {
+        "name": "基金",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Fund.svg",
+        "url": "/fund"
+    },
+    {
         "name": "短视频",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Tiktok.svg",
         "url": "/video"
