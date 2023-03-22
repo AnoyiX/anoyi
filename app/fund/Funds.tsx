@@ -1,13 +1,13 @@
 'use client'
 
 import FullContainer from "@/components/server/Containers"
-import debounce from "@/utils/debounce"
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { Loading, SearchIcon } from '../../components/Icons'
 import http from "../../utils/http"
 import FundsFilter from "./FundsFilter"
 import { TFund } from "./typs"
+import { debounce } from "lodash"
 
 type Query = {
     page: number,
@@ -41,18 +41,16 @@ export default function Funds() {
     const limit = 20
     const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
     const values = Array.from({ length: Object.keys(TYPE).length + Object.keys(RISKLEVEL).length + Object.keys(SH).length }, _ => false)
-    const genBody = (query: Query) => {
-        let sort: any = {}
-        if (Object.keys(query.filter).length === 0){
-            sort.SYL_1N_NUMBER = -1
-        }
+    const genBody = (query: Query, filter: any) => {
         let body: any = {
             database: 'cloud',
             collection: 'funds',
-            filter: query.filter,
+            filter,
             skip: query.page * limit,
             limit,
-            sort,
+            sort: {
+                SYL_1N_NUMBER: -1
+            },
         }
         if (query.keyword.length > 0) {
             body.filter.SHORTNAME = {
@@ -71,24 +69,12 @@ export default function Funds() {
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState<TFund[]>([])
     const onSearch = debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 500)
-    const onFilter = debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 500)
 
     useEffect(() => {
         if (loading) return
         if (query.page === 0) setData([])
         setLoading(true)
-        http.post([`/api/mongo/find`, genBody(query)]).then(resp => {
-            setHasMore(resp.has_more)
-            if (query.page > 0) {
-                setData([...data, ...(resp.data)])
-            } else {
-                setData([...resp.data])
-            }
-            setLoading(false)
-        })
-    }, [query])
 
-    useEffect(() => {
         let filter: any = {}
         const typeKeys = Object.keys(TYPE).filter(key => filters[key])
         if (typeKeys.length > 0) {
@@ -109,8 +95,18 @@ export default function Funds() {
                 }
             }
         }
-        onFilter(filter)
-    }, [filters])
+
+        http.post([`/api/mongo/find`, genBody(query, filter)]).then(resp => {
+            setHasMore(resp.has_more)
+            if (query.page > 0) {
+                setData([...data, ...(resp.data)])
+            } else {
+                setData([...resp.data])
+            }
+            setLoading(false)
+        })
+    }, [query, filters])
+
 
     const onToggleFilterItem = (id: string) => {
         setFilters(pre => {

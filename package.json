@@ -9,6 +9,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "clsx": "^1.2.1",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "^13.2.4",
     "nextjs-google-analytics": "^2.3.3",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@types/lodash": "^4.14.191",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
