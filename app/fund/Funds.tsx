@@ -15,9 +15,32 @@ type Query = {
     filter: any,
 }
 
+export const TYPE = {
+    T0: '债券型',
+    T1: '货币型',
+    T2: '混合型',
+    T3: '股票型',
+    T4: '指数型',
+    T5: 'FOF',
+    T6: 'QDII',
+}
+export const RISKLEVEL = {
+    R1: '低风险',
+    R2: '中低风险',
+    R3: '中风险',
+    R4: '中高风险',
+    R5: '高风险',
+}
+export const SH = {
+    S0: '持有天数≥7天',
+    S1: '持有天数≥30天',
+}
+
 export default function Funds() {
 
     const limit = 20
+    const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
+    const values = Array.from({ length: Object.keys(TYPE).length + Object.keys(RISKLEVEL).length + Object.keys(SH).length }, _ => false)
     const genBody = (query: Query) => {
         let sort: any = {}
         if (Object.keys(query.filter).length === 0){
@@ -38,6 +61,7 @@ export default function Funds() {
         }
         return body
     }
+    const [filters, setFilters] = useState<{ [key: string]: boolean }>(Object.fromEntries(keys.map((key, index) => [key, values[index]])))
     const [query, setQuery] = useState({
         page: 0,
         keyword: '',
@@ -46,6 +70,8 @@ export default function Funds() {
     const [hasMore, setHasMore] = useState(true)
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState<TFund[]>([])
+    const onSearch = debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 500)
+    const onFilter = debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 500)
 
     useEffect(() => {
         if (loading) return
@@ -61,6 +87,38 @@ export default function Funds() {
             setLoading(false)
         })
     }, [query])
+
+    useEffect(() => {
+        let filter: any = {}
+        const typeKeys = Object.keys(TYPE).filter(key => filters[key])
+        if (typeKeys.length > 0) {
+            filter.FTYPE = { '$regex': typeKeys.map(key => TYPE[key as keyof typeof TYPE]).join('|') }
+        }
+        const riskLevelKeys = Object.keys(RISKLEVEL).filter(key => filters[key])
+        if (riskLevelKeys.length > 0) {
+            filter.RISKLEVEL = { '$in': riskLevelKeys.map(key => key.replace('R', ''))}
+        }
+        const shKeys = Object.keys(SH).filter(key => filters[key])
+        if (shKeys.length > 0) {
+            filter.sh = {
+                '$elemMatch': {
+                    feeRate: '0.00%',
+                    rateSection: {
+                        $in: shKeys.map(key => SH[key as keyof typeof SH])
+                    }
+                }
+            }
+        }
+        onFilter(filter)
+    }, [filters])
+
+    const onToggleFilterItem = (id: string) => {
+        setFilters(pre => {
+            let state = { ...pre }
+            state[id] = !pre[id]
+            return state
+        })
+    }
 
     const typeClass = (value: string) => {
         if (value.startsWith('债券型')) return 'bg-cyan-100 text-cyan-600'
@@ -88,9 +146,6 @@ export default function Funds() {
         return <></>
     }
 
-    const onSearch = debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 500)
-    const onFilter = debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 500)
-
     return (
         <>
             <div className="flex-row-center gap-4 text-sm">
@@ -105,7 +160,7 @@ export default function Funds() {
                         onChange={e => onSearch(e.target.value)}
                     />
                 </div>
-                <FundsFilter onChange={value => onFilter(value)} />
+                <FundsFilter filters={filters} onToggleFilterItem={onToggleFilterItem} />
             </div>
             <FullContainer>
                 <InfiniteScroll
