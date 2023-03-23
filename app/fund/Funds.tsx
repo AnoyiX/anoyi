@@ -1,7 +1,7 @@
 'use client'
 
 import FullContainer from "@/components/server/Containers"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { Loading, SearchIcon } from '../../components/Icons'
 import http from "../../utils/http"
@@ -67,7 +67,9 @@ export default function Funds() {
     })
     const [hasMore, setHasMore] = useState(true)
     const [loading, setLoading] = useState(false)
+    const initialRender = useRef(true)
     const [data, setData] = useState<TFund[]>([])
+
     const onSearch = useCallback(debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 1000), [])
     const onFilter = useCallback(debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 1000), [])
 
@@ -86,6 +88,10 @@ export default function Funds() {
     }, [query])
 
     useEffect(() => {
+        if (initialRender.current) {
+            initialRender.current = false
+            return () => {}
+        }
         let filter: any = {}
         const typeKeys = Object.keys(TYPE).filter(key => filters[key])
         if (typeKeys.length > 0) {
@@ -196,9 +202,9 @@ export default function Funds() {
                                     <tr className="bg-white border-b" key={fund.code}>
                                         <td className="p-3 text-gray-900">
                                             <div className="h-full flex flex-col gap-1 justify-center">
-                                                <div>
-                                                    [{fund.code}] {fund.SHORTNAME}
-                                                </div>
+                                                <a href={`https://fund.eastmoney.com/${fund.code}.html`} className="hover:text-blue-600 w-fit" target="_blank">
+                                                    {fund.code} - {fund.SHORTNAME}
+                                                </a>
                                                 <div className="flex-row-center gap-2 text-xs">
                                                     <span className={`rounded px-1 py-0.5 ${typeClass(fund.FTYPE)}`}>{fund.FTYPE}</span>
                                                     {renderRiskLevel(fund.RISKLEVEL)}
