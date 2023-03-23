@@ -1,7 +1,7 @@
 'use client'
 
 import FullContainer from "@/components/server/Containers"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { Loading, SearchIcon } from '../../components/Icons'
 import http from "../../utils/http"
@@ -40,7 +40,7 @@ export default function Funds() {
 
     const limit = 20
     const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
-    const values = Array.from({ length: Object.keys(TYPE).length + Object.keys(RISKLEVEL).length + Object.keys(SH).length }, _ => false)
+    const values = Array.from({ length: keys.length }, _ => false)
     const genBody = (query: Query) => {
         let body: any = {
             database: 'cloud',
@@ -68,35 +68,12 @@ export default function Funds() {
     const [hasMore, setHasMore] = useState(true)
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState<TFund[]>([])
-    const onSearch = debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 500)
-    const onFilter = debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 500)
+    const onSearch = useCallback(debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 1000), [])
+    const onFilter = useCallback(debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 1000), [])
 
     useEffect(() => {
-        if (loading) return
         if (query.page === 0) setData([])
         setLoading(true)
-
-        let filter: any = {}
-        const typeKeys = Object.keys(TYPE).filter(key => filters[key])
-        if (typeKeys.length > 0) {
-            filter.FTYPE = { '$regex': typeKeys.map(key => TYPE[key as keyof typeof TYPE]).join('|') }
-        }
-        const riskLevelKeys = Object.keys(RISKLEVEL).filter(key => filters[key])
-        if (riskLevelKeys.length > 0) {
-            filter.RISKLEVEL = { '$in': riskLevelKeys.map(key => key.replace('R', ''))}
-        }
-        const shKeys = Object.keys(SH).filter(key => filters[key])
-        if (shKeys.length > 0) {
-            filter.sh = {
-                '$elemMatch': {
-                    feeRate: '0.00%',
-                    rateSection: {
-                        $in: shKeys.map(key => SH[key as keyof typeof SH])
-                    }
-                }
-            }
-        }
-
         http.post([`/api/mongo/find`, genBody(query)]).then(resp => {
             setHasMore(resp.has_more)
             if (query.page > 0) {
@@ -116,7 +93,7 @@ export default function Funds() {
         }
         const riskLevelKeys = Object.keys(RISKLEVEL).filter(key => filters[key])
         if (riskLevelKeys.length > 0) {
-            filter.RISKLEVEL = { '$in': riskLevelKeys.map(key => key.replace('R', ''))}
+            filter.RISKLEVEL = { '$in': riskLevelKeys.map(key => key.replace('R', '')) }
         }
         const shKeys = Object.keys(SH).filter(key => filters[key])
         if (shKeys.length > 0) {
