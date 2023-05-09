@@ -6,7 +6,6 @@ export type SelectorProps = {
     options: string[]
     className?: string
     onChange: (value: string) => void
-
 }
 
 export default function Selector({ value, options, className, onChange }: SelectorProps) {

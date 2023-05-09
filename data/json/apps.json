@@ -35,11 +35,6 @@
         "url": "/dev-icons"
     },
     {
-        "name": "相册",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Photos.svg",
-        "url": "/photo"
-    },
-    {
         "name": "Git 表情",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
         "url": "/gitmojis"
@@ -48,5 +43,10 @@
         "name": "CNCF",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
         "url": "/cncf"
+    },
+    {
+        "name": "相册",
+        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Photos.svg",
+        "url": "/photo"
     }
 ]

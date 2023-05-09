@@ -1,5 +1,5 @@
-import Toaster from '@/components/client/Toaster';
 import './globals.css';
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: '轻量级云原生架构实验室',
