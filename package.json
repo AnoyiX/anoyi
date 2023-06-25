@@ -7,11 +7,11 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.14",
+    "@headlessui/react": "^1.7.15",
     "clsx": "^1.2.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "next": "^13.4.1",
+    "next": "^13.4.7",
     "nextjs-google-analytics": "^2.3.3",
     "node-html-parser": "^6.1.5",
     "react": "^18.2.0",
@@ -20,21 +20,21 @@
     "react-infinite-scroll-component": "^6.1.0",
     "rehype-raw": "^6.1.1",
     "rehype-stringify": "^9.0.3",
-    "remark-parse": "^10.0.1",
+    "remark-parse": "^10.0.2",
     "remark-rehype": "^10.1.0",
-    "swr": "^2.1.5",
+    "swr": "^2.2.0",
     "unified": "^10.1.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
-    "@types/lodash": "^4.14.194",
-    "@types/node": "^20.1.1",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
+    "@types/lodash": "^4.14.195",
+    "@types/node": "^20.3.1",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "autoprefixer": "^10.4.14",
-    "eslint-config-next": "^13.4.1",
-    "postcss": "^8.4.23",
+    "eslint-config-next": "^13.4.7",
+    "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
-    "typescript": "5.0"
+    "typescript": "5.1"
   }
 }
