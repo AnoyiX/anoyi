@@ -13,7 +13,8 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
             dataSource: process.env.MONGODB_DATASOURCE,
             ...body,
-        })
+        }),
+        next: { revalidate: 0 },
     })
     const data = await resp.json()
     return NextResponse.json(WebResponse.successList(data.documents, data.documents.length >= body.limit))

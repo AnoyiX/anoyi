@@ -30,11 +30,6 @@
         "url": "https://www.jianshu.com/u/7b7ec6f2db21"
     },
     {
-        "name": "Dev Icons",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
-        "url": "/dev-icons"
-    },
-    {
         "name": "Git 表情",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
         "url": "/gitmojis"
