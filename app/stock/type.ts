@@ -4,32 +4,9 @@ export type StockPlatesProps = {
 }
 
 export type TPlate = {
-    core_avg_pcp: number
-    core_avg_pcp_rank: number
-    core_avg_pcp_rank_change: number
-    fall_count: number
-    fund_flow: number
-    is_new: boolean | null
-    limit_up_count: number
-    plate_id: null
-    plate_name: string
-    rise_count: number
-    stay_count: number
-    top_n_stocks: {
-        items: {
-            change_percent: number
-            price_change: number
-            stock_chi_name: string
-            symbol: string
-        }[]
-    }
-}
-
-export type TPlates = {
-    code: number
-    data: {
-        [key: string]: TPlate
-    }
+    D: number
+    INDEXCODE: string
+    INDEXNAME: string
 }
 
 export type TRealData = {

@@ -3,5 +3,5 @@ type SkeletonProps = {
 }
 
 export default function Skeleton({ className }: SkeletonProps) {
-    return <div className={`${className} animate-pulse bg-gray-100`}></div>
+    return <div className={`${className} animate-pulse bg-gray-200`}></div>
 }

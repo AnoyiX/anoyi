@@ -33,6 +33,15 @@ const http = {
     } else {
       throw new Error('请求失败')
     }
+  },
+
+  postAll: async ([url, body]: any[]) => {
+    const resp = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+    if (resp.status == 200) {
+      return await resp.json()
+    } else {
+      throw new Error('请求失败')
+    }
   }
 
 }

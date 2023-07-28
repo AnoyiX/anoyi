@@ -24,17 +24,10 @@ export default function Page() {
                 <div className="w-96 flex flex-0 flex-col gap-4">
                     <div className="bg-white rounded-lg shadow p-4">
                         <div className="mb-2">
-                            板块涨幅榜
+                            行业板块
                             <i className="fa-solid fa-arrow-trend-up text-red-500 ml-2"></i>
                         </div>
-                        <Plates is_acs={true} limit={9} />
-                    </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <div className="mb-2">
-                            板块跌幅榜
-                            <i className="fa-solid fa-arrow-trend-down text-green-500 ml-2"></i>
-                        </div>
-                        <Plates is_acs={false} limit={9} />
+                        <Plates />
                     </div>
                 </div>
             </div>

@@ -12,9 +12,11 @@ export default function Indices() {
         '000001.SS',
         '399001.SZ',
         '399006.SZ',
-        '000688.SS',
-        '399330.SZ',
         '000300.SS',
+        '000016.SS',
+        '000688.SS',
+        '000905.SS',
+        '000852.SS',
     ]
 
     const fields = [
@@ -52,7 +54,7 @@ export default function Indices() {
     }
 
     return (
-        <div className="grid grid-cols-6 gap-4 w-full text-white">
+        <div className="grid grid-cols-8 gap-4 w-full text-white">
             {
                 code.map((item) => {
                     if (Object.keys(realResp.data.snapshot).length > 0) {
@@ -62,7 +64,7 @@ export default function Indices() {
                             <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
                                 <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
                                     <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
-                                    <span className='text-3xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
+                                    <span className='text-2xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
                                     <div className='flex flex-row gap-2 text-sm'>
                                         <span>{format(stockObj['px_change'] as number)}</span>
                                         <span>{format(stockObj['px_change_rate'] as number)}%</span>
