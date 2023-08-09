@@ -4,7 +4,7 @@ import http from '@/utils/http'
 
 export default async function Page() {
 
-    const iconNames: string[] = await http.getAll('https://dev-icons.deta.dev/api/icons')
+    const iconNames: string[] = await http.getAll('https://icons.anoyi.com/api/icons')
 
     const icons = iconNames.filter(item => item.toLowerCase()).map(item => ({
         name: item,
