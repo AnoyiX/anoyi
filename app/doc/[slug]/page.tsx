@@ -1,14 +1,14 @@
-import AppHeader from "../../../components/server/AppNav"
-import FullContainer from "../../../components/server/Containers"
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
+import { readFileSync } from 'fs'
+import { Metadata } from "next"
+import { notFound } from 'next/navigation'
+import path from "path"
 import rehypeRaw from 'rehype-raw'
 import rehypeStringify from 'rehype-stringify'
-import { readFileSync } from 'fs'
-import path from "path"
-import { notFound } from 'next/navigation'
-import { Metadata } from "next"
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import { unified } from 'unified'
+import AppHeader from "../../../components/server/AppNav"
+import FullContainer from "../../../components/server/Containers"
 
 const titles = {
   about: '关于作者',
@@ -31,12 +31,9 @@ export default async function Page({ params: { slug } }: { params: { slug: DOC }
   const title = titles[slug]
 
   const content = readFileSync(path.join(process.cwd(), `data/md/${slug}.md`), 'utf-8')
-  const file = await unified()
-    .use(remarkParse)
-    .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeRaw)
-    .use(rehypeStringify)
-    .process(content)
+  
+  // @ts-ignore
+  const file = await unified().use(remarkParse).use(remarkRehype, { allowDangerousHtml: true }).use(rehypeRaw).use(rehypeStringify).process(content)
 
   return (
     <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
