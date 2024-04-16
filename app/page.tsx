@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Divider } from '@nextui-org/divider'
 import { readFileSync } from 'fs'
 import { Link } from 'next-view-transitions'
 import path from "path"
@@ -27,7 +26,7 @@ export default function Page() {
                             <div className="text-xl font-medium">{home.user.nickname}</div>
                             <span className='text-sm text-gray-600'>{home.user.bio}</span>
                         </div>
-                        <Divider />
+                        <div className="w-full h-[1px] bg-gray-200" />
                         <div className='flex flex-row gap-3 items-center justify-center text-lg py-3'>
                             {
                                 home.user.brands.map((item: { url: string, icon: keyof typeof Logos }) => (

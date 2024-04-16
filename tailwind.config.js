@@ -1,10 +1,7 @@
-// import {nextui} from "@nextui-org/react"
-
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    // "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
@@ -38,15 +35,6 @@ module.exports = {
   },
   darkMode: "class",
   plugins: [
-    require('@tailwindcss/typography'),
-    // nextui({
-    //   themes: {
-    //     dark: {
-    //       colors: {
-    //         background: "#1c2127",
-    //       }
-    //     }
-    //   }
-    // }),
+    require('@tailwindcss/typography')
   ],
 }
