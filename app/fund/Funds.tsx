@@ -8,6 +8,15 @@ import http from "../../utils/http"
 import FundsFilter from "./FundsFilter"
 import { TFund } from "./typs"
 import { debounce } from "lodash"
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+
 
 type Query = {
     page: number,
@@ -90,7 +99,7 @@ export default function Funds() {
     useEffect(() => {
         if (initialRender.current) {
             initialRender.current = false
-            return () => {}
+            return () => { }
         }
         let filter: any = {}
         const typeKeys = Object.keys(TYPE).filter(key => filters[key])
@@ -141,26 +150,23 @@ export default function Funds() {
     }
 
     const renderRiskLevel = (value: string) => {
-        if (value === '5') return <span className="rounded px-1 py-0.5 bg-red-100 text-red-600">高风险</span>
-        if (value === '4') return <span className="rounded px-1 py-0.5 bg-red-50 text-red-500">中高风险</span>
-        if (value === '3') return <span className="rounded px-1 py-0.5 bg-orange-50 text-orange-500">中风险</span>
-        if (value === '2') return <span className="rounded px-1 py-0.5 bg-green-50 text-green-500">中低风险</span>
-        if (value === '1') return <span className="rounded px-1 py-0.5 bg-green-100 text-green-600">低风险</span>
+        if (value === '5') return <span className="text-xs px-1 py-0.5 rounded text-white bg-red-700">高风险</span>
+        if (value === '4') return <span className="text-xs px-1 py-0.5 rounded text-white bg-red-500">中高风险</span>
+        if (value === '3') return <span className="text-xs px-1 py-0.5 rounded text-white bg-yellow-500">中风险</span>
+        if (value === '2') return <span className="text-xs px-1 py-0.5 rounded text-white bg-green-500">中低风险</span>
+        if (value === '1') return <span className="text-xs px-1 py-0.5 rounded text-white bg-green-700">低风险</span>
         return <></>
     }
 
     return (
         <>
             <div className="flex-row-center gap-4 text-sm">
-                <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <SearchIcon className="w-5 h-5 text-gray-500" />
-                    </div>
+                <div className="relative flex-1 gap-2 rounded-lg bg-white drop-shadow py-2.5">
+                    <SearchIcon className="mx-2.5 w-5 h-5 text-gray-500 absolute top-2.5 left-0" />
                     <input
-                        type="search"
-                        className="w-full p-3 pl-10 text-gray-900 bg-white shadow rounded-lg focus:outline-none"
                         placeholder="基金名称"
                         onChange={e => onSearch(e.target.value)}
+                        className="ring-0 w-full pl-10 pr-2 text focus-within:outline-none"
                     />
                 </div>
                 <FundsFilter filters={filters} onToggleFilterItem={onToggleFilterItem} />
@@ -173,34 +179,32 @@ export default function Funds() {
                     hasMore={hasMore}
                     loader={<></>}
                 >
-                    <table className="w-full text-sm text-left text-gray-500 ">
-                        <thead className="text-gray-100 uppercase bg-gray-700 ">
-                            <tr>
-                                <th scope="col" className="p-3 rounded-tl-lg">
-                                    基金
-                                </th>
-                                <th scope="col" className="p-3 w-28 text-right">
-                                    最新净值
-                                </th>
-                                <th scope="col" className="p-3 w-28 text-right">
-                                    日涨跌幅
-                                </th>
-                                <th scope="col" className="p-3 w-28 text-right">
-                                    近一年
-                                </th>
-                                <th scope="col" className="p-3 w-28 text-right">
-                                    申购费率
-                                </th>
-                                <th scope="col" className="p-3 w-64 text-right rounded-tr-lg">
-                                    赎回费率
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <Table className="w-full text-sm text-left">
+                        <TableHeader className="text-gray-100 uppercase ">
+                            <TableHead className="p-3 rounded-tl-lg">
+                                基金
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                最新净值
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                日涨跌幅
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                近一年
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                申购费率
+                            </TableHead>
+                            <TableHead className="p-3 w-64 text-right rounded-tr-lg">
+                                赎回费率
+                            </TableHead>
+                        </TableHeader>
+                        <TableBody>
                             {
                                 data.map(fund => (
-                                    <tr className="bg-white border-b" key={fund.code}>
-                                        <td className="p-3 text-gray-900">
+                                    <TableRow key={fund.code} className="">
+                                        <TableCell className="p-3">
                                             <div className="h-full flex flex-col gap-1 justify-center">
                                                 <a href={`https://fund.eastmoney.com/${fund.code}.html`} className="hover:text-blue-600 w-fit" target="_blank">
                                                     {fund.code} - {fund.SHORTNAME}
@@ -209,27 +213,27 @@ export default function Funds() {
                                                     <span className={`rounded px-1 py-0.5 ${typeClass(fund.FTYPE)}`}>{fund.FTYPE}</span>
                                                     {renderRiskLevel(fund.RISKLEVEL)}
                                                     {
-                                                        fund.CYCLE !== '--' && <span className={`rounded px-1 py-0.5 bg-gray-600 text-white`}>锁定{fund.CYCLE}</span>
+                                                        fund.CYCLE !== '--' && <span className="text-xs bg-black text-white px-1 py-0.5 rounded" >锁定{fund.CYCLE}</span>
                                                     }
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td className="p-3 text-right">
+                                        </TableCell>
+                                        <TableCell className="p-3 text-right">
                                             {fund.DWJZ}
-                                        </td>
-                                        <td className="p-3 text-right">
+                                        </TableCell>
+                                        <TableCell className="p-3 text-right">
                                             {renderRate(parseFloat(fund.RZDF))}
-                                        </td>
-                                        <td className="p-3 text-right">
+                                        </TableCell>
+                                        <TableCell className="p-3 text-right">
                                             {renderRate(fund.SYL_1N_NUMBER)}
-                                        </td>
-                                        <td className="p-3 text-right">
+                                        </TableCell>
+                                        <TableCell className="p-3 text-right">
                                             {fund.RATE}
-                                        </td>
-                                        <td className="p-3 text-right">
+                                        </TableCell>
+                                        <TableCell className="p-3 text-right">
                                             {
                                                 fund.sh.length === 1 ? '--' : (
-                                                    <div className="flex flex-col">
+                                                    <div className="flex flex-col text-xs">
                                                         {
                                                             fund.sh.slice(1).map((rule, index) => (
                                                                 <span key={index}>{rule.rateSection}: {rule.feeRate}</span>
@@ -238,12 +242,12 @@ export default function Funds() {
                                                     </div>
                                                 )
                                             }
-                                        </td>
-                                    </tr>
+                                        </TableCell>
+                                    </TableRow>
                                 ))
                             }
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                     {
                         loading && <div className="my-8 w-full"><Loading className='h-20 w-20 mx-auto' /></div>
                     }

@@ -22,7 +22,7 @@ export default function Page() {
                     <Lives />
                 </FullContainer>
                 <div className="w-96 flex flex-0 flex-col gap-4">
-                    <div className="bg-white rounded-lg shadow p-4">
+                    <div className="box rounded-lg shadow p-4">
                         <div className="mb-2">
                             行业板块
                             <i className="fa-solid fa-arrow-trend-up text-red-500 ml-2"></i>

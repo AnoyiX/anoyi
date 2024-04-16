@@ -1,10 +1,9 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import useSWR from 'swr'
 import { TRealData } from './type'
 import http from '../../utils/http'
-import { Fragment } from 'react'
 
 export default function Indices() {
 
@@ -62,8 +61,8 @@ export default function Indices() {
                         const stockObj = Object.fromEntries(realResp.data.fields.map((_, i) => [realResp.data.fields[i], stock[i]]))
                         return (
                             <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
-                                <div className={`cursor-pointer rounded-lg w-full flex flex-col shadow gap-1 py-4 justify-center items-center bg-white ${getTextColor(stockObj['px_change'] as number)}`}>
-                                    <span className='text-sm text-gray-900'>{stockObj['prod_name']}</span>
+                                <div className={`box-card cursor-pointer w-full flex flex-col shadow gap-1 py-4 justify-center items-center ${getTextColor(stockObj['px_change'] as number)}`}>
+                                    <span className='text-sm'>{stockObj['prod_name']}</span>
                                     <span className='text-2xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
                                     <div className='flex flex-row gap-2 text-sm'>
                                         <span>{format(stockObj['px_change'] as number)}</span>

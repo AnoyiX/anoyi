@@ -1,5 +1,8 @@
-import './globals.css';
-import { Toaster } from "react-hot-toast";
+import { ViewTransitions } from 'next-view-transitions'
+import { Toaster } from "react-hot-toast"
+
+import './globals.css'
+import './apps.css'
 
 export const metadata = {
   title: '轻量级云原生架构实验室',
@@ -15,13 +18,15 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang='zh'>
-      <body className="bg-gray-100 min-h-screen w-full">
-        <div className='min-h-screen mx-auto flex lg:container'>
-          {children}
-        </div>
-        <Toaster />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html>
+        <body className="min-h-screen w-full text-foreground bg-slate-100">
+          <div className='min-h-screen mx-auto flex lg:container'>
+            {children}
+          </div>
+          <Toaster />
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

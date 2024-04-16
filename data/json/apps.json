@@ -20,11 +20,6 @@
         "url": "/video"
     },
     {
-        "name": "Rainbow",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Rainbow.svg",
-        "url": "/rainbow"
-    },
-    {
         "name": "博客",
         "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/JianShu.svg",
         "url": "https://www.jianshu.com/u/7b7ec6f2db21"

@@ -5,6 +5,7 @@ import 'moment/locale/zh-cn'
 import { Location } from '../../components/Icons'
 import ImageSkeleton from "../../components/client/ImageSkeleton"
 import { TVideo } from "./type"
+import { Link } from "next-view-transitions"
 
 type VideoProps = {
     video: TVideo
@@ -14,22 +15,22 @@ type VideoProps = {
 export default function Video({ video, onPlay }: VideoProps) {
 
     return (
-        <div className="video-card">
+        <div className="box video-card">
             <div onClick={() => onPlay(video.video.play_addr.uri)} className='h-full aspect-[7/10]'>
                 <ImageSkeleton src={video.video.cover.url_list[0]} className="video-cover" />
             </div>
             <div className="flex flex-col p-4 justify-between">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
-                        <a href={`https://www.douyin.com/user/${video.author.sec_uid}`} target="_blank" rel='noreferrer'>
+                        <Link href={`https://www.douyin.com/user/${video.author.sec_uid}`} target="_blank" rel='noreferrer'>
                             <ImageSkeleton src={video.author.avatar_thumb.url_list[0]} className="w-12 h-12 rounded-full" />
-                        </a>
+                        </Link>
                         <div className="flex flex-col justify-center gap-1">
-                            <a href={`https://www.douyin.com/user/${video.author.sec_uid}`} className="text-lg font-bold text-gray-900 hover:text-blue-600" target="_blank" rel='noreferrer'>{video.author.nickname}</a>
-                            <span className="text-xs text-gray-400">{video.author.custom_verify || '抖音创作者'}</span>
+                            <Link href={`https://www.douyin.com/user/${video.author.sec_uid}`} className="font-semibold" target="_blank" rel='noreferrer'>{video.author.nickname}</Link>
+                            <span className="text-xs bg-blue-50 px-1.5 py-1 rounded text-blue-500">{video.author.custom_verify || '抖音创作者'}</span>
                         </div>
                     </div>
-                    <div className="text-gray-600 text-sm">
+                    <div className="text-sm text-gray-700">
                         {video.desc}
                     </div>
                 </div>
@@ -47,7 +48,7 @@ export default function Video({ video, onPlay }: VideoProps) {
                             </a>
                         )
                     }
-                    <span className="text-gray-500">{moment(video.create_time * 1000).fromNow()}</span>
+                    <span className="text-gray-600">{moment(video.create_time * 1000).fromNow()}</span>
                 </div>
             </div>
         </div>

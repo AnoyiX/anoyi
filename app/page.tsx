@@ -1,9 +1,11 @@
-import Link from 'next/link'
-import FullContainer from '../components/server/Containers'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Divider } from '@nextui-org/divider'
 import { readFileSync } from 'fs'
+import { Link } from 'next-view-transitions'
 import path from "path"
 import { Logos } from '../components/Icons'
-import Dock from '@/components/client/Dock'
+import FullContainer from '../components/server/Containers'
+
 
 export default function Page() {
 
@@ -16,17 +18,19 @@ export default function Page() {
             <div className='flex flex-col md:flex-row flex-1 gap-4 md:gap-6'>
 
                 <div className='flex flex-col gap-4 md:gap-6'>
-                    <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-col gap-4 items-center justify-center'>
-                        <div className='flex flex-col items-center justify-center gap-2 pt-6 pb-2'>
-                            <img className="w-28 h-28 rounded-full" src={home.user.avatar} alt="" />
+                    <div className="box-card">
+                        <div className='w-full md:w-72 flex flex-col gap-3 items-center justify-center py-4'>
+                            <Avatar className='w-28 h-28'>
+                                <AvatarImage src={home.user.avatar} />
+                                <AvatarFallback>{home.user.nickname}</AvatarFallback>
+                            </Avatar>
                             <div className="text-xl font-medium">{home.user.nickname}</div>
-                            <div className='text-gray-500'>
-                                <span className='text-sm'>{home.user.bio}</span>
-                            </div>
+                            <span className='text-sm text-gray-600'>{home.user.bio}</span>
                         </div>
-                        <div className='flex flex-row gap-3 items-center justify-center text-lg border-t border-gray-200 py-3 w-full'>
+                        <Divider />
+                        <div className='flex flex-row gap-3 items-center justify-center text-lg py-3'>
                             {
-                                home.user.brands.map((item: {url: string, icon: keyof typeof Logos}) => (
+                                home.user.brands.map((item: { url: string, icon: keyof typeof Logos }) => (
                                     <Link href={item.url} target="_blank" key={item.icon}>
                                         {
                                             Logos[item.icon]({ className: 'text-xl text-gray-500/75 hover:text-gray-700' })
@@ -37,16 +41,8 @@ export default function Page() {
                         </div>
                     </div>
 
-                    <div className='bg-white w-full md:w-72 rounded-lg shadow flex flex-row space-x-6 items-center justify-center py-4'>
-                        {
-                            [home.languages, home.skills, home.softwares].map((item, index) => (
-                                <Dock name={item.name} key={index} data={item.children}></Dock>
-                            ))
-                        }
-                    </div>
-
-                    <div className='md:flex hidden flex-col items-center space-y-2 text-gray-500 text-xs'>
-                        <div className='flex flex-row space-x-1'>
+                    <div className='md:flex hidden flex-col items-center space-y-2 text-xs'>
+                        <div className='flex flex-row space-x-1 text-slate-500'>
                             <Link href='/doc/about'>
                                 <span className="hover:text-blue-600 cursor-pointer">关于作者</span>
                             </Link>
@@ -63,8 +59,8 @@ export default function Page() {
                                 <span className="hover:text-blue-600 cursor-pointer">用户协议</span>
                             </Link>
                         </div>
-                        <div className='text-center text-gray-400'>
-                            <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2023 All Rights Reserved
+                        <div className='text-center text-slate-400'>
+                            <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2024 All Rights Reserved
                         </div>
                     </div>
                 </div>
@@ -79,9 +75,9 @@ export default function Page() {
                             }, index: number) => (
                                 <div className='flex flex-col items-center gap-3' key={index}>
                                     <Link href={item.url} target={(item.url.startsWith('http://') || item.url.startsWith('https://')) ? '_blank' : '_self'} className='cursor-pointer'>
-                                        <img src={item.icon} alt="" className='w-16 h-16 shadow rounded-2xl' />
+                                        <img src={item.icon} alt="" className='w-16 h-16' />
                                     </Link>
-                                    <span className='text-gray-800 text-sm'>{item.name}</span>
+                                    <span className='text-default-800 text-sm'>{item.name}</span>
                                 </div>
                             ))
                         }

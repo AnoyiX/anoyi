@@ -2,7 +2,7 @@
 
 import moment from "moment"
 import 'moment/locale/zh-cn'
-import Link from "next/link"
+import { Link } from 'next-view-transitions'
 import { useCallback, useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWR from "swr"
@@ -56,16 +56,18 @@ function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
 function Live({ live }: { live: TLive }) {
 
-    const contentStyle = (score: number) => score > 1 ? "text-red-600" : ''
+    const titleStyle = (score: number) => score > 1 ? "text-rose-600" : ''
+    const contentStyle = (score: number) => score > 1 ? "text-rose-400" : ''
+
 
     return (
-        <div key={live.id} className={`w-full flex flex-row py-4 border-b ${contentStyle(live.score)}`}>
+        <div key={live.id} className={`w-full flex flex-row py-4 border-b text-opacity-75`}>
             <div className="w-16 py-[2px]">{moment(live.display_time * 1000).format('HH:mm')}</div>
-            <div className='flex flex-col gap-2 w-full border-l border-dashed pl-5 py-[2px]'>
+            <div className={`flex flex-col gap-2 w-full border-l border-dashed pl-5 py-[2px] ${titleStyle(live.score)}`}>
                 {
-                    live.title.length > 0 && <div className="font-medium">【{live.title}】</div>
+                    live.title.length > 0 && <div className="font-medium">{live.title}</div>
                 }
-                <article className="" dangerouslySetInnerHTML={{ __html: live.content }} />
+                <article className={`${contentStyle(live.score)}`} dangerouslySetInnerHTML={{ __html: live.content }} />
                 {
                     live.symbols.length > 0 && <StocksTag symbols={live.symbols} />
                 }

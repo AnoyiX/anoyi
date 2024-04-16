@@ -15,9 +15,9 @@ export default function Plates() {
     }], http.postAll, { refreshInterval: 10000 })
 
     const getColor = (num: number) => {
-        if (num > 0) return 'bg-red-500 hover:bg-red-400'
-        if (num == 0) return 'bg-gray-500 hover:bg-gray-400'
-        return 'bg-green-500 hover:bg-green-400'
+        if (num > 0) return 'bg-red-600 hover:bg-red-500 bg-opacity-50'
+        if (num == 0) return 'bg-gray-600 hover:bg-gray-500 bg-opacity-50'
+        return 'bg-green-600 hover:bg-green-500 bg-opacity-50'
     }
 
     const format = (num: number) => {
@@ -26,7 +26,7 @@ export default function Plates() {
     }
 
     return (
-        <div className="grid grid-cols-3 gap-1 w-full text-white">
+        <div className="box-card grid grid-cols-3 gap-1 w-full text-white">
             {
                 data.Data.length === 0 ? [...Array.from(Array(9).keys())].map(i => <Skeleton key={i} className="w-full rounded-sm h-20" />) : data.Data.map((item: TPlate) => (
                     <div key={item.INDEXCODE} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(item.D)}`}>

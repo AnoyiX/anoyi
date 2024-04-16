@@ -1,10 +1,10 @@
 'use client'
 
+import { Link } from "next-view-transitions"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWRInfinite from 'swr/infinite'
-import http from "../../../utils/http"
 import { ForkIcon, IssueIcon, LicenseIcon, Loading, StarIcon } from "../../../components/Icons"
-import ImageSkeleton from "../../../components/client/ImageSkeleton"
+import http from "../../../utils/http"
 import { TRepo } from "./type"
 
 
@@ -30,25 +30,13 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
         >
             {
                 data.map(resp => resp.map(item => (
-                    <div key={item.id} className="repo-card">
-                        <div className="flex-0 text-center">
-                            <a href={item.owner.html_url} target="_blank" rel='noreferrer'>
-                                <ImageSkeleton src={item.owner.avatar_url} className="h-14 w-14 rounded-lg" />
-                            </a>
-                        </div>
+                    <div key={item.id} className="box flex w-full rounded-lg p-4 gap-4 md:gap-6">
+                        <a href={item.owner.html_url} target="_blank" rel='noreferrer' className="h-fit">
+                            <img width={48} height={48} src={item.owner.avatar_url} alt="" className="rounded-xl" />
+                        </a>
                         <div className="flex-1">
-                            <a className="text-xl cursor-pointer select-none font-semibold hover:text-blue-600" href={item.html_url} target="_blank" rel='noreferrer'>{item.full_name}</a>
-                            <p className="text-sm text-gray-500 my-2 font-sans">{item.description}</p>
-                            <div className="text-gray-600 flex flex-row gap-3 text-xs cursor-default flex-wrap mt-4">
-                                {
-                                    item.language && (
-                                        <div className="cursor-default">
-                                            <span className="px-2 py-1 rounded-full mr-1 text-white" style={Object.keys(colors).includes(item.language) ? { backgroundColor: colors[item.language] } : {}}>
-                                                {item.language}
-                                            </span>
-                                        </div>
-                                    )
-                                }
+                            <Link href={item.html_url} target="_blank" rel='noreferrer' className="font-semibold">{item.full_name}</Link>
+                            <div className="flex-row-center gap-3 text-xs cursor-default my-3 text-gray-500">
                                 <div className="flex-row-center">
                                     <StarIcon className="mr-1" />
                                     {item.stargazers_count.toLocaleString()}
@@ -70,20 +58,29 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
                                     )
                                 }
                             </div>
-                            {
-                                item.topics.length > 0 && <div className="border-t my-4"></div>
-                            }
-                            <div className="text-gray-600 flex flex-row gap-2 text-xs flex-wrap">
+                            <p className="text-sm font-sans text-gray-700">{item.description}</p>
+                            <div className="text-gray-600 flex flex-row gap-2 text-xs flex-wrap mt-3">
                                 {
                                     item.topics.map(topic => (
-                                        <a key={topic} href={`https://github.com/topics/${topic}`} className="github-repo-topic" target="_blank" rel='noreferrer'>
+                                        <a key={topic} href={`https://github.com/topics/${topic}`} target="_blank" rel='noreferrer' className="a-tag">
                                             {topic}
                                         </a>
                                     ))
                                 }
                             </div>
                         </div>
+                        {/* <Divider />
+                            <CardFooter className="flex items-center justify-between">
+                                {
+                                    item.language && (
+                                        <Chip size="sm" className="cursor-default text-xs" style={Object.keys(colors).includes(item.language) ? { backgroundColor: colors[item.language] } : {}}>
+                                            {item.language}
+                                        </Chip>
+                                    )
+                                }
+                            </CardFooter> */}
                     </div>
+
                 )))
             }
         </InfiniteScroll>

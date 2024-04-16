@@ -1,9 +1,14 @@
 'use client'
 
-import { Popover } from '@headlessui/react'
-import { ReactNode } from 'react'
-import { FilterIcon } from '../../components/Icons'
-import { RISKLEVEL, SH, TYPE } from './Funds'
+import { Button } from "@/components/ui/button";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { ReactNode } from 'react';
+import { FilterIcon } from '../../components/Icons';
+import { RISKLEVEL, SH, TYPE } from './Funds';
 
 type CheckBoxProps = {
     id: string,
@@ -26,15 +31,12 @@ function CheckBox(props: CheckBoxProps) {
 export default function FundsFilter({ filters, onToggleFilterItem }: { filters: { [key: string]: boolean }, onToggleFilterItem: (id: string) => void }) {
 
     return (
-        <Popover className="relative">
-            <Popover.Button className="outline-0">
-                <div className={`flex-row-center bg-white shadow cursor-pointer px-3 py-3 rounded-lg gap-1.5 ${Object.values(filters).filter(b => b).length ? 'text-blue-500' : ''}`}>
-                    <FilterIcon className="w-4 h-4" />
-                    <span>筛选</span>
-                </div>
-            </Popover.Button>
-            <Popover.Panel className="absolute z-10 w-96 -right-0">
-                <div className="bg-white rounded-lg shadow-xl shadow-slate-300 mt-2 flex flex-col px-4 py-5 gap-4">
+        <Popover >
+            <PopoverTrigger>
+                <Button><FilterIcon className="w-4 h-4 mr-2" />筛选</Button>
+            </PopoverTrigger>
+            <PopoverContent className='shadow-lg' align="end">
+                <div className="flex flex-col py-4 gap-4">
                     <div>
                         <p className='font-medium'>基金类型</p>
                         <div className='mt-3 flex-row-center gap-y-3 gap-x-2 flex-wrap'>
@@ -60,7 +62,7 @@ export default function FundsFilter({ filters, onToggleFilterItem }: { filters: 
                         </div>
                     </div>
                 </div>
-            </Popover.Panel>
+            </PopoverContent>
         </Popover>
     )
 }

@@ -1,9 +1,21 @@
+.box {
+    @apply border border-slate-200 rounded-2xl;
+}
+
+.box-card {
+    @apply bg-white rounded-2xl drop-shadow;
+}
+
+.a-tag {
+    @apply py-1 px-1.5 bg-gray-50 border border-gray-200 rounded-md hover:bg-blue-100 hover:border-blue-500 hover:text-blue-600;
+}
+
 .icon-card {
-    @apply py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg text-gray-500 hover:shadow hover:bg-slate-50;
+    @apply py-4 w-[7.5rem] cursor-pointer text-center space-y-2 rounded-lg text-gray-500 hover:shadow hover:bg-slate-100;
 }
 
 .icon-image {
-    @apply w-16 h-16 mx-auto rounded-xl bg-slate-50;
+    @apply w-16 h-16 mx-auto rounded-xl bg-slate-100;
 }
 
 .github-repo-topic {
@@ -11,7 +23,7 @@
 }
 
 .gitmoji-card {
-    @apply shadow w-full rounded-lg text-center hover:shadow-xl;
+    @apply border border-slate-200 w-full rounded-xl text-center;
 }
 
 .gitmoji-code {
@@ -23,7 +35,7 @@
 }
 
 .video-card {
-    @apply border rounded-lg lg:h-64 w-full flex flex-col lg:flex-row;
+    @apply rounded-lg lg:h-64 w-full flex flex-col lg:flex-row;
 }
 
 .video-cover {
@@ -31,7 +43,7 @@
 }
 
 .repo-card {
-    @apply flex border border-slate-200 w-full rounded-lg p-4 gap-4 md:gap-6;
+    @apply bg-opacity-25 flex w-full rounded-lg p-4 gap-4 md:gap-6;
 }
 
 .flex-row-center {

@@ -47,10 +47,10 @@ git clone https://github.com/AnoyiX/anoyi.git
 
 ```shell
 # install packages
-yarn
+bun install
 
 # run
-yarn dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
