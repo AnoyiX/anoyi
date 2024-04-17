@@ -21,38 +21,37 @@ export type TRealData = {
 }
 
 export type TLive = {
-    article: null
-    author: {
-        avatar: string,
-        display_name: string,
-        id: number,
-        is_followed: boolean,
-        uri: string
-    }
-    channels: string[]
-    comment_count: number
-    content: string
-    content_more: string
-    content_text: string
-    cover_images: string[]
-    display_time: number
-    fund_codes: string[]
-    global_channel_name: string
-    has_live_reading: boolean
     id: number
-    images: string[]
-    is_calendar: boolean
-    is_favourite: boolean
-    is_priced: boolean
-    is_scaling: boolean
-    reference: string
-    related_themes: string[]
-    score: number
-    symbols: TSymbol[]
-    tags: string[]
     title: string
-    type: string,
-    uri: string
+    title_path: string
+    summary: string
+    summary_path: string
+    image: string
+    pc_image: string
+    subscribe_type: number
+    is_subscribed: boolean
+    is_premium: boolean
+    impact: number
+    need_explained: boolean
+    whether_hide_impact_face: boolean
+    subj_ids: number[]
+    stocks: TStockInfo[]
+    watermarks: string
+    has_summary: boolean
+    created_at: number
+    manual_updated_at: number
+    content_refused: boolean
+    flash_message_type: string
+    super_vip_right_type: number
+    all_stocks: TStockInfo[]
+    sub_title: string
+    route: string
+}
+
+export interface TStockInfo {
+    name: string;
+    symbol: string;
+    market: string;
 }
 
 export type TSymbol = {

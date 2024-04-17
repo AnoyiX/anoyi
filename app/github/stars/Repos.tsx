@@ -35,7 +35,7 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
                             <img width={48} height={48} src={item.owner.avatar_url} alt="" className="rounded-xl" />
                         </a>
                         <div className="flex-1">
-                            <Link href={item.html_url} target="_blank" rel='noreferrer' className="font-semibold">{item.full_name}</Link>
+                            <Link href={item.html_url} target="_blank" rel='noreferrer' className="font-semibold hover:text-blue-600">{item.full_name}</Link>
                             <div className="flex-row-center gap-3 text-xs cursor-default my-3 text-gray-500">
                                 <div className="flex-row-center">
                                     <StarIcon className="mr-1" />

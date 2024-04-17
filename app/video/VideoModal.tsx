@@ -42,7 +42,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                 onClose={onClose}
             >
                 <div className="h-full w-full mx-auto text-center lg:px-32 lg:pt-20 lg:pb-32">
-                    <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-60"/>
+                    <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-60" />
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -57,7 +57,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                                 <div className='relative w-full'>
                                     <XIcon className="fa-solid fa-xmark absolute -top-8 right-1 lg:top-0 lg:-right-8 h-8 w-8 cursor-pointer text-gray-100" onClick={onClose} />
                                 </div>
-                                <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' /> 
+                                <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' />
                             </div>
                         </div>
                     </Transition.Child>

@@ -7,13 +7,13 @@ import { useCallback, useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWR from "swr"
 import { Loading } from "../../components/Icons"
-import { TLive, TLivesMap, TRealData, TSymbol } from "./type"
+import { TLive, TLivesMap, TRealData, TStockInfo } from "./type"
 import http from "../../utils/http"
 
-function StocksTag({ symbols }: { symbols: TSymbol[] }) {
+function StocksTag({ stocks }: { stocks: TStockInfo[] }) {
 
     const fields = ["prod_code", "prod_name", "px_change", "px_change_rate", "price_precision", "delisting_date"]
-    const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${symbols.map(item => item.key).join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
+    const { data: realResp = { data: { fields: [], snapshot: {} } } } = useSWR<TRealData>(`https://api-ddc.wallstcn.com/market/real?prod_code=${stocks.map(item => item.symbol).join(',')}&fields=${fields.join(',')}`, http.getAll, { refreshInterval: 5000 })
 
     const render = (stock: Array<string | number>) => {
         const stockObj = Object.fromEntries(fields.map((_, i) => [fields[i], stock[i]]))
@@ -56,20 +56,19 @@ function StocksTag({ symbols }: { symbols: TSymbol[] }) {
 
 function Live({ live }: { live: TLive }) {
 
-    const titleStyle = (score: number) => score > 1 ? "text-rose-600" : ''
-    const contentStyle = (score: number) => score > 1 ? "text-rose-400" : ''
-
+    const titleStyle = (ids: number[]) => ids.indexOf(10) > -1 ? "text-red-600" : ''
+    const contentStyle = (ids: number[]) => ids.indexOf(10) > -1 ? "text-red-400" : ''
 
     return (
         <div key={live.id} className={`w-full flex flex-row py-4 border-b text-opacity-75`}>
-            <div className="w-16 py-[2px]">{moment(live.display_time * 1000).format('HH:mm')}</div>
-            <div className={`flex flex-col gap-2 w-full border-l border-dashed pl-5 py-[2px] ${titleStyle(live.score)}`}>
+            <div className="w-16 py-[2px]">{moment(live.manual_updated_at * 1000).format('HH:mm')}</div>
+            <div className={`flex flex-col gap-2 w-full border-l border-dashed pl-5 py-[2px] ${titleStyle(live.subj_ids)}`}>
                 {
                     live.title.length > 0 && <div className="font-medium">{live.title}</div>
                 }
-                <article className={`${contentStyle(live.score)}`} dangerouslySetInnerHTML={{ __html: live.content }} />
+                <article className={`${contentStyle(live.subj_ids)}`} dangerouslySetInnerHTML={{ __html: live.summary }} />
                 {
-                    live.symbols.length > 0 && <StocksTag symbols={live.symbols} />
+                    live.all_stocks.length > 0 && <StocksTag stocks={live.all_stocks} />
                 }
             </div>
         </div>
@@ -84,22 +83,22 @@ export default function Lives() {
     const [livesMap, setLivesMap] = useState<TLivesMap>({})
 
     const fetchLives = useCallback(async () => {
-        const resp = await http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=true`)
+        const resp = await http.getAll(`https://baoer-api.xuangubao.cn/api/v6/message/newsflash?limit=20&subj_ids=9,10,723,35,469,821&platform=pcweb`)
         const data = resp.data
         data.next_cursor > cursor && setCursor(data.next_cursor)
         if (lives.length === 0) {
-            setLives(data.items)
+            setLives(data.messages)
         } else {
-            const index = data.items.findIndex((item: TLive) => item.id === lives[0].id)
-            index > 0 && setLives(pre => [...(data.items.subarray(0, index)), ...pre])
-            index < 0 && setLives(pre => [...(data.items), ...pre])
+            const index = data.messages.findIndex((item: TLive) => item.id === lives[0].id)
+            index > 0 && setLives(pre => [...(data.messages.subarray(0, index)), ...pre])
+            index < 0 && setLives(pre => [...(data.messages), ...pre])
         }
     }, [])
 
     const fetchMore = () => {
-        http.getAll(`https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&client=pc&limit=20&accept=live&first_page=false&cursor=${cursor}`).then(resp => {
+        http.getAll(`https://baoer-api.xuangubao.cn/api/v6/message/newsflash?limit=20&subj_ids=9,10,723,35,469,821&platform=pcweb&cursor=${cursor}`).then(resp => {
             const data = resp.data
-            setLives(pre => [...pre, ...(data.items)])
+            setLives(pre => [...pre, ...(data.messages)])
             setCursor(data.next_cursor)
         })
     }
@@ -112,7 +111,7 @@ export default function Lives() {
         if (lives.length > 0) {
             let tmp: TLivesMap = {}
             lives.forEach((item, index) => {
-                const date = new Date(item.display_time * 1000).toLocaleDateString('zh-CN')
+                const date = new Date(item.manual_updated_at * 1000).toLocaleDateString('zh-CN')
                 if (date in tmp) {
                     tmp[date].push(index)
                 } else {

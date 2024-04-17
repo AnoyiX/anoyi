@@ -1,5 +1,5 @@
 .box {
-    @apply border border-slate-200 rounded-2xl;
+    @apply border border-slate-200 rounded-2xl hover:shadow-md;
 }
 
 .box-card {

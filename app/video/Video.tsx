@@ -27,7 +27,7 @@ export default function Video({ video, onPlay }: VideoProps) {
                         </Link>
                         <div className="flex flex-col justify-center gap-1">
                             <Link href={`https://www.douyin.com/user/${video.author.sec_uid}`} className="font-semibold" target="_blank" rel='noreferrer'>{video.author.nickname}</Link>
-                            <span className="text-xs bg-blue-50 px-1.5 py-1 rounded text-blue-500">{video.author.custom_verify || '抖音创作者'}</span>
+                            <span className="text-xs bg-blue-50 px-1.5 py-1 rounded text-blue-500 w-fit">{video.author.custom_verify || '抖音创作者'}</span>
                         </div>
                     </div>
                     <div className="text-sm text-gray-700">
