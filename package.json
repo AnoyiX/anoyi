@@ -15,6 +15,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "cobe": "^0.6.3",
     "framer-motion": "^11.0.28",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",

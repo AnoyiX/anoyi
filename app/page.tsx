@@ -4,6 +4,7 @@ import { Link } from 'next-view-transitions'
 import path from "path"
 import { Logos } from '../components/Icons'
 import FullContainer from '../components/server/Containers'
+import Cobe from "@/components/client/Cobe"
 
 
 export default function Page() {
@@ -38,6 +39,10 @@ export default function Page() {
                                 ))
                             }
                         </div>
+                    </div>
+
+                    <div className="box-card md:w-72 md:h-72">
+                        <Cobe className="w-full h-full" />
                     </div>
 
                     <div className='md:flex hidden flex-col items-center space-y-2 text-xs'>
