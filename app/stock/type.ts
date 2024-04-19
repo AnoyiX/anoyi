@@ -4,7 +4,7 @@ export type StockPlatesProps = {
 }
 
 export type TPlate = {
-    D: number
+    CHGRT: number
     INDEXCODE: string
     INDEXNAME: string
 }
