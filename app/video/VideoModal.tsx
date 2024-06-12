@@ -1,7 +1,7 @@
 'use client'
 
 import { XIcon } from '@/components/Icons'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition, TransitionChild } from '@headlessui/react'
 import { Fragment, useEffect, useRef } from 'react'
 
 type VideoModalProps = {
@@ -38,12 +38,11 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
                 as="div"
-                className="fixed inset-0 z-10 overflow-y-auto"
+                className="fixed inset-0 z-10 w-screen h-screen bg-black bg-opacity-75"
                 onClose={onClose}
             >
                 <div className="h-full w-full mx-auto text-center lg:px-32 lg:pt-20 lg:pb-32">
-                    <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-60" />
-                    <Transition.Child
+                    <TransitionChild
                         as={Fragment}
                         enter="ease-out duration-300"
                         enterFrom="opacity-0 scale-95"
@@ -60,7 +59,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                                 <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' />
                             </div>
                         </div>
-                    </Transition.Child>
+                    </TransitionChild>
                 </div>
             </Dialog>
         </Transition>
