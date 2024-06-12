@@ -2,162 +2,27 @@
     "user": {
         "nickname": "Anoyi 🐬",
         "avatar": "https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240",
-        "bio": "轻量级云原生架构实验室",
-        "brands": [{
+        "bio": "All in AI 的全栈工程师",
+        "brands": [
+            {
                 "icon": "github",
                 "url": "https://github.com/AnoyiX"
-            }, {
+            },
+            {
                 "icon": "telegram",
                 "url": "https://t.me/fastweb3"
-            }, {
+            },
+            {
                 "icon": "twitter",
-                "url": "https://twitter.com/AnoyiX"
-            }, {
+                "url": "https://x.com/AnoyiX"
+            },
+            {
                 "icon": "tiktok",
                 "url": "https://www.douyin.com/user/MS4wLjABAAAAFS6CPjIHAim7TdTQjzevZX7LwfKCIi37PTVmqCpzdU0"
-            }, {
+            },
+            {
                 "icon": "youtube",
                 "url": "https://www.youtube.com/channel/UCL-w1IbRfznZauYz6JIZOBw"
-            }
-        ]
-    },
-    "languages": {
-        "name": "语言",
-        "children": [
-            {
-                "name": "Python",
-                "icon": "Python",
-                "url": "https://python.org"
-            },
-            {
-                "name": "C",
-                "icon": "C",
-                "url": "https://www.runoob.com/cprogramming/c-tutorial.html"
-            },
-            {
-                "name": "Java",
-                "icon": "Java",
-                "url": "https://www.java.com"
-            },
-            {
-                "name": "HTML5",
-                "icon": "HTML5",
-                "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTML"
-            },
-            {
-                "name": "CSS3",
-                "icon": "CSS3",
-                "url": "https://developer.mozilla.org/zh-CN/docs/Web/CSS"
-            },
-            {
-                "name": "JavaScript",
-                "icon": "JavaScript",
-                "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
-            },
-            {
-                "name": "TypeScript",
-                "icon": "TypeScript",
-                "url": "https://www.typescriptlang.org/"
-            }
-        ]
-    },
-    "skills": {
-        "name": "技能",
-        "children": [
-            {
-                "name": "Docker",
-                "icon": "Docker",
-                "url": "https://www.docker.com"
-            },
-            {
-                "name": "Kubernetes",
-                "icon": "Kubernetes",
-                "url": "https://kubernetes.io"
-            },
-            {
-                "name": "FastAPI",
-                "icon": "FastAPI",
-                "url": "https://fastapi.tiangolo.com"
-            },
-            {
-                "name": "React",
-                "icon": "React",
-                "url": "https://reactjs.org"
-            },
-            {
-                "name": "Spring",
-                "icon": "Spring",
-                "url": "https://spring.io"
-            },
-            {
-                "name": "NextJS",
-                "icon": "NextJS",
-                "url": "https://nextjs.org"
-            },
-            {
-                "name": "TailwindCSS",
-                "icon": "TailwindCSS",
-                "url": "https://tailwindcss.com"
-            },
-            {
-                "name": "Terraform",
-                "icon": "Terraform",
-                "url": "https://www.terraform.io"
-            },
-            {
-                "name": "Grafana",
-                "icon": "Grafana",
-                "url": "https://grafana.com"
-            },
-            {
-                "name": "Nginx",
-                "icon": "Nginx",
-                "url": "https://www.nginx.com"
-            },
-            {
-                "name": "Mysql",
-                "icon": "Mysql",
-                "url": "https://www.mysql.com"
-            },
-            {
-                "name": "Redis",
-                "icon": "Redis",
-                "url": "https://redis.io"
-            },
-            {
-                "name": "MongoDB",
-                "icon": "MongoDB",
-                "url": "https://www.mongodb.com"
-            },
-            {
-                "name": "Prometheus",
-                "icon": "Prometheus",
-                "url": "https://prometheus.io"
-            }
-        ]
-    },
-    "softwares": {
-        "name": "软件",
-        "children": [
-            {
-                "name": "VS Code",
-                "icon": "VSCode",
-                "url": "https://code.visualstudio.com"
-            },
-            {
-                "name": "Warp",
-                "icon": "Warp",
-                "url": "https://warp.dev"
-            },
-            {
-                "name": "Postman",
-                "icon": "Postman",
-                "url": "https://www.postman.com"
-            },
-            {
-                "name": "Git",
-                "icon": "Git",
-                "url": "https://git-scm.com"
             }
         ]
     }

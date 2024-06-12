@@ -1,18 +1,8 @@
 [
     {
         "name": "开源项目",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Github.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/dc/7c/ec/dc7cec80-cd34-b0e3-981f-22af7c915823/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/230x0w.webp",
         "url": "/github/stars"
-    },
-    {
-        "name": "股市",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Stock.svg",
-        "url": "/stock"
-    },
-    {
-        "name": "基金",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Fund.svg",
-        "url": "/fund"
     },
     {
         "name": "短视频",
@@ -20,28 +10,43 @@
         "url": "/video"
     },
     {
-        "name": "博客",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/JianShu.svg",
-        "url": "https://www.jianshu.com/u/7b7ec6f2db21"
-    },
-    {
         "name": "Dev Icons",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/DevIcons.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4b/45/5e/4b455e92-06ba-cd3b-0e59-069096692f10/AppIcon-0-1x_U007emarketing-0-7-0-85-220-0.png/230x0w.webp",
         "url": "/dev-icons"
     },
     {
         "name": "Git 表情",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/GitEmojis.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a4/e6/80/a4e68094-c754-bae9-02c1-83c2886fdb87/AppIcon-0-1x_U007emarketing-0-7-0-0-85-220-0.png/230x0w.webp",
         "url": "/gitmojis"
     },
     {
+        "name": "股市",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/e1/38/69/e1386957-0bcc-7314-6746-23b96a2c05bb/AppIcon-0-0-1x_U007emarketing-0-0-0-8-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
+        "url": "/stock"
+    },
+    {
+        "name": "基金",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/b6/f1/e8b6f1ba-b9c2-8463-cfed-37f4868e05e7/AppIcon-0-0-1x_U007emarketing-0-10-0-0-85-220.jpeg/230x0w.webp",
+        "url": "/fund"
+    },
+    {
         "name": "CNCF",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/CNCF.svg",
-        "url": "/cncf"
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/16/a7/a2/16a7a2ef-523a-19d1-4b79-89172e519d5e/AppIcon-0-1x_U007emarketing-0-7-0-85-220-0.png/230x0w.webp",
+        "url": "https://landscape.cncf.io/"
     },
     {
         "name": "相册",
-        "icon": "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Photos.svg",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/9c/be/25/9cbe25e9-4fc6-2c25-d4b3-b06aefe9f96f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         "url": "/photo"
+    },
+    {
+        "name": "博客",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/20/f1/ff/20f1ff82-03c4-0a9f-211c-90bd81297334/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/230x0w.webp",
+        "url": "https://www.jianshu.com/u/7b7ec6f2db21"
+    },
+    {
+        "name": "ChatGPT",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8f/5b/bc/8f5bbca7-555e-2c7a-df65-a4457a2056b4/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/230x0w.webp",
+        "url": "https://chatgpt.com"
     }
 ]
