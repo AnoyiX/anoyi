@@ -1,7 +1,6 @@
 'use client'
 
 import ImageSkeleton from "@/components/client/ImageSkeleton"
-import moment from "moment"
 import { useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useSWRInfinite from 'swr/infinite'
@@ -49,17 +48,18 @@ export function Photos() {
             >
                 {
                     data.map(resp => resp.data.map(photo => (
-                        <div className="box w-full">
-                            <div className="overflow-hidden rounded-t-lg" onClick={() => showPhoto(photo)} >
-                                <ImageSkeleton src={photo.thumbnail} className="w-full aspect-[5/3] object-cover cursor-pointer" />
-                            </div>
-                            <div className="p-4 flex flex-row text-sm justify-between items-center">
-                                <a className="flex flex-fow gap-1 items-center" href={photo.address} target="_blank" rel='noreferrer'>
-                                    <Location className="h-4 w-4" />
-                                    <span className="line-clamp-1">{photo.name}</span>
-                                </a>
-                                <span className="text-sm text-gray-500 line-clamp-1">{moment(photo.create_time).fromNow()}</span>
-                            </div>
+                        <div className="box w-full relative rounded-lg text-xs" onClick={() => showPhoto(photo)} >
+                            <ImageSkeleton src={photo.thumbnail} className="w-full aspect-[5/3] object-cover cursor-pointer rounded-lg" />
+                            <a
+                                className="absolute left-3 top-3 flex flex-fow gap-1 items-center bg-black/50 text-white px-2.5 py-1.5 rounded-full"
+                                target="_blank"
+                                rel='noreferrer'
+                                href={photo.address}
+                                onClick={e => e.stopPropagation()}
+                            >
+                                <Location className="h-4 w-4" />
+                                <span className="">{photo.name}</span>
+                            </a>
                         </div>
                     )))
                 }

@@ -17,14 +17,15 @@ export default function PhotosModal({ isOpen, photo, onClose }: PhotoModalProps)
             <DialogPortal>
                 <DialogOverlay />
                 <DialogContent className='fixed inset-0 h-screen w-screen z-50 flex flex-col' onEscapeKeyDown={onClose}>
-                    <div className='flex-none h-12 bg-black px-4'>
-                        <div className='flex flex-row h-full justify-end items-center'>
-                            <XIcon className="fa-solid fa-xmark w-6 h-6 text-gray-400 cursor-pointer" onClick={onClose} />
+                    <div className='flex flex-row justify-between items-center w-full bg-black'>
+                        <div></div>
+                        <div className='p-2'>
+                            <XIcon className="fa-solid fa-xmark w-8 h-8 p-1 text-gray-400 cursor-pointer rounded-md hover:bg-gray-700" onClick={onClose} />
                         </div>
                     </div>
-                    <div className='flex h-full items-center justify-center'>
+                    <div className='flex-1-col items-center justify-center'>
                         {
-                            !!photo && <img src={photo.file} alt="" className='max-h-full object-contain' />
+                            !!photo && <img src={photo.file} alt="" className='flex-1-col object-contain' />
                         }
                     </div>
                 </DialogContent>
