@@ -8,7 +8,6 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import AppHeader from "../../../components/server/AppNav"
-import FullContainer from "../../../components/server/Containers"
 
 const titles = {
   about: '关于作者',
@@ -31,18 +30,18 @@ export default async function Page({ params: { slug } }: { params: { slug: DOC }
   const title = titles[slug]
 
   const content = readFileSync(path.join(process.cwd(), `data/md/${slug}.md`), 'utf-8')
-  
+
   // @ts-ignore
   const file = await unified().use(remarkParse).use(remarkRehype, { allowDangerousHtml: true }).use(rehypeRaw).use(rehypeStringify).process(content)
 
   return (
-    <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
+    <div className='flex flex-1 flex-col p-4 md:p-8 gap-4 md:gap-6 '>
 
       <AppHeader paths={[{ name: title }]} />
 
-      <FullContainer>
+      <div className='flex flex-1 flex-col box-card'>
         <article className="max-w-full prose text-base p-4 md:p-8" dangerouslySetInnerHTML={{ __html: file.value.toString() }} />
-      </FullContainer>
+      </div>
 
     </div>
   )

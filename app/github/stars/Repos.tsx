@@ -8,7 +8,7 @@ import http from "../../../utils/http"
 import { TRepo } from "./type"
 
 
-export default function Repos({ colors }: { colors: { [key: string]: string } }) {
+export function Repos() {
 
     const limit = 12
     const genAPI = (page: number) => `https://api.github.com/users/AnoyiX/starred?page=${page + 1}&per_page=${limit}`
@@ -20,7 +20,6 @@ export default function Repos({ colors }: { colors: { [key: string]: string } })
     const { data = [], size, setSize } = useSWRInfinite<TRepo[]>(getKey, http.getAll)
 
     return (
-
         <InfiniteScroll
             className="w-full grid grid-cols-1 p-4 gap-4 lg:p-8 lg:gap-8 lg:grid-cols-2"
             dataLength={new Array<TRepo>().concat.apply([], data.map(resp => resp)).length}

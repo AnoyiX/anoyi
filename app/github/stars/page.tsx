@@ -1,13 +1,17 @@
-import { readFileSync } from "fs"
-import path from "path"
-import Repos from "./Repos"
+import AppNav from "@/components/server/AppNav"
+import { Repos } from "./Repos"
+
+export const metadata = {
+    title: '开源项目',
+}
 
 export default function Page() {
-
-    const colors = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/github-colors.json'), 'utf-8'))
-
     return (
-        <Repos colors={colors} />
+        <div className='flex-1-col p-4 md:p-8 gap-4 md:gap-6'>
+            <AppNav paths={[{ name: '相册' }]} />
+            <div className='flex-1-col box-card'>
+                <Repos />
+            </div>
+        </div>
     )
-
 }

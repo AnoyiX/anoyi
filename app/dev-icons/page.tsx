@@ -1,6 +1,11 @@
+import AppNav from '@/components/server/AppNav'
 import CDN from '@/utils/cdn'
-import DevIcon, { DevIconProps } from './DevIcon'
 import http from '@/utils/http'
+import DevIcon, { DevIconProps } from './DevIcon'
+
+export const metadata = {
+    title: 'Dev Icons',
+}
 
 export default async function Page() {
 
@@ -12,11 +17,14 @@ export default async function Page() {
     }))
 
     return (
-        <div className='p-6 w-fit'>
-            <div className="flex flex-row flex-wrap gap-2">
-                {
-                    icons.map((item: DevIconProps) => <DevIcon key={item.name} icon={item} />)
-                }
+        <div className='flex-1-col p-4 md:p-8 gap-4 md:gap-6'>
+            <AppNav paths={[{ name: 'Dev Icons' }]} />
+            <div className='flex-1-col box-card p-6'>
+                <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
+                    {
+                        icons.map((item: DevIconProps) => <DevIcon key={item.name} icon={item} />)
+                    }
+                </div>
             </div>
         </div>
     )

@@ -1,6 +1,5 @@
 import AppNav from "@/components/server/AppNav"
-import Photos from "./Photos"
-import FullContainer from "@/components/server/Containers"
+import { Photos } from "./Photos"
 
 export const metadata = {
     title: '相册',
@@ -9,11 +8,11 @@ export const metadata = {
 export default function Page() {
 
     return (
-        <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
+        <div className='flex-1-col p-4 md:p-8 gap-4 md:gap-6'>
             <AppNav paths={[{ name: '相册' }]} />
-            <FullContainer>
+            <div className='flex flex-1 flex-col box-card'>
                 <Photos />
-            </FullContainer>
+            </div>
         </div>
     )
 

@@ -11,16 +11,16 @@ export const metadata = {
 export default function Page() {
 
     return (
-        <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6'>
+        <div className='flex-1-col p-4 md:p-8 gap-4 md:gap-6'>
 
             <AppNav paths={[{ name: '股市' }]} />
 
             <Indices />
 
-            <div className="w-full flex flex-1 gap-4 md:gap-6">
-                <FullContainer>
+            <div className="flex flex-row gap-4 md:gap-6">
+                <div className="flex-1-col box-card">
                     <Lives />
-                </FullContainer>
+                </div>
                 <div className="w-96 flex flex-0 flex-col gap-4">
                     <div className="box-card p-4">
                         <div className="mb-2">

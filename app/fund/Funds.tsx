@@ -1,13 +1,5 @@
 'use client'
 
-import FullContainer from "@/components/server/Containers"
-import { useCallback, useEffect, useRef, useState } from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
-import { Loading, SearchIcon } from '../../components/Icons'
-import http from "../../utils/http"
-import FundsFilter from "./FundsFilter"
-import { TFund } from "./typs"
-import { debounce } from "lodash"
 import {
     Table,
     TableBody,
@@ -16,6 +8,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { debounce } from "lodash"
+import { useCallback, useEffect, useRef, useState } from "react"
+import InfiniteScroll from "react-infinite-scroll-component"
+import { Loading, SearchIcon } from '../../components/Icons'
+import http from "../../utils/http"
+import FundsFilter from "./FundsFilter"
+import { TFund } from "./typs"
 
 
 type Query = {
@@ -45,7 +44,7 @@ export const SH = {
     S1: '持有天数≥30天',
 }
 
-export default function Funds() {
+export function Funds() {
 
     const limit = 20
     const keys = [...Object.keys(TYPE), ...Object.keys(RISKLEVEL), ...Object.keys(SH)]
@@ -171,7 +170,7 @@ export default function Funds() {
                 </div>
                 <FundsFilter filters={filters} onToggleFilterItem={onToggleFilterItem} />
             </div>
-            <FullContainer>
+            <div className="flex-1-col box-card">
                 <InfiniteScroll
                     className="relative overflow-x-auto mb-8"
                     dataLength={data.length}
@@ -252,7 +251,7 @@ export default function Funds() {
                         loading && <div className="my-8 w-full"><Loading className='h-20 w-20 mx-auto' /></div>
                     }
                 </InfiniteScroll>
-            </FullContainer>
+            </div>
         </>
     )
 }

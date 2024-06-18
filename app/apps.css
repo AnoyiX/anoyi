@@ -1,3 +1,7 @@
+.flex-1-col {
+    @apply flex flex-1 flex-col;
+}
+
 .box {
     @apply border border-slate-200 rounded-2xl hover:shadow-md;
 }

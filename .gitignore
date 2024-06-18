@@ -67,3 +67,5 @@ MANIFEST
 .swc/
 .vscode/
 pages/account
+# Million Lint
+.million

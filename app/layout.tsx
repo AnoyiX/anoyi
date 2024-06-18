@@ -20,8 +20,8 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html>
-        <body className="min-h-screen w-full text-foreground bg-slate-100">
-          <div className='min-h-screen mx-auto flex lg:container'>
+        <body className="flex min-h-screen text-foreground bg-slate-100">
+          <div className='flex flex-1 flex-col mx-auto lg:container'>
             {children}
           </div>
           <Toaster />

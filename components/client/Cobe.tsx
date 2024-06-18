@@ -7,7 +7,7 @@ type CobeProps = {
     className?: string
 }
 
-export default function Cobe({ className }: CobeProps) {
+export function Cobe({ className }: CobeProps) {
 
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
