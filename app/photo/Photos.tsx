@@ -1,33 +1,41 @@
 'use client'
 
 import ImageSkeleton from "@/components/client/ImageSkeleton"
-import { useState } from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
+import { useMemo, useState } from "react"
 import useSWRInfinite from 'swr/infinite'
 import { Loading, Location } from '../../components/Icons'
 import http from "../../utils/http"
 import { PageData } from "../../utils/types"
 import PhotosModal from "./PhotosModal"
 import { TPhoto } from "./type"
+import useInfiniteScroll from "react-infinite-scroll-hook"
+import { SWRInfiniteOptions } from "@/lib/constant"
+
+const limit = 24
+const genBody = (page: number) => ({
+    database: 'cloud',
+    collection: 'photos',
+    filter: {},
+    skip: page * limit,
+    limit,
+    sort: {
+        create_time: -1
+    },
+})
+const getKey = (pageIndex: number, previousPageData: PageData<TPhoto>) => {
+    if (previousPageData && !previousPageData.data.length) return null
+    return [`/api/mongo/find`, genBody(pageIndex)]
+}
 
 export function Photos() {
-
-    const limit = 24
-    const genBody = (page: number) => ({
-        database: 'cloud',
-        collection: 'photos',
-        filter: {},
-        skip: page * limit,
-        limit,
-        sort: {
-            create_time: -1
-        },
+    const { data = [], isLoading, error, size, setSize } = useSWRInfinite<PageData<TPhoto>>(getKey, http.post, SWRInfiniteOptions)
+    const hasNextPage = useMemo(() => !isLoading && (data.length > 0 && data[data.length - 1]?.data.length === limit), [isLoading, data])
+    const [sentryRef] = useInfiniteScroll({
+        loading: isLoading,
+        hasNextPage,
+        onLoadMore: () => setSize(size + 1),
+        disabled: !!error,
     })
-    const getKey = (pageIndex: number, previousPageData: PageData<TPhoto>) => {
-        if (previousPageData && !previousPageData.data.length) return null
-        return [`/api/mongo/find`, genBody(pageIndex)]
-    }
-    const { data = [], size, setSize } = useSWRInfinite<PageData<TPhoto>>(getKey, http.post)
     const [photo, setPhoto] = useState<TPhoto | undefined>()
     const [showPhotos, setShowPhotos] = useState(false)
 
@@ -38,14 +46,7 @@ export function Photos() {
 
     return (
         <>
-            <PhotosModal isOpen={showPhotos} photo={photo} onClose={() => setShowPhotos(false)} />
-            <InfiniteScroll
-                className="w-full grid grid-cols-2 p-4 gap-4 lg:p-8 lg:gap-8 lg:grid-cols-3"
-                dataLength={new Array<TPhoto>().concat.apply([], data.map(item => item.data)).length}
-                next={() => setSize(size + 1)}
-                hasMore={!data.length || data.slice(-1)[0].data.length >= limit}
-                loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
-            >
+            <div className="w-full grid grid-cols-2 p-4 gap-4 lg:p-8 lg:gap-8 lg:grid-cols-3">
                 {
                     data.map(resp => resp.data.map(photo => (
                         <div className="box w-full relative rounded-lg text-xs" onClick={() => showPhoto(photo)} >
@@ -63,7 +64,13 @@ export function Photos() {
                         </div>
                     )))
                 }
-            </InfiniteScroll>
+            </div>
+            {(isLoading || hasNextPage) && (
+                <div ref={sentryRef} className="my-8 mx-auto col-span-full">
+                    <Loading className='h-20 w-20' />
+                </div>
+            )}
+            <PhotosModal isOpen={showPhotos} photo={photo} onClose={() => setShowPhotos(false)} />
         </>
     )
 }

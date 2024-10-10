@@ -10,12 +10,11 @@ import {
 } from "@/components/ui/table"
 import { debounce } from "lodash"
 import { useCallback, useEffect, useRef, useState } from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
 import { Loading, SearchIcon } from '../../components/Icons'
 import http from "../../utils/http"
 import FundsFilter from "./FundsFilter"
 import { TFund } from "./typs"
-
+import useInfiniteScroll from "react-infinite-scroll-hook"
 
 type Query = {
     page: number,
@@ -123,6 +122,12 @@ export function Funds() {
         onFilter(filter)
     }, [filters])
 
+    const [sentryRef] = useInfiniteScroll({
+        loading,
+        hasNextPage: hasMore,
+        onLoadMore: () => setQuery(pre => ({ ...pre, page: pre.page + 1 })),
+    })
+
     const onToggleFilterItem = (id: string) => {
         setFilters(pre => {
             let state = { ...pre }
@@ -171,86 +176,80 @@ export function Funds() {
                 <FundsFilter filters={filters} onToggleFilterItem={onToggleFilterItem} />
             </div>
             <div className="flex-1-col box-card">
-                <InfiniteScroll
-                    className="relative overflow-x-auto mb-8"
-                    dataLength={data.length}
-                    next={() => setQuery(pre => ({ ...pre, page: pre.page + 1 }))}
-                    hasMore={hasMore}
-                    loader={<></>}
-                >
-                    <Table className="w-full text-sm text-left">
-                        <TableHeader className="text-gray-100 uppercase ">
-                            <TableHead className="p-3 rounded-tl-lg">
-                                基金
-                            </TableHead>
-                            <TableHead className="p-3 w-28 text-right">
-                                最新净值
-                            </TableHead>
-                            <TableHead className="p-3 w-28 text-right">
-                                日涨跌幅
-                            </TableHead>
-                            <TableHead className="p-3 w-28 text-right">
-                                近一年
-                            </TableHead>
-                            <TableHead className="p-3 w-28 text-right">
-                                申购费率
-                            </TableHead>
-                            <TableHead className="p-3 w-64 text-right rounded-tr-lg">
-                                赎回费率
-                            </TableHead>
-                        </TableHeader>
-                        <TableBody>
-                            {
-                                data.map(fund => (
-                                    <TableRow key={fund.code} className="">
-                                        <TableCell className="p-3">
-                                            <div className="h-full flex flex-col gap-1 justify-center">
-                                                <a href={`https://fund.eastmoney.com/${fund.code}.html`} className="hover:text-blue-600 w-fit" target="_blank">
-                                                    {fund.code} - {fund.SHORTNAME}
-                                                </a>
-                                                <div className="flex-row-center gap-2 text-xs">
-                                                    <span className={`rounded px-1 py-0.5 ${typeClass(fund.FTYPE)}`}>{fund.FTYPE}</span>
-                                                    {renderRiskLevel(fund.RISKLEVEL)}
+                <Table className="w-full text-sm text-left">
+                    <TableHeader className="text-gray-100 uppercase ">
+                        <TableHead className="p-3 rounded-tl-lg">
+                            基金
+                        </TableHead>
+                        <TableHead className="p-3 w-28 text-right">
+                            最新净值
+                        </TableHead>
+                        <TableHead className="p-3 w-28 text-right">
+                            日涨跌幅
+                        </TableHead>
+                        <TableHead className="p-3 w-28 text-right">
+                            近一年
+                        </TableHead>
+                        <TableHead className="p-3 w-28 text-right">
+                            申购费率
+                        </TableHead>
+                        <TableHead className="p-3 w-64 text-right rounded-tr-lg">
+                            赎回费率
+                        </TableHead>
+                    </TableHeader>
+                    <TableBody>
+                        {
+                            data.map(fund => (
+                                <TableRow key={fund.code} className="">
+                                    <TableCell className="p-3">
+                                        <div className="h-full flex flex-col gap-1 justify-center">
+                                            <a href={`https://fund.eastmoney.com/${fund.code}.html`} className="hover:text-blue-600 w-fit" target="_blank">
+                                                {fund.code} - {fund.SHORTNAME}
+                                            </a>
+                                            <div className="flex-row-center gap-2 text-xs">
+                                                <span className={`rounded px-1 py-0.5 ${typeClass(fund.FTYPE)}`}>{fund.FTYPE}</span>
+                                                {renderRiskLevel(fund.RISKLEVEL)}
+                                                {
+                                                    fund.CYCLE !== '--' && <span className="text-xs bg-black text-white px-1 py-0.5 rounded" >锁定{fund.CYCLE}</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell className="p-3 text-right">
+                                        {fund.DWJZ}
+                                    </TableCell>
+                                    <TableCell className="p-3 text-right">
+                                        {renderRate(parseFloat(fund.RZDF))}
+                                    </TableCell>
+                                    <TableCell className="p-3 text-right">
+                                        {renderRate(fund.SYL_1N_NUMBER)}
+                                    </TableCell>
+                                    <TableCell className="p-3 text-right">
+                                        {fund.RATE}
+                                    </TableCell>
+                                    <TableCell className="p-3 text-right">
+                                        {
+                                            fund.sh.length === 1 ? '--' : (
+                                                <div className="flex flex-col text-xs">
                                                     {
-                                                        fund.CYCLE !== '--' && <span className="text-xs bg-black text-white px-1 py-0.5 rounded" >锁定{fund.CYCLE}</span>
+                                                        fund.sh.slice(1).map((rule, index) => (
+                                                            <span key={index}>{rule.rateSection}: {rule.feeRate}</span>
+                                                        ))
                                                     }
                                                 </div>
-                                            </div>
-                                        </TableCell>
-                                        <TableCell className="p-3 text-right">
-                                            {fund.DWJZ}
-                                        </TableCell>
-                                        <TableCell className="p-3 text-right">
-                                            {renderRate(parseFloat(fund.RZDF))}
-                                        </TableCell>
-                                        <TableCell className="p-3 text-right">
-                                            {renderRate(fund.SYL_1N_NUMBER)}
-                                        </TableCell>
-                                        <TableCell className="p-3 text-right">
-                                            {fund.RATE}
-                                        </TableCell>
-                                        <TableCell className="p-3 text-right">
-                                            {
-                                                fund.sh.length === 1 ? '--' : (
-                                                    <div className="flex flex-col text-xs">
-                                                        {
-                                                            fund.sh.slice(1).map((rule, index) => (
-                                                                <span key={index}>{rule.rateSection}: {rule.feeRate}</span>
-                                                            ))
-                                                        }
-                                                    </div>
-                                                )
-                                            }
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            }
-                        </TableBody>
-                    </Table>
-                    {
-                        loading && <div className="my-8 w-full"><Loading className='h-20 w-20 mx-auto' /></div>
-                    }
-                </InfiniteScroll>
+                                            )
+                                        }
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        }
+                    </TableBody>
+                </Table>
+                {(loading || hasMore) && (
+                    <div ref={sentryRef} className="my-8 mx-auto col-span-full">
+                        <Loading className='h-20 w-20' />
+                    </div>
+                )}
             </div>
         </>
     )

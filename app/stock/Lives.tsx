@@ -4,11 +4,11 @@ import moment from "moment"
 import 'moment/locale/zh-cn'
 import { Link } from 'next-view-transitions'
 import { useCallback, useEffect, useState } from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
+import useInfiniteScroll from "react-infinite-scroll-hook"
 import useSWR from "swr"
 import { Loading } from "../../components/Icons"
-import { TLive, TLivesMap, TRealData, TStockInfo } from "./type"
 import http from "../../utils/http"
+import { TLive, TLivesMap, TRealData, TStockInfo } from "./type"
 
 function StocksTag({ stocks }: { stocks: TStockInfo[] }) {
 
@@ -81,8 +81,21 @@ export default function Lives() {
     const [cursor, setCursor] = useState('')
     const [lives, setLives] = useState<TLive[]>([])
     const [livesMap, setLivesMap] = useState<TLivesMap>({})
+    const [isLoading, setIsLoading] = useState(false)
+    const [sentryRef] = useInfiniteScroll({
+        loading: isLoading,
+        hasNextPage: true,
+        onLoadMore: () => {
+            http.getAll(`https://baoer-api.xuangubao.cn/api/v6/message/newsflash?limit=20&subj_ids=9,10,723,35,469,821&platform=pcweb&cursor=${cursor}`).then(resp => {
+                const data = resp.data
+                setLives(pre => [...pre, ...(data.messages)])
+                setCursor(data.next_cursor)
+            })
+        }
+    })
 
     const fetchLives = useCallback(async () => {
+        setIsLoading(true)
         const resp = await http.getAll(`https://baoer-api.xuangubao.cn/api/v6/message/newsflash?limit=20&subj_ids=9,10,723,35,469,821&platform=pcweb`)
         const data = resp.data
         data.next_cursor > cursor && setCursor(data.next_cursor)
@@ -93,15 +106,8 @@ export default function Lives() {
             index > 0 && setLives(pre => [...(data.messages.subarray(0, index)), ...pre])
             index < 0 && setLives(pre => [...(data.messages), ...pre])
         }
+        setIsLoading(false)
     }, [])
-
-    const fetchMore = () => {
-        http.getAll(`https://baoer-api.xuangubao.cn/api/v6/message/newsflash?limit=20&subj_ids=9,10,723,35,469,821&platform=pcweb&cursor=${cursor}`).then(resp => {
-            const data = resp.data
-            setLives(pre => [...pre, ...(data.messages)])
-            setCursor(data.next_cursor)
-        })
-    }
 
     useEffect(() => {
         fetchLives()
@@ -123,13 +129,7 @@ export default function Lives() {
     }, [lives])
 
     return (
-        <InfiniteScroll
-            className="flex flex-col w-full px-8 py-4 text-sm gap-6"
-            dataLength={lives.length}
-            next={fetchMore}
-            hasMore={true}
-            loader={<div className="my-8 mx-auto col-span-full"><Loading className='h-20 w-20' /></div>}
-        >
+        <div className="flex flex-col w-full px-8 py-4 text-sm gap-6">
             {
                 Object.keys(livesMap).map((date, index) => {
                     const [_, month, day] = date.split('/')
@@ -145,6 +145,9 @@ export default function Lives() {
                     )
                 })
             }
-        </InfiniteScroll>
+            <div ref={sentryRef} className="my-8 mx-auto col-span-full">
+                <Loading className='h-20 w-20' />
+            </div>
+        </div>
     )
 }

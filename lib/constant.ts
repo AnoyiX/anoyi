@@ -1,0 +1,1 @@
+export const SWRInfiniteOptions = { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnMount: true }
