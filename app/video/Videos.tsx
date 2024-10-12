@@ -1,10 +1,9 @@
 'use client'
 
-import { Loading } from "@/components/Icons"
+import InfiniteScrollLoader from "@/components/client/InfiniteScrollLoader"
+import useSWRInfiniteScroll from "@/hooks/useSWRInfiniteScroll"
 import { SWRInfiniteOptions } from "@/lib/constant"
-import { useMemo, useState } from "react"
-import useInfiniteScroll from "react-infinite-scroll-hook"
-import useSWRInfinite from 'swr/infinite'
+import { useState } from "react"
 import http from "../../utils/http"
 import { PageData } from "../../utils/types"
 import Video from "./Video"
@@ -49,23 +48,20 @@ const genBody = (page: number) => (
     }
 )
 const getKey = (pageIndex: number, previousPageData: PageData<TVideo>) => {
-    if (previousPageData && !previousPageData.data.length) return null
+    if (previousPageData && previousPageData.data.length < limit) return null
     return [`/api/mongo/find`, genBody(pageIndex)]
 }
 
 export default function Videos() {
 
-    const { data = [], isLoading, error, size, setSize } = useSWRInfinite<PageData<TVideo>>(getKey, http.post, SWRInfiniteOptions)
-    const hasNextPage = useMemo(() => !isLoading && (data.length > 0 && data[data.length - 1]?.data.length === limit), [isLoading, data])
-    const [sentryRef] = useInfiniteScroll({
-        loading: isLoading,
-        hasNextPage,
-        onLoadMore: () => setSize(size + 1),
-        disabled: !!error,
-    })
-
     const [showVideo, setShowVideo] = useState(false)
     const [vid, setVid] = useState('')
+    const { data, showLoading, sentryRef } = useSWRInfiniteScroll<PageData<TVideo>>(
+        getKey,
+        http.post,
+        SWRInfiniteOptions,
+        data => data.length > 0 && data[data.length - 1]?.data.length >= limit
+    )
 
     const playVideo = (vid: string) => {
         setVid(vid)
@@ -79,11 +75,7 @@ export default function Videos() {
                     data.map(item => item.data.map(video => <Video key={video.aweme_id} video={video} onPlay={playVideo} />))
                 }
             </div>
-            {(isLoading || hasNextPage) && (
-                <div ref={sentryRef} className="my-8 mx-auto col-span-full">
-                    <Loading className='h-20 w-20' />
-                </div>
-            )}
+            <InfiniteScrollLoader sentryRef={sentryRef} showLoading={showLoading} />
             <VideoModal isOpen={showVideo} vid={vid} onClose={() => setShowVideo(false)} />
         </>
     )

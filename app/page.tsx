@@ -1,5 +1,5 @@
 import { Cobe } from "@/components/client/Cobe"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { readFileSync } from 'fs'
 import { Link } from 'next-view-transitions'
 import path from "path"

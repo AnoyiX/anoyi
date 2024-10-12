@@ -1,12 +1,12 @@
 'use client'
 
+import InfiniteScrollLoader from "@/components/client/InfiniteScrollLoader"
 import moment from "moment"
 import 'moment/locale/zh-cn'
 import { Link } from 'next-view-transitions'
 import { useCallback, useEffect, useState } from "react"
 import useInfiniteScroll from "react-infinite-scroll-hook"
 import useSWR from "swr"
-import { Loading } from "../../components/Icons"
 import http from "../../utils/http"
 import { TLive, TLivesMap, TRealData, TStockInfo } from "./type"
 
@@ -145,9 +145,7 @@ export default function Lives() {
                     )
                 })
             }
-            <div ref={sentryRef} className="my-8 mx-auto col-span-full">
-                <Loading className='h-20 w-20' />
-            </div>
+            <InfiniteScrollLoader sentryRef={sentryRef} showLoading={true} />
         </div>
     )
 }

@@ -1,29 +1,26 @@
 'use client'
 
+import InfiniteScrollLoader from "@/components/client/InfiniteScrollLoader"
+import useSWRInfiniteScroll from "@/hooks/useSWRInfiniteScroll"
+import { SWRInfiniteOptions } from "@/lib/constant"
 import { Link } from "next-view-transitions"
-import { useMemo } from "react"
-import useInfiniteScroll from "react-infinite-scroll-hook"
-import useSWRInfinite from 'swr/infinite'
-import { ForkIcon, IssueIcon, LicenseIcon, Loading, StarIcon } from "../../../components/Icons"
+import { ForkIcon, IssueIcon, LicenseIcon, StarIcon } from "../../../components/Icons"
 import http from "../../../utils/http"
 import { TRepo } from "./type"
-import { SWRInfiniteOptions } from "@/lib/constant"
 
 const limit = 12
 const getKey = (pageIndex: number, previousPageData: TRepo[]) => {
-    if (previousPageData && !previousPageData.length) return null
+    if (previousPageData && previousPageData.length < limit) return null
     return `https://api.github.com/users/AnoyiX/starred?page=${pageIndex + 1}&per_page=${limit}`
 }
 
 export function Repos() {
-    const { data = [], isLoading, error, size, setSize } = useSWRInfinite<TRepo[]>(getKey, http.getAll, SWRInfiniteOptions)
-    const hasNextPage = useMemo(() => !isLoading && (data.length > 0 && data[data.length - 1]?.length === limit), [isLoading, data])
-    const [sentryRef] = useInfiniteScroll({
-        loading: isLoading,
-        hasNextPage,
-        onLoadMore: () => setSize(size + 1),
-        disabled: !!error,
-    })
+    const { data, showLoading, sentryRef } = useSWRInfiniteScroll<TRepo[]>(
+        getKey,
+        http.getAll,
+        SWRInfiniteOptions,
+        data => data.length > 0 && data[data.length - 1]?.length >= limit
+    )
 
     return (
         <>
@@ -73,11 +70,7 @@ export function Repos() {
                     )))
                 }
             </div>
-            {(isLoading || hasNextPage) && (
-                <div ref={sentryRef} className="my-8 mx-auto col-span-full">
-                    <Loading className='h-20 w-20' />
-                </div>
-            )}
+            <InfiniteScrollLoader sentryRef={sentryRef} showLoading={showLoading} />
         </>
     )
 }
