@@ -4,9 +4,37 @@ export type StockPlatesProps = {
 }
 
 export type TPlate = {
-    CHGRT: number
-    INDEXCODE: string
-    INDEXNAME: string
+    code: string
+    name: string
+    zxj: string
+    zdf: string
+    zd: string
+    hsl: string
+    lb: string
+    volume: string
+    turnover: string
+    zsz: string
+    ltsz: string
+    speed: string
+    zdf_d5: string
+    zdf_d20: string
+    zdf_d60: string
+    zdf_y: string
+    zdf_w52: string
+    zllr: string
+    zllc: string
+    zljlr: string
+    zljlr_d5: string
+    zljlr_d20: string
+    zgb: string
+    lzg: {
+        code: string
+        name: string
+        zxj: string
+        zdf: string
+        zd: string
+    }
+    stock_type: string
 }
 
 export type TRealData = {
@@ -49,9 +77,9 @@ export type TLive = {
 }
 
 export interface TStockInfo {
-    name: string;
-    symbol: string;
-    market: string;
+    name: string
+    symbol: string
+    market: string
 }
 
 export type TSymbol = {

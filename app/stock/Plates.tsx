@@ -7,21 +7,13 @@ import Skeleton from "@/components/server/Skeleton"
 
 export default function Plates() {
 
-    const { data = { data: [] } } = useSWR(["https://proxy.anoyi.com", {
-        url: "https://fundcomapi.tiantianfunds.com/mm/FundTheme/fundThemeClassificationList",
-        method: "POST",
-        data: {
-            "FIELDS": "FCODE,SHORTNAME,OL2TOP,CORR_1Y,RELATETYPE",
-            "FUNDINFO": "true",
-            "LOADALL": "true",
-            "TYPECODE": "001002",
-            "sort": "desc",
-            "sortColumn": "CHGRT",
-        },
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+    const { data = { data: { rank_list: [] } } } = useSWR(
+        'https://proxy.finance.qq.com/cgi/cgi-bin/rank/pt/getRank?board_type=hy&sort_type=priceRatio&direct=down&offset=0&count=40',
+        http.getAll,
+        {
+            refreshInterval: 10000
         }
-    }], http.postAll, { refreshInterval: 10000 })
+    )
 
     const getColor = (num: number) => {
         if (num > 0) return "bg-red-600 hover:bg-red-500 bg-opacity-75"
@@ -37,10 +29,10 @@ export default function Plates() {
     return (
         <div className="grid grid-cols-3 gap-1 w-full text-white">
             {
-                data.data.length === 0 ? [...Array.from(Array(9).keys())].map(i => <Skeleton key={i} className="w-full rounded-sm h-20" />) : data.data.map((item: TPlate) => (
-                    <div key={item.INDEXCODE} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(item.CHGRT)}`}>
-                        <span className="text-xs">{item.INDEXNAME}</span>
-                        <span className="">{format(item.CHGRT)}%</span>
+                data.data.rank_list.length === 0 ? [...Array.from(Array(9).keys())].map(i => <Skeleton key={i} className="w-full rounded-sm h-20" />) : data.data.rank_list.map((item: TPlate) => (
+                    <div key={item.code} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(parseFloat(item.zdf))}`}>
+                        <span className="text-xs">{item.name}</span>
+                        <span className="">{format(parseFloat(item.zdf))}%</span>
                     </div>
                 ))
             }
