@@ -1,5 +1,4 @@
 import AppNav from "../../components/server/AppNav"
-import FullContainer from "../../components/server/Containers"
 import Indices from "./Indices"
 import Lives from "./Lives"
 import Plates from "./Plates"

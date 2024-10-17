@@ -4,6 +4,7 @@ import { Link } from 'next-view-transitions'
 import useSWR from 'swr'
 import { TRealData } from './type'
 import http from '../../utils/http'
+import NumberFlow from '@number-flow/react'
 
 export default function Indices() {
 
@@ -47,11 +48,6 @@ export default function Indices() {
         return 'text-green-600'
     }
 
-    const format = (num: number) => {
-        if (num > 0) return `+${num.toFixed(2)}`
-        return num.toFixed(2)
-    }
-
     return (
         <div className="grid grid-cols-8 gap-4 w-full text-white">
             {
@@ -65,8 +61,16 @@ export default function Indices() {
                                     <span className='text-sm'>{stockObj['prod_name']}</span>
                                     <span className='text-2xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
                                     <div className='flex flex-row gap-2 text-sm'>
-                                        <span>{format(stockObj['px_change'] as number)}</span>
-                                        <span>{format(stockObj['px_change_rate'] as number)}%</span>
+                                        <NumberFlow
+                                            trend
+                                            value={stockObj['px_change'] as number}
+                                            format={{ maximumFractionDigits: 2, signDisplay: 'always' }}
+                                        />
+                                        <NumberFlow
+                                            trend
+                                            value={stockObj['px_change_rate'] as number / 100}
+                                            format={{ style: 'percent', maximumFractionDigits: 2, signDisplay: 'always' }}
+                                        />
                                     </div>
                                 </div>
                             </Link>
