@@ -6,6 +6,9 @@ import { TRealData } from './type'
 import http from '../../utils/http'
 import NumberFlow from '@number-flow/react'
 
+const changeFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2, signDisplay: 'always' })
+const changeRateFormat = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 2, signDisplay: 'always' })
+
 export default function Indices() {
 
     const code = [
@@ -59,18 +62,15 @@ export default function Indices() {
                             <Link href={`/stock/${item}`} key={stockObj['prod_code']}>
                                 <div className={`box-card cursor-pointer w-full flex flex-col shadow gap-1 py-4 justify-center items-center ${getTextColor(stockObj['px_change'] as number)}`}>
                                     <span className='text-sm'>{stockObj['prod_name']}</span>
-                                    <span className='text-2xl font-semibold'>{(stockObj['last_px'] as number).toFixed(2)}</span>
+                                    <NumberFlow
+                                        trend
+                                        value={stockObj['last_px'] as number}
+                                        format={{ useGrouping: false, maximumFractionDigits: 2, minimumFractionDigits: 2 }}
+                                        className='text-2xl font-semibold'
+                                    />
                                     <div className='flex flex-row gap-2 text-sm'>
-                                        <NumberFlow
-                                            trend
-                                            value={stockObj['px_change'] as number}
-                                            format={{ maximumFractionDigits: 2, signDisplay: 'always' }}
-                                        />
-                                        <NumberFlow
-                                            trend
-                                            value={stockObj['px_change_rate'] as number / 100}
-                                            format={{ style: 'percent', maximumFractionDigits: 2, signDisplay: 'always' }}
-                                        />
+                                        <span>{changeFormat.format(stockObj['px_change'] as number)}</span>
+                                        <span>{changeRateFormat.format(stockObj['px_change_rate'] as number / 100)}</span>
                                     </div>
                                 </div>
                             </Link>
