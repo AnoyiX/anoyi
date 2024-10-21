@@ -53,5 +53,15 @@
         "name": "ChatGPT",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8f/5b/bc/8f5bbca7-555e-2c7a-df65-a4457a2056b4/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/230x0w.webp",
         "url": "https://chatgpt.com"
+    },
+    {
+        "name": "Felo",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d4/37/05/d437056a-a9dd-7044-0d29-033f5ceec435/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/492x0w.webp",
+        "url": "https://felo.ai"
+    },
+    {
+        "name": "Claude",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/da/a4/82/daa48224-ca5b-9fcb-1276-dae5db9dda3f/AppIcon-0-0-1x_U007epad-0-1-85-220.png/230x0w.webp",
+        "url": "https://claude.ai"
     }
 ]
