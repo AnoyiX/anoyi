@@ -1,8 +1,8 @@
-import { GithubIcon } from '@/components/Icons'
 import AppNav from '@/components/server/AppNav'
 import { readFileSync } from 'fs'
 import path from "path"
 import Emoji, { EmojiProps } from './Emoji'
+import { RiGithubFill } from '@remixicon/react'
 
 export const metadata = {
     title: 'An emoji guide for your commit messages',
@@ -25,7 +25,7 @@ export default function Page() {
                             <a href="https://github.com/AnoyiX/anoyi" target="_blank" className="relative p-0.5 inline-flex items-center justify-center font-semibold overflow-hidden group rounded-md" rel='noreferrer'>
                                 <span className="w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
                                 <span className="relative px-4 py-2 transition-all ease-out bg-gray-700 rounded-md group-hover:bg-opacity-0 duration-400">
-                                    <span className="relative text-white flex flex-row items-center gap-2"><GithubIcon />查看演示</span>
+                                    <span className="relative text-white flex flex-row items-center gap-2"><RiGithubFill />查看演示</span>
                                 </span>
                             </a>
                         </div>
