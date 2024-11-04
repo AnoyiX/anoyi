@@ -1,8 +1,8 @@
 'use client'
 
-import { XIcon } from '@/components/Icons'
 import { Dialog, DialogOverlay, DialogPortal } from '@/components/ui/dialog'
 import { DialogContent } from '@radix-ui/react-dialog'
+import { RiCloseCircleFill } from '@remixicon/react'
 import { useEffect, useRef } from 'react'
 
 type VideoModalProps = {
@@ -41,7 +41,7 @@ export default function VideoModal({ isOpen, vid, onClose }: VideoModalProps) {
                 <DialogOverlay />
                 <DialogContent className='fixed inset-0 h-screen w-screen z-50 flex flex-col items-center justify-center' onEscapeKeyDown={onClose}>
                     <div className='max-w-4xl w-full aspect-video relative'>
-                        <XIcon className="fa-solid fa-xmark absolute -top-8 right-2 lg:top-0 lg:-right-8 h-8 w-8 cursor-pointer text-gray-100" onClick={onClose} />
+                        <RiCloseCircleFill className="absolute -top-8 right-2 lg:top-0 lg:-right-10 h-8 w-8 cursor-pointer text-gray-100" onClick={onClose} />
                         <video ref={videoRef} controls className='w-full max-h-[520px] bg-black rounded-lg outline-0 shadow shadow-gray-900' />
                     </div>
                 </DialogContent>

@@ -2,10 +2,10 @@
 
 import moment from "moment"
 import 'moment/locale/zh-cn'
-import { Location } from '../../components/Icons'
 import ImageSkeleton from "../../components/client/ImageSkeleton"
 import { TVideo } from "./type"
 import { Link } from "next-view-transitions"
+import { RiMapPinLine } from "@remixicon/react"
 
 type VideoProps = {
     video: TVideo
@@ -43,7 +43,7 @@ export default function Video({ video, onPlay }: VideoProps) {
                                 target="_blank"
                                 rel='noreferrer'
                             >
-                                <Location className="h-4 w-4" />
+                                <RiMapPinLine className="h-4 w-4" />
                                 <span>{video.poi_info.poi_name}</span>
                             </a>
                         )

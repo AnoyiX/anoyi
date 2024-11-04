@@ -4,9 +4,9 @@ import InfiniteScrollLoader from "@/components/client/InfiniteScrollLoader"
 import useSWRInfiniteScroll from "@/hooks/useSWRInfiniteScroll"
 import { SWRInfiniteOptions } from "@/lib/constant"
 import { Link } from "next-view-transitions"
-import { ForkIcon, IssueIcon, LicenseIcon, StarIcon } from "../../../components/Icons"
 import http from "../../../utils/http"
 import { TRepo } from "./type"
+import { RiGitForkLine, RiRecordCircleLine, RiStarLine } from "@remixicon/react"
 
 const limit = 12
 const getKey = (pageIndex: number, previousPageData: TRepo[]) => {
@@ -35,25 +35,17 @@ export function Repos() {
                                 <Link href={item.html_url} target="_blank" rel='noreferrer' className="font-semibold hover:text-blue-600">{item.full_name}</Link>
                                 <div className="flex-row-center gap-3 text-xs cursor-default my-3 text-gray-500">
                                     <div className="flex-row-center">
-                                        <StarIcon className="mr-1" />
+                                        <RiStarLine className="mr-1 w-4" />
                                         {item.stargazers_count.toLocaleString()}
                                     </div>
                                     <div className="flex-row-center">
-                                        <ForkIcon className="mr-1" />
+                                        <RiGitForkLine className="mr-1 w-4" />
                                         {item.forks.toLocaleString()}
                                     </div>
                                     <div className="flex-row-center">
-                                        <IssueIcon className="mr-1" />
+                                        <RiRecordCircleLine className="mr-1 w-4" />
                                         {item.open_issues.toLocaleString()}
                                     </div>
-                                    {
-                                        item.license && (
-                                            <div className="flex-row-center">
-                                                <LicenseIcon className="mr-1" />
-                                                {item.license.spdx_id}
-                                            </div>
-                                        )
-                                    }
                                 </div>
                                 <p className="text-sm font-sans text-gray-700">{item.description}</p>
                                 <div className="text-gray-600 flex flex-row gap-2 text-xs flex-wrap mt-3">

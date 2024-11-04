@@ -6,8 +6,8 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { RiFilter2Fill } from "@remixicon/react";
 import { ReactNode } from 'react';
-import { FilterIcon } from '../../components/Icons';
 import { RISKLEVEL, SH, TYPE } from './Funds';
 
 type CheckBoxProps = {
@@ -33,7 +33,7 @@ export default function FundsFilter({ filters, onToggleFilterItem }: { filters: 
     return (
         <Popover >
             <PopoverTrigger>
-                <Button><FilterIcon className="w-4 h-4 mr-2" />筛选</Button>
+                <Button><RiFilter2Fill className="w-4 mr-2" />筛选</Button>
             </PopoverTrigger>
             <PopoverContent className='shadow-lg' align="end">
                 <div className="flex flex-col py-4 gap-4">

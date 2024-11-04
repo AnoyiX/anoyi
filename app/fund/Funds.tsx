@@ -8,13 +8,14 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { RiSearch2Line } from "@remixicon/react"
 import { debounce } from "lodash"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Loading, SearchIcon } from '../../components/Icons'
+import useInfiniteScroll from "react-infinite-scroll-hook"
+import { Loading } from '../../components/Icons'
 import http from "../../utils/http"
 import FundsFilter from "./FundsFilter"
 import { TFund } from "./typs"
-import useInfiniteScroll from "react-infinite-scroll-hook"
 
 type Query = {
     page: number,
@@ -166,7 +167,7 @@ export function Funds() {
         <>
             <div className="flex-row-center gap-4 text-sm">
                 <div className="relative flex-1 gap-2 rounded-lg bg-white drop-shadow py-2.5">
-                    <SearchIcon className="mx-2.5 w-5 h-5 text-gray-500 absolute top-2.5 left-0" />
+                    <RiSearch2Line className="mx-2.5 w-5 fill-gray-500 absolute top-2 left-0" />
                     <input
                         placeholder="基金名称"
                         onChange={e => onSearch(e.target.value)}

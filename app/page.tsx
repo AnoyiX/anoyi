@@ -1,15 +1,14 @@
 import { Cobe } from "@/components/client/Cobe"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { readFileSync } from 'fs'
 import { Link } from 'next-view-transitions'
 import path from "path"
-import { Logos } from '../components/Icons'
+import { Socials, User } from "./data"
 
 
 export default function Page() {
 
     const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'))
-    const home = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/home.json'), 'utf-8'))
 
     return (
         <div className='flex flex-row flex-1 gap-4 md:gap-6 p-4 md:p-8'>
@@ -17,19 +16,17 @@ export default function Page() {
                 <div className="box-card">
                     <div className='w-full md:w-72 flex flex-col gap-3 items-center justify-center py-4'>
                         <Avatar className='w-28 h-28'>
-                            <AvatarImage src={home.user.avatar} />
+                            <AvatarImage src={User.avatar} />
                         </Avatar>
-                        <div className="text-xl font-medium">{home.user.nickname}</div>
-                        <span className='text-sm text-gray-600'>{home.user.bio}</span>
+                        <div className="text-xl font-medium">{User.nickname}</div>
+                        <span className='text-sm text-gray-600'>{User.bio}</span>
                     </div>
                     <div className="w-full h-[1px] bg-gray-200" />
                     <div className='flex flex-row gap-3 items-center justify-center text-lg py-3'>
                         {
-                            home.user.brands.map((item: { url: string, icon: keyof typeof Logos }) => (
-                                <Link href={item.url} target="_blank" key={item.icon}>
-                                    {
-                                        Logos[item.icon]({ className: 'text-xl text-gray-500/75 hover:text-gray-700' })
-                                    }
+                            Socials.map((item, index) => (
+                                <Link href={item.url} target="_blank" key={index}>
+                                    {item.icon}
                                 </Link>
                             ))
                         }

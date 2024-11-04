@@ -5,11 +5,11 @@ import InfiniteScrollLoader from "@/components/client/InfiniteScrollLoader"
 import useSWRInfiniteScroll from "@/hooks/useSWRInfiniteScroll"
 import { SWRInfiniteOptions } from "@/lib/constant"
 import { useState } from "react"
-import { Location } from '../../components/Icons'
 import http from "../../utils/http"
 import { PageData } from "../../utils/types"
 import PhotosModal from "./PhotosModal"
 import { TPhoto } from "./type"
+import { RiMapPinLine } from "@remixicon/react"
 
 const limit = 24
 const genBody = (page: number) => ({
@@ -56,7 +56,7 @@ export function Photos() {
                                 href={photo.address}
                                 onClick={e => e.stopPropagation()}
                             >
-                                <Location className="h-4 w-4" />
+                                <RiMapPinLine className="h-4 w-4" />
                                 <span className="">{photo.name}</span>
                             </a>
                         </div>

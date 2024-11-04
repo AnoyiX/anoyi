@@ -1,6 +1,6 @@
 import { Link } from 'next-view-transitions'
 import { Fragment } from 'react'
-import { ChevronRightIcon } from '../Icons'
+import { RiArrowRightSLine } from '@remixicon/react'
 
 type TAppNav = {
     paths: {
@@ -20,7 +20,7 @@ export default function AppNav({ paths }: TAppNav) {
                 {
                     paths.map((item, index) => (
                         <Fragment key={index}>
-                            <ChevronRightIcon className="fa-solid fa-angle-right" />
+                            <RiArrowRightSLine className="fill-gray-400" />
                             {
                                 !!item.url ?
                                     <Link href={item.url} className="text-sm  cursor-pointer">{item.name}</Link> :
