@@ -20,6 +20,13 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html>
+        {
+          process.env.NEXT_PUBLIC_ENABLE_REACT_SCAN && (
+            <head>
+              <script src="https://unpkg.com/react-scan/dist/auto.global.js" async></script>
+            </head>
+          )
+        }
         <body className="flex min-h-screen text-foreground bg-slate-100">
           <div className='flex flex-1 flex-col mx-auto lg:container'>
             {children}
