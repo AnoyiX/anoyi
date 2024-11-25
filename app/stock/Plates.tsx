@@ -29,7 +29,7 @@ export default function Plates() {
                 data.data.rank_list.length === 0 ? [...Array.from(Array(9).keys())].map(i => <Skeleton key={i} className="w-full rounded-sm h-20" />) : data.data.rank_list.map((item: TPlate) => (
                     <div key={item.code} className={`rounded-sm cursor-pointer w-full flex flex-col gap-1 py-4 justify-center items-center ${getColor(parseFloat(item.zdf))}`}>
                         <span className="text-xs">{item.name}</span>
-                        <NumberFlow trend value={parseFloat(item.zdf) / 100} format={{ style: 'percent', maximumFractionDigits: 2, signDisplay: 'always' }} />
+                        <NumberFlow value={parseFloat(item.zdf) / 100} format={{ style: 'percent', maximumFractionDigits: 2, signDisplay: 'always' }} />
                     </div>
                 ))
             }

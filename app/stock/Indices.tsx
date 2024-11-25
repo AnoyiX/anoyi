@@ -63,7 +63,6 @@ export default function Indices() {
                                 <div className={`box-card cursor-pointer w-full flex flex-col shadow gap-1 py-4 justify-center items-center ${getTextColor(stockObj['px_change'] as number)}`}>
                                     <span className='text-sm'>{stockObj['prod_name']}</span>
                                     <NumberFlow
-                                        trend
                                         value={stockObj['last_px'] as number}
                                         format={{ useGrouping: false, maximumFractionDigits: 2, minimumFractionDigits: 2 }}
                                         className='text-2xl font-semibold'
