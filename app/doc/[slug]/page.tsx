@@ -18,14 +18,14 @@ const titles = {
 type DOC = keyof typeof titles
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: DOC }> }): Promise<Metadata> {
-  const slug = (await params).slug
+  const { slug } = await params
   return { title: titles[slug] }
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: DOC }> }) {
 
-  const slug = (await params).slug
-  
+  const { slug } = await params
+
   if (Object.keys(titles).indexOf(slug) === -1) {
     return notFound()
   }
