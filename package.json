@@ -18,7 +18,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cobe": "^0.6.3",
-    "framer-motion": "^11.11.17",
     "moment": "^2.30.1",
     "next": "^15.0.3",
     "next-view-transitions": "^0.3.2",

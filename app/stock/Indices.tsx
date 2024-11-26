@@ -5,9 +5,7 @@ import useSWR from 'swr'
 import { TRealData } from './type'
 import http from '../../utils/http'
 import NumberFlow from '@number-flow/react'
-
-const changeFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2, signDisplay: 'always' })
-const changeRateFormat = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 2, signDisplay: 'always' })
+import { NumberFlowFormat, StockFormat } from '@/utils/format'
 
 export default function Indices() {
 
@@ -64,12 +62,12 @@ export default function Indices() {
                                     <span className='text-sm'>{stockObj['prod_name']}</span>
                                     <NumberFlow
                                         value={stockObj['last_px'] as number}
-                                        format={{ useGrouping: false, maximumFractionDigits: 2, minimumFractionDigits: 2 }}
+                                        format={NumberFlowFormat.value}
                                         className='text-2xl font-semibold'
                                     />
                                     <div className='flex flex-row gap-2 text-sm'>
-                                        <span>{changeFormat.format(stockObj['px_change'] as number)}</span>
-                                        <span>{changeRateFormat.format(stockObj['px_change_rate'] as number / 100)}</span>
+                                        <span>{StockFormat.trend(stockObj['px_change'] as number)}</span>
+                                        <span>{StockFormat.rate(stockObj['px_change_rate'] as number / 100)}</span>
                                     </div>
                                 </div>
                             </Link>

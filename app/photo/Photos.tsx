@@ -46,8 +46,8 @@ export function Photos() {
         <>
             <div className="w-full grid grid-cols-2 p-4 gap-4 lg:p-8 lg:gap-8 lg:grid-cols-3">
                 {
-                    data.map(resp => resp.data.map(photo => (
-                        <div className="box w-full relative rounded-lg text-xs" onClick={() => showPhoto(photo)} >
+                    data.map(resp => resp.data.map((photo, index) => (
+                        <div key={index} className="box w-full relative rounded-lg text-xs" onClick={() => showPhoto(photo)} >
                             <ImageSkeleton src={photo.thumbnail} className="w-full aspect-[5/3] object-cover cursor-pointer rounded-lg" />
                             <a
                                 className="absolute left-3 bottom-3 flex flex-fow gap-1 items-center bg-black/50 text-white px-2.5 py-1.5 rounded-full"

@@ -9,6 +9,7 @@ import useInfiniteScroll from "react-infinite-scroll-hook"
 import useSWR from "swr"
 import http from "../../utils/http"
 import { TLive, TLivesMap, TRealData, TStockInfo } from "./type"
+import { StockFormat } from "@/utils/format"
 
 function StocksTag({ stocks }: { stocks: TStockInfo[] }) {
 
@@ -17,23 +18,11 @@ function StocksTag({ stocks }: { stocks: TStockInfo[] }) {
 
     const render = (stock: Array<string | number>) => {
         const stockObj = Object.fromEntries(fields.map((_, i) => [fields[i], stock[i]]))
+        const change = stockObj['px_change'] as number
         let state = {
-            icon: '',
-            rate: '0.00',
-            style: 'text-gray-600 border-gray-600'
-        }
-        if (stockObj['px_change'] as number > 0) {
-            state = {
-                icon: '▲',
-                rate: '+' + (stockObj['px_change_rate'] as number).toFixed(2),
-                style: 'text-red-600 border-red-600'
-            }
-        } else if (stockObj['px_change'] as number < 0) {
-            state = {
-                icon: '▼',
-                rate: (stockObj['px_change_rate'] as number).toFixed(2),
-                style: 'text-green-600 border-green-600'
-            }
+            icon: change > 0 ? '▲' : change === 0 ? '' : '▼',
+            rate: StockFormat.rate(stockObj['px_change_rate'] as number),
+            style: change > 0 ? 'text-red-600 border-red-600' : change === 0 ? 'text-gray-600 border-gray-600' : 'text-green-600 border-green-600',
         }
         return (
             <Link href={`/stock/${stockObj['prod_code']}`} key={stockObj['prod_code']}>

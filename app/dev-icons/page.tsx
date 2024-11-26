@@ -11,7 +11,7 @@ export default async function Page() {
 
     const iconNames: string[] = await http.getAll('https://icons.anoyi.com/api/icons')
 
-    const icons = iconNames.filter(item => item.toLowerCase()).map(item => ({
+    const icons: DevIconProps[] = iconNames.filter(item => item.toLowerCase()).map(item => ({
         name: item,
         url: CDN.icon(item)
     }))
@@ -22,7 +22,7 @@ export default async function Page() {
             <div className='flex-1-col box-card p-6'>
                 <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
                     {
-                        icons.map((item: DevIconProps) => <DevIcon key={item.name} icon={item} />)
+                        icons.map(item => <DevIcon key={item.name} icon={item} />)
                     }
                 </div>
             </div>
