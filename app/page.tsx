@@ -43,12 +43,12 @@ export default function Page() {
                             <span className="hover:text-blue-600 cursor-pointer">关于作者</span>
                         </Link>
                         <span>·</span>
-                        <Link href='/doc/jobs'>
-                            <span className="hover:text-blue-600 cursor-pointer">工作内推</span>
-                        </Link>
-                        <span>·</span>
                         <Link href='/doc/links'>
                             <span className="hover:text-blue-600 cursor-pointer">友情链接</span>
+                        </Link>
+                        <span>·</span>
+                        <Link href='/doc/open'>
+                            <span className="hover:text-blue-600 cursor-pointer">开源声明</span>
                         </Link>
                         <span>·</span>
                         <Link href='/doc/terms'>

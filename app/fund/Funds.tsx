@@ -9,8 +9,8 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { RiSearch2Line } from "@remixicon/react"
-import { debounce } from "lodash"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useDebounce } from "@uidotdev/usehooks"
+import { useEffect, useRef, useState } from "react"
 import useInfiniteScroll from "react-infinite-scroll-hook"
 import { Loading } from '../../components/Icons'
 import http from "../../utils/http"
@@ -73,27 +73,25 @@ export function Funds() {
         keyword: '',
         filter: {}
     })
+    const debouncedQuery = useDebounce(query, 1000)
     const [hasMore, setHasMore] = useState(true)
     const [loading, setLoading] = useState(false)
     const initialRender = useRef(true)
     const [data, setData] = useState<TFund[]>([])
 
-    const onSearch = useCallback(debounce((keyword: string) => setQuery(pre => ({ ...pre, page: 0, keyword })), 1000), [])
-    const onFilter = useCallback(debounce((filter: any) => setQuery(pre => ({ ...pre, page: 0, filter })), 1000), [])
-
     useEffect(() => {
-        if (query.page === 0) setData([])
+        if (debouncedQuery.page === 0) setData([])
         setLoading(true)
-        http.post([`/api/mongo/find`, genBody(query)]).then(resp => {
+        http.post([`/api/mongo/find`, genBody(debouncedQuery)]).then(resp => {
             setHasMore(resp.has_more)
-            if (query.page > 0) {
+            if (debouncedQuery.page > 0) {
                 setData([...data, ...(resp.data)])
             } else {
                 setData([...resp.data])
             }
             setLoading(false)
         })
-    }, [query])
+    }, [debouncedQuery])
 
     useEffect(() => {
         if (initialRender.current) {
@@ -120,7 +118,7 @@ export function Funds() {
                 }
             }
         }
-        onFilter(filter)
+        setQuery(pre => ({ ...pre, page: 0, filter }))
     }, [filters])
 
     const [sentryRef] = useInfiniteScroll({
@@ -170,7 +168,7 @@ export function Funds() {
                     <RiSearch2Line className="mx-2.5 w-5 fill-gray-500 absolute top-2 left-0" />
                     <input
                         placeholder="基金名称"
-                        onChange={e => onSearch(e.target.value)}
+                        onChange={e => setQuery(pre => ({ ...pre, page: 0, keyword: e.target.value }))}
                         className="ring-0 w-full pl-10 pr-2 text focus-within:outline-none"
                     />
                 </div>

@@ -11,8 +11,8 @@ import AppHeader from "../../../components/server/AppNav"
 
 const titles = {
   about: '关于作者',
-  jobs: '工作内推',
   links: '友情链接',
+  open: '开源声明',
   terms: '用户协议',
 }
 type DOC = keyof typeof titles
