@@ -21,13 +21,13 @@ function StocksTag({ stocks }: { stocks: TStockInfo[] }) {
         const change = stockObj['px_change'] as number
         let state = {
             icon: change > 0 ? '▲' : change === 0 ? '' : '▼',
-            rate: StockFormat.rate(stockObj['px_change_rate'] as number),
+            rate: StockFormat.rate(stockObj['px_change_rate'] as number / 100),
             style: change > 0 ? 'text-red-600 border-red-600' : change === 0 ? 'text-gray-600 border-gray-600' : 'text-green-600 border-green-600',
         }
         return (
             <Link href={`/stock/${stockObj['prod_code']}`} key={stockObj['prod_code']}>
                 <span className={`cursor-pointer flex flex-row rounded-sm border py-1 px-2 text-sm ${state.style}`}>
-                    {state.icon} {stockObj['prod_name']}({stockObj['prod_code']}) {state.rate}%
+                    {state.icon} {stockObj['prod_name']}({stockObj['prod_code']}) {state.rate}
                 </span>
             </Link>
         )
