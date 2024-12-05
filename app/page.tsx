@@ -1,14 +1,10 @@
 import { Cobe } from "@/components/client/Cobe"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { readFileSync } from 'fs'
 import { Link } from 'next-view-transitions'
-import path from "path"
-import { Socials, User } from "./data"
+import { Apps, Socials, User } from "./data"
 
 
 export default function Page() {
-
-    const apps = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/apps.json'), 'utf-8'))
 
     return (
         <div className='flex flex-row flex-1 gap-4 md:gap-6 p-4 md:p-8'>
@@ -56,18 +52,14 @@ export default function Page() {
                         </Link>
                     </div>
                     <div className='text-center text-slate-400'>
-                        <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © 2024 All Rights Reserved
+                        <a href="https://github.com/AnoyiX" target="_blank">Anoyi</a> © {new Date().getFullYear()} All Rights Reserved
                     </div>
                 </div>
             </div>
             <div className="flex flex-1 box-card flex-col">
                 <div className='flex flex-row flex-wrap p-8 gap-10'>
                     {
-                        apps.map((item: {
-                            name: string
-                            url: string
-                            icon: string
-                        }, index: number) => (
+                        Apps.map((item, index) => (
                             <div className='flex flex-col items-center gap-3' key={index}>
                                 <Link href={item.url} target={(item.url.startsWith('http://') || item.url.startsWith('https://')) ? '_blank' : '_self'} className='cursor-pointer'>
                                     <img src={item.icon} alt="" className='w-16 h-16 box-card' />

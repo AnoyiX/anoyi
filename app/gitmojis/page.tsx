@@ -1,16 +1,13 @@
 import AppNav from '@/components/server/AppNav'
-import { readFileSync } from 'fs'
-import path from "path"
-import Emoji, { EmojiProps } from './Emoji'
 import { RiGithubFill } from '@remixicon/react'
+import { Emojis } from './data'
+import Emoji, { EmojiProps } from './Emoji'
 
 export const metadata = {
     title: 'An emoji guide for your commit messages',
 }
 
 export default function Page() {
-
-    const data = JSON.parse(readFileSync(path.join(process.cwd(), 'data/json/gitmojis.json'), 'utf-8'))
 
     return (
         <div className='w-full p-4 md:p-8 flex flex-col gap-4 md:gap-6 '>
@@ -37,7 +34,7 @@ export default function Page() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-10 gap-6">
                     {
-                        data.map((item: EmojiProps) => <Emoji key={item.name} emoji={item} />)
+                        Emojis.map((item: EmojiProps) => <Emoji key={item.name} emoji={item} />)
                     }
                 </div>
             </div>
