@@ -177,24 +177,26 @@ export function Funds() {
             <div className="flex-1-col box-card">
                 <Table className="w-full text-sm text-left">
                     <TableHeader className="text-gray-100 uppercase ">
-                        <TableHead className="p-3 rounded-tl-lg">
-                            基金
-                        </TableHead>
-                        <TableHead className="p-3 w-28 text-right">
-                            最新净值
-                        </TableHead>
-                        <TableHead className="p-3 w-28 text-right">
-                            日涨跌幅
-                        </TableHead>
-                        <TableHead className="p-3 w-28 text-right">
-                            近一年
-                        </TableHead>
-                        <TableHead className="p-3 w-28 text-right">
-                            申购费率
-                        </TableHead>
-                        <TableHead className="p-3 w-64 text-right rounded-tr-lg">
-                            赎回费率
-                        </TableHead>
+                        <TableRow>
+                            <TableHead className="p-3 rounded-tl-lg">
+                                基金
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                最新净值
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                日涨跌幅
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                近一年
+                            </TableHead>
+                            <TableHead className="p-3 w-28 text-right">
+                                申购费率
+                            </TableHead>
+                            <TableHead className="p-3 w-64 text-right rounded-tr-lg">
+                                赎回费率
+                            </TableHead>
+                        </TableRow>
                     </TableHeader>
                     <TableBody>
                         {

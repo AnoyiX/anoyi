@@ -3,7 +3,7 @@ import { RiGithubFill, RiTelegramFill, RiTiktokFill, RiTwitterXFill, RiYoutubeFi
 export const User = {
     nickname: "Anoyi 🐬",
     avatar: "https://upload.jianshu.io/users/upload_avatars/3424642/abb0b8e9-cfb6-40a4-92d1-4e326aeebd32.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240",
-    bio: "All in AI 的全栈工程师"
+    bio: "AI Full Stack Engineer"
 }
 
 export const Socials = [
@@ -61,6 +61,11 @@ export const Apps = [
         url: "/fund"
     },
     {
+        name: "ETF",
+        icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/64/fe/e3/64fee350-f578-85ed-7ce1-1ad75e8721f1/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/460x0w.webp",
+        url: "/etf"
+    },
+    {
         name: "CNCF",
         icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/16/a7/a2/16a7a2ef-523a-19d1-4b79-89172e519d5e/AppIcon-0-1x_U007emarketing-0-7-0-85-220-0.png/230x0w.webp",
         url: "https://landscape.cncf.io/"
@@ -69,11 +74,6 @@ export const Apps = [
         name: "相册",
         icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/9c/be/25/9cbe25e9-4fc6-2c25-d4b3-b06aefe9f96f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp",
         url: "/photo"
-    },
-    {
-        name: "博客",
-        icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/20/f1/ff/20f1ff82-03c4-0a9f-211c-90bd81297334/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/230x0w.webp",
-        url: "https://www.jianshu.com/u/7b7ec6f2db21"
     },
     {
         name: "Perplexity",
@@ -94,5 +94,15 @@ export const Apps = [
         name: "ChatGPT",
         icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8f/5b/bc/8f5bbca7-555e-2c7a-df65-a4457a2056b4/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/230x0w.webp",
         url: "https://chatgpt.com"
-    }
+    },
+    {
+        name: "Deepseek",
+        icon: "https://cdn.jsdelivr.net/gh/AnoyiX/cdn@main/apps/Deepseek.svg",
+        url: "https://chat.deepseek.com/"
+    },
+    {
+        name: "简书",
+        icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/20/f1/ff/20f1ff82-03c4-0a9f-211c-90bd81297334/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/230x0w.webp",
+        url: "https://www.jianshu.com/u/7b7ec6f2db21"
+    },
 ]
