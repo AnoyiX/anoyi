@@ -61,12 +61,9 @@ You can use the following environment variables to modify the application's conf
 
 Name|Default|Description
 --|--|--
-MONGODB_API|`null`|MongoDB Atlas API 
-MONGODB_API_KEY|`null`|MongoDB Atlas API Key
-MONGODB_DATASOURCE|`null`|MongoDB Atlas DataSource
+MONGO_URI|`null`|MongoDB connection string
 NEXT_PUBLIC_GA_MEASUREMENT_ID|`null`|Google Analytics Measurement ID
-
-Custom user data saved in `./data`, you can change them to yourself.
+NEXT_PUBLIC_ENABLE_REACT_SCAN|`false`|Enable to use [react-scan](https://react-scan.com/)
 
 ### ▼ Deployment
 
