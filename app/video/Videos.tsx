@@ -13,7 +13,6 @@ import { TVideo } from "./type"
 const limit = 20
 const projection = {
     _id: 0,
-    aweme_id: 1,
     desc: 1,
     author: {
         nickname: 1,
@@ -72,7 +71,7 @@ export default function Videos() {
         <>
             <div className="w-full grid grid-cols-1 p-4 md:p-8 gap-4 md:gap-8 lg:grid-cols-2">
                 {
-                    data.map(item => item.data.map(video => <Video key={video.aweme_id} video={video} onPlay={playVideo} />))
+                    data.map(item => item.data.map(video => <Video key={video.video.play_addr.uri} video={video} onPlay={playVideo} />))
                 }
             </div>
             <InfiniteScrollLoader sentryRef={sentryRef} showLoading={showLoading} />
