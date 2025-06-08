@@ -87,3 +87,7 @@ To learn more, see [Next.js Deployment](https://nextjs.org/docs/deployment).
 ## 🧿 Activity
 
 ![](https://repobeats.axiom.co/api/embed/a35b540b024b7b7aeac7ef2e9ec4340aab76cff3.svg)
+
+## 🐬 Powered By
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
