@@ -20,7 +20,7 @@
     "cobe": "^0.6.3",
     "moment": "^2.30.1",
     "mongodb": "^6.11.0",
-    "next": "^15.0.3",
+    "next": "15.0.7",
     "next-view-transitions": "^0.3.4",
     "nextjs-google-analytics": "^2.3.7",
     "node-html-parser": "^6.1.13",
